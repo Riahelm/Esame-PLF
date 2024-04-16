@@ -11,7 +11,7 @@ linspace :: Int -> Double -> Double -> Double -> [Double]
 linspace i low up pts | i >= 0    = low : linspace (i - 1) (low + (up / pts)) up pts 
                       | otherwise = []
                 
-wave :: [Double] -> [Int]
+wave :: [Double] -> [Double]
 wave  []                                                   = []
 wave  lx@(x:xs) | lunghezza lx > 0 && x >= 0.5 && x <= 1.0 = 2 : wave xs
                 | otherwise                                = 1 : wave xs   
@@ -23,8 +23,8 @@ calcolaVett lx@(x:_) i c dx dt  | i == 0                = x : calcolaVett lx (i+
 
 
 calcConvezione :: [Double] -> Int -> Int -> Double -> Double -> Double -> [Double]
-calcConvezione wave 0 _ _ _ _     = []
-calcConvezione wave nx nt c dx dt = calcConvezione (calcolaVett wave 1 c dx dt) nx (nt - 1) c dx dt
+calcConvezione onda _ 0 _ _ _     = onda
+calcConvezione onda nx nt c dx dt = calcConvezione (calcolaVett onda 0 c dx dt) nx (nt - 1) c dx dt
 
 --  nx = 41
 --  nt = 25
@@ -33,4 +33,4 @@ calcConvezione wave nx nt c dx dt = calcConvezione (calcolaVett wave 1 c dx dt) 
 --  dt = 0.02
 
 main_calculate :: [Double]
-main_calculate = calcConvezione wave (linspace 41 0 2 41 ) 41 25 1.0 0.05 0.02
+main_calculate = calcConvezione (wave (linspace 41 0 2 41 )) 41 25 1.0 0.05 0.02
