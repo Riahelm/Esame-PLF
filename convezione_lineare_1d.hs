@@ -1,4 +1,3 @@
-
 {-main :: IO()
 main = do
     putStrLn "LE ISTRUZIONI VANNO QUI"
@@ -38,5 +37,6 @@ calcolaVett lx@(x:_) i c dx dt  | i == 0                = x : calcolaVett lx (i+
 
 --calcolaVett [1,1,2,2,1,1] [1,1,2,2,1,1] 6 1.0 0.05 0.02 
 --calcolaVett [1,1,2,2,1,1] 0 1.0 0.05 0.02 
+
 
 
