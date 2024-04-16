@@ -11,8 +11,7 @@
    distance = upper / points
 -}
 
-linspace :: [Double] -> Int -> Int -> Int -> [Double]
+linspace :: Int -> Int -> Int -> [Double]
 linspace low up dis | low == 0            = low : linspace low dis pts - 1
                     | pts > 0 && dis != 0 = (low + dis) : linspace (low + dis) dis pts - 1
                     | otherwise           = []
-                    

@@ -29,14 +29,14 @@ estrai (_:xs) i = estrai xs (i-1)
 
 uni :: (Num a, Ord a) => a -> [Int]
 uni a   | a < 1     = []
-        | otherwise = 1 : uni (a - 1)
+        | otherwise = 1 : uni (a - 1)  
 
 calcolaVett :: [Double] -> Int -> Double -> Double -> Double -> [Double]
 calcolaVett lx@(x:_) i c dx dt  | i == 0                = x : calcolaVett lx (i+1) c dx dt
                                 | i == lunghezza lx - 1 = [estrai lx i - c * dt /dx *(estrai lx i - estrai lx (i-1))]
                                 | otherwise             = (estrai lx i - c * dt /dx *(estrai lx i - estrai lx (i-1))) : calcolaVett lx (i+1) c dx dt
 
-
-
 --calcolaVett [1,1,2,2,1,1] [1,1,2,2,1,1] 6 1.0 0.05 0.02 
 --calcolaVett [1,1,2,2,1,1] 0 1.0 0.05 0.02 
+
+
