@@ -26,9 +26,6 @@ lunghezza :: [a] -> Int
 lunghezza []        = 0
 lunghezza (x:xs)    = 1 + lunghezza xs
 
-estrai :: [Double] -> Int -> Double
-estrai (x:xs) 0 = x
-estrai (_:xs) i = estrai xs (i-1)
 
 wave :: [Double] -> [Int]
 wave  []                                                   = []
