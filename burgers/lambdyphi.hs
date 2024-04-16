@@ -13,8 +13,8 @@ linspace i low up pts | i >= 0    = low : linspace (i - 1) (low + (up / pts)) up
 -- disegnare la funzione 
 
 -- var
--- t  = 1
--- nu = 3
+-- t  = 0
+-- nu = 0.07
 -- x = ...per ogni valore di linspace() = lx
 
 phiprime :: Double -> Double -> Double -> Double 
@@ -24,9 +24,9 @@ phi :: Double -> Double -> Double -> Double
 phi t x nu = exp(-(x-4*t)**2/(4*nu*(t+1))) + exp(-(x-4*t-2*pi)**2/(4*nu*(t+1)))
 
 u :: Double -> Double -> Double -> Double 
-u  t x nu = -2*nu*(phiprime(t x nu) / phi(t x nu))+4
+u t x nu = -2*nu*((phiprime t x nu) / (phi t x nu))+4
 
-wave :: [Double] -> [Double]
-wave lx = [u t x nu | x <- lx]
+wave :: [Double] -> Double -> Double -> [Double]
+wave lx t nu = [u t x nu | x <- lx]
 
-main_calculate = wave(linspace 201 0 6.28 201) 
+main_calculate = wave (linspace 201 0 6.28 201) 0 0.07 
