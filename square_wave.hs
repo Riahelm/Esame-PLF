@@ -38,3 +38,4 @@ wave  lx@(x:xs) | lunghezza lx > 0 && x >= 0.5 && x <= 1.0 = 2 : wave xs
 
 calc :: [Int]
 calc = wave linspace 41 0 2 41  
+
