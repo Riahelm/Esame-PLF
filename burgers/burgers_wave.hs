@@ -24,7 +24,7 @@ linspace i low up pts | i >= 0    = low : linspace (i - 1) (low + (up / pts)) up
 
 -- var
 -- t  = 0
-   nu = 0.07  
+-- nu = 0.07  
 -- x = ...per ogni valore di linspace() = lx
 
 phiprime :: Double -> Double -> Double -> Double 
@@ -43,11 +43,11 @@ wave lx t nu = [u t x nu | x <- lx]
 main_calculate = wave (linspace 201 0 6.28 201) 0 0.07 
 
 -- var:
-   T     = 0.6
-   dx    = 2*pi/(nx-1)     
-   sigma = .1
-   dt    = sigma*dx**2/nu  --
-   nt    = int(T/dt)
+-- T     = 0.6
+-- dx    = 2*pi/(nx-1)     = 0.0314
+-- sigma = .1
+-- dt    = sigma*dx**2/nu  = 0.0014
+-- nt    = int(T/dt)       = 425
 
 calcolaVett :: [Double] -> Int -> Double -> Double -> Double -> [Double]
 calcolaVett lx i nu dx dt  | i == 0                = (estrai lx i - estrai lx i * dt/dx * (estrai lx i - estrai lx (lunghezza lx)) + nu*dt/dx**2 * (estrai lx (i+1) - 2*(estrai lx i) + estrai lx (lunghezza lx))) 
@@ -69,12 +69,12 @@ calcolaVett lx i nu dx dt  | i == 0                = (estrai lx i - estrai lx i 
 -- estrai lx i  - estrai lx i * dt/dx * (estrai lx i - estrai lx (i-1)) + nu*dt/dx**2*(estrai lx (i+1) - 2*(estrai lx i) + estrai lx (i-1))
 
 -- test su calcolaVett
-second_calculate = cacolaVett (wave (linspace 201 0 6.28 201) 0 0.07 ) 0 nu dx dt 
+second_calculate = calcolaVett (wave (linspace 201 0 6.28 201) 0 0.07 ) 0 0.07 0.0314 0.0014 
 
 calcBurgers :: [Double] -> Int -> Int -> Double -> Double -> Double -> [Double]
 calcBurgers onda _ 0 _ _ _      = onda
-calcBurgers onda nx nt nu dx dt = calcConvezione (calcolaVett onda 0 nu dx dt) nx (nt - 1) nu dx dt
+calcBurgers onda nx nt nu dx dt = calcBurgers (calcolaVett onda 0 0.07 0.0314 0.0014) 201 (425 - 1) 0.07 0.0315 0.0014
 
 -- test su calcBurgers
-third_calculate = calcBurgers (wave (linspace 201 0 6.28 201) 0 0.07 ) nx nt nu dx dt 
+third_calculate = calcBurgers (wave (linspace 201 0 6.28 201) 0 0.07 ) 201 425 0.07 0.0314 0.0014
 
