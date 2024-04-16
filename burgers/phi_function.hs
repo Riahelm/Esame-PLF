@@ -30,7 +30,7 @@ phi = fatt4 + fatt 2
 
 -}
 
-phi      = exp(-(x-4*t)**2/(4*nu*(t+1))) + exp(-(x-4*t-2*sympy.pi)**2/(4*nu*(t+1)))
+phi      = exp(-(x-4*t)**2/(4*nu*(t+1))) + exp(-(x-4*t-2*pi)**2/(4*nu*(t+1)))
 phiprime = -(-8*t + 2*x)*exp(-(-4*t + x)**2/(4*nu*(t + 1)))/(4*nu*(t + 1)) - (-8*t + 2*x - 4*pi)*exp(-(-4*t + x - 2*pi)**2/(4*nu*(t + 1)))/(4*nu*(t + 1))
 u = -2*nu*(phiprime/phi)+4
 
