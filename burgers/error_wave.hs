@@ -23,4 +23,5 @@ u t x nu = -2*nu*((phiprime t x nu) / (phi t x nu))+4
 wave :: [Double] -> Double -> Double -> [Double]
 wave lx t nu = [u t x nu | x <- lx]
 
+-- analytical soultion with dt*nt = 0.5992259814947111 al posto di t0 = 0
 main_calculate = wave (linspace 201 0 6.28 201) 0.5992259814947111 0.07 
