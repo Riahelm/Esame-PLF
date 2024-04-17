@@ -23,4 +23,4 @@ u t x nu = -2*nu*((phiprime t x nu) / (phi t x nu))+4
 wave :: [Double] -> Double -> Double -> [Double]
 wave lx t nu = [u t x nu | x <- lx]
 
-main_calculate = wave (linspace 201 0.6 6.28 201) 0 0.07 
+main_calculate = wave (linspace 201 0.5992259814947111 6.28 201) 0 0.07 
