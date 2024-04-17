@@ -50,7 +50,7 @@ main_calculate = wave (linspace 201 0 6.28 201) 0 0.07
 -- nt    = int(T/dt)
 
 calcolaVett :: [Double] -> Int -> Double -> Double -> Double -> [Double]
-calcolaVett lx i nu dx dt  | i == 0                = ((estrai lx i) - (estrai lx i) * dt/dx * ((estrai lx i) - (estrai lx (lunghezza lx))) + nu*dt/dx**2 * ((estrai lx (i+1)) - 2*(estrai lx i) + (estrai lx (lunghezza lx))) 
+calcolaVett lx i nu dx dt  | i == 0                = (estrai lx i) - (estrai lx i) * dt/dx * ((estrai lx i) - (estrai lx (lunghezza lx))) + nu*dt/dx**2 * ((estrai lx (i+1)) - 2*(estrai lx i) + (estrai lx (lunghezza lx))) 
                                                      : calcolaVett lx (i+1) nu dx dt
                            | i == lunghezza lx     = [(estrai lx (lunghezza lx)) - (estrai lx (lunghezza lx)) * dt/dx * ((estrai lx (lunghezza lx)) - (estrai lx (lunghezza lx - 1))) + nu*dt/dx**2*((estrai lx 0) - 2*(estrai lx (lunghezza lx)) + (estrai lx (lunghezza lx - 1)))]                    
                            | otherwise             = ((estrai lx i)  - (estrai lx i) * dt/dx * ((estrai lx i) - (estrai lx (i-1))) + nu*dt/dx**2*((estrai lx (i+1)) - 2*(estrai lx i) + (estrai lx (i-1)))) 
