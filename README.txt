@@ -1,7 +1,11 @@
-#Creato file "convect_wave.hs": contiene la funzione d'onda completa.
-#controllare che funzioni correttamente
-#A me non dà errori (Gab)
+#Added phugoid folder and source file
 
-----------------------------------------------------------------
-#Burgers completato. Vedi file b_wave.hs...
-#...ci sono tre test disponibili
+#TODOs:
+	1) Make modules for the shared functions 			.....
+	2) Finish up writing the full phugoid model 			(Nic)
+	3) Write code for the simple phugoid model			(Nic)
+	4) Write code for the analytical solution to Burger's 		(Gab)
+	5) Write code to discern the error percent between versions. 	(Gab)
+	6) Write comments in each code					.....
+	7) Tidy up code to make it more functional, Haskell-like	.....
+	8) Write the main function					.....
