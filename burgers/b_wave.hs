@@ -73,7 +73,8 @@ second_calculate = calcolaVett (wave (linspace 201 0 6.28 201) 0 0.07 ) 0 0.07 0
 
 calcBurgers :: [Double] -> Int -> Int -> Double -> Double -> Double -> [Double]
 calcBurgers onda _ 0 _ _ _      = onda
-calcBurgers onda nx nt nu dx dt = calcBurgers (calcolaVett onda 0 0.07 0.0314 0.0014) 201 (nx - 1) 0.07 0.0315 0.0014
+calcBurgers onda nx nt nu dx dt = calcBurgers (calcolaVett onda 0 nu dx dt) nx (nt - 1) nu dx dt
+
 
 -- test su calcBurgers
 third_calculate = calcBurgers (wave (linspace 201 0 6.28 201) 0 0.07) 201 425 0.07 0.0314 0.0014
