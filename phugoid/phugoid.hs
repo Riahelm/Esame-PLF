@@ -24,16 +24,16 @@ rhs (v,theta,x,y) (cG@costGrav, vT@vTrim, cR@coeffResist, cP@coeffPort) =(- (cG 
                                                                          v*cos theta,
                                                                          v*sin theta)
 
-eulerStep :: (Num a, Floating a) => Dati a -> Dati a -> a -> Dati a
-eulerStep dA@datiAliante dS@datiSimulazione dt = sommaTupla dA (moltiplicaTuplaPerScalare (rhs dA dS) dt)
+metodoEulero :: (Num a, Floating a) => Dati a -> Dati a -> a -> Dati a
+metodoEulero dA@datiAliante dS@datiSimulazione dt = sommaTupla dA (moltiplicaTuplaPerScalare (rhs dA dS) dt)
 
-calcEuler :: (Num a, Floating a) => Dati a -> Dati a -> a -> Int -> Int -> [Dati a]
-calcEuler dA@datiAliante dS@datiSimulazione dt i len| i == 0            = dA : calcolaProssimoPunto
+calcEulero :: (Num a, Floating a) => Dati a -> Dati a -> a -> Int -> Int -> [Dati a]
+calcEulero dA@datiAliante dS@datiSimulazione dt i len| i == 0            = dA : calcolaProssimoPunto
                                                     | i == (len - 1)    = [dA2]
                                                     | otherwise         = dA2 : calcolaProssimoPunto
                                                     where
-                                                        dA2 = eulerStep dA dS dt 
-                                                        calcolaProssimoPunto = calcEuler dA2 dS dt (i+1) len
+                                                        dA2 = metodoEulero dA dS dt 
+                                                        calcolaProssimoPunto = calcEulero dA2 dS dt (i+1) len
 
 mainEuler :: (Num a, Fractional a, Floating a) => [Dati a]
-mainEuler = calcEuler (30.0, 0.0, 0.0, 1000.0) (9.81, 30.0, 0.05, 1.0) 0.1 0 1000 
+mainEuler = calcEulero (30.0, 0.0, 0.0, 1000.0) (9.81, 30.0, 0.05, 1.0) 0.1 0 1000 
