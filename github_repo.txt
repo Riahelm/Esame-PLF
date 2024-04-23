@@ -1,0 +1,11 @@
+#git remote add origin ...
+
+https://github.com/GabrieleRamagnano/plf_projects.git --personale
+https://github.com/Riahelm/Esame-PLF.git              --gruppo
+
+#per escludere il file dalla tracciabilità
+git rm --cached file_da_escludere.txt
+
+
+#per rimuovere origin
+git remote remove origin
