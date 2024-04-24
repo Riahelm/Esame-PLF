@@ -9,8 +9,8 @@ estrai (_:xs) i = estrai xs (i-1)
 
 rimuovi_elem :: [Double] -> Int -> Int -> [Double]
 rimuovi_elem [] _ _                 = []
-rimuovi_elem (x:xs) i k | i = k     = rimuovi_elem xs (i + 1)
-                        | otherwise = x : rimuovi_elem xs (i + 1) 
+rimuovi_elem (x:xs) i k | i == k    = rimuovi_elem xs (i + 1) k
+                        | otherwise = x : rimuovi_elem xs (i + 1) k
 
 
 linspace :: Int -> Double -> Double -> Double -> [Double]
@@ -28,9 +28,9 @@ wave  lx@(x:xs) | lunghezza lx > 0 && x >= 0.5 && x <= 1.0 = 2 : wave xs
 --                                | otherwise             = (estrai lx i - c * dt /dx *(estrai lx i - estrai lx (i-1))) : calcolaVett lx (i+1) c dx dt
 
 calcolaVett :: [Double] -> Int -> Double -> Double -> Double -> [Double]
-calcolaVett lx@(x:_) nx c dx dt = x : [oneStep x dx dt z y | z <- rimuovi_elem 0, y <- rimuovi_elem (nx - 1)]
+calcolaVett lx@(x:xs) nx c dx dt = x : [z + y | z <- xs, y <- [z]]
        where 
-          oneStep x dx dt z y = z - c * dt/dx * (z - y)
+          oneStep c dx dt z y = z - c * dt/dx * (z - y)
 
 
 calcConvezione :: [Double] -> Int -> Int -> Double -> Double -> Double -> [Double]
