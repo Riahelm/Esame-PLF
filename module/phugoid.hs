@@ -3,14 +3,8 @@ module Main where
 import Data.List
 
 main :: IO ()
-main = do putStrLn "Inserisci la larghezza del passo temporale: "
+main = do putStrLn "Inserisci la lunghezza del passo temporale: "
           dt <- getLine 
-         {- let zt = profondita     {- Dato simulazione: profondità al di sotto di una linea orizzonatale di riferimento -}
-          let g  = acceleraGravit {- Dato simulazione accelerazione di gravità -}
-          let z0 = altitudine     {- Dato aliante: altitudine -}
-          let b0 = velocita       {- Dato aliante: velocità ascendente risultante dalla raffica -}
-          let t  = tempoVolo      {- Tempo di volo finale -}
-          let nt = numPassiTemp   -- t / (read dt :: Float) numero di passi temporali -}
           putStrLn $ show (calcEulero (z0, b0) (zt, g) ((read dt :: Float) ) 0 nt )
 
 -- mainEuler :: (Num a, Fractional a, Floating a) => [Dati a]
@@ -27,6 +21,13 @@ b0 = 10.0
 t  = 100.0
 --nt :: Int
 nt = 1000
+-----------------------------------------------------------------------------------------------------
+         {- let zt = profondita     {- Dato simulazione: profondità al di sotto di una linea orizzonatale di riferimento -}
+          let g  = acceleraGravit {- Dato simulazione accelerazione di gravità -}
+          let z0 = altitudine     {- Dato aliante: altitudine -}
+          let b0 = velocita       {- Dato aliante: velocità ascendente risultante dalla raffica -}
+          let t  = tempoVolo      {- Tempo di volo finale -}
+          let nt = numPassiTemp   -- t / (read dt :: Float) numero di passi temporali -}
 
 
 type Dati a = (a,a)
