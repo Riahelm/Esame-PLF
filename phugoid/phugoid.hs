@@ -27,13 +27,13 @@ rhs (v,theta,x,y) (cG@costGrav, vT@vTrim, cR@coeffResist, cP@coeffPort) =(- (cG 
 metodoEulero :: (Num a, Floating a) => Dati a -> Dati a -> a -> Dati a
 metodoEulero dA@datiAliante dS@datiSimulazione dt = sommaTupla dA (moltiplicaTuplaPerScalare (rhs dA dS) dt)
 
-calcEulero :: (Num a, Floating a) => Dati a -> Dati a -> a -> Int -> Int -> [Dati a]
-calcEulero dA@datiAliante dS@datiSimulazione dt i len| i == 0            = dA : calcolaProssimoPunto
-                                                    | i == (len - 1)    = [dA2]
-                                                    | otherwise         = dA2 : calcolaProssimoPunto
-                                                    where
-                                                        dA2 = metodoEulero dA dS dt 
-                                                        calcolaProssimoPunto = calcEulero dA2 dS dt (i+1) len
+calcEulero :: (Num a, Floating a) => Dati a -> Dati a -> a -> Int -> Int -> [a]
+calcEulero dA@(dAA,_,_,_) dS@datiSimulazione dt i len| i == 0            = dAA : calcolaProssimoPunto
+                                                     | i == (len - 1)    = [dBA]
+                                                     | otherwise         = dBA : calcolaProssimoPunto
+                                                     where
+                                                        dB@(dBA,_,_,_) = metodoEulero dA dS dt 
+                                                        calcolaProssimoPunto = calcEulero dB dS dt (i+1) len
 
-mainEuler :: (Num a, Fractional a, Floating a) => [Dati a]
+mainEuler :: (Num a, Fractional a, Floating a) => [a]
 mainEuler = calcEulero (30.0, 0.0, 0.0, 1000.0) (9.81, 30.0, 0.05, 1.0) 0.1 0 1000 
