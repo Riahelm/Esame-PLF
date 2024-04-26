@@ -7,6 +7,8 @@ module Parametri where
  limiteInf = 0.0                                {- limite inferiore del dominio spaziale -}  
  nx :: Int
  nx        = 41                                 {- numero di punti della griglia spaziale -} -- Nota 1
+ nt :: Int 
+ nt = 25                                        {- numero complessivo di passi temporali che deve effettuare l'algoritmo -}
  dt :: Double
  dt = 0.02                                      {- lunghezza del passo temporale -}
  dx :: Double
