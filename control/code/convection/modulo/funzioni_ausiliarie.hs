@@ -13,4 +13,4 @@ estrai (_:xs) i = estrai xs (i-1)
 {- Funzione che genera un numero finito di punti tutti equidistanti tra loro in un intervallo specificato -}
 calcPuntiEqui :: Int -> Int -> Double -> Double -> [Double]
 calcPuntiEqui i nx inf sup  | i == nx    = [sup]
-                            | otherwise  = inf : calcPuntiEqui (i + 1) (inf + (sup / fromIntegral(nx :: Int))) sup nx
+                            | otherwise  = inf : calcPuntiEqui (i + 1) nx (inf + (sup / fromIntegral(nx :: Int))) sup 
