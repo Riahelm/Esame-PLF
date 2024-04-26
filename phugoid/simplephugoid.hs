@@ -27,10 +27,10 @@ metodoEulero dA@datiAliante dS@datiSimulazione dt = sommaTupla dA (moltiplicaTup
 calcEulero :: (Num a, Floating a) => Dati a -> Dati a -> a -> Int -> Int -> [Dati a]
 calcEulero dA@datiAliante dS@datiSimulazione dt i len   | i == 0            = dA : calcolaProssimoPunto
                                                         | i == (len - 1)    = [dA2]
-                                                        | otherwise         = dA2 : calcolaProssimoPunto
+                                                        | otherwise         = dA : calcolaProssimoPunto
                                                         where
                                                             dA2 = metodoEulero dA dS dt 
                                                             calcolaProssimoPunto = calcEulero dA2 dS dt (i+1) len
 
 mainEuler :: (Num a, Fractional a, Floating a) => [Dati a]
-mainEuler = calcEulero (1000.0, 10.0) (100, 9.81) 0.1 0 1000 
+mainEuler = calcEulero (100.0, 10.0) (100, 9.81) 0.1 0 1000 
