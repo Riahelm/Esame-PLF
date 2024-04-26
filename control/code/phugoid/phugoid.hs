@@ -1,3 +1,5 @@
+module Phugoid(main_fullPhugoid) where
+
 import Data.List
 type Dati a = (a,a,a,a)
 
@@ -35,5 +37,9 @@ calcEulero dA@datiAliante dS@datiSimulazione dt i len| i == 0            = dA : 
                                                         dA2 = metodoEulero dA dS dt 
                                                         calcolaProssimoPunto = calcEulero dA2 dS dt (i+1) len
 
-mainEuler :: (Num a, Fractional a, Floating a) => [Dati a]
-mainEuler = calcEulero (30.0, 0.0, 0.0, 1000.0) (9.81, 30.0, 0.05, 1.0) 0.1 0 1000 
+mainEuler :: (Num a, Fractional a, Floating a) => a -> [Dati a]
+mainEuler dt = calcEulero (30.0, 0.0, 0.0, 1000.0) (9.81, 30.0, 0.05, 1.0) dt 0 1000
+
+-- metodo richiamato nell'import
+main_fullPhugoid :: (Num a, Fractional a, Floating a) =>  a -> [Dati a]  
+main_fullPhugoid dt = mainEuler dt
