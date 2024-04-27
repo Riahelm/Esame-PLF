@@ -13,7 +13,7 @@ main_convezione = calcConvTempo condizioneIniziale nt nx c dx dt
     *Caso generale: altrimenti si integra numericamente la funzione d'onda quadra rispetto allo spazio, si decrementa di una
     unità il numero di passi totale e si procede ricorsivamente con la funzione d'onda ricalcolata.-}
 calcConvTempo :: [Double] -> Int -> Int -> Double -> Double -> Double -> [Double]
-calcConvTempo  onda 0 _ _ _ _           = onda
+calcConvTempo onda 0 _ _ _ _           = onda
 calcConvTempo onda@(x:_) nt nx c dx dt = calcConvTempo (x : calcConvSpazio onda 1 c dx dt) (nt - 1) nx c dx dt
 
 {- Funzione per il calcolo numerico dell'integrazione dell'equazione di convezione lineare unidimensionale rispetto allo spazio:
