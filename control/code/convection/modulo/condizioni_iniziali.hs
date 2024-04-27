@@ -1,4 +1,4 @@
-module CondIniziali where
+module CondInizialiConv where
 
 import Funzionalita 
 --import Parametri

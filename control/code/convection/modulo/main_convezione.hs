@@ -2,7 +2,7 @@ module Convezione(main_convezione) where
 
 import Funzionalita
 --import Parametri
-import CondIniziali
+import CondInizialiConv
 
 
 {- Funzione per il calcolo dell'equazione di convezione lineare unidimensionale -}

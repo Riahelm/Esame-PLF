@@ -1,7 +1,7 @@
-module CondIniziali where
+module CondInizialiBurg where
 
 import Funzionalita 
-import Parametri
+import ParametriBurg
 
 {- Calcolo della condizione iniziale per la risoluzione dell'equazione di Burgers a una dimensione. La con-
    -dizione iniziale viene imposta al tempo t=0 e consiste nel calcolo della funzione 'u' a dente di sega. -}
@@ -36,7 +36,8 @@ condizioneIniziale nx lmtInf lmtSup = [calcOndaDenteSega x | x <- lx]
 calcOndaDenteSega :: Double -> Double
 calcOndaDenteSega x = u t0 x nu 
                        where 
+                         t0 = 0.0                                                                                  -- tempo iniziale di di simulazione 
                          phiprime t0 x nu = -(-8*t0 + 2*x)*exp(-(-4*t0 + x)**2/(4*nu*(t0 + 1)))/(4*nu*(t0 + 1)) - (-8*t0 + 2*x - 4*pi)*
-                                            exp(-(-4*t0 + x - 2*pi)**2/(4*nu*(t0 + 1)))/(4*nu*(t0 + 1))          -- derivata rispetto alla variabile x della funzione phi
+                                            exp(-(-4*t0 + x - 2*pi)**2/(4*nu*(t0 + 1)))/(4*nu*(t0 + 1))            -- derivata rispetto alla variabile x della funzione phi
                          phi t0 x nu      = exp(-(x-4*t0)**2/(4*nu*(t0+1))) + exp(-(x-4*t0-2*pi)**2/(4*nu*(t0+1))) -- funzione phi
                          u t0 x nu        = -2*nu*((phiprime t0 x nu) / (phi t0 x nu))+4  
