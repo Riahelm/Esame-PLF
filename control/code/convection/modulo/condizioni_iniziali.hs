@@ -8,7 +8,7 @@ import Funzionalita
 --condizioneIniziale :: Int -> Double -> Double -> [Double]
 --condizioneIniziale nx lmtInf lmtSup = calcOndaQuadra (calcPuntiEqui 0 nx lmtInf lmtSup) 
 
-{- Funzione che definisce l'onda quadra: il domiino della funzione è rappresentato da un insieme finito di
+{- Funzione che definisce l'onda quadra: il dominio della funzione è rappresentato da un insieme finito di
    punti tra 0 e 2, estremi compresi. Il coodominio è formato da due valori: 2 (valore assunto da tutti gli 
    elementi del dominio compresi tra 0.5 e 1.0) e 1 (valore assunto dagli elementi del dominio che non fan-
    -no parte dell'intervallo [0.5, 1.0]) -}  -- Nota 1

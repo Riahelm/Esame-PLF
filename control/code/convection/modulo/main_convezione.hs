@@ -29,8 +29,8 @@ calcConvTempo onda@(x:_) nt nx c dx dt = calcConvTempo (x : calcConvSpazio onda 
     *Caso generale: altrimenti si esegue un passo di Eulero, si incrementa di un'unità il numero di passi spaziali e si procede 
      ricorsivamente sulla medesima lista di punti. -}
 calcConvSpazio :: [Double] -> Int -> Double -> Double -> Double -> [Double]
-calcConvSpazio lx@(x:_) i c dx dt  | i == lunghezza lx - 1 = [passoEulero]
-                                   | otherwise             = (passoEulero) : calcConvSpazio lx (i+1) c dx dt
+calcConvSpazio lx@(x:_) i c dx dt  | i == length lx - 1 = [passoEulero]
+                                   | otherwise          = (passoEulero) : calcConvSpazio lx (i+1) c dx dt
                                       where
                                         passoEulero = estrai lx i - c * dt /dx *(estrai lx i - estrai lx (i-1))
 

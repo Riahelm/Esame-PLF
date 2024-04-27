@@ -8,8 +8,8 @@ limiteInf :: Double
 limiteInf = 0.0                                {- limite inferiore del dominio spaziale -}  
 nx :: Int
 nx = 201                                       {- numero di punti della griglia spaziale -} 
-tInizio :: Double
-tInizio = 0.0                                  {- tempo iniziale di di simulazione -}
+t0 :: Double
+t0 = 0.0                                       {- tempo iniziale di di simulazione -}
 tFine :: Double
 tFine = 0.6                                    {- tempo totale di simulazione -}
 dx :: Double
