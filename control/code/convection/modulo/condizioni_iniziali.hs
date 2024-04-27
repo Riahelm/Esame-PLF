@@ -24,3 +24,21 @@ calcOndaQuadra  lx@(x:xs) | lunghezza lx > 0 && x >= 0.5 && x <= 1.0 = ondaSup :
 -----------------------------------------------------------------------------------------------------------------
 -- Nota 1: le costanti 0.5 e 1.0 sono utilizzate per calcolare l'onda. Il fatto che non siano impostabili
 -- dall'utente è una "scelta di progetto".
+
+-- Nota 2: list comprehension: alternativa
+{-
+condizioneIniziale :: Int -> Double -> Double -> [Double]
+condizioneIniziale nx lmtInf lmtSup = [calcOndaQuadra x | x <- lx]
+                                         where
+                                           lx = calcPuntiEqui 0 nx lmtInf lmtSup
+
+calcOndaQuadra :: Double -> Double
+calcOndaQuadra x | x >= 0.5 && x <= 1.0 = ondaSup
+                 | otherwise            = ondaInf
+                     where 
+                       ondaSup = 2.0 -- valori assunti dalla parte alta della funzione d'onda quadra
+                       ondaInf = 1.0 -- valori assunti dalla parte bassa della funzione d'onda quadra
+-}
+                                                                  
+
+
