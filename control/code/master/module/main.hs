@@ -4,16 +4,20 @@ import Convezione
 
 main::IO()
 main = do --putStrLn "Calcolo del moto di fugoide senza attrito"
-	  --putStrLn "Digita lunghezza del passo temporale:"
-	  --dt <- getChar 
+          --putStrLn "Digita lunghezza del passo temporale:"
+	      --dt <- getChar 
           --putStrLn $ show (main_simplePhugoid (read dt :: Double))
-	  --putStrLn "Calcolo del moto di fugoide con attrito"
-	  --putStrLn "Digita lunghezza del passo temporale:"
-	  --dt <- getChar
+	      --putStrLn "Calcolo del moto di fugoide con attrito"
+	      --putStrLn "Digita lunghezza del passo temporale:"
+	      --dt <- getChar
           --putStrLn $ show (main_fullPhugoid (read [dt]))
           --putStrLn "Calcolo dell'equazione di convezione lineare unidimensionale"
           putStrLn "Calcolo dell'equazione di convezione lineare a una dimensione"
-          putStrLn $ show (main_convezione)
+          putStrLn "Digita il numero di punti totali della funzione d'onda:"
+          nx <- getChar
+          putStrLn "Digita la lunghezza del passo temporale della funzione d'onda:"
+          dt <- getChar
+          putStrLn $ show (main_convezione nx dt)
 
 
 

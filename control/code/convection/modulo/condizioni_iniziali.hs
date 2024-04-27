@@ -5,8 +5,8 @@ import Parametri
 
 {- Calcolo della condizione iniziale per la risoluzione dell'equazione di convezione lineare a una dimensione. 
    La condizione iniziale viene imposta al tempo t=0 e consiste nel calcolo della funzione d'onda quadra. -}
-condizioneIniziale :: [Double]
-condizioneIniziale = calcOndaQuadra (calcPuntiEqui 0 nx limiteInf limiteSup) ondaInf ondaSup
+condizioneIniziale :: Int -> [Double]
+condizioneIniziale nx = calcOndaQuadra (calcPuntiEqui 0 nx limiteInf limiteSup) ondaInf ondaSup
 
 {- Funzione che definisce l'onda quadra: il domiino della funzione è rappresentato da un insieme finito di
    punti tra 0 e 2, estremi compresi. Il coodominio è formato da due valori: 2 (valore assunto da tutti gli 

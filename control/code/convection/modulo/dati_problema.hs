@@ -6,13 +6,13 @@ module Parametri where
  limiteInf :: Double
  limiteInf = 0.0                                {- limite inferiore del dominio spaziale -}  
  nx :: Int
- nx        = 41                                 {- numero di punti della griglia spaziale -} -- Nota 1
+ nx = 41                                        {- numero di punti della griglia spaziale -} -- Nota 1
  nt :: Int 
  nt = 25                                        {- numero complessivo di passi temporali che deve effettuare l'algoritmo -}
  dt :: Double
  dt = 0.02                                      {- lunghezza del passo temporale -}
- dx :: Double
- dx = limiteSup / (fromIntegral(nx :: Int) - 1) {- distanza tra qualsiasi coppia di punti della griglia adiacenti -}
+ --dx :: Double
+ --dx = limiteSup / (fromIntegral(nx :: Int) - 1) {- distanza tra qualsiasi coppia di punti della griglia adiacenti -}
  c :: Double
  c = 1.0                                        {- velocità dell'onda -}   
  ondaSup :: Double

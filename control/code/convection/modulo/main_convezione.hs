@@ -6,7 +6,10 @@ import CondIniziali
 
 
 {- Funzione per il calcolo dell'equazione di convezione lineare unidimensionale -}
-main_convezione = calcConvTempo condizioneIniziale nt nx c dx dt
+main_convezione :: Int -> Double -> [Double]
+main_convezione nx dt = calcConvTempo (condizioneIniziale nx) nt nx c dx dt
+                            where
+                              dx = limiteSup / (fromIntegral(nx :: Int) - 1) -- distanza tra qualsiasi coppia di punti della griglia adiacenti 
 
 {- Funzione per il calcolo numerico dell'integrazione dell'equazione di convezione lineare unidimensionale rispetto al tempo:
     *Caso base: se il numero di passi temporali è pari a zero, allora si restituisce la funzione d'onda quadra.
