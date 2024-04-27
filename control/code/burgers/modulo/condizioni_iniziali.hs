@@ -36,7 +36,7 @@ condizioneIniziale nx lmtInf lmtSup = [calcOndaDenteSega x | x <- lx]
 calcOndaDenteSega :: Double -> Double
 calcOndaDenteSega x = u t0 x nu 
                        where 
-                         phiprime t0 x nu = -(-8*t + 2*x)*exp(-(-4*t + x)**2/(4*nu*(t + 1)))/(4*nu*(t + 1)) - (-8*t + 2*x - 4*pi)*
-                                            exp(-(-4*t + x - 2*pi)**2/(4*nu*(t + 1)))/(4*nu*(t + 1))          -- derivata rispetto alla variabile x della funzione phi
-                         phi t0 x nu      = exp(-(x-4*t)**2/(4*nu*(t+1))) + exp(-(x-4*t-2*pi)**2/(4*nu*(t+1))) -- funzione phi
-                         u t0 x nu        = -2*nu*((phiprime t x nu) / (phi t x nu))+4  
+                         phiprime t0 x nu = -(-8*t0 + 2*x)*exp(-(-4*t0 + x)**2/(4*nu*(t0 + 1)))/(4*nu*(t0 + 1)) - (-8*t0 + 2*x - 4*pi)*
+                                            exp(-(-4*t0 + x - 2*pi)**2/(4*nu*(t0 + 1)))/(4*nu*(t0 + 1))          -- derivata rispetto alla variabile x della funzione phi
+                         phi t0 x nu      = exp(-(x-4*t0)**2/(4*nu*(t0+1))) + exp(-(x-4*t0-2*pi)**2/(4*nu*(t0+1))) -- funzione phi
+                         u t0 x nu        = -2*nu*((phiprime t0 x nu) / (phi t0 x nu))+4  

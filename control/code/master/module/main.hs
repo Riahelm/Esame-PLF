@@ -1,6 +1,7 @@
 module Main where
 
-import Convezione 
+--import Convezione 
+import Burgers
 
 main::IO()
 main = do --putStrLn "Calcolo del moto di fugoide senza attrito"
@@ -23,6 +24,8 @@ main = do --putStrLn "Calcolo del moto di fugoide senza attrito"
           putStrLn "Calcolo dell'equazione di Burgers a una dimensione"
           putStrLn "Digita il numero di punti totali della funzione d'onda:"
           nx <- getLine
+          putStrLn $ show (main_burgers (read nx :: Int))
+
 
 
 
