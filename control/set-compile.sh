@@ -7,7 +7,7 @@
 
 #moduli convezione:
 #code/convection/modulo/funzioni_ausiliarie.hs
-#code/convection/modulo/dati_problema.hs
+#code/convection/modulo/dati_problema.hs --removed
 #code/convection/modulo/condizioni_iniziali.hs
 #code/convection/modulo/main_convezione.hs
 
