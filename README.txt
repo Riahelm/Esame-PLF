@@ -37,11 +37,11 @@ FASE II) Compilazione codice
 
 1. Una volta completata l'implementazione di uno dei quattro moduli (fugoide, convezione...) si passa alla
    fase di compilazone.
-2. control/set-compile.sh è lo script da eseguire con il comando: source <nome_script>. All'interno dello
+2. control/set-compile.sh è lo script da eseguire con il comando source <nome_script>. All'interno dello
    script dovrà andar specificata la lista dei moduli da compilare (incluso il main) per produrre l'esegui-
    -bile.
 3. Prima di ogni push è buona norma mantener pulita la propria directory di lavoro. Per questo si utilizza
-   lo script control/delete_compile.sh. All'interno si deve specificare il comando "rm -r" la relativa di-
+   lo script control/delete_compile.sh. All'interno si deve specificare il comando "rm -r" e la relativa di-
    -recotry dove andranno rimossi i file .o e .hi .
 
---> Un esempio di implementazione è stata già svolta con il modello di convezione.
+--> Un esempio di implementazione è stato già svolto con il modello di convezione.
