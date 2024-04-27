@@ -6,7 +6,7 @@ import CondIniziali
 
 
 {- Funzione per il calcolo dell'equazione di convezione lineare unidimensionale -}
-main_convezione = calcConveTempo (condizioneIniziale nt nx c dx dt)
+main_convezione = calcConvTempo condizioneIniziale nt nx c dx dt
 
 {- Funzione per il calcolo numerico dell'integrazione dell'equazione di convezione lineare unidimensionale rispetto al tempo:
     *Caso base: se il numero di passi temporali è pari a zero, allora si restituisce la funzione d'onda quadra.
@@ -14,7 +14,7 @@ main_convezione = calcConveTempo (condizioneIniziale nt nx c dx dt)
     unità il numero di passi totale e si procede ricorsivamente con la funzione d'onda ricalcolata.-}
 calcConvTempo :: [Double] -> Int -> Int -> Double -> Double -> Double -> [Double]
 calcConvTempo  onda 0 _ _ _ _           = onda
-calcConveTempo onda@(x:_) nt nx c dx dt = calcConvTempo (x : calcConvSpazio onda 1 c dx dt) (nt - 1) nx c dx dt
+calcConvTempo onda@(x:_) nt nx c dx dt = calcConvTempo (x : calcConvSpazio onda 1 c dx dt) (nt - 1) nx c dx dt
 
 {- Funzione per il calcolo numerico dell'integrazione dell'equazione di convezione lineare unidimensionale rispetto allo spazio:
     *Caso base: se il numero corrente di passi spaziali è pari al numero complessivo di passi spaziali, allora la funzione ese-
