@@ -45,4 +45,4 @@ FASE II) Compilazione codice
    lo script control/delete_compile.sh. All'interno si deve specificare il comando "rm -r" e la relativa di-
    -recotry dove andranno rimossi i file .o e .hi .
 
---> Un esempio di implementazione è stato già svolto con il modello di convezione.
+--> Un esempio di implementazione è stato già svolto con il modello di convezione: commit cdc7b6c (group/main) Update README.txt

@@ -12,12 +12,17 @@ main = do --putStrLn "Calcolo del moto di fugoide senza attrito"
 	      --dt <- getChar
           --putStrLn $ show (main_fullPhugoid (read [dt]))
           --putStrLn "Calcolo dell'equazione di convezione lineare unidimensionale"
+          {-
           putStrLn "Calcolo dell'equazione di convezione lineare a una dimensione"
           putStrLn "Digita il numero di punti totali della funzione d'onda:"
           nx <- getLine
           putStrLn "Digita la lunghezza del passo temporale della funzione d'onda:"
           dt <- getLine
           putStrLn $ show (main_convezione (read nx :: Int) (read dt :: Double))
+          -}
+          putStrLn "Calcolo dell'equazione di Burgers a una dimensione"
+          putStrLn "Digita il numero di punti totali della funzione d'onda:"
+          nx <- getLine
 
 
 

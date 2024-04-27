@@ -21,7 +21,9 @@ main_convezione nx dt = calcConvTempo (condizioneIniziale nx lmtInf lmtSup) nt n
     unità il numero di passi totale e si procede ricorsivamente con la funzione d'onda ricalcolata.-}
 calcConvTempo :: [Double] -> Int -> Int -> Double -> Double -> Double -> [Double]
 calcConvTempo onda 0 _ _ _ _           = onda
-calcConvTempo onda@(x:_) nt nx c dx dt = calcConvTempo (x : calcConvSpazio onda 1 c dx dt) (nt - 1) nx c dx dt
+calcConvTempo onda nt nx c dx dt = calcConvTempo (x : calcConvSpazio onda 1 c dx dt) (nt - 1) nx c dx dt
+                                      where 
+                                        x = head onda
 
 {- Funzione per il calcolo numerico dell'integrazione dell'equazione di convezione lineare unidimensionale rispetto allo spazio:
     *Caso base: se il numero corrente di passi spaziali è pari al numero complessivo di passi spaziali, allora la funzione ese-
@@ -29,9 +31,9 @@ calcConvTempo onda@(x:_) nt nx c dx dt = calcConvTempo (x : calcConvSpazio onda 
     *Caso generale: altrimenti si esegue un passo di Eulero, si incrementa di un'unità il numero di passi spaziali e si procede 
      ricorsivamente sulla medesima lista di punti. -}
 calcConvSpazio :: [Double] -> Int -> Double -> Double -> Double -> [Double]
-calcConvSpazio lx@(x:_) i c dx dt  | i == length lx - 1 = [passoEulero]
-                                   | otherwise          = (passoEulero) : calcConvSpazio lx (i+1) c dx dt
-                                      where
-                                        passoEulero = estrai lx i - c * dt /dx *(estrai lx i - estrai lx (i-1))
+calcConvSpazio lx i c dx dt  | i == length lx - 1 = [passoEulero]
+                             | otherwise          = (passoEulero) : calcConvSpazio lx (i+1) c dx dt
+                                where
+                                  passoEulero =  lx !! i - c * dt /dx *(lx !! i - lx !! (i-1))
 
     
