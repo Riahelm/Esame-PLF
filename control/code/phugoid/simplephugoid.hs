@@ -2,10 +2,11 @@ module FugoideSemplice(mainFugoide) where
 type Dati a = (a,a)
 
 mainFugoide :: (Num a, Fractional a, Floating a) => a -> [a]
-mainFugoide dt = 100.0 : calcEulero (100.0, 10.0) (9.81, 100) dt 1 10000
+mainFugoide dt = calcEulero (100.0, 10.0) (9.81, 100) dt 0 10000
 
 calcEulero :: (Num a, Floating a) => Dati a -> Dati a -> a -> Int -> Int -> [a]
-calcEulero dA@(dAA,_) dS@datiSimulazione dt i len   | i == (len - 1)    = [dBA]
+calcEulero dA@(dAA,_) dS@datiSimulazione dt i len   |i == 0 = dAA : calcolaProssimoPunto 
+                                                    |i == (len - 1)    = [dBA]
                                                     | otherwise         = dBA : calcolaProssimoPunto
                                                     where
                                                         dB@(dBA,_) = metodoEulero dA dS dt
