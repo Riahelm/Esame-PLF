@@ -2,15 +2,16 @@ module FugoideSemplice(mainFugoide) where
 type Dati a = (a,a)
 
 mainFugoide :: (Num a, Fractional a, Floating a) => a -> [a]
-mainFugoide dt = calcEulero (100.0, 10.0) (9.81, 100) dt 0 10000
+mainFugoide dt = 100.0 : calcEulero (100.0, 10.0) (9.81, 100) dt 10000
 
-calcEulero :: (Num a, Floating a) => Dati a -> Dati a -> a -> Int -> Int -> [a]
-calcEulero dA@(dAA,_) dS@datiSimulazione dt i len   |i == 0 = dAA : calcolaProssimoPunto 
-                                                    |i == (len - 1)    = [dBA]
-                                                    | otherwise         = dBA : calcolaProssimoPunto
-                                                    where
-                                                        dB@(dBA,_) = metodoEulero dA dS dt
-                                                        calcolaProssimoPunto = calcEulero dB dS dt (i+1) len
+calcEulero :: (Num a, Floating a) => Dati a -> Dati a -> a -> Int -> [a]
+calcEulero dA dS dt 0 = [dBA]
+                        where 
+                            (dBA,_) = metodoEulero dA dS dt
+calcEulero dA dS dt len = dBA : calcolaProssimoPunto
+                                            where
+                                                dB@(dBA,_)              = metodoEulero dA dS dt
+                                                calcolaProssimoPunto    = calcEulero dB dS dt (len - 1)
 
 
 
@@ -18,13 +19,10 @@ metodoEulero :: (Num a, Floating a) => Dati a -> Dati a -> a -> Dati a
 metodoEulero dA@datiAliante dS@datiSimulazione dt = sommaTupla dA (moltiplicaTuplaPerScalare (rhs dA dS) dt)
 
 rhs :: (Num a, Floating a) => Dati a -> Dati a-> Dati a
-rhs (y@altitude, v@velocity) (cG@costGrav, zt) = (v,cG * (1-y/zt))
+rhs (y@altitudine, v@velocita) (cG@costGrav, zt) = (v,cG * (1-y/zt))
 
 sommaTupla :: (Num a) => Dati a -> Dati a -> Dati a
 sommaTupla (a1,b1) (a2,b2) = (a1+a2, b1+b2)
-
-moltiplicaTupla :: (Num a) => Dati a -> Dati a -> Dati a
-moltiplicaTupla (a1,b1) (a2,b2) = (a1*a2, b1*b2)
 
 moltiplicaTuplaPerScalare :: (Num a) => Dati a -> a -> Dati a
 moltiplicaTuplaPerScalare (a1,b1) b = (a1*b, b1*b)
