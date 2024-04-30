@@ -1,4 +1,4 @@
-module Funzionalita (Dati, sommaTupla, moltiplicaTuplaPerScalare)where
+module Funzioni (Dati, sommaTupla, moltiplicaTuplaPerScalare) where
 
     type Dati a = (a,a,a,a)
 
