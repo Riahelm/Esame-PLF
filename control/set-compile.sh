@@ -1,9 +1,14 @@
 #!/bin/bash
 
+
 #code/master/module/main.hs -- main.hs
-#code/phugoid/phugoid.hs    -- phugoid.hs
-#...
-#ghc code/phugoid/phugoid.hs code/master/module/main.hs -o start
+
+#moduli fugoide completo:
+#code/fugoideCompleto/modulo/condizioni_iniziali.hs
+#code/fugoideCompleto/modulo/dati_problema.hs
+#code/fugoideCompleto/modulo/fugoideCompleto.hs
+#code/fugoideCompleto/modulo/funzioni_ausiliarie.hs
+ghc code/fugoideCompleto/modulo/*.hs code/master/module/main.hs -o fullPhugoid
 
 #moduli convezione:
 #code/convection/modulo/funzioni_ausiliarie.hs

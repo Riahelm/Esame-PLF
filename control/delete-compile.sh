@@ -4,4 +4,4 @@
  rm -r  code/master/module/*.{o,hi}
  rm -r  code/burgers/modulo/*.{o,hi}
  rm -r  code/convection/modulo/*.{o,hi}
- 
+ rm -r  code/fugoideCompleto/modulo/*.{o,hi}
