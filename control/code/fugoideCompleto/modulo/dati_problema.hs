@@ -7,10 +7,11 @@ module DatiProblema where
     vT = 30.0
 
     cR :: Float 
-    cR = 1.0/40.0
+    cR = 1.0/40.0   -- definire 1.0 e 40.0 (cosa rappresentano?)
 
     cP :: Float
     cP = 1.0
+
 
 
 
