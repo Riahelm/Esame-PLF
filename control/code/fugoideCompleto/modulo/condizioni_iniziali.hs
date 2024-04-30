@@ -1,6 +1,6 @@
 module CondizioniIniziali where
 
-import qualified DatiProblema as DP
+import qualified DatiProblema as DP -- attenzione all'utilizzo di qualified...
 
 v0 :: Float
 v0 = DP.vT
