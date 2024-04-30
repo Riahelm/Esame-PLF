@@ -2,16 +2,16 @@ module FugoideSemplice(mainFugoide) where
 type Dati a = (a,a)
 
 mainFugoide :: (Num a, Fractional a, Floating a) => a -> [a]
-mainFugoide dt = 100.0 : calcEulero (100.0, 10.0) (9.81, 100) dt 10000
+mainFugoide dt = 100.0 : calcMoto (100.0, 10.0) (9.81, 100) dt 10000
 
-calcEulero :: (Num a, Floating a) => Dati a -> Dati a -> a -> Int -> [a]
-calcEulero dA dS dt 0 = [dBA]
+calcMoto :: (Num a, Floating a) => Dati a -> Dati a -> a -> Int -> [a]
+calcMoto dA dS dt 0 = [dBA]
                         where 
                             (dBA,_) = metodoEulero dA dS dt
-calcEulero dA dS dt len = dBA : calcolaProssimoPunto
+calcMoto dA dS dt len = dBA : calcolaProssimoPunto
                                             where
                                                 dB@(dBA,_)              = metodoEulero dA dS dt
-                                                calcolaProssimoPunto    = calcEulero dB dS dt (len - 1)
+                                                calcolaProssimoPunto    = calcMoto dB dS dt (len - 1)
 
 
 
