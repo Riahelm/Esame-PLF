@@ -1,7 +1,7 @@
 module DatiProblema where
 
-    g :: Float
-    g = 9.81
+    cG :: Float
+    cG = 9.81
 
     vT :: Float
     vT = 30.0

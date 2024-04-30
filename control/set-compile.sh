@@ -8,7 +8,6 @@
 #code/fugoideCompleto/modulo/dati_problema.hs
 #code/fugoideCompleto/modulo/fugoideCompleto.hs
 #code/fugoideCompleto/modulo/funzioni_ausiliarie.hs
-ghc code/fugoideCompleto/modulo/*.hs code/master/module/main.hs -o fullPhugoid
 
 #moduli convezione:
 #code/convection/modulo/funzioni_ausiliarie.hs
@@ -26,6 +25,6 @@ ghc code/fugoideCompleto/modulo/*.hs code/master/module/main.hs -o fullPhugoid
 
 #ghc code/convection/modulo/funzioni_ausiliarie.hs code/burgers/modulo/*.hs code/master/module/main.hs -o burgers
 
-ghc code/convection/modulo/*.hs code/burgers/modulo/*.hs code/master/module/main.hs -o convburgers
+ghc code/fugoideCompleto/modulo/*.hs code/convection/modulo/*.hs code/burgers/modulo/*.hs code/master/module/main.hs -o convburgers
 
 
