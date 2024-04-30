@@ -5,12 +5,12 @@ import Burgers
 import Fugoide
 
 main::IO()
-main = do 
-          putStrLn "Calcolo del moto di fugoide senza attrito"
+main = do {-
+	  putStrLn "Calcolo del moto di fugoide senza attrito"
           putStrLn "Digita lunghezza del passo temporale:"
-	      dt <- getLine
-          putStrLn $ show (mainFugoide(read dt :: Double))
-          {-
+	  dt <- getLine
+          putStrLn $ show (mainFugoide(read dt :: Float))
+         
 	      putStrLn "Calcolo del moto di fugoide con attrito"
 	      putStrLn "Digita lunghezza del passo temporale:"
 	      dt <- getChar

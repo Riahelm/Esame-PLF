@@ -25,6 +25,6 @@
 
 #ghc code/convection/modulo/funzioni_ausiliarie.hs code/burgers/modulo/*.hs code/master/module/main.hs -o burgers
 
-ghc code/fugoideCompleto/modulo/*.hs code/convection/modulo/*.hs code/burgers/modulo/*.hs code/master/module/main.hs -o convburgers
+ghc code/fugoideCompleto/modulo/*.hs code/convection/modulo/*.hs code/burgers/modulo/*.hs code/master/module/main.hs -o fugconvburgers
 
 

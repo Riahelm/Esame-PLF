@@ -1,9 +1,9 @@
 module CondizioniIniziali where
 
-import qualified DatiProblema
+import qualified DatiProblema as DP
 
 v0 :: Float
-v0 = vT
+v0 = DP.vT
 
 theta0 :: Float
 theta0 = 0.0

@@ -4,8 +4,8 @@ import Funzioni
 import CondizioniIniziali
 import DatiProblema
 
-mainFugoide :: Float -> Int -> [Float]
-mainFugoide dt t@finalTime = y0 : calcMoto (vT, theta0, x0, y0) dt floor (fromIntegral t/dt)
+mainFugoide :: Float -> Int -> [Float] -- attenzione: solo un parametro in ingresso: dt !!
+mainFugoide dt t@finalTime = y0 : calcMoto (vT, theta0, x0, y0) dt (floor (fromIntegral(t :: Int)  / dt))
 
 calcMoto :: Dati Float -> Float -> Int -> [Float]
 calcMoto dA dt 0     =  [dBA]
