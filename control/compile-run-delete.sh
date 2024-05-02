@@ -33,4 +33,12 @@ ghc src/fugoide/completo/modulo/*.hs src/fugoide/semplice/modulo/*.hs src/convec
 rm -r  src/master/module/*.{o,hi}
 rm -r  src/burgers/modulo/*.{o,hi}
 rm -r  src/convection/modulo/*.{o,hi}
-rm -r  src/fugoideCompleto/modulo/*.{o,hi}
+rm -r  src/fugoide/completo/modulo/*.{o,hi}
+rm -r  src/fugoide/semplice/modulo/*.{o,hi}
+
+#Funzionalità aggiuntiva 
+./fugconvburgers
+
+rm -r fugconvburgers
+
+
