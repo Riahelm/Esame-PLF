@@ -1,6 +1,6 @@
-module CondizioniIniziali where
+module CondizioniComplete where
 
-import DatiProblema 
+import DatiCompleti 
 
 --v0 :: Float       {- Velocita' iniziale del velivolo, in m/s -}
 --v0 = vT
