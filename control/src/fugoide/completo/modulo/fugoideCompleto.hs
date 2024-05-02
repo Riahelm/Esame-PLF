@@ -1,14 +1,21 @@
 module Fugoide(mainFugoide) where
 
-import Funzioni
+import Quadrupla
 import CondizioniIniziali
 import DatiProblema
 
-mainFugoide :: Float -> Int -> [Float] -- attenzione: solo un parametro in ingresso: dt !!
-mainFugoide dt t@finalTime = y0 : calcMoto (vT, theta0, x0, y0) dt (floor (fromIntegral(t :: Int)  / dt))  
+mainFugoide :: Float -> [Float] -- attenzione: solo un parametro in ingresso: dt !!
+mainFugoide dt = y0 : calcMoto (v0, theta0, x0, y0) dt passiTemporali
+   where
+      v0 = 30.0
+      theta0 = 0.0
+      x0 = 0.0
+      y0 = 1000.0
+      passiTemporali = floor(tempo/dt)
+
                                                                    -- vedi dispense per utilizzo corretto di fromIntegral
 
-calcMoto :: Dati Float -> Float -> Int -> [Float]
+calcMoto :: Quadrupla Float -> Float -> Int -> [Float]
 calcMoto dA dt 0     =  [dBA]
                         where
                            (dBA,_,_,_) = metodoEulero dA dt                    
@@ -18,15 +25,14 @@ calcMoto dA dt len   =  dBA : calcolaProssimoPunto
                            dB@(dBA,_,_,_) = metodoEulero dA dt
                            calcolaProssimoPunto = calcMoto dB dt (len - 1)
 
-rhs :: Dati Float -> Dati Float
-rhs (v,theta,x,y) =  (- (cG * sin theta) - (cR / cP)*cG/vT**2*v**2,
-                     - (cG * cos theta / v) + cG/vT**2*v,
-                     v*cos theta,
-                     v*sin theta)
-
-metodoEulero :: Dati Float -> Float -> Dati Float
-metodoEulero dA@datiAliante dt = sommaTupla dA (moltiplicaTuplaPerScalare (rhs dA) dt)
-
+metodoEulero :: Quadrupla Float -> Float -> Quadrupla Float
+metodoEulero dA@(v,theta,x,y) dt = sommaTupla dA (moltiplicaTuplaPerScalare (rhs dA) dt)
+                                 where 
+                                   {- inserisci i dati del problema qui -}
+                                   rhs = (- (cG * sin theta) - (cR / cP)*cG/vT**2*v**2,
+                                         - (cG * cos theta / v) + cG/vT**2*v,
+                                         v*cos theta,
+                                         v*sin theta)
 {-
 
 --forma più concisa...
@@ -36,7 +42,7 @@ mainFugoide dt t@finalTime = y0 : calcMoto (vT, theta0, x0, y0) dt floor (fromIn
                            -- where
                                 {- inserisci condizioni iniziali qui & nt = fromIntegral t/dt-}
 
-calcMoto :: Dati Float -> Float -> Int -> [Float]
+calcMoto :: Quadrupla Float -> Float -> Int -> [Float]
 calcMoto dA dt 0     =  [dBA]
 calcMoto dA dt len   =  dBA : calcolaProssimoPunto
                         where
@@ -45,7 +51,7 @@ calcMoto dA dt len   =  dBA : calcolaProssimoPunto
                            calcolaProssimoPunto = calcMoto dB dt (len - 1)
 
 
-metodoEulero :: Dati Float -> Float -> Dati Float
+metodoEulero :: Quadrupla Float -> Float -> Quadrupla Float
 metodoEulero dA@(v,theta,x,y) dt = sommaTupla dA (moltiplicaTuplaPerScalare (rhs dA) dt)
                                  where 
                                    {- inserisci i dati del problema qui -}
