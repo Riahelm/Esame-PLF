@@ -1,23 +1,31 @@
 module FugoideSemplice(mainFugoide) where
-type Dati a = (a,a)
 
-mainFugoide :: (Num a, Fractional a, Floating a) => a -> [a]
-mainFugoide dt = 100.0 : calcMoto (100.0, 10.0) (9.81, 100) dt 10000
+import DatiProblema
+import CondizioniIniziali
+import Coppia
 
-calcMoto :: (Num a, Floating a) => Dati a -> Dati a -> a -> Int -> [a]
-calcMoto dA dS dt 0 = [dBA]
-                        where 
-                            (dBA,_) = metodoEulero dA dS dt
-calcMoto dA dS dt len = dBA : calcolaProssimoPunto
-                                            where
-                                                dB@(dBA,_)              = metodoEulero dA dS dt
-                                                calcolaProssimoPunto    = calcMoto dB dS dt (len - 1)
+mainFugoide :: Float -> [Float]
+mainFugoide dt = z0 : calcMoto (z0, b0) dt 
+    where
+        z0 = 100.0
+        b0 = 10.0
+
+calcMoto :: Coppia Float -> Float -> Int -> [Float]
+calcMoto dA dt 0 = [dBA]
+    where 
+        (dBA,_) = metodoEulero dA dt
+calcMoto dA dt len = dBA : calcolaProssimoPunto
+    where
+        dB@(dBA,_)              = metodoEulero dA dt
+        calcolaProssimoPunto    = calcMoto dB dt (len - 1)
 
 
 
-metodoEulero :: (Num a, Floating a) => Dati a -> Dati a -> a -> Dati a
-metodoEulero dA@datiAliante dS@datiSimulazione dt = sommaTupla dA (moltiplicaTuplaPerScalare (rhs dA dS) dt)
+metodoEulero :: Coppia Float -> Float -> Coppia Float
+metodoEulero dA@(y@altitudine, v@velocita) dt = sommaCoppia dA (moltiplicaCoppiaPerScalare (rhs dA) dt)
+    where
+        cG = 9.81
+        zt = 100.0
+        rhs = (v, cG * (1-y/zt))
 
-rhs :: (Num a, Floating a) => Dati a -> Dati a-> Dati a
-rhs (y@altitudine, v@velocita) (cG@costGrav, zt) = (v,cG * (1-y/zt))
 
