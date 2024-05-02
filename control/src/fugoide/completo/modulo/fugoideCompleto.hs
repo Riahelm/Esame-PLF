@@ -26,7 +26,7 @@ calcMoto dA dt len   =  dBA : calcolaProssimoPunto
                            calcolaProssimoPunto = calcMoto dB dt (len - 1)
 
 metodoEulero :: Quadrupla Float -> Float -> Quadrupla Float
-metodoEulero dA@(v,theta,x,y) dt = sommaTupla dA (moltiplicaTuplaPerScalare (rhs dA) dt)
+metodoEulero dA@(v,theta,x,y) dt = sommaQuadrupla dA (moltiplicaQuadruplaPerScalare (rhs dA) dt)
                                  where 
                                    {- inserisci i dati del problema qui -}
                                    rhs = (- (cG * sin theta) - (cR / cP)*cG/vT**2*v**2,
@@ -52,7 +52,7 @@ calcMoto dA dt len   =  dBA : calcolaProssimoPunto
 
 
 metodoEulero :: Quadrupla Float -> Float -> Quadrupla Float
-metodoEulero dA@(v,theta,x,y) dt = sommaTupla dA (moltiplicaTuplaPerScalare (rhs dA) dt)
+metodoEulero dA@(v,theta,x,y) dt = sommaQuadrupla dA (moltiplicaQuadruplaPerScalare (rhs dA) dt)
                                  where 
                                    {- inserisci i dati del problema qui -}
                                    rhs = (- (cG * sin theta) - (cR / cP)*cG/vT**2*v**2,
