@@ -21,8 +21,3 @@ metodoEulero dA@datiAliante dS@datiSimulazione dt = sommaTupla dA (moltiplicaTup
 rhs :: (Num a, Floating a) => Dati a -> Dati a-> Dati a
 rhs (y@altitudine, v@velocita) (cG@costGrav, zt) = (v,cG * (1-y/zt))
 
-sommaTupla :: (Num a) => Dati a -> Dati a -> Dati a
-sommaTupla (a1,b1) (a2,b2) = (a1+a2, b1+b2)
-
-moltiplicaTuplaPerScalare :: (Num a) => Dati a -> a -> Dati a
-moltiplicaTuplaPerScalare (a1,b1) b = (a1*b, b1*b)
