@@ -25,7 +25,7 @@
 
 #ghc src/convection/modulo/funzioni_ausiliarie.hs src/burgers/modulo/*.hs src/master/module/main.hs -o burgers
 
-ghc src/fugoideCompleto/modulo/*.hs src/convection/modulo/*.hs src/burgers/modulo/*.hs src/master/module/main.hs -o fugconvburgers
+ghc src/fugoide/completo/modulo/*.hs src/fugoide/semplice/modulo/*.hs src/convection/modulo/*.hs src/burgers/modulo/*.hs src/master/module/main.hs -o fugconvburgers
 
 #!/bin/bash
 
