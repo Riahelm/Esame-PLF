@@ -1,30 +1,36 @@
 #!/bin/bash
 
 
-#code/master/module/main.hs -- main.hs
+#src/master/module/main.hs -- main.hs
 
 #moduli fugoide completo:
-#code/fugoideCompleto/modulo/condizioni_iniziali.hs
-#code/fugoideCompleto/modulo/dati_problema.hs
-#code/fugoideCompleto/modulo/fugoideCompleto.hs
-#code/fugoideCompleto/modulo/funzioni_ausiliarie.hs
+#src/fugoideCompleto/modulo/condizioni_iniziali.hs
+#src/fugoideCompleto/modulo/dati_problema.hs
+#src/fugoideCompleto/modulo/fugoideCompleto.hs
+#src/fugoideCompleto/modulo/funzioni_ausiliarie.hs
 
 #moduli convezione:
-#code/convection/modulo/funzioni_ausiliarie.hs
-#code/convection/modulo/dati_problema.hs --removed
-#code/convection/modulo/condizioni_iniziali.hs
-#code/convection/modulo/main_convezione.hs
+#src/convection/modulo/funzioni_ausiliarie.hs
+#src/convection/modulo/dati_problema.hs --removed
+#src/convection/modulo/condizioni_iniziali.hs
+#src/convection/modulo/main_convezione.hs
 
-#ghc code/convection/modulo/*.hs code/master/module/main.hs -o convezione
+#ghc src/convection/modulo/*.hs src/master/module/main.hs -o convezione
 
 #moduli burgers
-#code/convection/modulo/funzioni_ausiliarie.hs
-#code/burgers/modulo/dati_problema.hs 
-#code/burgers/modulo/condizioni_iniziali.hs
-#code/burgers/modulo/main_burgers.hs
+#src/convection/modulo/funzioni_ausiliarie.hs
+#src/burgers/modulo/dati_problema.hs 
+#src/burgers/modulo/condizioni_iniziali.hs
+#src/burgers/modulo/main_burgers.hs
 
-#ghc code/convection/modulo/funzioni_ausiliarie.hs code/burgers/modulo/*.hs code/master/module/main.hs -o burgers
+#ghc src/convection/modulo/funzioni_ausiliarie.hs src/burgers/modulo/*.hs src/master/module/main.hs -o burgers
 
-ghc code/fugoideCompleto/modulo/*.hs code/convection/modulo/*.hs code/burgers/modulo/*.hs code/master/module/main.hs -o fugconvburgers
+ghc src/fugoideCompleto/modulo/*.hs src/convection/modulo/*.hs src/burgers/modulo/*.hs src/master/module/main.hs -o fugconvburgers
 
+#!/bin/bash
 
+#rm -r <name_directory>/*.{<list extensions>}
+rm -r  src/master/module/*.{o,hi}
+rm -r  src/burgers/modulo/*.{o,hi}
+rm -r  src/convection/modulo/*.{o,hi}
+rm -r  src/fugoideCompleto/modulo/*.{o,hi}
