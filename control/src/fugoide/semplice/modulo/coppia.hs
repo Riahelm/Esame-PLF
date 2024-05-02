@@ -1,4 +1,4 @@
-module Coppia (Coppia, sommaCoppia, moltiplicaCoppiaPerScalare) where
+module Coppia where
     
     type Coppia a = (a,a)
     

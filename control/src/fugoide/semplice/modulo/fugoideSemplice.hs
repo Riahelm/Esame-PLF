@@ -1,14 +1,16 @@
-module FugoideSemplice(mainFugoide) where
+module FugoideSemplice(mainFugoideSemplice) where
 
-import DatiProblema
-import CondizioniIniziali
+import DatiSemplici
+import CondizioniSemplici
 import Coppia
 
-mainFugoide :: Float -> [Float]
-mainFugoide dt = z0 : calcMoto (z0, b0) dt 
+mainFugoideSemplice :: Float -> [Float]
+mainFugoideSemplice dt = z0 : calcMoto (z0, b0) dt passiTemporali
     where
+        tempo = 100
         z0 = 100.0
         b0 = 10.0
+        passiTemporali = floor(fromIntegral tempo/dt)
 
 calcMoto :: Coppia Float -> Float -> Int -> [Float]
 calcMoto dA dt 0 = [dBA]
@@ -23,9 +25,9 @@ calcMoto dA dt len = dBA : calcolaProssimoPunto
 
 metodoEulero :: Coppia Float -> Float -> Coppia Float
 metodoEulero dA@(y@altitudine, v@velocita) dt = sommaCoppia dA (moltiplicaCoppiaPerScalare (rhs dA) dt)
+
+rhs :: Coppia Float -> Coppia Float
+rhs dA@(y@altitudine, v@velocita) = (v, cG * (1-y/zt))
     where
         cG = 9.81
         zt = 100.0
-        rhs = (v, cG * (1-y/zt))
-
-
