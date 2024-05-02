@@ -10,8 +10,8 @@ main = do putStrLn "Calcolo del moto di fugoide senza attrito"
           putStrLn "Digita lunghezza del passo temporale:"
           dt <- getLine
           putStrLn $ show (mainFugoideSemplice (read dt :: Float))
-	      putStrLn "Calcolo del moto di fugoide con attrito"
-	      putStrLn "Digita lunghezza del passo temporale:"
+          putStrLn "Calcolo del moto di fugoide con attrito"
+          putStrLn "Digita lunghezza del passo temporale:"
           dt <- getLine
           putStrLn $ show (mainFugoideCompleto (read dt :: Float))
           putStrLn "Calcolo dell'equazione di convezione lineare a una dimensione"

@@ -5,22 +5,22 @@ import CondizioniComplete
 import DatiCompleti
 
 mainFugoideCompleto :: Float -> [Float]
-mainFugoideCompleto dt = y0 : calcMoto (v0, theta0, x0, y0) dt passiTemporali
+mainFugoideCompleto dt  = y0 : calcMoto (v0, theta0, x0, y0) dt passiTemporali
    where
-      v0 = vTrim
-      theta0 = 0.0
-      x0 = 0.0
-      y0 = 1000.0
-      tempo = 100.0
-      passiTemporali = floor(tempo/dt)
+      v0                = vTrim
+      theta0            = 0.0
+      x0                = 0.0
+      y0                = 1000.0
+      tempo             = 100.0
+      passiTemporali    = floor(tempo/dt)
 
 calcMoto :: Quadrupla Float -> Float -> Int -> [Float]
-calcMoto dA dt 0           =  [dBA]         
+calcMoto dA dt 0           =  [dAD]         
    where
-      (dBA,_,_,_)          = metodoEulero dA dt
-calcMoto dA dt len         =  dBA : calcolaProssimoPunto
+      (_,_,_, dAD)         = metodoEulero dA dt
+calcMoto dA dt len         =  dAD : calcolaProssimoPunto
    where
-      dB@(dBA,_,_,_)       = metodoEulero dA dt
+      dB@(_,_,_, dAD)      = metodoEulero dA dt
       calcolaProssimoPunto = calcMoto dB dt (len - 1)
 
 metodoEulero :: Quadrupla Float -> Float -> Quadrupla Float
