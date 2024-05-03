@@ -11,9 +11,9 @@ import Coppia
 mainFugoideSemplice :: Float -> [Float]
 mainFugoideSemplice dt = z0 : calcMoto (z0, b0) dt (passiTemporali - 1)
     where
-        tempo = 100                                     -- Numero di secondi di simulazione
         z0 = 100.0                                      -- Altitudine iniziale del velivolo
         b0 = 10.0                                       -- Angolo iniziale del velivolo
+        tempo = 100                                     -- Numero di secondi di simulazione
         passiTemporali = floor(fromIntegral tempo/dt)   -- Numero di punti in cui effettuare il calcolo
 
 {-  Funzione per il calcolo numerico dell'integrazione del moto fugoide 
@@ -23,7 +23,7 @@ mainFugoideSemplice dt = z0 : calcMoto (z0, b0) dt (passiTemporali - 1)
     Dati di output: lista di numeri floating-point, questi sono l'altitudine del velivolo per ogni passo temporale. 
     La funzione e' ricorsiva e si divide in caso base e caso generale:
     *Caso base: il numero di passi temporali si azzera, percio' sono stati calcolati tutti i valori necessari.
-                Ritorna quindi l'ultimo punto calcolato del moto fugoide. 
+                Ritorna quindi l'ultima altitudine calcolata del moto fugoide. 
     *Caso generale: altrimenti si applica il metodo di Eulero per il calcolo della posizione del velivolo in base 
                     alla posizione nel tempo precedente, si aggiunge l'altitudine alla lista di elementi da ritornare,
                     si abbassa di uno il numero di elementi da calcolare e si procede ricorsivamente con la posizione del
@@ -54,5 +54,5 @@ metodoEulero dA@(y@altitudine, v@velocita) dt = sommaCoppia dA (moltiplicaCoppia
 rhs :: Coppia Float -> Coppia Float
 rhs dA@(y@alt, v@vel)   = (v, cG * (1-y/zt))
     where
-        cG              = 9.81  --Costante gravitazionale terrestre
-        zt              = 100.0 --Altitudine centrale all'oscillazione
+        cG              = 9.81  -- Costante gravitazionale terrestre
+        zt              = 100.0 -- Altitudine centrale all'oscillazione
