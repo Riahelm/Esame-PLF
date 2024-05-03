@@ -8,9 +8,9 @@ type Dati a = (a,a,a)
 
 
 main_burgers :: Int -> [Double]
-main_burgers nx = calcConvTempo onda nt (condBordoInf onda) 
-                                        (condBordoSup onda) 
-                                        (passoEulero onda 0)
+main_burgers nx = calcConvTempo onda nt (condBordoInf) 
+                                        (condBordoSup) 
+                                        (passoEulero)
                      where
                        onda = condizioneIniziale nx lmtInf lmtSup
                        lmtInf = 0.0                                -- limite inferiore del dominio spaziale 
@@ -27,13 +27,13 @@ calcConvTempo :: [Double] -> Int -> ([Double] -> Double) ->
                                     ([Double] -> Int -> Double) -> [Double]
 
 calcConvTempo onda 0 _ _ _       = onda
-calcConvTempo onda nt inf sup pe = calcConvTempo ((inf onda): calcConvSpazio onda 1 sup pe) (nt - 1) (inf onda) (sup onda) (pe onda 0)
+calcConvTempo onda nt inf sup pe = calcConvTempo ((inf onda): calcConvSpazio onda 1 sup pe) (nt - 1) inf sup pe 
 
 calcConvSpazio :: [Double] -> Int -> ([Double] -> Double) -> 
                                      ([Double] -> Int -> Double) -> [Double]
 
-calcConvSpazio lx i sup pe | i == length lx - 1 = [sup onda]
-                           | otherwise          = (pe onda i) : calcConvSpazio lx (i+1) (sup onda) (pe onda i)
+calcConvSpazio lx i sup pe | i == length lx - 1 = [sup lx]
+                           | otherwise          = (pe lx i) : calcConvSpazio lx (i+1) sup pe 
 
 condBordoInf :: [Double] -> Double
 condBordoInf onda = head onda - head onda * dt/dx * (head onda - last onda) + 
