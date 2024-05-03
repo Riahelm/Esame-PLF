@@ -8,7 +8,7 @@ type Dati a = (a,a)
 
 
 main_burgers :: Int -> [Double]
-main_burgers nx = calcConvTempo (condizioneIniziale nx lmtInf lmtSup) (dx, dt) nt condBordoInf condBordoSup passoEulero
+main_burgers nx = calcConvTempo (condizioneIniziale nx lmtInf lmtSup) nt (dx, dt) condBordoInf condBordoSup passoEulero
                      where
                        lmtInf = 0.0                                -- limite inferiore del dominio spaziale 
                        lmtSup = 2.0 * pi                           -- limite superiore del dominio spaziale 
@@ -23,12 +23,12 @@ calcConvTempo :: [Double] -> Int -> Dati Double -> ([Double] -> Dati Double -> D
                                                    ([Double] -> Dati Double -> Double) -> 
                                                    ([Double] -> Dati Double -> Int -> Double) -> [Double]
 calcConvTempo onda 0 _ _ _ _          = onda
-calcConvTempo onda nt dati inf sup pe = calcConvTempo ((inf onda dati): calcConvSpazio onda 1 sup pe) (nt - 1) inf sup pe 
+calcConvTempo onda nt dati inf sup pe = calcConvTempo ((inf onda dati) : calcConvSpazio onda 1 dati sup pe) (nt - 1) dati inf sup pe 
 
-calcConvSpazio :: [Double] -> Dati Double -> Int -> ([Double] -> Dati Double -> Double) -> 
-                                                    ([Double] -> Dati Double -> Int -> Double) -> [Double]
-calcConvSpazio lx dati i sup pe | i == length lx - 1 = [sup lx dati]
-                                | otherwise          = (pe lx dati i) : calcConvSpazio lx (i+1) sup pe 
+calcConvSpazio :: [Double] -> Int -> Dati Double  -> ([Double] -> Dati Double -> Double) -> 
+                                                     ([Double] -> Dati Double -> Int -> Double) -> [Double]
+calcConvSpazio lx i dati sup pe | i == length lx - 1 = [sup lx dati]
+                                | otherwise          = (pe lx dati i) : calcConvSpazio lx (i+1) dati sup pe 
 
 condBordoInf :: [Double] -> Dati Double -> Double
 condBordoInf onda (dx,dt) = head onda - head onda * dt/dx * (head onda - last onda) + 
