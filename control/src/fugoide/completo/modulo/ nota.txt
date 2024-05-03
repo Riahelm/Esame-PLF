@@ -1,0 +1,6 @@
+Da sistemare:
+
+*caso base: se il numero di passi temporali è zero, si restituisce la funzione traiettoria del moto di fugoide.
+
+- la funzione può essere anche di un solo punto (zero passi temporali).
+- non è detto che venga valutato per forza il caso generale.
