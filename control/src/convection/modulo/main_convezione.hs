@@ -20,7 +20,7 @@ main_convezione nx dt = calcConvTempo (condizioneIniziale nx lmtInf lmtSup) nt n
     *Caso generale: altrimenti si integra numericamente la funzione d'onda quadra rispetto allo spazio, si decrementa di una
     unità il numero di passi totale e si procede ricorsivamente con la funzione d'onda ricalcolata.-}
 calcConvTempo :: [Double] -> Int -> Int -> Double -> Double -> Double -> [Double]
-calcConvTempo onda 0 _ _ _ _           = onda
+calcConvTempo onda 0 _ _ _ _     = onda
 calcConvTempo onda nt nx c dx dt = calcConvTempo (x : calcConvSpazio onda 1 c dx dt) (nt - 1) nx c dx dt
                                       where 
                                         x = head onda
