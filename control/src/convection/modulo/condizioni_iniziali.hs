@@ -1,4 +1,4 @@
-module CondInizialiConv where
+module CondInizialiConv(calcOndaQuadra) where
 
 import Funzionalita 
 --import Parametri

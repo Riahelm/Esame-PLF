@@ -1,4 +1,4 @@
-module CondInizialiBurg where
+module CondInizialiBurg(calcOndaDenteSega) where
 
 import Funzionalita 
 import ParametriBurg

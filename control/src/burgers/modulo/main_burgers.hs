@@ -3,10 +3,11 @@ module Burgers(main_burgers) where
 import Funzionalita
 import ParametriBurg
 import CondInizialiBurg
+import CondizioniIniziali
 
 {- Funzione per il calcolo dell'equazione di Burgers unidimensionale -}
 main_burgers :: Int -> [Double]
-main_burgers nx = calcConvTempo (condizioneIniziale nx lmtInf lmtSup) nt nx nu dx dt
+main_burgers nx = calcConvTempo (condizioneIniziale nx calcOndaDenteSega lmtInf lmtSup) nt nx nu dx dt
                      where
                        lmtInf = 0.0                                -- limite inferiore del dominio spaziale 
                        lmtSup = 2.0 * pi                           -- limite superiore del dominio spaziale 

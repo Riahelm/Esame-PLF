@@ -2,12 +2,13 @@ module Convezione(main_convezione) where
 
 import Funzionalita
 --import Parametri
+import CondizioniIniziali
 import CondInizialiConv
 
 
 {- Funzione per il calcolo dell'equazione di convezione lineare unidimensionale -}
 main_convezione :: Int -> Double -> [Double]
-main_convezione nx dt = calcConvTempo (condizioneIniziale nx lmtInf lmtSup) nt nx c dx dt
+main_convezione nx dt = calcConvTempo (condizioneIniziale nx calcOndaQuadra lmtInf lmtSup) nt nx c dx dt
                             where
                               lmtInf = 0.0                                -- limite inferiore del dominio spaziale 
                               lmtSup = 2.0                                -- limite superiore del dominio spaziale

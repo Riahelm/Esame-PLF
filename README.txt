@@ -6,7 +6,7 @@
 	3) Tidy up code to make it more functional, Haskell-like	      (Nic)
 	4) Write the main function					      (Gab)
         5) convection: list comprehension test on square wave                 (Gab) ok!
-        6) project choices: rewrite burgers and convection' similar functions (Gab)
+        6) project choices: rewrite burgers and convection' similar functions (Gab) 
 
 #NEW
 
