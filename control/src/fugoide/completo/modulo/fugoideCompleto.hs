@@ -32,12 +32,12 @@ mainFugoideCompleto dt  = y0 : calcMoto (v0, theta0, x0, y0) dt passiTemporali
                     si abbassa di uno il numero di elementi da calcolare e si procede ricorsivamente con la posizione del
                     velivolo ricalcolata -}
 calcMoto :: Quadrupla Float -> Float -> Int -> [Float]
-calcMoto dA dt 0           =  [dAD]         
+calcMoto dA dt 0           =  [dBD]         
    where
-      (_,_,_, dAD)         = metodoEulero dA dt
-calcMoto dA dt len         =  dAD : calcolaProssimoPunto
+      (_,_,_, dBD)         = metodoEulero dA dt
+calcMoto dA dt len         =  dBD : calcolaProssimoPunto
    where
-      dB@(_,_,_, dAD)      = metodoEulero dA dt
+      dB@(_,_,_, dBD)      = metodoEulero dA dt
       calcolaProssimoPunto = calcMoto dB dt (len - 1)
 
 {-  Funzione per l'applicazione del metodo di Eulero ad una quadrupla di numeri. La funzione approssima la soluzione
