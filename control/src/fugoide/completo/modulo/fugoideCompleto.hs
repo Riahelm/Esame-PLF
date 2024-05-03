@@ -35,6 +35,3 @@ rhs dA@(v,theta,x,y) = (- (cG * sin theta) - (cR / cP)*cG/vTrim**2*v**2,
       cG = 9.81
       cR = 0.025
       cP = 1.0
-
-   
-
