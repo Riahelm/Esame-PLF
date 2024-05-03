@@ -8,7 +8,9 @@ type Dati a = (a,a,a)
 
 
 main_burgers :: Int -> [Double]
-main_burgers nx = calcConvTempo onda nt (condBordoInf (nu, dx, dt) onda) (condBordoSup (nu, dx, dt) onda) (passoEulero (nu, dx, dt) onda 0)
+main_burgers nx = calcConvTempo onda nt (condBordoInf onda) 
+                                        (condBordoSup onda) 
+                                        (passoEulero onda 0)
                      where
                        onda = condizioneIniziale nx lmtInf lmtSup
                        lmtInf = 0.0                                -- limite inferiore del dominio spaziale 
@@ -20,22 +22,27 @@ main_burgers nx = calcConvTempo onda nt (condBordoInf (nu, dx, dt) onda) (condBo
                        nt = truncate(tFine / dt)                   -- numero complessivo di passi temporali che deve effettuare l'algoritmo 
 
 
-calcConvTempo :: [Double] -> Int -> (Dati Double -> [Double] -> Double) -> (Dati Double -> [Double] -> Double) -> (Dati Double -> [Double] -> Int -> Double) -> [Double]
-calcConvTempo onda 0 _ _ _                                 = onda
-calcConvTempo onda nt inf sup pe = calcConvTempo (inf : calcConvSpazio onda 1 sup pe) (nt - 1) inf sup pe
+calcConvTempo :: [Double] -> Int -> ([Double] -> Double) -> 
+                                    ([Double] -> Double) -> 
+                                    ([Double] -> Int -> Double) -> [Double]
 
-calcConvSpazio :: [Double] -> Int -> (Dati Double -> [Double] -> Double) -> (Dati Double -> [Double] -> Int -> Double) -> [Double]
-calcConvSpazio lx i sup pe | i == length lx - 1 = [sup]
-                           | otherwise          = pe : calcConvSpazio lx (i+1) sup pe
+calcConvTempo onda 0 _ _ _       = onda
+calcConvTempo onda nt inf sup pe = calcConvTempo ((inf onda): calcConvSpazio onda 1 sup pe) (nt - 1) (inf onda) (sup onda) (pe onda 0)
 
-condBordoInf :: Dati Double -> [Double] -> Double
-condBordoInf (nu, dx, dt) onda = head onda - head onda * dt/dx * (head onda - last onda) + 
-                                 nu*dt/dx**2 * ((head $ tail onda) - 2*(head onda) + last onda)
+calcConvSpazio :: [Double] -> Int -> ([Double] -> Double) -> 
+                                     ([Double] -> Int -> Double) -> [Double]
+
+calcConvSpazio lx i sup pe | i == length lx - 1 = [sup onda]
+                           | otherwise          = (pe onda i) : calcConvSpazio lx (i+1) (sup onda) (pe onda i)
+
+condBordoInf :: [Double] -> Double
+condBordoInf onda = head onda - head onda * dt/dx * (head onda - last onda) + 
+                    nu*dt/dx**2 * ((head $ tail onda) - 2*(head onda) + last onda)
             
-condBordoSup :: Dati Double -> [Double] -> Double
-condBordoSup (nu, dx, dt) lx  = (last lx) - (last lx) * dt/dx * ((last lx) - (last $ init lx)) + 
-                                nu*dt/dx**2*(head lx - 2*(last lx) + (last $ init lx))
+condBordoSup :: [Double] -> Double
+condBordoSup lx = (last lx) - (last lx) * dt/dx * ((last lx) - (last $ init lx)) + 
+                  nu*dt/dx**2*(head lx - 2*(last lx) + (last $ init lx))
 
-passoEulero :: Dati Double -> [Double] -> Int -> Double
-passoEulero (nu, dx, dt) lx i  = (lx !! i - lx !! i * dt/dx * (lx !! i - lx !! (i-1)) + 
-                                 nu*dt/dx**2*(lx !! (i+1) - 2*(lx !! i) + lx !! (i-1))) 
+passoEulero :: [Double] -> Int -> Double
+passoEulero lx i  = (lx !! i - lx !! i * dt/dx * (lx !! i - lx !! (i-1)) + 
+                    nu*dt/dx**2*(lx !! (i+1) - 2*(lx !! i) + lx !! (i-1))) 
