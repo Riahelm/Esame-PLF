@@ -18,9 +18,15 @@ main_burgers nx = calcConvTempo (condizioneIniziale nx lmtInf lmtSup) nt condBor
 
 
 calcConvTempo :: [Double] -> Int -> (Dati Double -> Double) -> (Dati Double -> Double) -> (Dati Double -> [Double] -> Int -> Double) -> [Double]
-calcConvTempo onda 0 _ _ _ _      = onda
-calcConvTempo onda nt  inf@condBordoInf (nu, dx, dt)  sup@condBordoSup (nu, dx, dt) pe@passoEulero (nu, dx, dt) lx i = calcConvTempo (x : calcConvSpazio onda 1 inf sup pe) (nt - 1) nx inf sup pe
+calcConvTempo onda 0 _ _ _ _                              = onda
+calcConvTempo onda nt  inf@condBordoInf (nu, dx, dt)  
+                       sup@condBordoSup (nu, dx, dt) 
+                       pe@passoEulero   (nu, dx, dt) lx i = calcConvTempo (inf : calcConvSpazio onda 1 sup pe) (nt - 1) nx inf sup pe
 
+calcConvSpazio :: [Double] -> Int -> (Dati Double -> Double) -> (Dati Double -> [Double] -> Int -> Double) -> [Double]
+calcConvSpazio lx i  sup@condBordoSup (nu, dx, dt) 
+                     pe@passoEulero   (nu, dx, dt) lx i | i == length lx - 1 = [sup]
+                                                        | otherwise          = (pe) : calcConvSpazio lx (i+1) un sup pe
 
 condBordoInf :: Dati Double -> Double
 condBordoInf (nu, dx, dt) = head onda - head onda * dt/dx * (head onda - last onda) + 

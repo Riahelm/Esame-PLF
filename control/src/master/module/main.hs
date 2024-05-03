@@ -3,7 +3,7 @@ module Main where
 import FugoideSemplice
 import FugoideCompleto
 import Convezione 
-import Burgers
+import MatchBurgers
 
 main::IO()
 main = do putStrLn "Calcolo del moto di fugoide senza attrito"
