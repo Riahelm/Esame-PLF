@@ -14,7 +14,3 @@ vTrim = 30.0       {- Velocita' di trim del velivolo, misurato in m/s -}
 
 --tempo :: Int
 --tempo = 100     {- Durata della simulazione in secondi -}
-
-
-
-
