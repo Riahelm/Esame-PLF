@@ -10,7 +10,7 @@ import DatiCompleti
     Dati di output: Lista di numeri floating-point => Rappresenta l'altitudine del velivolo per ogni singolo 
     incremento temporale calcolato. -}
 mainFugoideCompleto :: Float -> [Float]
-mainFugoideCompleto dt  = y0 : calcMoto (v0, theta0, x0, y0) dt passiTemporali
+mainFugoideCompleto dt  = y0 : calcMoto (v0, theta0, x0, y0) dt (passiTemporali - 1)
    where
       v0                = vTrim           -- La velocita' iniziale, in questo caso quella di trim
       theta0            = 0.0             -- Angolo iniziale del velivolo
@@ -25,20 +25,20 @@ mainFugoideCompleto dt  = y0 : calcMoto (v0, theta0, x0, y0) dt passiTemporali
                     un numero intero, rappresenta il numero di passi che sono ancora da effettuare.
     Dati di output: lista di numeri floating-point, questi sono l'altitudine del velivolo per ogni passo temporale. 
     La funzione e' ricorsiva e si divide in caso base e caso generale:
-    *Caso base: il numero di passi temporali si azzera, percio' sono stati calcolati tutti i valori necessari.
-                Ritorna quindi l'ultimo punto calcolato del moto fugoide. 
+    *Primo caso base:   se il numero di passi temporali e' negativo il dt di input e' maggiore del tempo finale 
+                        oppure negativo percio' non si applica il metodo di Eulero
+    *Secondo caso base: se il numero di passi temporali e' pari a zero si restituisce la funzione traiettoria del moto fugoide 
     *Caso generale: altrimenti si applica il metodo di Eulero per il calcolo della posizione del velivolo in base 
                     alla posizione nel tempo precedente, si aggiunge l'altitudine alla lista di elementi da ritornare,
                     si abbassa di uno il numero di elementi da calcolare e si procede ricorsivamente con la posizione del
                     velivolo ricalcolata -}
 calcMoto :: Quadrupla Float -> Float -> Int -> [Float]
-calcMoto dA dt 0           =  [dBD]         
-   where
-      (_,_,_, dBD)         = metodoEulero dA dt
-calcMoto dA dt len         =  dBD : calcolaProssimoPunto
-   where
-      dB@(_,_,_, dBD)      = metodoEulero dA dt
-      calcolaProssimoPunto = calcMoto dB dt (len - 1)
+calcMoto dA@(_,_,_, dAD) dt   | len < 0  = [dAD]
+                              | len == 0 = [dBD]
+                              | otherwise = dBD : calcolaProssimoPunto
+                              where
+                                 dB@(_,_,_, dBD)      = metodoEulero dA dt
+                                 calcolaProssimoPunto = calcMoto dB dt (len - 1)
 
 {-  Funzione per l'applicazione del metodo di Eulero ad una quadrupla di numeri. La funzione approssima la soluzione
     al tempo t_(n+1) tramite il valore della funzione al tempo t_n ed un opportuno passo temporale.
