@@ -7,8 +7,7 @@ import Burgers
 
 main::IO()
 main = do putStrLn "Calcolo del moto di fugoide senza attrito"
-          putStrLn "Digita lunghezza del passo temporale:"
-          dt <- getLine
+          dt <- acquisisciDato "Digita lunghezza del passo temporale:"
           putStrLn $ show (mainFugoideSemplice (read dt :: Float))
           putStrLn "Calcolo del moto di fugoide con attrito"
           putStrLn "Digita lunghezza del passo temporale:"
@@ -24,6 +23,17 @@ main = do putStrLn "Calcolo del moto di fugoide senza attrito"
           putStrLn "Digita il numero di punti totali della funzione d'onda:"
           nx <- getLine
           putStrLn $ show (main_burgers (read nx :: Int))
+
+
+
+acquisisciDato :: (Num a, Ord a) => String -> a 
+acquisisciDato s = do putStrLn s
+                      dato <- getLine
+                      if signum dato == 1
+                        then return dato
+                      else do putStrLn "Acquisizione errata"
+                              putStrLn "Il valore deve essere maggiore di zero"
+                              acquisisciDato s
           
 
 
