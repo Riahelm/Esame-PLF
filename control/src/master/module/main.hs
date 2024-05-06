@@ -22,10 +22,10 @@ main = do putStrLn "Calcolo del moto di fugoide senza attrito"
 
 
 
-acquisisciDato :: (Num a, Ord a) => String -> a 
+acquisisciDato :: String -> IO String
 acquisisciDato s = do putStrLn s
                       dato <- getLine
-                      if signum dato == 1
+                      if (signum (read dato :: Float)) == 1
                         then return dato
                       else do putStrLn "Acquisizione errata"
                               putStrLn "Il valore deve essere maggiore di zero!"
