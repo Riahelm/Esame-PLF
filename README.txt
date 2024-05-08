@@ -8,6 +8,8 @@
         5) convection: list comprehension test on square wave                 (Gab) ok!
         6) project choices: rewrite burgers and convection' similar functions (Gab) ok! 
            --> solo per le condizioni inziali 
+   7) Nella fase di testing del progetto effettuare "esattamente" 10 test per linguaggio.
+      Inserire obbligatoriamente anche i test sulla validazione!
 
 #NEW
 
