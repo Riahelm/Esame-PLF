@@ -1,25 +1,20 @@
 #Added phugoid folder and source file
 
-#TODOs:
-	1) Make modules for the shared functions			      (Gab)
-	2) Write comments in each code					      (Nic),(Gab)
-	3) Tidy up code to make it more functional, Haskell-like	      (Nic)
+#Haskell TODOs:
+	1) Make modules for the shared functions			      (Gab) ok!
+	2) Write comments in each code					      (Nic),(Gab) ok!
+	3) Tidy up code to make it more functional, Haskell-like	      (Nic) ok!
 	4) Write the main function					      (Gab)
         5) convection: list comprehension test on square wave                 (Gab) ok!
         6) project choices: rewrite burgers and convection' similar functions (Gab) ok! 
            --> solo per le condizioni inziali 
    7) Nella fase di testing del progetto effettuare "esattamente" 10 test per linguaggio.
       Inserire obbligatoriamente anche i test sulla validazione!
+      --> aggiorna validazione per includere il tempo finale nel fugoide
 
-#NEW
 
--- Aggiunta "relazione" con 01_specifica e 02_analisi
--- Rivedere fugoide: risultati errati
--- Nuovo paradigma per scrittura codice:
-
-   i.   Descrivere in linguaggio naturale tutti i passi dell'algoritmo 
-   ii.  Scrivere codice con commenti su "ogni" riga
-   iii. Implementare una batteria ti test su Jupyter
+#Prolog TODOs:
+...
 
 
 ----------------------------------------------------------------------------------------------------
