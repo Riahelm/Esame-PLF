@@ -32,8 +32,7 @@ mainFugoideSemplice dt  = z0 : calcMoto (z0, b0) dt (passiTemporali - 1)
                     velivolo ricalcolata   
 -}
 calcMoto :: Coppia Float -> Float -> Int -> [Float]
-calcMoto dA@(dAA,_) dt len  | len < 0                   = [dAA]
-                            | len == 0                  = [dBA]
+calcMoto dA@(_ ,_) dt len   | len == 0                  = [dBA]
                             | otherwise                 = dBA : calcolaProssimoPunto
                             where
                                 dB@(dBA,_)              = metodoEulero dA dt
