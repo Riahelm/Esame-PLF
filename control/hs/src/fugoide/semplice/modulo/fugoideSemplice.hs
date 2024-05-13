@@ -32,11 +32,11 @@ mainFugoideSemplice dt  = z0 : calcMoto (z0, b0) dt (passiTemporali - 1)
                     velivolo ricalcolata   
 -}
 calcMoto :: Coppia Float -> Float -> Int -> [Float]
-calcMoto dA@(_ ,_) dt len   | len == 0                  = [dBA]
-                            | otherwise                 = dBA : calcolaProssimoPunto
-                            where
-                                dB@(dBA,_)              = metodoEulero dA dt
-                                calcolaProssimoPunto    = calcMoto dB dt (len - 1)
+calcMoto dA dt len  | len == 0                      = [dBA]
+                    | otherwise                     = dBA : calcolaProssimoPunto
+                        where
+                            dB@(dBA,_)              = metodoEulero dA dt
+                            calcolaProssimoPunto    = calcMoto dB dt (len - 1)
 
 {-  Funzione per l'applicazione del metodo di Eulero ad una coppia di numeri. La funzione approssima la soluzione
     al tempo t_(n+1) tramite il valore della funzione al tempo t_n ed un opportuno passo temporale.
