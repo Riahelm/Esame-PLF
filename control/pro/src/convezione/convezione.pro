@@ -6,8 +6,8 @@
 
  condizioneIniziale(I,X) :- N   is 41,
                             INF is 0.0,
-			    SUP is 2.0,
-			    calcPuntiEqui(I, N, INF, SUP, L),
+			                   SUP is 2.0,
+			                   calcPuntiEqui(I, N, INF, SUP, L),
                             calcOndaQuadra(L, X).
 
 /* input: 
