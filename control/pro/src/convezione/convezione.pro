@@ -49,6 +49,8 @@ calcOndaQuadra([X|L1], [OS | T]) :- (X < (0.5);
    N1 = N - 1
 
 */
+ 
+ main_calcola(0,L) :- 
 
  calcConvSpazio(N1,N1,C,DX,DT,[E0,E1|LX],[T])   :- passoEulero(E0,E1,DT,DX,C,T).
  calcConvSpazio(I,N1,C,DX,DT,[E0,E1|LX],[E|T])  :- I < N1,
