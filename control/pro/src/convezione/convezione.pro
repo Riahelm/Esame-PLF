@@ -25,18 +25,20 @@ calcPuntiEqui(I, N, INF, SUP, [INF | L]) :- I < N,
 
 */
 
-calcOndaQuadra([], _, []).
-calcOndaQuadra([X|L1], OS, [OS|T]) :- X >= (0.5),
-                                      X =< (1.0),
-   	                              OS is (2.0),
-                                      calcOndaQuadra(L1, OS, T).
-				      
-/*
-calcOndaQuadra([X|L1], OI, [IO|T]) :- X < (0.5),
-                                      %X > (1.0),
-				      %OI is (1.0),
-                                      calcOndaQuadra(L1, OI, T).
-*/
+
+
+   
+calcOndaQuadra([], []).
+calcOndaQuadra([X|L1], [OS | T]) :- X >= (0.5), 
+                                    X =< (1.0),
+                                    OS is (2.0),
+                                    calcOndaQuadra(L1, T).
+calcOndaQuadra([X|L1], [OS | T]) :- (X < (0.5); 
+                                    X > (1.0)),
+                                    OS is (1.0),
+                                    calcOndaQuadra(L1, T).
+                              
+                                                      
 
 calc([],  _, []).
 calc([X|L1], Y, [Y|T]) :- primo(X,Z),
