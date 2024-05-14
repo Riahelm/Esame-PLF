@@ -1,6 +1,15 @@
 
 /* Funzione che genera un numero finito di punti tutti equidistanti tra loro in un intervallo specificato */
 
+
+
+
+ condizioneIniziale(I,X) :- N   is 41,
+                            INF is 0.0,
+			                   SUP is 2.0,
+			                   calcPuntiEqui(I, N, INF, SUP, L),
+                            calcOndaQuadra(L, X).
+
 /* input: 
    INF = 0.0  -- limite inferiore del dominio spaziale 
    SUP = 2.0  -- limite superiore del dominio spaziale
@@ -38,26 +47,64 @@ calcOndaQuadra([X|L1], [OS | T]) :- (X < (0.5);
                                     OS is (1.0),
                                     calcOndaQuadra(L1, T).
                               
-                                                      
-
-calc([],  _, []).
-calc([X|L1], Y, [Y|T]) :- primo(X,Z),
-                          Y is Z,
-                          calc(L1, Z, T).
-
-primo(2,0).
-primo(3,1).
 
 
-decidi([], _, []).
-decidi([X|L1], O, [O|T]) :- X == 0,
-                            O is 1,
-			    decidi(L1, O, T).
+/*input:
+   LX = ...           -- condizione iniziale: funzione d'onda quadra
+   I  = 0             -- indice su cui iterare
+   C  = 1.0           -- velocità dell'onda 
+   DT = 0.1           -- passo temporale (parametro in input)
+   DX = SUP/ (N - 1)  -- distanza tra qualsiasi coppia di punti della griglia adiacenti 
+   N1 = N - 1
+   NT = 25            -- numero complessivo di passi temporali che deve effettuare l'algoritmo 
 
-decidi([X|L1], O, [O|T]) :- X == 1,
-                            O is 0,
-	  	            decidi(L1, O, T).
-% NOTA: possibile accorpare più clausole aventi la stessa testa con ";".
+*/
+ 
+
+ calculemus(I,X) :- C   is 1.0,
+                    N   is 41,
+		              N1  is N - 1,
+		              SUP is 2.0,
+		              DT  is 0.1,
+		              DX  is SUP / N1,
+		              condizioneIniziale(I,Y),
+		              calcConvSpazio(I,N1,C,DX,DT,Y,X).
+
+calculemusDue(I,X) :- NT  is 25,
+                      C   is 1.0,
+                      N   is 41,
+		                N1  is N - 1,
+		                SUP is 2.0,
+		                DT  is 0.1,
+		                DX  is SUP / N1,
+                      condizioneIniziale(I,ONDA),
+                      calcConvTempo(I,N1,NT,C,DX,DT,ONDA,[X|F]).
+
+
+calcConvTempo(N,N,NT,C,DX,DT,ONDA,[]). 
+calcConvTempo(I,N1,NT,C,DX,DT,ONDA,[X|F]) :- I < NT,
+                                             NT1 is NT - 1,
+                                             I1 is I + 1,
+                                             calcConvSpazio(1,N1,C,DX,DT,ONDA,Z),
+                                             inserisci_elem(X,Z),
+                                             calcConvTempo(I1,N1,NT1,C,DX,DT,Z,F).
+
+
+                                        
+
+ calcConvSpazio(N1,N1,C,DX,DT,[E0|_],[T])    :- passoEulero(E0,E0,DT,DX,C,T).
+ calcConvSpazio(I,N1,C,DX,DT,[E0|LX],[E|T])  :- I < N1,
+                                                estrai_elem(LX,E1),
+	                                             passoEulero(E0,E1,DT,DX,C,RES),
+						                              E  is RES,
+					                                 I1 is I + 1,
+                                                calcConvSpazio(I1,N1,C,DX,DT,LX,T).
+
+
+ passoEulero(E0,E1,DT,DX,C,RES) :- RES is E0 - C * (DT/DX) * (E0 -  E1).   
+
+ inserisci_elem(X, L, [X | L]).
+ estrai_elem([X|LX], X).  
                             
 
 
