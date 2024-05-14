@@ -25,18 +25,18 @@ calcPuntiEqui(I, N, INF, SUP, [INF | L]) :- I < N,
 
 */
 
-calcOndaQuadra([],L2).
-calcOndaQuadra([X|L1], [Y|L2]) :- OS is 2.0,
-                                  X >= (0.5),
-                                  X <= (1.0),
-                                  calcOndaQuadra(L1, [OS|L2]).
+calcOndaQuadra([], OS, []).
+calcOndaQuadra([X|L1],OS,[OS|T]) :- %OS is 2.0,
+                                     X >= (0.5),
+                                     X =< (1.0),
+                                     calcOndaQuadra(L1, OS, T).
 
-calcOndaQuadra([X|L1], [Y|L2]) :- OI is 1.0,
+/*calcOndaQuadra([X|L1], [Y|L2]) :- OI is 1.0,
                                   X < (0.5),
                                   X > (1.0),
                                   calcOndaQuadra(L1, [OI|L2]).
-
--- NOTA: possibile accorpare più clausole aventi la stessa testa con ";".
+*/
+% NOTA: possibile accorpare più clausole aventi la stessa testa con ";".
                             
 
 
