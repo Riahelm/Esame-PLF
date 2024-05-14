@@ -1,16 +1,17 @@
-module FugoideCompleto(mainFugoideCompleto) where
+module FugoideCompleto(main_fugoide_completo) where
 
 import Quadrupla           
 import CondizioniComplete
 import DatiCompleti
 
 {-  Funzione per il calcolo del moto fugoide con attrito di un velivolo generico.   
-    Dati di input: un numero di tipo floating-point => Rappresenta il "dt" ovvero l'incremento di tempo per ogni calcolo. 
+    Dati di input: un numero di tipo floating-point, rappresenta il "dt" ovvero l'incremento di tempo per ogni calcolo. 
     Questo si puo' ridurre per avere una precisione di calcolo maggiore. 
-    Dati di output: Lista di numeri floating-point => Rappresenta l'altitudine del velivolo per ogni singolo 
-    incremento temporale calcolato. -}
-mainFugoideCompleto :: Float -> [Float]
-mainFugoideCompleto dt  = y0 : calcMoto (v0, theta0, x0, y0) dt (passiTemporali - 1)
+    Dati di output: Lista di numeri floating-point, rappresenta l'altitudine del velivolo per ogni singolo 
+    incremento temporale calcolato. 
+-}
+main_fugoide_completo :: Float -> [Float]
+main_fugoide_completo dt  = y0 : calc_moto (v0, theta0, x0, y0) dt (passiTemporali - 1)
    where
       v0                = vTrim           -- La velocita' iniziale, in questo caso quella di trim
       theta0            = 0.0             -- Angolo iniziale del velivolo
@@ -20,24 +21,24 @@ mainFugoideCompleto dt  = y0 : calcMoto (v0, theta0, x0, y0) dt (passiTemporali 
       passiTemporali    = floor(tempo/dt) -- Numero di punti in cui effettuare il calcolo
 
 {-  Funzione per il calcolo numerico dell'integrazione del moto fugoide 
-    Dati di input:  una quadrupla di numeri floating-point, questi sono velocita', angolo, spostamento laterale e verticale del velivolo,
-                    un numero floating-point, il dt. Questo e' il passo temporale,
-                    un numero intero, rappresenta il numero di passi che sono ancora da effettuare.
-    Dati di output: lista di numeri floating-point, questi sono l'altitudine del velivolo per ogni passo temporale. 
+        Dati di input:  una quadrupla di numeri floating-point, questi sono velocita', angolo, spostamento laterale e verticale del velivolo,
+                        un numero floating-point, il dt. Questo e' il passo temporale,
+                        un numero intero, rappresenta il numero di passi che sono ancora da effettuare.
+        Dati di output: lista di numeri floating-point, questi sono l'altitudine del velivolo per ogni passo temporale. 
+
     La funzione e' ricorsiva e si divide in caso base e caso generale:
-    *Primo caso base:   se il numero di passi temporali e' negativo il dt di input e' maggiore del tempo finale 
-                        oppure negativo percio' non si applica il metodo di Eulero
-    *Secondo caso base: se il numero di passi temporali e' pari a zero si restituisce la funzione traiettoria del moto fugoide 
-    *Caso generale: altrimenti si applica il metodo di Eulero per il calcolo della posizione del velivolo in base 
-                    alla posizione nel tempo precedente, si aggiunge l'altitudine alla lista di elementi da ritornare,
-                    si abbassa di uno il numero di elementi da calcolare e si procede ricorsivamente con la posizione del
-                    velivolo ricalcolata -}
-calcMoto :: Quadrupla Float -> Float -> Int -> [Float]
-calcMoto dA dt len  | len == 0                  = [dBD]
-                    | otherwise                 = dBD : calcolaProssimoPunto
+        *Caso base: se il numero di passi temporali e' pari a zero si restituisce la funzione traiettoria del moto fugoide 
+        *Caso generale: altrimenti si applica il metodo di Eulero per il calcolo della posizione del velivolo in base 
+                        alla posizione nel tempo precedente, si aggiunge l'altitudine alla lista di elementi da ritornare,
+                        si abbassa di uno il numero di elementi da calcolare e si procede ricorsivamente con la posizione del
+                        velivolo ricalcolata 
+-}
+calc_moto :: Quadrupla Float -> Float -> Int -> [Float]
+calc_moto dA dt len | len == 0                  = [dBD]
+                    | otherwise                 = dBD : calcola_prossimo_punto
                     where
-                        dB@(_,_,_, dBD)         = metodoEulero dA dt
-                        calcolaProssimoPunto    = calcMoto dB dt (len - 1)
+                        dB@(_,_,_, dBD)         = metodo_eulero dA dt
+                        calcola_prossimo_punto  = calc_moto dB dt (len - 1)
 
 {-  Funzione per l'applicazione del metodo di Eulero ad una quadrupla di numeri. La funzione approssima la soluzione
     al tempo t_(n+1) tramite il valore della funzione al tempo t_n ed un opportuno passo temporale.
@@ -45,15 +46,17 @@ calcMoto dA dt len  | len == 0                  = [dBD]
                         del velivolo al momento t_n,
                         un numero floating-point, il passo temporale.
     Dati in uscita:     una quadrupla di numeri floating-point, ovvero la velocita', angolo, spostamento laterale e verticale 
-                        del velivolo al momento t_(n+1) -}
-metodoEulero :: Quadrupla Float -> Float -> Quadrupla Float
-metodoEulero dA@(v,theta,x,y) dt = sommaQuadrupla dA (moltiplicaQuadruplaPerScalare (rhs dA) dt)
+                        del velivolo al momento t_(n+1) 
+-}
+metodo_eulero :: Quadrupla Float -> Float -> Quadrupla Float
+metodo_eulero dA@(v,theta,x,y) dt = somma_quadrupla dA (moltiplica_quadrupla_per_scalare (rhs dA) dt)
 
 {-  Funzione per l'applicazione dell'equazione del moto fugoide
     Dati in ingresso:   una quadrupla di numeri floating-point, ovvero la velocita', angolo, spostamento laterale e verticale 
                         del velivolo.
     Dati in uscita:     una quadrupla di numeri floating-point, ovvero la velocita', angolo, spostamento laterale e verticale 
-                        del velivolo dopo aver applicato l'equazione per il moto fugoide-}
+                        del velivolo dopo aver applicato l'equazione per il moto fugoide
+-}
 rhs :: Quadrupla Float -> Quadrupla Float
 rhs dA@(v,theta,x,y) = (- (cG * sin theta) - (cR / cP)*cG/vTrim**2*v**2,
                         - (cG * cos theta / v) + cG/vTrim**2*v,
