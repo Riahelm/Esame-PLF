@@ -9,8 +9,9 @@
 */
 
 
-calcPuntiEqui(N, N, []).
-calcPuntiEqui(I, N, INF, SUP, [INF | L]) :- I1   is (I + 1),
+calcPuntiEqui(N, N, _, _,[]).
+calcPuntiEqui(I, N, INF, SUP, [INF | L]) :- I < N,
+	                                    I1   is (I + 1),
                                             INF1 is (INF + (SUP / N)),
                                             calcPuntiEqui(I1, N, INF1, SUP, L).
 
