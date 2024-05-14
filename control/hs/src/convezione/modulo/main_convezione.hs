@@ -37,4 +37,4 @@ calcConvSpazio lx i c dx dt  | i == length lx - 1 = [passoEulero]
                                 where
                                   passoEulero =  lx !! i - c * dt /dx *(lx !! i - lx !! (i-1))
 
-    
+  
