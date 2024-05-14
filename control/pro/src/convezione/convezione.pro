@@ -39,25 +39,6 @@ calcOndaQuadra([X|L1], [OS | T]) :- (X < (0.5);
                                     calcOndaQuadra(L1, T).
                               
                                                       
-
-calc([],  _, []).
-calc([X|L1], Y, [Y|T]) :- primo(X,Z),
-                          Y is Z,
-                          calc(L1, Z, T).
-
-primo(2,0).
-primo(3,1).
-
-
-decidi([], _, []).
-decidi([X|L1], O, [O|T]) :- X == 0,
-                            O is 1,
-			    decidi(L1, O, T).
-
-decidi([X|L1], O, [O|T]) :- X == 1,
-                            O is 0,
-	  	            decidi(L1, O, T).
-% NOTA: possibile accorpare più clausole aventi la stessa testa con ";".
                             
 
 
