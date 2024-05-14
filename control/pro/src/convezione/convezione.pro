@@ -1,6 +1,15 @@
 
 /* Funzione che genera un numero finito di punti tutti equidistanti tra loro in un intervallo specificato */
 
+
+
+
+ condizioneIniziale(I,X) :- N   is 41,
+                            INF is 0.0,
+			    SUP is 2.0,
+			    calcPuntiEqui(I, N, INF, SUP, L),
+                            calcOndaQuadra(L, X).
+
 /* input: 
    INF = 0.0  -- limite inferiore del dominio spaziale 
    SUP = 2.0  -- limite superiore del dominio spaziale
@@ -50,7 +59,6 @@ calcOndaQuadra([X|L1], [OS | T]) :- (X < (0.5);
 
 */
  
- main_calcola(0,L) :- 
 
  calcConvSpazio(N1,N1,C,DX,DT,[E0,E1|LX],[T])   :- passoEulero(E0,E1,DT,DX,C,T).
  calcConvSpazio(I,N1,C,DX,DT,[E0,E1|LX],[E|T])  :- I < N1,
