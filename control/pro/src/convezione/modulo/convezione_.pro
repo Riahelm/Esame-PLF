@@ -3,8 +3,8 @@
 
  condizioneIniziale(I,X) :- N   is 41,
                             INF is 0.0,
-	                         SUP is 2.0,
-			                   calcPuntiEqui(I, N, INF, SUP, L),
+	                    SUP is 2.0,
+			    calcPuntiEqui(I, N, INF, SUP, L),
                             calcOndaQuadra(L, X).
 
 /* input: 
@@ -17,7 +17,7 @@
 
 calcPuntiEqui(N, N, INF,  _, [INF]).   
 calcPuntiEqui(I, N, INF, SUP, [INF|L]) :- I < N,
-               	                        I1   is (I + 1),
+               	                          I1   is (I + 1),
                                           INF1 is (INF + (SUP / N)),
                                           calcPuntiEqui(I1, N, INF1, SUP, L).
                                     
@@ -82,9 +82,9 @@ calculemusDue(I,F) :- NT  is 25,
 calcConvTempo(N, _,N, _, _, _, F,F). 
 calcConvTempo(I,N1,NT,C,DX,DT,ONDA,F) :- I < NT,
                                          I1  is I + 1,
-					                          estrai_elem(ONDA,X),                  % restituisce il primo punto della funzione d'onda
+					 estrai_elem(ONDA,X),                  % restituisce il primo punto della funzione d'onda
                                          calcConvSpazio(0,N1,C,DX,DT,ONDA,Z),  % integra la funzione rispetto allo spazio
-					                          inserisci_elem(X,Z,R),                % aggiunge la testa dell'onda al risultato dell'integrazione spaziale
+					 inserisci_elem(X,Z,R),                % aggiunge la testa dell'onda al risultato dell'integrazione spaziale
                                          calcConvTempo(I1,N1,NT,C,DX,DT,R,F).  % calcola l'onda nel successivo passo spaziale
 
 
