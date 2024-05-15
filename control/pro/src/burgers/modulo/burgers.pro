@@ -12,8 +12,8 @@
    tra loro in un intervallo specificato */
 condizioneIniziale(I,X) :- NX  is 201,   
                            INF is 0.0,
-			               SUP is 2.0 * pi,
-			               calcPuntiEqui(I, NX, INF, SUP, L),
+			   SUP is 2.0 * pi,
+			   calcPuntiEqui(I, NX, INF, SUP, L),
                            calcOndaDenteSega(L, X).
 
 /**************************__INPUT__***************************
@@ -25,8 +25,8 @@ condizioneIniziale(I,X) :- NX  is 201,
 
 /* Predicato per il calcolo della derivata rispetto alla variabile x 
    della funzione phi */
-phiprime(X,T0,NU,F) :- F is -(-8*T0 + 2*X)*exp(-(-4*T0 + X)^2/(4*NU*(T0 + 1)))/(4*NU*(T0 + 1)) 
-                            exp(-(-4*T0 + X - 2*pi)^2/(4*NU*(T0 + 1)))/(4*NU*(T0 + 1)).   
+phiprime(X,T0,NU,F) :- F is -(-8*T0 + 2*X)*exp(-(-4*T0 + X)^2/(4*NU*(T0 + 1)))/(4*NU*(T0 + 1)) - (-8*T0 + 
+                            2*X - 4*pi)* exp(-(-4*T0 + X - 2*pi)^2/(4*NU*(T0 + 1)))/(4*NU*(T0 + 1)).   
 
 /* Predicato per il calcolo della funzione phi */
 phi(X,T0,NU,F) :- F is exp(-(X-4*T0)^2/(4*NU*(T0+1))) + exp(-(X-4*T0-2*pi)^2/(4*NU*(T0+1))).
@@ -39,6 +39,6 @@ calcOndaDenteSega([X|LX],[U|LU]) :- T0 is 0.0,
                                     phiprime(X,T0,NU,F1),
                                     phi(X,T0,NU,F2),
                                     U is -2*NU*(F1 / F2)+4,
-                                    calcOndaDenteSega(LX,LU)
+                                    calcOndaDenteSega(LX,LU).
 
 
