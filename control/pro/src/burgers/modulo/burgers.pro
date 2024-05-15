@@ -11,8 +11,8 @@
 /* Predicato per il calcolo della condizione iniziale */
 condizioneIniziale(I,X) :- NX  is 201,   
                            INF is 0.0,
-			               SUP is 2.0 * pi,
-			               calcPuntiEqui(I, NX, INF, SUP, L),
+			   SUP is 2.0 * pi,
+			   calcPuntiEqui(I, NX, INF, SUP, L),
                            calcOndaDenteSega(L, X).
 
 /* Predicato che genera un numero finito di punti tutti equidistanti 
@@ -33,11 +33,11 @@ calcPuntiEqui(I, N, INF, SUP, [INF | L]) :- I < N,
 
 /* Predicato per il calcolo della derivata rispetto alla variabile x 
    della funzione phi */
-phiprime(X,T0,NU,F) :- F is -(-8*T0 + 2*X)*exp(-(-4*T0 + X)^2/(4*NU*(T0 + 1)))/(4*NU*(T0 + 1)) - (-8*T0 + 
-                            2*X - 4*pi)* exp(-(-4*T0 + X - 2*pi)^2/(4*NU*(T0 + 1)))/(4*NU*(T0 + 1)).   
+phiprime(X,T0,NU,F) :- F is -(-8*T0 + 2*X)*exp(-((-4*T0 + X)^2)/(4*NU*(T0 + 1)))/(4*NU*(T0 + 1)) - (-8*T0 + 
+                            2*X - 4*pi)*exp(-((-4*T0 + X - 2*pi)^2)/(4*NU*(T0 + 1)))/(4*NU*(T0 + 1)).   
 
 /* Predicato per il calcolo della funzione phi */
-phi(X,T0,NU,F) :- F is exp(-(X-4*T0)^2/(4*NU*(T0+1))) + exp(-(X-4*T0-2*pi)^2/(4*NU*(T0+1))).
+phi(X,T0,NU,F) :- F is exp(-((X-4*T0)^2)/(4*NU*(T0+1))) + exp(-((X-4*T0-2*pi)^2)/(4*NU*(T0+1))).
 
 
 /* Predicato per il calcolo dell'onda a dente di sega 'u' */    
