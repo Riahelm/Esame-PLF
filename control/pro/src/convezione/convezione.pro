@@ -91,7 +91,7 @@ calcConvTempo(I,N1,NT,C,DX,DT,ONDA,F) :- I < NT,
 
 
 
- calcConvSpazio(N1,N1,C,DX,DT,[E0|_],[T])    :- passoEulero(E0,E0,DT,DX,C,T).
+ calcConvSpazio(N1,N1, _, _, _, _, []). 
  calcConvSpazio(I,N1,C,DX,DT,[E0|LX],[E|T])  :- I < N1,
                                                 estrai_elem(LX,E1),
 	                                        passoEulero(E0,E1,DT,DX,C,RES),
