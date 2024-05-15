@@ -35,8 +35,8 @@ calcConvTempo onda nt nx nu dx dt = calcConvTempo (x : calcConvSpazio onda 1 nu 
     *Caso generale: altrimenti si esegue un passo di Eulero, si incrementa di un'unità il numero di passi spaziali e si procede 
      ricorsivamente sulla medesima lista di punti. -}
 calcConvSpazio :: [Double] -> Int -> Double -> Double -> Double -> [Double]
-calcConvSpazio lx i un dx dt  | i == length lx - 1 = [condBordoSup]
-                              | otherwise          = (passoEulero) : calcConvSpazio lx (i+1) un dx dt
+calcConvSpazio lx i nu dx dt  | i == length lx - 1 = [condBordoSup]
+                              | otherwise          = (passoEulero) : calcConvSpazio lx (i+1) nu dx dt
                                   where
                                     condBordoSup = (last lx) - (last lx) * dt/dx * ((last lx) - (last $ init lx)) + nu*dt/dx**2*(head lx - 2*(last lx) + (last $ init lx))
                                     passoEulero  = (lx !! i - lx !! i * dt/dx * (lx !! i - lx !! (i-1)) + nu*dt/dx**2*(lx !! (i+1) - 2*(lx !! i) + lx !! (i-1))) 

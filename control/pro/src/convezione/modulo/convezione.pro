@@ -73,7 +73,7 @@ calculemusDue(I,F) :- NT  is 25,
                       C   is 1.0,
                       N   is 41,
                       N1  is N - 1,
-		      SUP is 2.0,
+		                SUP is 2.0,
                       DT  is 0.02,
                       DX  is SUP / N1,
                       condizioneIniziale(I,ONDA),
@@ -94,9 +94,9 @@ calcConvTempo(I,N1,NT,C,DX,DT,ONDA,F) :- I < NT,
  calcConvSpazio(N1,N1, _, _, _, _, []). 
  calcConvSpazio(I,N1,C,DX,DT,[E0|LX],[E|T]) :- I < N1,
                                                estrai_elem(LX,E1),
-	                                       passoEulero(E0,E1,DT,DX,C,RES),
- 		                               E  is RES, 			                                                   
-					       I1 is I + 1,
+	                                            passoEulero(E0,E1,DT,DX,C,RES),
+ 		                                         E  is RES, 			                                                   
+					                                I1 is I + 1,
                                                calcConvSpazio(I1,N1,C,DX,DT,LX,T).
 
 
