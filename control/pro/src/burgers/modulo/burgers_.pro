@@ -11,8 +11,8 @@
 /* Predicato per il calcolo della condizione iniziale */
 condizioneIniziale(I,X) :- NX  is 201,   
                            INF is 0.0,
-			                  SUP is 2.0 * pi,
-			                  calcPuntiEqui(I, NX, INF, SUP, L),
+			   SUP is 2.0 * pi,
+			   calcPuntiEqui(I, NX, INF, SUP, L),
                            calcOndaDenteSega(L, X).
 
 /* Predicato che genera un numero finito di punti tutti equidistanti 
@@ -64,62 +64,87 @@ calcOndaDenteSega([X|LX],[U|LU]) :- T0 is 0.0,
 
 /* Predicato MAIN */
 calculemus(I,F) :- NX  is 201,
-                   T   is 0.6,
+                   %T   is 0.6,
                    S   is 0.1,
                    NU  is 0.07,
                    SUP is 2.0 * pi,
                    DX  is SUP / (NX - 1),
                    DT  is S * DX^2 / NU,
-                   NT  is truncate(T / DT),
+                   NT  is 425,
+		   NX1 is NX - 1, 
                    condizioneIniziale(I,ONDA),
-                   calcConvTempo(I,NT,NX,NU,DX,DT,ONDA,F).
+                   calcConvTempo(I,NT,NX1,NU,DX,DT,ONDA,F).
                       
 
 /* Predicato per il calcolo integrae della funzione di Burgers
    rispetto al tempo */
 calcConvTempo(NT, NT, _, _, _, _, F,F). 
-calcConvTempo(I, NT, NX, NU, DX, DT, ONDA, F) :- I < NT,
-                                                 I1  is I + 1,
-					                             condBordoInf(ONDA,NU,DX,DT,BI),                    
-                                                 calcConvSpazio(0,NX,NU,DX,DT,ONDA,ONDA,Z),  
-					                             inserisci_elem(BI,Z,R),                
-                                                 calcConvTempo(I1,NX,NT,NU,DX,DT,R,F).
+calcConvTempo(I, NT, NX1, NU, DX, DT, ONDA, F) :- I < NT,
+                                                  I1  is I + 1,
+						  condBordoInf(ONDA,NU,DX,DT,BI),                    
+						  calcConvSpazio(1,NX1,NU,DX,DT,ONDA,Z),  
+						  inserisci_elem(BI,Z,R),
+                                                  calcConvTempo(I1,NX,NT,NU,DX,DT,R,F).
 
+%----> TESTED!					 
 /* Predicato per il calcolo dell'integrale della funzione di Burgers 
    rispetto allo spazio */
-calcConvSpazio(NX, NX, NU, DX, DT, _, ONDA, [F])    :- condBordoSup(NU,DX,DT,ONDA,F).
-calcConvSpazio(I, NX, NU, DX, DT, [X|LX], _, [E|F]) :- I < NX,
-                                                       I1 is I + 1,
-                                                       passoEulero(X,NU,DX,DT,LX,EU),
-                                                       E is EU,
-                                                       calcConvSpazio(I1,NX,NU,DX,DT,LX,_,F).
+calcConvSpazio(NX, NX, NU, DX, DT, ONDA, [F])  :- condBordoSup(NU,DX,DT,ONDA,R),
+                                                  F is R.
+calcConvSpazio(I, NX, NU, DX, DT, ONDA, [E|F]) :- I < NX,
+	                                          I1 is I + 1,
+						  passoEulero(I,NU,DX,DT,ONDA,EU),
+						  E is EU,
+						  calcConvSpazio(I1,NX,NU,DX,DT,ONDA,F).
 
+%---->  TESTED!					       
 /* Predicato per il calcolo delle condizioni di bordo inferiore */
 condBordoInf([X|LX],NU,DX,DT,BI) :- coda(LX,C),
                                     estrai_elem(LX,T),
                                     BI is X - X*DT/DX * (X - C) + NU*DT/DX^2 * (T - 2*X + C).
-
+%----> TESTED!
 /* Predicato per il calcolo delle condizioni di bordo superiore */
 condBordoSup(NU,DX,DT,ONDA,BS) :- coda(ONDA,C),
                                   penultimo(ONDA,P),
                                   estrai_elem(ONDA,T),
-                                  BS is C - C*DT/DX * (C - P) + NU*DT/DX^2 * (T - 2*C) + P. 
+                                  BS is C - C*DT/DX * (C - P) + NU*DT/DX^2 * (T - 2*C + P). 
 
+
+test3(I,Z) :- NX  is 201,
+              S   is 0.1,
+              NU  is 0.07,
+              SUP is 2.0 * pi,
+              DX  is SUP / (NX - 1),
+              DT  is S * DX^2 / NU, 
+              calcConvSpazio(I,4,NU,DX,DT,[1,2,3,4,5],Z).  
+	
+%----> TESTED!	
 /* Predicato che effettua il passo di Eulero */
-passoEulero(E0,NU,DX,DT,[E1|LY],EU) :- estrai_elem(LY,E2),
-                                       EU is E1 - E1*DT/DX * (E1 - E0) + NU*DT/DX^2 * (E2 - 2*E1 + E0).
+ passoEulero(I,NU,DX,DT,ONDA,EU) :- I0 is I  - 1,
+                                    I2 is I  + 1,
+				    estrai(0,I0,ONDA,E0),
+			            estrai(0,I,ONDA,E1),
+		    	            estrai(0,I2,ONDA,E2),
+                                    EU is E1 - E1*DT/DX * (E1 - E0) + NU*DT/DX^2 * (E2 - 2*E1 + E0).
 
 
 /*******************************************************************
                        PREDICATI AUSILIARI
  *******************************************************************/
 
+ inserisci_elem(X, L, [X | L]).
+
+ estrai(N,N,[X|_],X).
+ estrai(I,N,[_|LX],Z) :- I < N,
+                         I1 is I + 1,
+			 estrai(I1,N,LX,Z).
+
 /* Predicato che restituisce  la coda di una lista */ 
 coda(LX,X) :- inverti(LX,Y),
               estrai_elem(Y,X).
 
 /* Predicato che restituisce il penultimo elemento di una lista */
-punultimo(LX,X) :- inverti(LX,LXInv),
+penultimo(LX,X) :- inverti(LX,LXInv),
                    estrai_lista(LXInv,Y),
                    estrai_elem(Y,X).
                   
