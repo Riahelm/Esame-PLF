@@ -1,13 +1,10 @@
 
-/* Funzione che genera un numero finito di punti tutti equidistanti tra loro in un intervallo specificato */
-
-
-
+/* Predicato che genera un numero finito di punti tutti equidistanti tra loro in un intervallo specificato */
 
  condizioneIniziale(I,X) :- N   is 41,
                             INF is 0.0,
-			    SUP is 2.0,
-			    calcPuntiEqui(I, N, INF, SUP, L),
+			                   SUP is 2.0,
+			                   calcPuntiEqui(I, N, INF, SUP, L),
                             calcOndaQuadra(L, X).
 
 /* input: 
@@ -25,7 +22,7 @@ calcPuntiEqui(I, N, INF, SUP, [INF | L]) :- I < N,
                                             calcPuntiEqui(I1, N, INF1, SUP, L).
                                     
 
-/* Funzione che definisce l'onda quadra */
+/* Predicato che definisce l'onda quadra */
 
 /*input:
    OS = 2.0 -- valori assunti dalla parte alta della funzione d'onda quadra
@@ -60,33 +57,34 @@ calcOndaQuadra([X|L1], [OS | T]) :- (X < (0.5);
 
 */
  
-
+ /* test per il calcolo della convezione nello spazio */
  calculemus(I,X) :- C   is 1.0,
                     N   is 41,
-		    N1  is N - 1,
-		    SUP is 2.0,
-		    DT  is 0.1,
-		    DX  is SUP / N1,
-		    condizioneIniziale(I,Y),
-		    calcConvSpazio(I,N1,C,DX,DT,Y,X).
+		              N1  is N - 1,
+		              SUP is 2.0,
+		              DT  is 0.1,
+		              DX  is SUP / N1,
+		              condizioneIniziale(I,Y),
+		              calcConvSpazio(I,N1,C,DX,DT,Y,X).
 
+/* Calcolo della funzione completa: predicato-main */
 calculemusDue(I,F) :- NT  is 25,
                       C   is 1.0,
                       N   is 41,
-		      N1  is N - 1,
-		      SUP is 2.0,
-		      DT  is 0.1,
-		      DX  is SUP / N1,
+		                N1  is N - 1,
+		                SUP is 2.0,
+		                DT  is 0.1,
+		                DX  is SUP / N1,
                       condizioneIniziale(I,ONDA),
                       calcConvTempo(I,N1,NT,C,DX,DT,ONDA,F).
 	      
 calcConvTempo(N, _,N, _, _, _, F,F). 
 calcConvTempo(I,N1,NT,C,DX,DT,ONDA,F) :- I < NT,
                                          I1  is I + 1,
-                                         calcConvSpazio(1,N1,C,DX,DT,ONDA,Z),
-	   		                 estrai_elem(ONDA,X),
-				         inserisci_elem(X,Z,R),
-                                         calcConvTempo(I1,N1,NT,C,DX,DT,R,F).
+                                         estrai_elem(ONDA,X),                 % restituisce il primo punto della funzione d'onda
+                                         calcConvSpazio(1,N1,C,DX,DT,ONDA,Z), % integra la funzione rispetto allo spazio
+				                             inserisci_elem(X,Z,R),               % aggiunge la testa dell'onda al risultato dell'integrazione spaziale
+                                         calcConvTempo(I1,N1,NT,C,DX,DT,R,F). % calcola l'onda nel successivo passo spaziale
 
 
 
@@ -94,9 +92,9 @@ calcConvTempo(I,N1,NT,C,DX,DT,ONDA,F) :- I < NT,
  calcConvSpazio(N1,N1,C,DX,DT,[E0|_],[T])    :- passoEulero(E0,E0,DT,DX,C,T).
  calcConvSpazio(I,N1,C,DX,DT,[E0|LX],[E|T])  :- I < N1,
                                                 estrai_elem(LX,E1),
-	                                        passoEulero(E0,E1,DT,DX,C,RES),
- 		                                E  is RES, 			                                                   
-					       	I1 is I + 1,
+	                                             passoEulero(E0,E1,DT,DX,C,RES),
+ 		                                          E  is RES, 			                                                   
+					       	                        I1 is I + 1,
                                                 calcConvSpazio(I1,N1,C,DX,DT,LX,T).
 
 
