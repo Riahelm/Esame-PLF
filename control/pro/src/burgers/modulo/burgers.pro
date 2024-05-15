@@ -11,17 +11,17 @@
 /* Predicato per il calcolo della condizione iniziale */
 condizioneIniziale(I,X) :- NX  is 201,   
                            INF is 0.0,
-			   SUP is 2.0 * pi,
-			   calcPuntiEqui(I, NX, INF, SUP, L),
+			               SUP is 2.0 * pi,
+			               calcPuntiEqui(I, NX, INF, SUP, L),
                            calcOndaDenteSega(L, X).
 
 /* Predicato che genera un numero finito di punti tutti equidistanti 
    tra loro in un intervallo specificato */
-calcPuntiEqui(N, N, _, _, []).
-calcPuntiEqui(I, N, INF, SUP, [INF | L]) :- I < N,
-                                            I1   is (I + 1),
-                                            INF1 is (INF + (SUP / N)),
-                                            calcPuntiEqui(I1, N, INF1, SUP, L).
+calcPuntiEqui(N, N, INF,  _, [INF]).   
+calcPuntiEqui(I, N, INF, SUP, [INF|L]) :- I < N,
+               	                          I1   is (I + 1),
+                                          INF1 is (INF + (SUP / N)),
+                                          calcPuntiEqui(I1, N, INF1, SUP, L).
                                             
 
 /**************************__INPUT__***************************
