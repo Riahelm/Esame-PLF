@@ -17,7 +17,6 @@ condizioneIniziale(I,X) :- NX  is 201,
 
 /* Predicato che genera un numero finito di punti tutti equidistanti 
    tra loro in un intervallo specificato */
-<<<<<<< HEAD
 calcPuntiEqui(N, N, _, _, []).
 calcPuntiEqui(I, N, INF, SUP, [INF | L]) :- I < N,
                                             I1   is (I + 1),
