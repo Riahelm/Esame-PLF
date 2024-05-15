@@ -11,6 +11,7 @@
    7) Nella fase di testing del progetto effettuare "esattamente" 10 test per linguaggio.
       Inserire obbligatoriamente anche i test sulla validazione!
       --> aggiorna validazione per includere il tempo finale nel fugoide
+8) Sistemare la funzione linspace (Gab)
 
 
 #Prolog TODOs:
