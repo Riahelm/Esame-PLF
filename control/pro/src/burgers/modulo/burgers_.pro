@@ -54,7 +54,7 @@ calcOndaDenteSega([X|LX],[U|LU]) :- T0 is 0.0,
    S  = 0.1              -- costante di Courant-Friedrichs_Lewy (CFL) - sigma -
    DT = S * DX^2 / NU    -- lunghezza del passo temporale
    T  = 0.6              -- tempo totale di simulazione 
-   NT = truncate(T / DT) -- numero complessivo di passi temporali che deve effettuare l'algoritmo 
+   NT = T / DT           -- numero complessivo di passi temporali che deve effettuare l'algoritmo 
      
 ***************************************************************/
 
