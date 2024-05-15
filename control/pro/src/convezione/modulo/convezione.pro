@@ -3,8 +3,8 @@
 
  condizioneIniziale(I,X) :- N   is 41,
                             INF is 0.0,
-			                   SUP is 2.0,
-			                   calcPuntiEqui(I, N, INF, SUP, L),
+	                    SUP is 2.0,
+			    calcPuntiEqui(I, N, INF, SUP, L),
                             calcOndaQuadra(L, X).
 
 /* input: 
@@ -15,11 +15,11 @@
 */
 
 
-calcPuntiEqui(N, N, _, _, []).
-calcPuntiEqui(I, N, INF, SUP, [INF | L]) :- I < N,
-                                            I1   is (I + 1),
-                                            INF1 is (INF + (SUP / N)),
-                                            calcPuntiEqui(I1, N, INF1, SUP, L).
+calcPuntiEqui(N, N, INF,  _, [INF]).   
+calcPuntiEqui(I, N, INF, SUP, [INF|L]) :- I < N,
+               	                          I1   is (I + 1),
+                                          INF1 is (INF + (SUP / N)),
+                                          calcPuntiEqui(I1, N, INF1, SUP, L).
                                     
 
 /* Predicato che definisce l'onda quadra */
@@ -73,18 +73,18 @@ calculemusDue(I,F) :- NT  is 25,
                       C   is 1.0,
                       N   is 41,
                       N1  is N - 1,
-		                SUP is 2.0,
-		                DT  is 0.02,
-		                DX  is SUP / N1,
+		      SUP is 2.0,
+                      DT  is 0.02,
+                      DX  is SUP / N1,
                       condizioneIniziale(I,ONDA),
                       calcConvTempo(I,N1,NT,C,DX,DT,ONDA,F).
 	      
 calcConvTempo(N, _,N, _, _, _, F,F). 
 calcConvTempo(I,N1,NT,C,DX,DT,ONDA,F) :- I < NT,
                                          I1  is I + 1,
-					                          estrai_elem(ONDA,X),                  % restituisce il primo punto della funzione d'onda
+					 estrai_elem(ONDA,X),                  % restituisce il primo punto della funzione d'onda
                                          calcConvSpazio(0,N1,C,DX,DT,ONDA,Z),  % integra la funzione rispetto allo spazio
-					                          inserisci_elem(X,Z,R),                % aggiunge la testa dell'onda al risultato dell'integrazione spaziale
+					 inserisci_elem(X,Z,R),                % aggiunge la testa dell'onda al risultato dell'integrazione spaziale
                                          calcConvTempo(I1,N1,NT,C,DX,DT,R,F).  % calcola l'onda nel successivo passo spaziale
 
 
@@ -94,9 +94,9 @@ calcConvTempo(I,N1,NT,C,DX,DT,ONDA,F) :- I < NT,
  calcConvSpazio(N1,N1, _, _, _, _, []). 
  calcConvSpazio(I,N1,C,DX,DT,[E0|LX],[E|T]) :- I < N1,
                                                estrai_elem(LX,E1),
-	                                            passoEulero(E0,E1,DT,DX,C,RES),
- 		                                         E  is RES, 			                                                   
-					       	                       I1 is I + 1,
+	                                       passoEulero(E0,E1,DT,DX,C,RES),
+ 		                               E  is RES, 			                                                   
+					       I1 is I + 1,
                                                calcConvSpazio(I1,N1,C,DX,DT,LX,T).
 
 

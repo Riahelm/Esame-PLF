@@ -41,3 +41,6 @@ calcOndaDenteSega x = u t0 x nu
                                             exp(-(-4*t0 + x - 2*pi)**2/(4*nu*(t0 + 1)))/(4*nu*(t0 + 1))            -- derivata rispetto alla variabile x della funzione phi
                          phi t0 x nu      = exp(-(x-4*t0)**2/(4*nu*(t0+1))) + exp(-(x-4*t0-2*pi)**2/(4*nu*(t0+1))) -- funzione phi
                          u t0 x nu        = -2*nu*((phiprime t0 x nu) / (phi t0 x nu))+4  
+
+
+
