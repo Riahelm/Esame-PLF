@@ -65,7 +65,7 @@ calcOndaQuadra([X|L1], [OS | T]) :- (X < (0.5);
                     N   is 41,
 		    N1  is N - 1,
 		    SUP is 2.0,
-		    DT  is 0.1,
+		    DT  is 0.02,
 		    DX  is SUP / N1,
 		    condizioneIniziale(I,Y),
 		    calcConvSpazio(I,N1,C,DX,DT,Y,X).
@@ -75,7 +75,7 @@ calculemusDue(I,F) :- NT  is 25,
                       N   is 41,
 		      N1  is N - 1,
 		      SUP is 2.0,
-		      DT  is 0.1,
+		      DT  is 0.02,
 		      DX  is SUP / N1,
                       condizioneIniziale(I,ONDA),
                       calcConvTempo(I,N1,NT,C,DX,DT,ONDA,F).
@@ -83,9 +83,9 @@ calculemusDue(I,F) :- NT  is 25,
 calcConvTempo(N, _,N, _, _, _, F,F). 
 calcConvTempo(I,N1,NT,C,DX,DT,ONDA,F) :- I < NT,
                                          I1  is I + 1,
-                                         calcConvSpazio(1,N1,C,DX,DT,ONDA,Z),
-	   		                 estrai_elem(ONDA,X),
-				         inserisci_elem(X,Z,R),
+					 estrai_elem(ONDA,X),
+                                         calcConvSpazio(0,N1,C,DX,DT,ONDA,Z),
+					 inserisci_elem(X,Z,R),
                                          calcConvTempo(I1,N1,NT,C,DX,DT,R,F).
 
 
@@ -100,10 +100,11 @@ calcConvTempo(I,N1,NT,C,DX,DT,ONDA,F) :- I < NT,
                                                 calcConvSpazio(I1,N1,C,DX,DT,LX,T).
 
 
- passoEulero(E0,E1,DT,DX,C,RES) :- RES is E0 - C * (DT/DX) * (E0 -  E1).   
+ passoEulero(E0,E1,DT,DX,C,RES) :- RES is E1 - C * (DT/DX) * (E1 - E0).   
 
  inserisci_elem(X, L, [X | L]).
  estrai_elem([X|_], X).  
+ 
                             
 
 
