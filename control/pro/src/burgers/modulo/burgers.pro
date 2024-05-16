@@ -70,7 +70,7 @@ calculemus(I,F) :- NX  is 201,
                    SUP is 2.0 * pi,
                    DX  is SUP / (NX - 1),
                    DT  is S * DX^2 / NU,
-                   NT  is T/DT,
+                   NT  is 425,%T/DT,
 		             NX1 is NX - 1, 
                    condizioneIniziale(I,ONDA),
                    calcConvTempo(I,NT,NX1,NU,DX,DT,ONDA,F).
@@ -78,23 +78,23 @@ calculemus(I,F) :- NX  is 201,
 
 /* Predicato per il calcolo integrae della funzione di Burgers
    rispetto al tempo */
-calcConvTempo(NT, NT, _, _, _, _, F,F). 
-calcConvTempo(I, NT, NX1, NU, DX, DT, ONDA, F) :- I < NT,
-                                                  I1  is I + 1,
-						                                condBordoInf(ONDA,NU,DX,DT,BI),                    
-						                                calcConvSpazio(1,NX1,NU,DX,DT,ONDA,Z),  
-						                                inserisci_elem(BI,Z,R),
-                                                  calcConvTempo(I1,NX,NT,NU,DX,DT,R,F).
+calcConvTempo(NT,NT,_,_,_,_,F,F). 
+calcConvTempo(I,NT,NX1,NU,DX,DT,ONDA,F) :- I < NT,
+                                           I1  is I + 1,
+						                         condBordoInf(ONDA,NU,DX,DT,BI),                    
+						                         calcConvSpazio(1,NX1,NU,DX,DT,ONDA,Z),  
+						                         inserisci_elem(BI,Z,R),
+                                           calcConvTempo(I1,NT,NX1,NU,DX,DT,R,F).
 
 /* Predicato per il calcolo dell'integrale della funzione di Burgers 
    rispetto allo spazio */
-calcConvSpazio(NX, NX, NU, DX, DT, ONDA, [F])  :- condBordoSup(NU,DX,DT,ONDA,R),
-                                                  F is R.
-calcConvSpazio(I, NX, NU, DX, DT, ONDA, [E|F]) :- I < NX,
-	                                               I1 is I + 1,
-						                                passoEulero(I,NU,DX,DT,ONDA,EU),
-						                                E is EU,
-						                                calcConvSpazio(I1,NX,NU,DX,DT,ONDA,F).
+calcConvSpazio(NX1,NX1,NU,DX,DT,ONDA,[F]) :- condBordoSup(NU,DX,DT,ONDA,R),
+                                             F is R.
+calcConvSpazio(I,NX1,NU,DX,DT,ONDA,[E|F]) :- I < NX1,
+	                                          I1 is I + 1,
+						                           passoEulero(I,NU,DX,DT,ONDA,EU),
+						                           E is EU,
+						                           calcConvSpazio(I1,NX1,NU,DX,DT,ONDA,F).
 
 /* Predicato per il calcolo delle condizioni di bordo inferiore */
 condBordoInf([X|LX],NU,DX,DT,BI) :- coda(LX,C),
