@@ -119,7 +119,7 @@ calc_moto(V, THETA, X, Y, DT, LEN, [Y1 | T]) :- LEN > 0,
                             del velivolo al momento t_n,
                             un numero floating-point, il passo temporale.
         Dati in uscita:     una quadrupla di numeri floating-point, ovvero la velocita', angolo, spostamento laterale e verticale 
-                            del velivolo al momento t_(n+1) -}
+                            del velivolo al momento t_(n+1) 
 */
 metodo_eulero(V, THETA, X, Y, DT, V1, THETA1, X1, Y1) :-    rhs(V, THETA, X, Y, VT, THETAT, XT, YT),
                                                             V1      is (V + (VT * DT)),
