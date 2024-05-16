@@ -20,7 +20,7 @@ condizioneIniziale(I,X) :- NX   is 41,
 calcPuntiEqui(N,N,INF,_,[INF]).   
 calcPuntiEqui(I,N,INF,SUP,[INF|L]) :- I < N,
                	                    I1   is (I + 1),
-                                      INF1 is (INF + (SUP / N)),
+                                      INF1 is (INF + ((SUP - INF) / N)),
                                       calcPuntiEqui(I1,N,INF1,SUP,L).
                                     
 
