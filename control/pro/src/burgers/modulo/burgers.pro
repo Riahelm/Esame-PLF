@@ -72,7 +72,7 @@ calculemus(I,F) :- NX  is 201,
                    NT  is floor(T/DT),
 		             NX1 is NX - 1,
                    condizioneIniziale(I,ONDA),
-                   calcConvTempo(I,NT,NX1,NU,DX,DT,ONDA,F).
+                   calcConvTempo(I,50,NX1,NU,DX,DT,ONDA,F).
 
 calcConvTempo(NT,NT,_,_,_,_,F,F). 
 calcConvTempo(I,NT,NX1,NU,DX,DT,ONDA,F) :- I < NT,
@@ -85,20 +85,20 @@ calcConvTempo(I,NT,NX1,NU,DX,DT,ONDA,F) :- I < NT,
 
 calcConvSpazio(NX1,NX1,NU,DX,DT,ONDA,[F]) :- condBordoSup(NU,DX,DT,ONDA,F).
 calcConvSpazio(I,NX1,NU,DX,DT,ONDA,[E|F]) :- I < NX1,
-	                                         I1 is I + 1,
-						                          passoEulero(I,NU,DX,DT,ONDA,E),
-						                          calcConvSpazio(I1,NX1,NU,DX,DT,ONDA,F).
+	                                          I1 is I + 1,
+						                           passoEulero(I,NU,DX,DT,ONDA,E),
+						                           calcConvSpazio(I1,NX1,NU,DX,DT,ONDA,F).
 
 
 /* Predicato per il calcolo delle condizioni di bordo inferiore */
 condBordoInf([X|LX],NU,DX,DT,BI) :- coda(LX,C),
-                                    estrai_elem(LX,T),
+                                    testa(LX,T),
                                     BI is X - X*DT/DX * (X - C) + NU*DT/DX^2 * (T - 2*X + C).
 
 /* Predicato per il calcolo delle condizioni di bordo superiore */
 condBordoSup(NU,DX,DT,ONDA,BS) :- coda(ONDA,C),
                                   penultimo(ONDA,P),
-                                  estrai_elem(ONDA,T),
+                                  testa(ONDA,T),
                                   BS is C - C*DT/DX * (C - P) + NU*DT/DX^2 * (T - 2*C + P). 
 
 
@@ -126,18 +126,18 @@ condBordoSup(NU,DX,DT,ONDA,BS) :- coda(ONDA,C),
 
 /* Predicato che restituisce  la coda di una lista */ 
 coda(LX,X) :- inverti(LX,Y),
-              estrai_elem(Y,X).
+              testa(Y,X).
 
 /* Predicato che restituisce il penultimo elemento di una lista */
 penultimo(LX,X) :- inverti(LX,LXInv),
                    estrai_lista(LXInv,Y),
-                   estrai_elem(Y,X).
+                   testa(Y,X).
                   
 /* Predicato che estrae la lista di elementi successivi al primo */
 estrai_lista([_|LX],LX). 
 
 /* Predicato per estrarre il primo elemento di una lista */
-estrai_elem([X|_], X).
+testa([X|_], X).
 
 /* Predicato per aggiungere un elemento alla fine di una lista */
 accoda_elem(X, [], [X]).
