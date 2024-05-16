@@ -71,16 +71,16 @@ calcOndaQuadra([X|L1],[OSI|T]) :- (X < (0.5);
 calculemus(I,F) :- NT  is 25,
                    NX   is 41,
                    C   is 1.0,
-                   NX1  is N - 1,
+                   NX1  is NX - 1,
 		             SUP is 2.0,
                    DT  is 0.02,
-                   DX  is SUP / N1,
+                   DX  is SUP / NX1,
                    condizioneIniziale(I,ONDA),
                    calcConvTempo(I,NT,NX1,C,DX,DT,ONDA,F).
 
 /* Predicato per il calcolo integrae della funzione di convezione
    rispetto al tempo */         
-calcConvTempo(N,N,_,_,_,_,F,F). 
+calcConvTempo(NT,NT,_,_,_,_,F,F). 
 calcConvTempo(I,NT,NX1,C,DX,DT,ONDA,F) :- I < NT,
                                           I1  is I + 1,
 					                           estrai_elem(ONDA,X),                  /* restituisce il primo punto della funzione d'onda */
@@ -93,13 +93,13 @@ calcConvTempo(I,NT,NX1,C,DX,DT,ONDA,F) :- I < NT,
 
  /* Predicato per il calcolo dell'integrale della funzione di convezione
     rispetto allo spazio */
- calcConvSpazio(N1,N1,_,_,_,_,[]). 
- calcConvSpazio(I,N1,C,DX,DT,[E0|LX],[E|T]) :- I < N1,
+ calcConvSpazio(NX1,NX1,_,_,_,_,[]). 
+ calcConvSpazio(I,NX1,C,DX,DT,[E0|LX],[E|T]) :- I < NX1,
                                                estrai_elem(LX,E1),
 	                                            passoEulero(E0,E1,DT,DX,C,RES),
  		                                         E  is RES, 			                                                   
 					                                I1 is I + 1,
-                                               calcConvSpazio(I1,N1,C,DX,DT,LX,T).
+                                               calcConvSpazio(I1,NX1,C,DX,DT,LX,T).
 
  /* Predicato che effettua il passo di Eulero */
  passoEulero(E0,E1,DT,DX,C,RES) :- RES is E1 - C * (DT/DX) * (E1 - E0). 
