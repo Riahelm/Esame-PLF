@@ -19,7 +19,7 @@ condizioneIniziale(I,X) :- NX  is 201,
 calcPuntiEqui(N, N, _, _, []).
 calcPuntiEqui(I, N, INF, SUP, [INF | L]) :- I < N,
                                             I1   is (I + 1),
-                                            INF1 is (INF + ((SUP - INF) / N)),
+                                            INF1 is (INF + (SUP / N)),
                                             calcPuntiEqui(I1, N, INF1, SUP, L).
 
 /**************************__INPUT__***************************
@@ -62,17 +62,20 @@ calcOndaDenteSega([X|LX],[U|LU]) :- T0 is 0.0,
 ***************************************************************/
 
 /* Predicato MAIN */
-calculemus(I,NT,F) :- NX  is 201,
-                      T   is 0.6,
-                      S   is 0.1,
-                      NU  is 0.07,
-                      SUP is 2.0 * pi,
-                      DX  is SUP / (NX - 1),
-                      DT  is S * DX^2 / NU,
-                      %NT  is floor(T/DT),
-		                NX1 is NX - 1,
-                      condizioneIniziale(I,ONDA),
-                      calcConvTempo(I,NT,NX1,NU,DX,DT,ONDA,F).
+calculemus(I,F) :- NX  is 201,
+                   T   is 0.6,
+                   S   is 0.1,
+                   NU  is 0.07,
+                   SUP is 2.0 * pi,
+                   DX  is SUP / (NX - 1),
+                   DT  is S * DX^2 / NU,
+                   NT is floor(T/DT),
+		             NX1 is NX - 1,
+                   condizioneIniziale(I,ONDA),
+                   calcConvTempo(K,NT,NX1,NU,DX,DT,ONDA,F).
+
+
+%calculemus(I,F) :- condizioneIniziale(I,ONDA), calcConvTempo(K,425,200,0.07,0.0314,0.0014,ONDA,F).
 
 calcConvTempo(NT,NT,_,_,_,_,F,F). 
 calcConvTempo(I,NT,NX1,NU,DX,DT,ONDA,F) :- I < NT,
