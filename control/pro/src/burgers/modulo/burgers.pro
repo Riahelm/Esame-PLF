@@ -8,11 +8,10 @@
 ***************************************************************/
 
 /* Predicato per il calcolo della condizione iniziale */
-condizioneIniziale(I,X) :- NX  is 201,   
-                           INF is 0.0,
-			   SUP is 2.0 * pi,
-			   calcPuntiEqui(I, NX, INF, SUP, L),
-                           calcOndaDenteSega(L, X).
+condizioneIniziale(I,NX,X) :- INF is 0.0,
+			      SUP is 2.0 * pi,
+			      calcPuntiEqui(I, NX, INF, SUP, L),
+                              calcOndaDenteSega(L, X).
 
 /* Predicato che genera un numero finito di punti tutti equidistanti 
    tra loro in un intervallo specificato */
@@ -70,11 +69,10 @@ calculemus(NX,F) :- T   is 0.6,
                     DT  is S * DX^2 / NU,
                     NT  is floor(T/DT),
 		    NX1 is NX - 1,
-                    condizioneIniziale(0,ONDA),
+                    condizioneIniziale(0,NX,ONDA),
                     calcConvTempo(0,NT,NX1,NU,DX,DT,ONDA,F).
 
 
-%calculemus(I,F) :- condizioneIniziale(I,ONDA), calcConvTempo(K,425,200,0.07,0.0314,0.0014,ONDA,F).
 
 calcConvTempo(NT,NT,_,_,_,_,F,F). 
 calcConvTempo(I,NT,NX1,NU,DX,DT,ONDA,F) :- I < NT,
