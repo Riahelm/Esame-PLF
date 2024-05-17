@@ -10,8 +10,8 @@
 /* Predicato per il calcolo della condizione iniziale */
 condizioneIniziale(I,X) :- NX  is 201,   
                            INF is 0.0,
-			                  SUP is 2.0 * pi,
-			                  calcPuntiEqui(I, NX, INF, SUP, L),
+			   SUP is 2.0 * pi,
+			   calcPuntiEqui(I, NX, INF, SUP, L),
                            calcOndaDenteSega(L, X).
 
 /* Predicato che genera un numero finito di punti tutti equidistanti 
@@ -62,17 +62,16 @@ calcOndaDenteSega([X|LX],[U|LU]) :- T0 is 0.0,
 ***************************************************************/
 
 /* Predicato MAIN */
-calculemus(I,F) :- NX  is 201,
-                   T   is 0.6,
-                   S   is 0.1,
-                   NU  is 0.07,
-                   SUP is 2.0 * pi,
-                   DX  is SUP / (NX - 1),
-                   DT  is S * DX^2 / NU,
-                   NT is floor(T/DT),
-		             NX1 is NX - 1,
-                   condizioneIniziale(I,ONDA),
-                   calcConvTempo(K,NT,NX1,NU,DX,DT,ONDA,F).
+calculemus(NX,F) :- T   is 0.6,
+                    S   is 0.1,
+                    NU  is 0.07,
+                    SUP is 2.0 * pi,
+                    DX  is SUP / (NX - 1),
+                    DT  is S * DX^2 / NU,
+                    NT  is floor(T/DT),
+		    NX1 is NX - 1,
+                    condizioneIniziale(0,ONDA),
+                    calcConvTempo(0,NT,NX1,NU,DX,DT,ONDA,F).
 
 
 %calculemus(I,F) :- condizioneIniziale(I,ONDA), calcConvTempo(K,425,200,0.07,0.0314,0.0014,ONDA,F).
@@ -80,17 +79,17 @@ calculemus(I,F) :- NX  is 201,
 calcConvTempo(NT,NT,_,_,_,_,F,F). 
 calcConvTempo(I,NT,NX1,NU,DX,DT,ONDA,F) :- I < NT,
                                            I1  is I + 1,
-						                         condBordoInf(ONDA,NU,DX,DT,BI),                    
-						                         calcConvSpazio(1,NX1,NU,DX,DT,ONDA,Z),
-						                         inserisci_elem(BI,Z,R),
+		                           condBordoInf(ONDA,NU,DX,DT,BI),                    
+				           calcConvSpazio(1,NX1,NU,DX,DT,ONDA,Z),
+				           inserisci_elem(BI,Z,R),
                                            calcConvTempo(I1,NT,NX1,NU,DX,DT,R,F).
 
 
 calcConvSpazio(NX1,NX1,NU,DX,DT,ONDA,[F]) :- condBordoSup(NU,DX,DT,ONDA,F).
 calcConvSpazio(I,NX1,NU,DX,DT,ONDA,[E|F]) :- I < NX1,
-	                                          I1 is I + 1,
-						                           passoEulero(I,NU,DX,DT,ONDA,E),
-						                           calcConvSpazio(I1,NX1,NU,DX,DT,ONDA,F).
+	                                     I1 is I + 1,
+				             passoEulero(I,NU,DX,DT,ONDA,E),
+				             calcConvSpazio(I1,NX1,NU,DX,DT,ONDA,F).
 
 
 /* Predicato per il calcolo delle condizioni di bordo inferiore */
@@ -108,9 +107,9 @@ condBordoSup(NU,DX,DT,ONDA,BS) :- coda(ONDA,C),
 /* Predicato che effettua il passo di Eulero */
  passoEulero(I,NU,DX,DT,ONDA,EU) :- I0 is I  - 1,
                                     I2 is I  + 1,
-				                        estrai(0,I0,ONDA,E0),
-			                           estrai(0,I,ONDA,E1),
-		    	                        estrai(0,I2,ONDA,E2),
+				    estrai(0,I0,ONDA,E0),
+			            estrai(0,I,ONDA,E1),
+		    	            estrai(0,I2,ONDA,E2),
                                     EU is E1 - E1*DT/DX * (E1 - E0) + NU*DT/DX^2 * (E2 - 2*E1 + E0).
 
 
@@ -125,7 +124,7 @@ condBordoSup(NU,DX,DT,ONDA,BS) :- coda(ONDA,C),
  estrai(N,N,[X|_],X).
  estrai(I,N,[_|LX],Z) :- I < N,
                          I1 is I + 1,
-			                estrai(I1,N,LX,Z).
+			 estrai(I1,N,LX,Z).
 
 /* Predicato che restituisce  la coda di una lista */ 
 coda(LX,X) :- inverti(LX,Y),
