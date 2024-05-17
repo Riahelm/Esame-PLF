@@ -8,10 +8,10 @@ import Burgers
 main::IO()
 main = do putStrLn "Calcolo del moto di fugoide senza attrito"
           dt <- acquisisciDato "Digita lunghezza del passo temporale:"
-          putStrLn $ show (mainFugoideSemplice (read dt :: Float))
+          putStrLn $ show (main_fugoide_semplice (read dt :: Float))
           putStrLn "Calcolo del moto di fugoide con attrito"
           dt <- acquisisciDato "Digita lunghezza del passo temporale:"
-          putStrLn $ show (mainFugoideCompleto (read dt :: Float))
+          putStrLn $ show (main_fugoide_completo (read dt :: Float))
           putStrLn "Calcolo dell'equazione di convezione lineare a una dimensione"
           nx <- acquisisciDato "Digita il numero di punti totali della funzione d'onda:"
           dt <- acquisisciDato "Digita la lunghezza del passo temporale della funzione d'onda:"
