@@ -1,9 +1,9 @@
 /*********************************_ATTENZIONE_***************************************
- Il predicato testa non accetta una lista vuota. Per evitare stac overflow si neces-
+ Il predicato testa non accetta una lista vuota. Per evitare stack overflow si neces-
  -sita che:
  - la lista sia di ALMENO 2 elementi,
  - su una lista di NX elementi: I is 0, NX1 is NX - 1.
- In questo modo si compiono esattamente NX iterazioni.
+ In questo modo si compiono esattamente NX1 iterazioni.
  Indici e numero di punti della lista devono essere degli interi: validazione nel 
  main!
 

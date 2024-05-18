@@ -16,20 +16,20 @@ main :-
     write('Digita la lunghezza del passo temporale: '), nl,
     read(DT),
     main_fugoide_completo(DT, FC),
-    write(FC).
-
-    /*write('Calcolo della equazione di convezione lineare a una dimensione'),
-    write('Digita il numero di punti totali della funzione di onda: '),
+    write(FC),                                           
+    nl,
+    write('Calcolo della equazione di convezione lineare a una dimensione'),   nl,
+    write('Digita il numero di punti totali della funzione di onda: '),        nl,
     read(NX),
-    write('Digita la lunghezza del passo temporale della funzione di onda: '),
+    write('Digita la lunghezza del passo temporale della funzione di onda: '), nl,
     read(DT),
-    main_convezione(DT, NX, CONV),
-    write(CONV),
-
-    write('Calcolo della equazione di Burgers a una dimensione'),
-    write('Digita il numero di punti totali della funzione di onda: '),
+    calc_convezione(NX,DT,CONV), %main_convezione(DT, NX, CONV),
+    write(CONV).
+    /* 
+    write('Calcolo della equazione di Burgers a una dimensione'), nl,
+    write('Digita il numero di punti totali della funzione di onda: '), nl
     read(NX),
-    main_burgers(NX, BURG),
+    calc_burgers(NX,BURG),       %main_burgers(NX, BURG),
     write(BURG),*/
 
 /*  Predicato per il calcolo del moto fugoide privo di attrito di un velivolo generico.   

@@ -45,7 +45,7 @@ main :-
            I is 0, NX1 is NX - 1,
            conv_spazio(I,NX1,C,DX,DT,M,F), conta(F,0,K),   write(F), write('K='), write(K),  nl,
     write('K1 is 0, NT is 25, NX1 is NX - 1, DX is SUP / (NX1), DT is 0.02.              '), nl,
-    write('conv_tempo(K1,NT,NX1,C,DX,DT,M,G), conta(G,0,Z). Z=41                         '), nl,
+    write('conv_tempo(K1,NT,NX1,C,DX,DT,M,G), conta(G,0,Z). Z=40                         '), nl,
            K1 is 0, NT is 25,
            conv_tempo(K1,NT,NX1,C,DX,DT,M,G), conta(G,0,Z), write(G), write('Z='), write(Z), nl,
     nl,
