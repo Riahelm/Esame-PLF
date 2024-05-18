@@ -11,15 +11,15 @@
 /* Predicato per il calcolo della condizione iniziale */
 condizioneIniziale(I,X) :- NX   is 41,
                            INF is 0.0,
-	                        SUP is 2.0,
-			                  calcPuntiEqui(I,NX,INF,SUP,L),
+	                   SUP is 2.0,
+			   calcPuntiEqui(I,NX,INF,SUP,L),
                            calcOndaQuadra(L,X).
 
 /* Predicato che genera un numero finito di punti tutti equidistanti 
    tra loro in un intervallo specificato */
 calcPuntiEqui(N,N,INF,_,[INF]).   
 calcPuntiEqui(I,N,INF,SUP,[INF|L]) :- I < N,
-               	                    I1   is (I + 1),
+               	                      I1   is (I + 1),
                                       INF1 is (INF + (SUP / N)),
                                       calcPuntiEqui(I1,N,INF1,SUP,L).
                                     
@@ -72,7 +72,7 @@ calculemus(I,F) :- NT  is 25,
                    NX  is 41,
                    C   is 1.0,
                    NX1 is NX - 1,
-		             SUP is 2.0,
+		   SUP is 2.0,
                    DT  is 0.02,
                    DX  is SUP / NX1,
                    condizioneIniziale(I,ONDA),
@@ -83,9 +83,9 @@ calculemus(I,F) :- NT  is 25,
 calcConvTempo(NT,NT,_,_,_,_,F,F). 
 calcConvTempo(I,NT,NX1,C,DX,DT,ONDA,F) :- I < NT,
                                           I1  is I + 1,
-					                           estrai_elem(ONDA,X),                  /* restituisce il primo punto della funzione d'onda */
+		                          estrai_elem(ONDA,X),                  /* restituisce il primo punto della funzione d'onda */
                                           calcConvSpazio(0,NX1,C,DX,DT,ONDA,Z), /* integra la funzione rispetto allo spazio */
-					                           inserisci_elem(X,Z,R),                /* aggiunge la testa dell'onda al risultato dell'integrazione spaziale */
+					  inserisci_elem(X,Z,R),                /* aggiunge la testa dell'onda al risultato dell'integrazione spaziale */
                                           calcConvTempo(I1,NT,NX1,C,DX,DT,R,F). /* calcola l'onda nel successivo passo spaziale */
 
 
@@ -96,9 +96,9 @@ calcConvTempo(I,NT,NX1,C,DX,DT,ONDA,F) :- I < NT,
  calcConvSpazio(NX1,NX1,_,_,_,_,[]). 
  calcConvSpazio(I,NX1,C,DX,DT,[E0|LX],[E|T]) :- I < NX1,
                                                 estrai_elem(LX,E1),
-	                                             passoEulero(E0,E1,DT,DX,C,RES),
- 		                                          E  is RES, 			                                                   
-					                                 I1 is I + 1,
+	                                        passoEulero(E0,E1,DT,DX,C,RES),
+ 		                                E  is RES, 			                                                   
+		                                I1 is I + 1,
                                                 calcConvSpazio(I1,NX1,C,DX,DT,LX,T).
 
  /* Predicato che effettua il passo di Eulero */

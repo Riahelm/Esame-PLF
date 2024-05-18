@@ -16,6 +16,9 @@ cond_iniziale(NX,INF,SUP,ONDA) :- gen_punti_equi(NX,INF,SUP,L),
    INF = 0.0      -- limite inferiore del dominio spaziale 
    SUP = 2.0 * pi -- limite superiore del dominio spaziale
 
+*_nota1: i parametri IN e SUP sono numeri reali; N deve essere 
+intero: il controllo viene demandato al predicato gen_punti_equi
+
 ***************************************************************/
 
 
