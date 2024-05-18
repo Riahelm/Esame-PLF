@@ -71,7 +71,7 @@ main :-
                                                                                     write(Z), nl,
     nl,
     write('>>TEST 05: verifica del predicato MAIN.                                        '), nl,
-    write('NX is 201, calc_burgers(NX,ONDA), conta(ONDA,0,W).                             '), nl, 
+    write('NX is 201, calc_burgers(NX,ONDA), conta(ONDA,0,W). W=201                       '), nl, 
            NX is 201, calc_burgers(NX,ONDA), conta(ONDA,0,W),                    write(ONDA), 
                                                                        write('W='), write(W), nl.
 
