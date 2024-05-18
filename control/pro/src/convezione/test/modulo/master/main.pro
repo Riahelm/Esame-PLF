@@ -5,8 +5,8 @@ calc_convezione(NX,DT,F) :- NT  is 25,
                             INF is 0.0,
                             SUP is 2.0,
                             DX  is SUP / NX1,
-                            cond_iniziale(NX,INF,SUP,ONDA),
-                            conv_tempo(0,NT,NX1,C,DX,DT,ONDA,F).
+                            cond_iniziale_conv(NX,INF,SUP,ONDA),
+                            tempo_conv(0,NT,NX1,C,DX,DT,ONDA,F).
 
 
 /**********************_INPUT_EXAMPLES_************************

@@ -12,12 +12,12 @@
    - il settimo termine è la funzione d'onda ricalcolata;
    - l' ottavo termine è la funzione d'onda risultante. */
 
-conv_tempo(NT,NT,_,_,_,_,F,F). 
-conv_tempo(I,NT,NX1,NU,DX,DT,ONDA,F) :- I < NT,
+tempo_burg(NT,NT,_,_,_,_,F,F). 
+tempo_burg(I,NT,NX1,NU,DX,DT,ONDA,F) :- I < NT,
                                         I1  is I + 1,
-			                bordo_inf(ONDA,NU,DX,DT,BI),                    
-				        conv_spazio(1,NX1,NU,DX,DT,ONDA,Z),
+		  	                bordo_inf(ONDA,NU,DX,DT,BI),                    
+				        spazio_burg(1,NX1,NU,DX,DT,ONDA,Z),
 				        inserisci_elem(BI,Z,R),
-                                        conv_tempo(I1,NT,NX1,NU,DX,DT,R,F).
+                                        tempo_burg(I1,NT,NX1,NU,DX,DT,R,F).
 
 

@@ -10,19 +10,17 @@
 # modulo/master/test.pro
 
 gplc      convezione/test/modulo/ausiliarie/linspace.pro \
-          convezione/test/modulo/ausiliarie/predicati_ausiliari.pro \
+          burgers/test/modulo/ausiliarie/predicati_ausiliari.pro \
           convezione/test/modulo/cond_iniziale/condizione_iniziale.pro \
           convezione/test/modulo/predicati_eulero/eulero.pro \
           convezione/test/modulo/convezione/spazio.pro \
           convezione/test/modulo/convezione/tempo.pro \
-          convezione/test/modulo/master/main.pro master/modulo/main_fug.pro -o simulazione
+          convezione/test/modulo/master/main.pro \
+          burgers/test/modulo/cond_iniziale/condizione_iniziale.pro \
+          burgers/test/modulo/predicati_eulero/eulero.pro \
+          burgers/test/modulo/burgers/spazio.pro \
+          burgers/test/modulo/burgers/tempo.pro burgers/test/modulo/master/main.pro master/modulo/main_fug.pro -o simulazione
 
-          #burgers/test/modulo/ausiliarie/linspace.pro \
-          #burgers/test/modulo/ausiliarie/predicati_ausiliari.pro \
-          #burgers/test/modulo/cond_iniziale/condizione_iniziale.pro \
-          #burgers/test/modulo/predicati_eulero/eulero.pro \
-          #burgers/test/modulo/burgers/spazio.pro \
-          #burgers/test/modulo/burgers/tempo.pro \
           
 ./simulazione
 

@@ -2,35 +2,36 @@
 main :-
     nl,
     write('Progetto della sessione estiva del corso Programmazione Logica e Funzionale'), nl,
-    write('Anno 2023/2024'), nl,
-    write('Corso tenuto dal prof. Marco Bernardo'), nl,
-    write('Progetto realizzato da: Barzotti Nicolas e Ramagnano Gabriele'), nl, nl, nl,
-
-    write('Calcolo del moto di fugoide senza attrito'), nl,
-    write('Digita la lunghezza del passo temporale: '), nl,
+    write('Anno 2023/2024'),                                                              nl,
+    write('Corso tenuto dal prof. Marco Bernardo'),                                       nl,
+    write('Progetto realizzato da: Barzotti Nicolas e Ramagnano Gabriele'),               nl,  
+    nl, 
+    nl,
+    write('Calcolo del moto di fugoide senza attrito'),   	                          nl,
+    write('Digita la lunghezza del passo temporale: '),                                   nl,
     read(DT),
     main_fugoide_semplice(DT, FS),
     write(FS),
-
-    write('Calcolo del moto di fugoide con attrito'), nl, 
-    write('Digita la lunghezza del passo temporale: '), nl,
-    read(DT),
-    main_fugoide_completo(DT, FC),
+    nl,
+    write('Calcolo del moto di fugoide con attrito'),                                     nl, 
+    write('Digita la lunghezza del passo temporale: '),                                   nl,
+    read(DT2),
+    main_fugoide_completo(DT2, FC),
     write(FC),                                           
     nl,
-    write('Calcolo della equazione di convezione lineare a una dimensione'),   nl,
-    write('Digita il numero di punti totali della funzione di onda: '),        nl,
-    read(NX),
-    write('Digita la lunghezza del passo temporale della funzione di onda: '), nl,
-    read(DT),
-    calc_convezione(NX,DT,CONV), %main_convezione(DT, NX, CONV),
-    write(CONV).
-    /* 
-    write('Calcolo della equazione di Burgers a una dimensione'), nl,
-    write('Digita il numero di punti totali della funzione di onda: '), nl
-    read(NX),
-    calc_burgers(NX,BURG),       %main_burgers(NX, BURG),
-    write(BURG),*/
+    write('Calcolo della equazione di convezione lineare a una dimensione'),              nl,
+    write('Digita il numero di punti totali della funzione di onda: '),                   nl,
+    read(NXC),
+    write('Digita la lunghezza del passo temporale della funzione di onda: '),            nl,
+    read(DT3),
+    calc_convezione(NXC,DT3,CONV), %main_convezione(DT, NX, CONV),
+    write(CONV),
+    nl,
+    write('Calcolo della equazione di Burgers a una dimensione'),                         nl,
+    write('Digita il numero di punti totali della funzione di onda: '),                   nl,
+    read(NXB),
+    calc_burgers(NXB,BURG),       %main_burgers(NX, BURG),
+    write(BURG).
 
 /*  Predicato per il calcolo del moto fugoide privo di attrito di un velivolo generico.   
         Dati in ingresso:   un numero di tipo floating-point, rappresenta il "dt" ovvero l'incremento di tempo per ogni calcolo. 

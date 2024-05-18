@@ -12,11 +12,11 @@
    - il settimo termine è la funzione d'onda ricalcolata;
    - l' ottavo termine è la funzione d'onda risultante. */
 
-conv_tempo(NT,NT,_,_,_,_,F,F).
-conv_tempo(I,NT,NX1,C,DX,DT,ONDA,F) :- I < NT,
+tempo_conv(NT,NT,_,_,_,_,F,F).
+tempo_conv(I,NT,NX1,C,DX,DT,ONDA,F) :- I < NT,
                                        I1  is I + 1,
                                        testa(ONDA,T),                
-                                       conv_spazio(0,NX1,C,DX,DT,ONDA,F1), 
+                                       spazio_conv(0,NX1,C,DX,DT,ONDA,F1), 
                                        inserisci_elem(T,F1,R),                
-                                       conv_tempo(I1,NT,NX1,C,DX,DT,R,F). 
+                                       tempo_conv(I1,NT,NX1,C,DX,DT,R,F). 
 

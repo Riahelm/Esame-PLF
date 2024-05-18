@@ -25,13 +25,13 @@
    - il settimo termine è la funzione d'onda ricalcolata con il passo_
      eulero */
 
-conv_spazio(NX1,NX1,_,_,_,_,[]). 
-conv_spazio(I,NX1,C,DX,DT,[E0|LX],[E|T]) :- I < NX1,
+spazio_conv(NX1,NX1,_,_,_,_,[]). 
+spazio_conv(I,NX1,C,DX,DT,[E0|LX],[E|T]) :- I < NX1,
                                             I1 is I + 1,
                                             testa(LX,E1),
-                                            passo_eulero(E0,E1,C,DX,DT,EU),
+                                            passo_eulero_conv(E0,E1,C,DX,DT,EU),
                                             E  is EU,                                                                         
-                                            conv_spazio(I1,NX1,C,DX,DT,LX,T).
+                                            spazio_conv(I1,NX1,C,DX,DT,LX,T).
 
 
 

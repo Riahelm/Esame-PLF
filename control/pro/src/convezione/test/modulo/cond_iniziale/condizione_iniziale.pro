@@ -6,8 +6,8 @@
    - il terzo argomento è il limite superiore del dominio spaziale; 
    - il quarto argomento è la funzione d'onda quadra. */
 
-cond_iniziale(NX,INF,SUP,ONDA) :- gen_punti_equi(NX,INF,SUP,L),
-                                  onda_quadra(L,ONDA).
+cond_iniziale_conv(NX,INF,SUP,ONDA) :- gen_punti_equi(NX,INF,SUP,L),
+                                       onda_quadra(L,ONDA).
 
 
 /**********************_INPUT_EXAMPLES_************************

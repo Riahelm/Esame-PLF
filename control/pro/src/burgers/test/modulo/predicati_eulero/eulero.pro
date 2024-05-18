@@ -50,12 +50,12 @@ bordo_sup(ONDA,NU,DX,DT,BS) :- last(ONDA,C),
    L'uso del predicato nth consente di accedere agli elementi della lista tramite
    indice. Gli elementi sono indicizzati da 1 a N. */
 
-passo_eulero(ONDA,I0,NU,DX,DT,EU) :- I1 is I0 + 1,
-                                     I2 is I1 + 1,
-		 		     nth(I0,ONDA,E0),
-			             nth(I1,ONDA,E1),
-		    	             nth(I2,ONDA,E2),
-                                     EU is E1 - E1*DT/DX * (E1 - E0) + NU*DT/DX^2 * (E2 - 2*E1 + E0).
+passo_eulero_burg(ONDA,I0,NU,DX,DT,EU) :- I1 is I0 + 1,
+                                          I2 is I1 + 1,
+		                          nth(I0,ONDA,E0),
+		  	                  nth(I1,ONDA,E1),
+		    	                  nth(I2,ONDA,E2),
+                                          EU is E1 - E1*DT/DX * (E1 - E0) + NU*DT/DX^2 * (E2 - 2*E1 + E0).
 
 
 

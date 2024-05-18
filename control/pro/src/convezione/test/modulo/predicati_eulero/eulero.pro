@@ -7,5 +7,5 @@
    - il sesto termine è il valore risultante del punto applicato il passo di eulero.
 */
 
-passo_eulero(E0,E1,C,DX,DT,EU) :- EU is E1 - C * (DT/DX) * (E1 - E0). 
+passo_eulero_conv(E0,E1,C,DX,DT,EU) :- EU is E1 - C * (DT/DX) * (E1 - E0). 
 

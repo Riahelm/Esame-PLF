@@ -8,5 +8,5 @@ calc_burgers(NX,F) :- NX1 is NX - 1,
                       DX  is SUP / NX1,
                       DT  is S * DX^2 / NU,
                       NT  is floor(T/DT),
-                      cond_iniziale(NX,INF,SUP,ONDA),
-                      conv_tempo(0,NT,NX1,NU,DX,DT,ONDA,F).
+                      cond_iniziale_burg(NX,INF,SUP,ONDA),
+                      tempo_burg(0,NT,NX1,NU,DX,DT,ONDA,F).

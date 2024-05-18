@@ -25,10 +25,10 @@
    - il settimo termine è la funzione d'onda ricalcolata con il passo_
      eulero e bordo_sup. */
 
-conv_spazio(NX1,NX1,NU,DX,DT,ONDA,[F]) :- bordo_sup(ONDA,NU,DX,DT,F).
-conv_spazio(I,NX1,NU,DX,DT,ONDA,[E|F]) :- I < NX1,
-	                                  I1 is I + 1,
-				          passo_eulero(ONDA,I,NU,DX,DT,E),
-				          conv_spazio(I1,NX1,NU,DX,DT,ONDA,F).
+spazio_burg(NX1,NX1,NU,DX,DT,ONDA,[F]) :- bordo_sup(ONDA,NU,DX,DT,F).
+spazio_burg(I,NX1,NU,DX,DT,ONDA,[E|F]) :- I < NX1,
+                                          I1 is I + 1,
+		   		          passo_eulero_burg(ONDA,I,NU,DX,DT,E),
+				          spazio_burg(I1,NX1,NU,DX,DT,ONDA,F).
 
 
