@@ -21,7 +21,11 @@ main :-
     nl,
     write('Calcolo della equazione di convezione lineare a una dimensione'),              nl,
     write('Digita il numero di punti totali della funzione di onda: '),                   nl,
-    read(NXC),
+    /* Il dato deve essere:
+       - una variaile istanziata,
+       - un intero positivo maggiore di zero. */
+    read(NXCV),
+    valida(NXCV,NXC),                                                                     nl,
     write('Digita la lunghezza del passo temporale della funzione di onda: '),            nl,
     read(DT3),
     calc_convezione(NXC,DT3,CONV), %main_convezione(DT, NX, CONV),
@@ -32,6 +36,18 @@ main :-
     read(NXB),
     calc_burgers(NXB,BURG),       %main_burgers(NX, BURG),
     write(BURG).
+
+
+    valida(NXCV,NXC) :- integer(NXCV),
+                     NXCV > 0,
+                     write('valore accettato'),
+                     NXC is NXCV;
+                     write('inserimento errato!'), nl,
+                     write('Digita il numero di punti totali della funzione di onda: '), 
+                     read(V),
+                     valida(V,NXC).
+                   
+
 
 /*  Predicato per il calcolo del moto fugoide privo di attrito di un velivolo generico.   
         Dati in ingresso:   un numero di tipo floating-point, rappresenta il "dt" ovvero l'incremento di tempo per ogni calcolo. 
