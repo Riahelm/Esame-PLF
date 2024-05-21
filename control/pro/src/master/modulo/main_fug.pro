@@ -20,32 +20,38 @@ main :-
     write(FC),                                           
     nl,
     write('Calcolo della equazione di convezione lineare a una dimensione'),              nl,
-    write('Digita il numero di punti totali della funzione di onda: '),                   nl,
+    write('Digita il numero di punti totali della funzione di onda: '),                  
     /* Il dato deve essere:
        - una variaile istanziata,
        - un intero positivo maggiore di zero. */
     read(NXCV),
-    valida(NXCV,NXC),                                                                     nl,
-    write('Digita la lunghezza del passo temporale della funzione di onda: '),            nl,
+    valida(NXCV,
+           'Digita il numero di punti totali della funzione di onda: ',
+           NXC),                                                                          nl,
+    write('Digita la lunghezza del passo temporale: '),                                   nl,
     read(DT3),
-    calc_convezione(NXC,DT3,CONV), %main_convezione(DT, NX, CONV),
+    calc_convezione(NXC,DT3,CONV),
     write(CONV),
     nl,
     write('Calcolo della equazione di Burgers a una dimensione'),                         nl,
-    write('Digita il numero di punti totali della funzione di onda: '),                   nl,
-    read(NXB),
-    calc_burgers(NXB,BURG),       %main_burgers(NX, BURG),
+    write('Digita il numero di punti totali della funzione di onda: '),  
+    read(NXBV),
+    valida(NXBV,
+           'Digita il numero di punti totali della funzione di onda: ',
+           NXB),                                                                          nl,    
+    calc_burgers(NXB,BURG),      
     write(BURG).
 
 
-    valida(NXCV,NXC) :- integer(NXCV),
-                     NXCV > 0,
-                     write('valore accettato'),
-                     NXC is NXCV;
-                     write('inserimento errato!'), nl,
-                     write('Digita il numero di punti totali della funzione di onda: '), 
-                     read(V),
-                     valida(V,NXC).
+    valida(NXV,MSG,NX) :- integer(NXV),
+                          NXV > 0,
+                          write('valore accettato'),
+                     	  NX is NXV,
+                          !;
+                          write('inserimento errato!'), nl,
+                          write(MSG), 
+                          read(V),
+                          valida(V,MSG,NX).
                    
 
 
