@@ -53,5 +53,11 @@ main :-
     write('>>TEST 05: verifica del predicato MAIN.                                       '), nl,
     write('NX is 25, DT is 0.02, calc_convezione(NX,DT,ONDA), conta(ONDA,0,W). W=41      '), nl, 
                                  calc_convezione(NX,DT,ONDA), conta(ONDA,0,W),  write(ONDA), 
-                                                                      write('W='), write(W), nl.
+                                                                      write('W='), write(W), nl,
+
+    write('----------------------------------BENVENUTO-----------------------------------'), nl,
+    write('Calcolo della equazione di convezione lineare a una dimensione.               '), nl,
+    acquisisci_dato_nx('Digita il numero di punti totali della funzione di onda: ',NX2),     nl,
+    acquisisci_dato_dt('Digita la lunghezza del passo temporale: ',DT2),                     nl,
+    calc_convezione(NX2,DT2,ONDA2),                                            write(ONDA2), nl.                                                      
 

@@ -4,6 +4,7 @@
 # modulo/ausiliarie/predicati_ausiliari.pro
 # modulo/cond_iniziale/condizione_iniziale.pro
 # modulo/predicati_eulero/eulero.pro
+# modulo/validazione/ctl_input.pro
 # modulo/convezione/spazio.pro
 # modulo/convezione/tempo.pro
 # modulo/master/main.pro 
@@ -16,6 +17,7 @@ gplc      convezione/test/modulo/ausiliarie/linspace.pro \
           convezione/test/modulo/convezione/spazio.pro \
           convezione/test/modulo/convezione/tempo.pro \
           convezione/test/modulo/master/main.pro \
+          convezione/test/modulo/validazione/ctl_input.pro \
           burgers/test/modulo/cond_iniziale/condizione_iniziale.pro \
           burgers/test/modulo/predicati_eulero/eulero.pro \
           burgers/test/modulo/burgers/spazio.pro \

@@ -8,51 +8,26 @@ main :-
     nl, 
     nl,
     write('Calcolo del moto di fugoide senza attrito'),   	                          nl,
-    write('Digita la lunghezza del passo temporale: '),                                   nl,
-    read(DT),
-    main_fugoide_semplice(DT, FS),
+    acquisisci_dato_dt('Digita la lunghezza del passo temporale: ',DT1),                   nl,
+    main_fugoide_semplice(DT1, FS),
     write(FS),
     nl,
     write('Calcolo del moto di fugoide con attrito'),                                     nl, 
-    write('Digita la lunghezza del passo temporale: '),                                   nl,
-    read(DT2),
+    acquisisci_dato_dt('Digita la lunghezza del passo temporale: ',DT2),                  nl,
     main_fugoide_completo(DT2, FC),
     write(FC),                                           
     nl,
     write('Calcolo della equazione di convezione lineare a una dimensione'),              nl,
-    write('Digita il numero di punti totali della funzione di onda: '),                  
-    /* Il dato deve essere:
-       - una variaile istanziata,
-       - un intero positivo maggiore di zero. */
-    read(NXCV),
-    valida(NXCV,
-           'Digita il numero di punti totali della funzione di onda: ',
-           NXC),                                                                          nl,
-    write('Digita la lunghezza del passo temporale: '),                                   nl,
-    read(DT3),
+    acquisisci_dato_nx('Digita il numero di punti totali della funzione di onda: ',NXC),  nl,
+    acquisisci_dato_dt('Digita la lunghezza del passo temporale: ',DT3),                  nl,
     calc_convezione(NXC,DT3,CONV),
     write(CONV),
     nl,
     write('Calcolo della equazione di Burgers a una dimensione'),                         nl,
-    write('Digita il numero di punti totali della funzione di onda: '),  
-    read(NXBV),
-    valida(NXBV,
-           'Digita il numero di punti totali della funzione di onda: ',
-           NXB),                                                                          nl,    
+    acquisisci_dato_nx('Digita il numero di punti totali della funzione di onda: ',NXB),  nl,
     calc_burgers(NXB,BURG),      
     write(BURG).
 
-
-    valida(NXV,MSG,NX) :- integer(NXV),
-                          NXV > 0,
-                          write('valore accettato'),
-                     	  NX is NXV,
-                          !;
-                          write('inserimento errato!'), nl,
-                          write(MSG), 
-                          read(V),
-                          valida(V,MSG,NX).
-                   
 
 
 /*  Predicato per il calcolo del moto fugoide privo di attrito di un velivolo generico.   
@@ -73,8 +48,8 @@ main_fugoide_semplice(DT, [Z0 | T]) :-  Z0 is 100.0,                    /* Altit
         Dati in uscita:     lista di numeri floating-point, questi sono l'altitudine del velivolo per ogni passo temporale. 
         
     Il predicato si divide in un fatto e una regola:
-            *Fatto:     se il numero di passi temporali e' pari a zero si restituisce la funzione traiettoria del moto fugoide 
-            *Regola:    altrimenti si applica il metodo di Eulero per il calcolo della posizione del velivolo in base 
+    --ERRORE! *Fatto:   se il numero di passi temporali e' pari a zero si restituisce la funzione traiettoria del moto fugoide 
+              *Regola:  altrimenti si applica il metodo di Eulero per il calcolo della posizione del velivolo in base 
                         alla posizione nel tempo precedente, si aggiunge l'altitudine alla lista di elementi T,
                         si abbassa di uno il numero di elementi da calcolare e si procede ricorsivamente con la posizione del
                         velivolo ricalcolata 
