@@ -24,7 +24,6 @@ acquisisci_dato_nx(MSG,NX) :- write(MSG),
 
 acquisisci_dato_dt(MSG,DT) :- write(MSG),
                               read(DTV),
-                              float(DTV),
 			      DTV > 0,
 			      DT is DTV,
 		   	      write('Valore accettato'),
