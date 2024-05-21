@@ -1,6 +1,6 @@
 module CondizioniIniziali where
 
-import CondInizialiConv 
+--import CondInizialiConv 
 import CondInizialiBurg
 import Funzionalita
 
