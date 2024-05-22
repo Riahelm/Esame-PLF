@@ -36,9 +36,9 @@ main :-
         Dati in uscita:     lista di numeri floating-point, rappresenta l'altitudine del velivolo per ogni singolo 
                             incremento temporale calcolato.
 */
-main_fugoide_semplice(DT, [Z0 | T]) :-  Z0 is 100.0,                    /* Altitudine iniziale del velivolo*/
-                                        B0 is 10.0,                     /* Angolo iniziale del velivolo */
-                                        PASSI is (floor(100.0/DT)- 1),  /* Numero di punti in cui effettuare il calcolo */
+main_fugoide_semplice(DT, [Z0 | T]) :-  Z0 is 100.0,                       /* Altitudine iniziale del velivolo*/
+                                        B0 is 10.0,                        /* Angolo iniziale del velivolo */
+                                        PASSI is (floor(100.0/DT) + 1) -1, /* Numero di punti in cui effettuare il calcolo */
                                         calc_moto(Z0, B0, DT, PASSI, T).
 
 /* Predicato per il calcolo numerico dell'integrazione del moto fugoide 
@@ -85,11 +85,11 @@ rhs(Y, V, V, V1) :- CG is 9.81,     /* Costante gravitazionale terrestre */
         Dati in uscita:     Lista di numeri floating-point, rappresenta l'altitudine del velivolo per ogni singolo 
                             incremento temporale calcolato.
 */
-main_fugoide_completo(DT, [Y0 | T]) :-  V0 is 30.0,                     /* La velocita' iniziale, in questo caso quella di trim */
-                                        THETA0 is 0.0,                  /* Angolo iniziale del velivolo */
-                                        X0 is 0.0,                      /* Spostamento orizzontale iniziale del velivolo*/
-                                        Y0 is 1000.0,                   /* Altitudine iniziale del velivolo */
-                                        PASSI is (floor(100.0/DT)- 1),  /* Numero di punti in cui effettuare il calcolo */
+main_fugoide_completo(DT, [Y0 | T]) :-  V0 is 30.0,                          /* La velocita' iniziale, in questo caso quella di trim */
+                                        THETA0 is 0.0,                       /* Angolo iniziale del velivolo */
+                                        X0 is 0.0,                           /* Spostamento orizzontale iniziale del velivolo*/
+                                        Y0 is 1000.0,                        /* Altitudine iniziale del velivolo */
+                                        PASSI is (floor(100.0/DT) + 1) - 1,  /* Numero di punti in cui effettuare il calcolo */
                                         calc_moto(V0, THETA0, X0, Y0, DT, PASSI, T). 
 
 /*  Predicato per il calcolo numerico dell'integrazione del moto fugoide 
