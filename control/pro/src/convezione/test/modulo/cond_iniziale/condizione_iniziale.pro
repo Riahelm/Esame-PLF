@@ -1,10 +1,11 @@
 
-/* Il predicato cond_iniziale calcola la condizione iniziale (una funzione)
+/* Il predicato cond_iniziale_conv calcola la condizione iniziale (una funzione)
    per il calcolo numerico dell'equazione di convezione:
    - il primo argomento è il numero di punti della griglia spaziale;
    - il secondo argomento è il limite inferiore del dominio spaziale;
    - il terzo argomento è il limite superiore del dominio spaziale; 
    - il quarto argomento è la funzione d'onda quadra. */
+
 
 cond_iniziale_conv(NX,INF,SUP,ONDA) :- gen_punti_equi(NX,INF,SUP,L),
                                        onda_quadra(L,ONDA).
@@ -22,7 +23,7 @@ intero: il controllo viene demandato al predicato gen_punti_equi
 ***************************************************************/
 
 
-/* Il predicato calcola la funzione d'onda quadra:
+/* Il predicato onda_quadra calcola la funzione d'onda quadra:
    - il primo argomento è la lista di punti equidistanti del dominio
      spaziale;
    - il secondo argomento è la funzione d'onda calcolata. */

@@ -31,7 +31,7 @@ calcOndaDenteSega lx = [u t0 x nu | x <- lx]
 condizioneIniziale :: Int -> Double -> Double -> [Double]
 condizioneIniziale nx lmtInf lmtSup = [calcOndaDenteSega x | x <- lx]
                                          where
-                                           lx = calcPuntiEqui 0 nx lmtInf lmtSup
+                                           lx = calcPuntiEqui nx lmtInf lmtSup
 
 calcOndaDenteSega :: Double -> Double
 calcOndaDenteSega x = u t0 x nu 

@@ -22,7 +22,8 @@ intero: il controllo viene demandato al predicato gen_punti_equi
 ***************************************************************/
 
 
-/* Il predicato calcola la funzione d'onda a dente di sega 'u':
+/* Il predicato onda_dente_sega calcola la funzione d'onda a dente di
+    sega 'u':
    - il primo argomento è la lista di punti equidistanti del dominio
      spaziale;
    - il secondo argomento è la funzione d'onda calcolata. 

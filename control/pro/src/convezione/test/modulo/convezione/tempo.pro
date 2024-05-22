@@ -1,4 +1,4 @@
-/* Il predicato conv_tempo calcola numericamente l'integrale della
+/* Il predicato tempo_conv calcola numericamente l'integrale della
    funzione rispetto al parametro temporale DT:
    - il primo termine è il numero di passi temporali che la funzione
      d'onda ha compiuto;

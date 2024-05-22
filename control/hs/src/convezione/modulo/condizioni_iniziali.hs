@@ -31,7 +31,7 @@ calcOndaQuadra  lx@(x:xs) | lunghezza lx > 0 && x >= 0.5 && x <= 1.0 = ondaSup :
 condizioneIniziale :: Int -> Double -> Double -> [Double]
 condizioneIniziale nx lmtInf lmtSup = [calcOndaQuadra x | x <- lx]
                                          where
-                                           lx = calcPuntiEqui 0 nx lmtInf lmtSup
+                                           lx = calcPuntiEqui nx lmtInf lmtSup
 
 calcOndaQuadra :: Double -> Double
 calcOndaQuadra x | x >= 0.5 && x <= 1.0 = ondaSup

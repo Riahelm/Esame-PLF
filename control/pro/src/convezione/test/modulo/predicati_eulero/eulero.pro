@@ -1,4 +1,4 @@
-/* Il predicato passo_eulero effettua il passo di Eulero:
+/* Il predicato passo_eulero_conv effettua il passo di Eulero:
    - il primo termine è l'elemento corrente della lista;
    - il secondo termine è l'elemento successivo a quello corrente della lista;
    - il terzo termine è la costante di velocità dell'onda;
