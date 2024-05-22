@@ -1,0 +1,42 @@
+
+L’equazione per il moto di fugoide senza frizione è un’equazione differenziale ordinaria del secondo ordine: 
+
+\begin{equation}
+z(t)'' = g - \frac{g \,z(t)}{z_t} = g \left(1 - \frac{z(t)}{z_t}\right)
+\end{equation}
+
+Possiamo trasformare questa equazione del secondo ordine in un sistema di equazioni del primo ordine: 
+
+\begin{equation}
+z'(t) = b(t)\\
+b'(t) = g\left(1-\frac{z(t)}{z_t}\right)
+\end{equation}
+
+Un altro modo di considerare un sistema di due equazioni ordinarie del primo ordine è scrivere il sistema differenziale come un’unica equazione vettoriale: 
+
+\begin{equation}
+\vec{u}  = \begin{pmatrix} z \\ b \end{pmatrix}
+\end{equation}
+
+\begin{equation}
+\vec{u}'(t)  = \begin{pmatrix} b\\ g-g\frac{z(t)}{z_t} \end{pmatrix}
+\end{equation}
+
+La soluzione approssimativa al tempo tn è un e la soluzione numerica dell’equazione differenziale consiste nel calcolare una sequenza di soluzioni con la seguente formula, basata sull’equazione: 
+
+\begin{equation}
+u_{n+1} = u_n + \Delta t \,f(u_n) + O(\Delta t)^2.
+\end{equation}
+
+Questa formula è chiamata metodo di Eulero. Per le equazioni di moto fugoide, il metodo di Eulero fornisce il seguente algoritmo:
+
+\begin{align}
+z_{n+1} & = z_n + \Delta t \, b_n \\
+b_{n+1} & = b_n + \Delta t \left(g - \frac{g}{z_t} \, z_n \right).
+\end{align}
+
+La costante di integrazione scelta è il valore della derivata al tempo t = 0 (condizione iniziale) : 
+
+\begin{equation}
+u(t=0)=u_0
+\end{equation}
