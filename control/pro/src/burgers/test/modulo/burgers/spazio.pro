@@ -13,7 +13,7 @@
 
 
 
-/* Il predicato conv_spazio calcola numericamente l'integrale della
+/* Il predicato spazio_burg calcola numericamente l'integrale della
    funzione rispetto al parametro spaziale DX:
    - il primo termine è l'indice per accedere agli elementi della 
      lista, viene utlizzato da passo_eulero; 

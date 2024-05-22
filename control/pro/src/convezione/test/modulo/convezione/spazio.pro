@@ -12,7 +12,7 @@
 
 
 
-/* Il predicato conv_spazio calcola numericamente l'integrale della
+/* Il predicato spazio_conv calcola numericamente l'integrale della
    funzione rispetto al parametro spaziale DX:
    - il primo termine è il numero di passi temporali che la funzione
      d'onda ha compiuto;
