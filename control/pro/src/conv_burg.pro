@@ -13,7 +13,8 @@ calc_burgers(NX,F) :- NX1 is NX - 1,
                       cond_iniziale_burg(NX,INF,SUP,ONDA),
                       tempo_burg(0,NT,NX1,NU,DX,DT,ONDA,F).
 
-/* Predicato MAIN */
+/* Il predicato calc_convezione calcola l'integrazione numerica
+   dell'equazione di convezione lineare a una dimensione.*/
 calc_convezione(NX,_,F)  :- (NX == 0;
                             NX == 1),
                             INF is 0.0,
@@ -183,8 +184,8 @@ tempo_conv(I,NT,NX1,C,DX,DT,ONDA,F) :- I < NT,
    - il quarto termine è la lunghezza del passo spaziale;
    - il quinto termine è la lunghezza del passo temporale;
    - il sesto termine è la funzione d'onda;
-   - il settimo termine è la funzione d'onda ricalcolata con il passo_
-     eulero */
+   - il settimo termine è la funzione d'onda ricalcolata con passo_
+     eulero_conv */
 
 spazio_conv(NX1,NX1,_,_,_,_,[]).
 spazio_conv(I,NX1,C,DX,DT,[E0|LX],[E|T]) :- I < NX1,
@@ -208,11 +209,11 @@ passo_eulero_conv(E0,E1,C,DX,DT,EU) :- EU is E1 - C * (DT/DX) * (E1 - E0).
 
 
 /* Il predicato cond_iniziale_conv calcola la condizione iniziale (una funzione)
-   per il calcolo numerico dell'equazione di convezione:
-   - il primo argomento è il numero di punti della griglia spaziale;
-   - il secondo argomento è il limite inferiore del dominio spaziale;
-   - il terzo argomento è il limite superiore del dominio spaziale; 
-   - il quarto argomento è la funzione d'onda quadra. */
+   per l'integrazione numerica dell'equazione di convezione:
+   - il primo argomento e' il numero di punti della griglia spaziale;
+   - il secondo argomento e' il limite inferiore del dominio spaziale;
+   - il terzo argomento e' il limite superiore del dominio spaziale; 
+   - il quarto argomento e' la funzione d'onda quadra. */
 
 cond_iniziale_conv(NX,INF,SUP,ONDA) :- gen_punti_equi(NX,INF,SUP,L),
                                        onda_quadra(L,ONDA).
@@ -235,11 +236,12 @@ onda_quadra([X|L1],[OSI|T]) :- (X < 0.5;
 
 
 
-/* Il predicato gen_punti_equi genera una lista di numeri equidistanti tra loro:
+/* Il predicato gen_punti_equi genera una lista di punti equidistanti tra loro:
    - il primo argomento è il numero di punti che si vuole generare;
    - il secondo argomento è il limite inferiore della lista di punti;
    - il terzo argomento è il limite superiore della lista di punti;
-   - il quarto argomento è la lista di punti equidistanti. */
+   - il quarto argomento è la lista di punti equidistanti. 
+   Per il calcolo dei punti si fa uso del predicato calc_punti.*/
 
 gen_punti_equi(0,_,_,[]).
 gen_punti_equi(N,INF,SUP,L) :- N > 0,

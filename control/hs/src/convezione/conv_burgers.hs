@@ -50,10 +50,11 @@ onda_dente_sega x = u t0 x nu
                          u t0 x nu         = -2*nu*((phi_primo t0 x nu) / (phi t0 x nu))+4
 
 
-{- La funzione main_convezione ... -}
+{- La funzione calc_convezione calcola l'integrazione numerica
+   dell'equazione di convezione lineare a una dimensione. -}
 
-main_convezione :: Int -> Double -> [Double]
-main_convezione nx dt | nx == 0 || nx == 1    = cond_iniziale nx onda_quadra lmt_inf lmt_sup
+calc_convezione :: Int -> Double -> [Double]
+calc_convezione nx dt | nx == 0 || nx == 1    = cond_iniziale nx onda_quadra lmt_inf lmt_sup
                       | otherwise             = tempo_conv (cond_iniziale nx onda_quadra lmt_inf lmt_sup) nt nx c dx dt
                             where
                               lmt_inf = 0.0                                     -- limite inferiore del dominio spaziale 
@@ -62,24 +63,63 @@ main_convezione nx dt | nx == 0 || nx == 1    = cond_iniziale nx onda_quadra lmt
                               dx      = lmt_sup / (fromIntegral(nx :: Int) - 1) -- distanza tra qualsiasi coppia di punti della griglia adiacenti 
                               c       = 1.0                                     -- velocità dell'onda 
 
-{- La funzione tempo_conv ... -}
+{- La funzione tempo_conv calcola numericamente l'integrale della
+   funzione rispetto al parametro temporale dt:
+   - il primo termine è il numero di passi temporali totali che la
+     funzione d'onda deve compiere; 
+   - il secondo termine è il numero di passi spaziali utilizzati dal
+     predicato conv_spazio;
+   - il terzo termine è la costante di velocità dell'onda;     
+   - il quarto termine è la lunghezza del passo spaziale;
+   - il quinto termine è la lunghezza del passo temporale;
+   - il sesto termine è la funzione d'onda ricalcolata;
+   - l' settimo termine è la funzione d'onda risultante.  -}
 
-tempo_conv :: [Double] -> Int -> Int -> Double -> Double -> Double -> [Double]
-tempo_conv onda 0 _ _ _ _     = onda
-tempo_conv onda nt nx c dx dt = tempo_conv ((head onda) : spazio_conv onda 1 c dx dt) (nt - 1) nx c dx dt
+tempo_conv :: Int -> Int -> Double -> Double -> Double -> [Double] -> [Double]
+tempo_conv 0 _ _ _ _ onda     = onda
+tempo_conv nt nx c dx dt onda = tempo_conv (nt - 1) nx c dx dt ((head onda) : spazio_conv 1 onda c dx dt) 
 
 
-{- La funzione spazio_conv ... -}
+{- La funzione spazio_conv calcola numericamente l'integrale della
+   funzione rispetto al parametro spaziale dx:
+   - il primo termine è il numero di passi temporali che la funzione
+     d'onda ha compiuto;
+   - il secondo termine è la costante di velocità dell'onda;      
+   - il terzo termine è la lunghezza del passo spaziale;
+   - il quarto termine è la lunghezza del passo temporale;
+   - il quinto termine è la funzione d'onda;
+   - il sesto termine è la funzione d'onda ricalcolata con il passo_
+     eulero  -}
 
-spazio_conv :: [Double] -> Int -> Double -> Double -> Double -> [Double]
-spazio_conv lx i c dx dt  | i == length lx - 1 = [passo_eulero]
-                          | otherwise          = (passo_eulero) : spazio_conv lx (i+1) c dx dt
+spazio_conv :: Int -> Double -> Double -> Double -> [Double] -> [Double] 
+spazio_conv i c dx dt lx  | i == length lx - 1 = [passo_eulero]
+                          | otherwise          = (passo_eulero) : spazio_conv (i+1) lx c dx dt
                                 where
                                   passo_eulero =  lx !! i - c * dt /dx *(lx !! i - lx !! (i-1))
 
 
 
-{- La funzione onda_quadra ... -}
+
+{- La funzione cond_iniziale calcola la condizione iniziale (una funzione)
+   per l'integrazione numerica dell'equazione di convezione e di Burgers:
+   - il primo argomento e' il numero di punti della griglia spaziale;
+   - il secondo argomento e' la funzione onda_quadra (onda_dente_sega) 
+     utilizzata per il calcolo delle omonime funzioni;
+   - il terzo argomento e' il limite inferiore del dominio spaziale;
+   - il quarto argomento e' il limite superiore del dominio spaziale; 
+   - il quinto argomento e' la funzione d'onda quadra (o a dente di
+     sega) calcolata. -}
+
+cond_iniziale :: Int -> (Double -> Double) -> Double -> Double -> [Double]
+cond_iniziale nx onda lmt_inf lmt_sup = [onda x | x <- lx]
+        where
+          lx = gen_punti_equi nx lmt_inf lmt_sup
+
+
+{- La funzione onda_quadra calcola la funzione d'onda quadra:
+   - il primo argomento è la lista di punti equidistanti del dominio
+     spaziale;
+   - il secondo argomento è la funzione d'onda calcolata. -}
 
 onda_quadra :: Double -> Double
 onda_quadra x | x >= 0.5 && x <= 1.0 = onda_sup
@@ -89,14 +129,13 @@ onda_quadra x | x >= 0.5 && x <= 1.0 = onda_sup
                        onda_inf = 1.0 -- valori assunti dalla parte bassa della funzione d'onda quadra
 
 
-{- La funzione cond_iniziale ... -}
 
-cond_iniziale :: Int -> (Double -> Double) -> Double -> Double -> [Double]
-cond_iniziale nx onda lmt_inf lmt_sup = [onda x | x <- lx]
-        where
-          lx = gen_punti_equi nx lmt_inf lmt_sup
-
-{- La funzione gen_punti_equi ... -}
+{- La funzione gen_punti_equi genera una lista di punti equidistanti tra loro:
+   - il primo argomento è il numero di punti che si vuole generare;
+   - il secondo argomento è il limite inferiore della lista di punti;
+   - il terzo argomento è il limite superiore della lista di punti;
+   - il quarto argomento è la lista di punti equidistanti.
+   Per il calcolo dei punti si fa uso della funzione calc_punti. -}
 
 gen_punti_equi :: Int -> Double -> Double -> [Double]
 gen_punti_equi nx _ _     = []
