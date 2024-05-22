@@ -1,0 +1,39 @@
+L’equazione per il moto fugoide con frizione è un sistema di equazioni differenziali ordinarie del primo ordine: 
+
+\begin{align}
+m \frac{dv}{dt} & = - W \sin\theta - D \\
+m v \, \frac{d\theta}{dt} & = - W \cos\theta + L
+\end{align}
+
+Per visualizzare le traiettorie di volo previste da questo modello, che dipendono sia dalla velocità di avanzamento v sia dall’angolo della traiettoria theta. La posizione dell’aliante su un piano verticale sarà determinata dalle coordinate (x,y): 
+
+\begin{align}
+x'(t) & = v \cos(\theta) \\
+y'(t) & = v \sin(\theta).
+\end{align}
+
+
+L’intero sistema di equazioni discretizzate con il metodo di Eulero è:
+
+\begin{align}
+v^{n+1} & = v^n + \Delta t \left(- g\, \sin\theta^n - \frac{C_D}{C_L} \frac{g}{v_t^2} (v^n)^2 \right) \\
+\theta^{n+1} & = \theta^n + \Delta t \left(- \frac{g}{v^n}\,\cos\theta^n + \frac{g}{v_t^2}\, v^n \right) \\
+x^{n+1} & = x^n + \Delta t \, v^n \cos\theta^n \\
+y^{n+1} & = y^n + \Delta t \, v^n \sin\theta^n.
+\end{align}
+
+Scritto in forma vettoriale risulta: 
+
+$$u'(t) = f(u)$$
+
+\begin{align}
+u & = \begin{pmatrix} v \\ \theta \\ x \\ y \end{pmatrix} & f(u) & = \begin{pmatrix} - g\, \sin\theta - \frac{C_D}{C_L} \frac{g}{v_t^2} v^2 \\ - \frac{g}{v}\,\cos\theta + \frac{g}{v_t^2}\, v \\ v\cos\theta \\ v\sin\theta \end{pmatrix}.
+\end{align}
+
+Le condizioni iniziali sono rappresentate dalle costanti di integrazione definite dal valore della derivata al tempo t = 0 :
+
+$$
+v(0) = v_0 \quad \text{and} \quad \theta(0) = \theta_0\\
+x(0) = x_0 \quad \text{and} \quad y(0) = y_0
+$$
+

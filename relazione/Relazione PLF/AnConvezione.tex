@@ -1,0 +1,35 @@
+L’equazione di convezione lineare unidimensionale è un’equazione differenziale alle derivate parziali: 
+
+\begin{equation}
+\frac{\partial u}{\partial t} + c \frac{\partial u}{\partial x} = 0
+\end{equation}
+
+Per la soluzione numerica di u(x,t) si sono utilizzati i pedici per denotare la posizione spaziale, come u$_i$, e gli apici per denotare l’istante temporale, come un : 
+
+$$
+\begin{matrix}
+& &\bullet & & \bullet & &  \bullet \\
+& &u^{n+1}_{i-1} & & u^{n+1}_i & & u^{n+1}_{i+1} \\
+& &\bullet & & \bullet & &  \bullet \\
+& &u^n_{i-1} & & u^n_i & & u^n_{i+1} \\
+& &\bullet & & \bullet & &  \bullet \\
+& &u^{n-1}_{i-1} & & u^{n-1}_i & & u^{n-1}_{i+1} \\
+\end{matrix}
+$$
+
+L’equazione per fornire la soluzione numerica del problema è data da:
+
+\begin{equation}
+u_i^{n+1} = u_i^n - c \frac{\Delta t}{\Delta x}(u_i^n-u_{i-1}^n)
+\end{equation}
+
+Le condizioni iniziali per una funzione d’onda quadra sono definite così:
+
+\begin{equation}
+u(x,0)=\begin{cases}2 & \text{where } 0.5\leq x \leq 1,\\
+1 & \text{everywhere else in } (0, 2)
+\end{cases}
+\end{equation}
+
+dove il dominio della soluzione numerica è definito in \textit{x} $\in$(0,2).
+Poniamo inoltre delle condizioni al contorno su \textit{x}: sia u = 1 quando \textit{x} = 0
