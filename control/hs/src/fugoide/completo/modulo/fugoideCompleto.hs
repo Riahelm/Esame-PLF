@@ -11,7 +11,7 @@ import DatiCompleti
     incremento temporale calcolato. 
 -}
 main_fugoide_completo :: Float -> [Float]
-main_fugoide_completo dt  = y0 : calc_moto (v0, theta0, x0, y0) dt (passiTemporali - 1)
+main_fugoide_completo dt  = y0 : calc_moto (v0, theta0, x0, y0) dt passiTemporali
    where
       v0                = vTrim           -- La velocita' iniziale, in questo caso quella di trim
       theta0            = 0.0             -- Angolo iniziale del velivolo
