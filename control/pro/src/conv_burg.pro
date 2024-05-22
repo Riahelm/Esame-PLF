@@ -33,17 +33,17 @@ calc_convezione(NX,DT,F) :- NX > 1,
 
 /* Il predicato tempo_burg calcola numericamente l'integrale della
    funzione rispetto al parametro temporale DT:
-   - il primo termine è il numero di passi temporali che la funzione
+   - il primo termine e' il numero di passi temporali che la funzione
      d'onda ha compiuto;
-   - il secondo termine è il numero di passi temporali totali che la
+   - il secondo termine e' il numero di passi temporali totali che la
      funzione d'onda deve compiere; 
-   - il terzo termine è il numero di passi spaziali utilizzati dal
+   - il terzo termine e' il numero di passi spaziali utilizzati dal
      predicato conv_spazio;
-   - il quarto termine è il coefficiente di diffusione;         
-   - il quinto termine è la lunghezza del passo spaziale;
-   - il sesto termine è la lunghezza del passo temporale;
-   - il settimo termine è la funzione d'onda ricalcolata;
-   - l' ottavo termine è la funzione d'onda risultante. */
+   - il quarto termine e' il coefficiente di diffusione;         
+   - il quinto termine e' la lunghezza del passo spaziale;
+   - il sesto termine e' la lunghezza del passo temporale;
+   - il settimo termine e' la funzione d'onda ricalcolata;
+   - l' ottavo termine e' la funzione d'onda risultante. */
 
 tempo_burg(NT,NT,_,_,_,_,F,F).
 tempo_burg(I,NT,NX1,NU,DX,DT,ONDA,F) :- I < NT,
@@ -56,14 +56,14 @@ tempo_burg(I,NT,NX1,NU,DX,DT,ONDA,F) :- I < NT,
 
 /* Il predicato spazio_burg calcola numericamente l'integrale della
    funzione rispetto al parametro spaziale DX:
-   - il primo termine è l'indice per accedere agli elementi della 
+   - il primo termine e' l'indice per accedere agli elementi della 
      lista, viene utlizzato da passo_eulero; 
-   - il secondo termine è il numero di punti della funzione; 
-   - il terzo termine è il coefficiente di diffusione;  
-   - il quarto termine è la lunghezza del passo spaziale;
-   - il quinto termine è la lunghezza del passo temporale;
-   - il sesto termine è la funzione d'onda;
-   - il settimo termine è la funzione d'onda ricalcolata con il passo_
+   - il secondo termine e' il numero di punti della funzione; 
+   - il terzo termine e' il coefficiente di diffusione;  
+   - il quarto termine e' la lunghezza del passo spaziale;
+   - il quinto termine e' la lunghezza del passo temporale;
+   - il sesto termine e' la funzione d'onda;
+   - il settimo termine e' la funzione d'onda ricalcolata con il passo_
      eulero e bordo_sup. */
 
 spazio_burg(NX1,NX1,NU,DX,DT,ONDA,[F]) :- bordo_sup(ONDA,NU,DX,DT,F).
@@ -74,11 +74,11 @@ spazio_burg(I,NX1,NU,DX,DT,ONDA,[E|F]) :- I < NX1,
 
 
 /* Il predicato bordo_inf calcola le condizioni di bordo inferiore della funzione:
-   - il primo termine è la funzione d'onda;
-   - il secondo termine è il coefficiente di diffusione;
-   - il terzo termine è la lunghezza del passo spaziale;
-   - il quarto termine è la lunghezza del passo temporale;
-   - il quinto termine è il valore del punto estremo inferiore della funzione.
+   - il primo termine e' la funzione d'onda;
+   - il secondo termine e' il coefficiente di diffusione;
+   - il terzo termine e' la lunghezza del passo spaziale;
+   - il quarto termine e' la lunghezza del passo temporale;
+   - il quinto termine e' il valore del punto estremo inferiore della funzione.
    L'uso di last e testa consente di selezionare gli elementi in coda e in testa
    alla funzione per il calcolo della condizione */
    
@@ -87,11 +87,11 @@ bordo_inf([X|LX],NU,DX,DT,BI) :- last(LX,C),
                                  BI is X - X*DT/DX * (X - C) + NU*DT/DX^2 * (T - 2*X + C).
 
 /* Il predicato bordo_sup calcola le condizioni di bordo superiore della funzione:
-   - il primo termine è la funzione d'onda;
-   - il secondo termine è il coefficiente di diffusione;
-   - il terzo termine è la lunghezza del passo spaziale;
-   - il quarto termine è la lunghezza del passo temporale;
-   - il quinto termine è il valore del punto estremo superiore della funzione.
+   - il primo termine e' la funzione d'onda;
+   - il secondo termine e' il coefficiente di diffusione;
+   - il terzo termine e' la lunghezza del passo spaziale;
+   - il quarto termine e' la lunghezza del passo temporale;
+   - il quinto termine e' il valore del punto estremo superiore della funzione.
    L'uso di last, testa e penultimo consente di selezionare l'ultimo, il primo e
    il penultimo elemento della funzione per il calcolo della condizione */
 
@@ -101,12 +101,12 @@ bordo_sup(ONDA,NU,DX,DT,BS) :- last(ONDA,C),
                                BS is C - C*DT/DX * (C - P) + NU*DT/DX^2 * (T - 2*C + P).
 
 /* Il predicato passo_eulero effettua il passo di Eulero:
-   - il primo termine è la funzione d'onda;
-   - il secondo termine è l'indice dell'elemento corrente della lista;
-   - il terzo termine è il coefficiente di diffusione;
-   - il quarto termine è la lunghezza del passo spaziale;
-   - il quinto termine è la lunghezza del passo temporale;
-   - il sesto termine è il valore risultante del punto applicato il passo di eulero.
+   - il primo termine e' la funzione d'onda;
+   - il secondo termine e' l'indice dell'elemento corrente della lista;
+   - il terzo termine e' il coefficiente di diffusione;
+   - il quarto termine e' la lunghezza del passo spaziale;
+   - il quinto termine e' la lunghezza del passo temporale;
+   - il sesto termine e' il valore risultante del punto applicato il passo di eulero.
    L'uso del predicato nth consente di accedere agli elementi della lista tramite
    indice. Gli elementi sono indicizzati da 1 a N. */
 
@@ -120,10 +120,10 @@ passo_eulero_burg(ONDA,I0,NU,DX,DT,EU) :- I1 is I0 + 1,
 
 /* Il predicato cond_iniziale_burg calcola la condizione iniziale (una 
    funzione) per il calcolo numerico dell'equazione di Burgers:
-   - il primo argomento è il numero di punti della griglia spaziale;
-   - il secondo argomento è il limite inferiore del dominio spaziale;
-   - il terzo argomento è il limite superiore del dominio spaziale; 
-   - il quarto argomento è la funzione "onda a dente di sega". */
+   - il primo argomento e' il numero di punti della griglia spaziale;
+   - il secondo argomento e' il limite inferiore del dominio spaziale;
+   - il terzo argomento e' il limite superiore del dominio spaziale; 
+   - il quarto argomento e' la funzione "onda a dente di sega". */
 
 cond_iniziale_burg(NX,INF,SUP,ONDA) :- gen_punti_equi(NX,INF,SUP,L),
                                        onda_dente_sega(L,ONDA).
@@ -131,9 +131,9 @@ cond_iniziale_burg(NX,INF,SUP,ONDA) :- gen_punti_equi(NX,INF,SUP,L),
 
 /* Il predicato onda_dente_sega calcola la funzione d'onda a dente di 
     sega 'u':
-   - il primo argomento è la lista di punti equidistanti del dominio
+   - il primo argomento e' la lista di punti equidistanti del dominio
      spaziale;
-   - il secondo argomento è la funzione d'onda calcolata. 
+   - il secondo argomento e' la funzione d'onda calcolata. 
    Per il calcolo dell'onda si fa uso dei predicati phi e phi_primo
    che sono rispettavamente una funzione e la sua derivata. */
 
@@ -153,17 +153,17 @@ phi(X,T0,NU,F) :- F is exp(-((X-4*T0)^2)/(4*NU*(T0+1))) + exp(-((X-4*T0-2*pi)^2)
 
 /* Il predicato tempo_conv calcola numericamente l'integrale della
    funzione rispetto al parametro temporale DT:
-   - il primo termine è il numero di passi temporali che la funzione
+   - il primo termine e' il numero di passi temporali che la funzione
      d'onda ha compiuto;
-   - il secondo termine è il numero di passi temporali totali che la
+   - il secondo termine e' il numero di passi temporali totali che la
      funzione d'onda deve compiere; 
-   - il terzo termine è il numero di passi spaziali utilizzati dal
+   - il terzo termine e' il numero di passi spaziali utilizzati dal
      predicato conv_spazio;
-   - il quarto termine è la costante di velocità dell'onda;     
-   - il quinto termine è la lunghezza del passo spaziale;
-   - il sesto termine è la lunghezza del passo temporale;
-   - il settimo termine è la funzione d'onda ricalcolata;
-   - l' ottavo termine è la funzione d'onda risultante. */
+   - il quarto termine e' la costante di velocità dell'onda;     
+   - il quinto termine e' la lunghezza del passo spaziale;
+   - il sesto termine e' la lunghezza del passo temporale;
+   - il settimo termine e' la funzione d'onda ricalcolata;
+   - l' ottavo termine e' la funzione d'onda risultante. */
 
 tempo_conv(NT,NT,_,_,_,_,F,F).
 tempo_conv(I,NT,NX1,C,DX,DT,ONDA,F) :- I < NT,
@@ -176,15 +176,15 @@ tempo_conv(I,NT,NX1,C,DX,DT,ONDA,F) :- I < NT,
 
 /* Il predicato spazio_conv calcola numericamente l'integrale della
    funzione rispetto al parametro spaziale DX:
-   - il primo termine è il numero di passi temporali che la funzione
+   - il primo termine e' il numero di passi temporali che la funzione
      d'onda ha compiuto;
-   - il secondo termine è il numero di passi temporali totali che la
+   - il secondo termine e' il numero di passi temporali totali che la
      funzione d'onda deve compiere; 
-   - il terzo termine è la costante di velocità dell'onda;      
-   - il quarto termine è la lunghezza del passo spaziale;
-   - il quinto termine è la lunghezza del passo temporale;
-   - il sesto termine è la funzione d'onda;
-   - il settimo termine è la funzione d'onda ricalcolata con passo_
+   - il terzo termine e' la costante di velocità dell'onda;      
+   - il quarto termine e' la lunghezza del passo spaziale;
+   - il quinto termine e' la lunghezza del passo temporale;
+   - il sesto termine e' la funzione d'onda;
+   - il settimo termine e' la funzione d'onda ricalcolata con passo_
      eulero_conv */
 
 spazio_conv(NX1,NX1,_,_,_,_,[]).
@@ -197,12 +197,12 @@ spazio_conv(I,NX1,C,DX,DT,[E0|LX],[E|T]) :- I < NX1,
 
 
 /* Il predicato passo_eulero_conv effettua il passo di Eulero:
-   - il primo termine è l'elemento corrente della lista;
-   - il secondo termine è l'elemento successivo a quello corrente della lista;
-   - il terzo termine è la costante di velocità dell'onda;
-   - il quarto termine è la lunghezza del passo spaziale;
-   - il quinto termine è la lunghezza del passo temporale;
-   - il sesto termine è il valore risultante del punto applicato il passo di eulero.
+   - il primo termine e' l'elemento corrente della lista;
+   - il secondo termine e' l'elemento successivo a quello corrente della lista;
+   - il terzo termine e' la costante di velocità dell'onda;
+   - il quarto termine e' la lunghezza del passo spaziale;
+   - il quinto termine e' la lunghezza del passo temporale;
+   - il sesto termine e' il valore risultante del punto applicato il passo di eulero.
 */
 
 passo_eulero_conv(E0,E1,C,DX,DT,EU) :- EU is E1 - C * (DT/DX) * (E1 - E0).
@@ -220,9 +220,9 @@ cond_iniziale_conv(NX,INF,SUP,ONDA) :- gen_punti_equi(NX,INF,SUP,L),
 
 
 /* Il predicato onda_quadra calcola la funzione d'onda quadra:
-   - il primo argomento è la lista di punti equidistanti del dominio
+   - il primo argomento e' la lista di punti equidistanti del dominio
      spaziale;
-   - il secondo argomento è la funzione d'onda calcolata. */
+   - il secondo argomento e' la funzione d'onda calcolata. */
 
 onda_quadra([],[]).
 onda_quadra([X|L1],[OSI|T]) :- X >= 0.5,
@@ -237,10 +237,10 @@ onda_quadra([X|L1],[OSI|T]) :- (X < 0.5;
 
 
 /* Il predicato gen_punti_equi genera una lista di punti equidistanti tra loro:
-   - il primo argomento è il numero di punti che si vuole generare;
-   - il secondo argomento è il limite inferiore della lista di punti;
-   - il terzo argomento è il limite superiore della lista di punti;
-   - il quarto argomento è la lista di punti equidistanti. 
+   - il primo argomento e' il numero di punti che si vuole generare;
+   - il secondo argomento e' il limite inferiore della lista di punti;
+   - il terzo argomento e' il limite superiore della lista di punti;
+   - il quarto argomento e' la lista di punti equidistanti. 
    Per il calcolo dei punti si fa uso del predicato calc_punti.*/
 
 gen_punti_equi(0,_,_,[]).
