@@ -8,13 +8,14 @@ import CondizioniIniziali
 
 {- Funzione per il calcolo dell'equazione di convezione lineare unidimensionale -}
 main_convezione :: Int -> Double -> [Double]
-main_convezione nx dt = calcConvTempo (condizioneIniziale nx calcOndaQuadra lmtInf lmtSup) nt nx c dx dt
+main_convezione nx dt | nx == 0 || nx == 1    = condizioneIniziale nx calcOndaQuadra lmtInf lmtSup
+                      | otherwise             = calcConvTempo (condizioneIniziale nx calcOndaQuadra lmtInf lmtSup) nt nx c dx dt
                             where
-                              lmtInf = 0.0                                -- limite inferiore del dominio spaziale 
-                              lmtSup = 2.0                                -- limite superiore del dominio spaziale
-                              nt = 25                                     -- numero complessivo di passi temporali che deve effettuare l'algoritmo 
-                              dx = lmtSup / (fromIntegral(nx :: Int) - 1) -- distanza tra qualsiasi coppia di punti della griglia adiacenti 
-                              c  = 1.0                                    -- velocità dell'onda 
+                              lmtInf = 0.0                                    -- limite inferiore del dominio spaziale 
+                              lmtSup = 2.0                                    -- limite superiore del dominio spaziale
+                              nt     = 25                                     -- numero complessivo di passi temporali che deve effettuare l'algoritmo 
+                              dx     = lmtSup / (fromIntegral(nx :: Int) - 1) -- distanza tra qualsiasi coppia di punti della griglia adiacenti 
+                              c      = 1.0                                    -- velocità dell'onda 
 
 {- Funzione per il calcolo numerico dell'integrazione dell'equazione di convezione lineare unidimensionale rispetto al tempo:
     *Caso base: se il numero di passi temporali è pari a zero, allora si restituisce la funzione d'onda quadra.
