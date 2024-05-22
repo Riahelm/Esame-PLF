@@ -11,12 +11,12 @@ import Coppia
                         incremento temporale calcolato. 
 -}
 main_fugoide_semplice :: Float -> [Float]
-main_fugoide_semplice dt  = z0 : calc_moto (z0, b0) dt passiTemporali
+main_fugoide_semplice dt  = z0 : calc_moto (z0, b0) dt passi_temporali
     where
         z0              = 100.0           -- Altitudine iniziale del velivolo
-        b0              = 10.0            -- Angolo iniziale del velivolo
+        b0              = 10.0            -- Velocita' iniziale del velivolo
         tempo           = 100.0           -- Numero di secondi di simulazione
-        passiTemporali  = floor(tempo/dt) -- Numero di punti in cui effettuare il calcolo
+        passi_temporali = floor(tempo/dt) -- Numero di punti in cui effettuare il calcolo
 
 {-  Funzione per il calcolo numerico dell'integrazione del moto fugoide 
         Dati di input:  una coppia di numeri floating-point, questi sono altitudine e velocita' del velivolo,
