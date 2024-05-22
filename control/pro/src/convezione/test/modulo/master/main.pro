@@ -1,5 +1,11 @@
 /* Predicato MAIN */
-calc_convezione(NX,DT,F) :- NT  is 25,
+calc_convezione(NX,_,F)  :- (NX == 0;
+                            NX == 1), 
+                            INF is 0.0,
+		            SUP is 2.0,
+                            cond_iniziale_conv(NX,INF,SUP,F).
+calc_convezione(NX,DT,F) :- NX > 1,
+                            NT  is 25,
                             NX1 is NX - 1,
                             C   is 1.0,
                             INF is 0.0,

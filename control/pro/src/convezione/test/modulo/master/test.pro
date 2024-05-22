@@ -15,7 +15,7 @@ main :-
    %                                                                              write(L1), nl,
     write('gen_punti_equi( 1,   0,  10, L2). '), gen_punti_equi(1,0,10,L2),                  nl,
                                                                                   write(L2), nl,
-    write('gen_punti_equi(10,   1,  10, L3). '), gen_punti_equi(10,1,10,L3),                 nl,
+    write('gen_punti_equi( 5,   0,   1, L3). '), gen_punti_equi(05,0,01,L3),                 nl,
                                                                                   write(L3), nl, 
     nl,
     write('SUP is 2.0, gen_punti_equi(41,  0.0,  SUP, L4).                               '), 
@@ -57,7 +57,10 @@ main :-
 
     write('----------------------------------BENVENUTO-----------------------------------'), nl,
     write('Calcolo della equazione di convezione lineare a una dimensione.               '), nl,
-    acquisisci_dato_nx('Digita il numero di punti totali della funzione di onda: ',NX2),     nl,
-    acquisisci_dato_dt('Digita la lunghezza del passo temporale: ',DT2),                     nl,
+   %acquisisci_dato_nx('Digita il numero di punti totali della funzione di onda: ',NX2),     nl,
+   %acquisisci_dato_dt('Digita la lunghezza del passo temporale: ',DT2),                     nl,
+    acquisisci_dato_conv('Digita il numero di punti totali della funzione di onda: ',
+                         'Digita la lunghezza del passo temporale: ', 
+                          NX2,DT2),                                                          nl,
     calc_convezione(NX2,DT2,ONDA2),                                            write(ONDA2), nl.                                                      
 

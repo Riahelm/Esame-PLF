@@ -5,8 +5,8 @@
    - il terzo argomento è il limite superiore della lista di punti;
    - il quarto argomento è la lista di punti equidistanti. */
 
-gen_punti_equi(N,INF,SUP,L) :- integer(N),
-                               N >= 0,
+gen_punti_equi(0,_,_,[]). 
+gen_punti_equi(N,INF,SUP,L) :- N > 0,
                                DST is SUP - INF,
                                N1  is N - 1, 
                                calc_punti(0,N1,INF,DST,L).
