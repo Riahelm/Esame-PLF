@@ -5,17 +5,19 @@ import ParametriBurg
 import CondInizialiBurg
 import CondizioniIniziali
 
+
 {- Funzione per il calcolo dell'equazione di Burgers unidimensionale -}
 main_burgers :: Int -> [Double]
-main_burgers nx = calcConvTempo (condizioneIniziale nx calcOndaDenteSega lmtInf lmtSup) nt nx nu dx dt
+main_burgers nx | nx == 0 || nx == 1 = condizioneIniziale nx calcOndaDenteSega lmtInf lmtSup
+                | otherwise          = calcConvTempo (condizioneIniziale nx calcOndaDenteSega lmtInf lmtSup) nt nx nu dx dt
                      where
-                       lmtInf = 0.0                                -- limite inferiore del dominio spaziale 
-                       lmtSup = 2.0 * pi                           -- limite superiore del dominio spaziale 
-                       dx = lmtSup / (fromIntegral(nx :: Int) - 1) -- distanza tra qualsiasi coppia di punti della griglia adiacenti 
-                       sigma = 0.1                                 -- costante di Courant-Friedrichs_Lewy (CFL)
-                       dt = sigma * dx**2 / nu                     -- lunghezza del passo temporale 
-                       tFine = 0.6                                 -- tempo totale di simulazione 
-                       nt = truncate(tFine / dt)                   -- numero complessivo di passi temporali che deve effettuare l'algoritmo 
+                       lmtInf = 0.0                                    -- limite inferiore del dominio spaziale 
+                       lmtSup = 2.0 * pi                               -- limite superiore del dominio spaziale 
+                       dx     = lmtSup / (fromIntegral(nx :: Int) - 1) -- distanza tra qualsiasi coppia di punti della griglia adiacenti 
+                       sigma  = 0.1                                    -- costante di Courant-Friedrichs_Lewy (CFL)
+                       dt     = sigma * dx**2 / nu                     -- lunghezza del passo temporale 
+                       tFine  = 0.6                                    -- tempo totale di simulazione 
+                       nt     = truncate(tFine / dt)                   -- numero complessivo di passi temporali che deve effettuare l'algoritmo 
 
 
 {- Funzione per il calcolo numerico dell'integrazione dell'equazione di Burgers unidimensionale rispetto al tempo:
