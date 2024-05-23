@@ -119,7 +119,7 @@ acquisisci_dato_nx s = do putStrLn s
 
 
 {- La funzione acquisisci_dato_conv viene utilizzata per validare 
-   i dati in ingresso dell funzione main_convezione. -}
+   i dati in ingresso della funzione main_convezione. -}
 
 acquisisci_dato_conv :: String -> String-> IO (String, String)
 acquisisci_dato_conv s' s'' = do putStrLn s'
