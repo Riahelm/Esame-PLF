@@ -1,93 +1,90 @@
 
 main :-
     nl,
-    write ('Progetto della sessione autunnale del corso Programmazione Logica e Funzionale'), nl,
-    write ('Anno 2023/2024'), nl,
-    write ('Corso tenuto dal prof. Marco Bernardo'), nl,
-    write ('Progetto realizzato da: Barzotti Nicolas e Ramagnano Gabriele'), nl, nl, nl,
+    write('Progetto della sessione autunnale del corso Programmazione Logica e Funzionale'), nl,
+    write('Anno 2023/2024'), nl,
+    write('Corso tenuto dal prof. Marco Bernardo'), nl,
+    write('Progetto realizzato da: Barzotti Nicolas e Ramagnano Gabriele'), nl, nl, nl,
 
-    write ('--------------------------------------------------------------------'), nl,
-    write ('| Calcolo del moto fugoide senza attrito                           |'), nl,
-    write ('| Parametri iniziali:                                              |'), nl,
-    write ('| altitudine iniziale      = 100m,                                 |'), nl,
-    write ('| velocita\'  iniziale       = 10m/s.                              |'), nl,
-    write ('| Parametri di simulazione:                                        |'), nl,
-    write ('| secondi di simulazione   = 100s,                                 |'), nl,
-    write ('| costante gravitazionale  = 9.81m/(s^2).                          |'), nl,
-    write ('| Parametro richiesto:                                             |'), nl,
-    write ('| passo temporale, determina la distanza temporale                 |'), nl,
-    write ('| tra due punti di simulazione, un valore basso                    |'), nl,
-    write ('| permette una simulazione piu\' accurata                          |'), nl,
-    write ('--------------------------------------------------------------------'), nl,
+    write('--------------------------------------------------------------------'), nl,
+    write('| Calcolo del moto fugoide senza attrito                           |'), nl,
+    write('| Parametri iniziali:                                              |'), nl,
+    write('| altitudine iniziale      = 100m,                                 |'), nl,
+    write('| velocita\'  iniziale      = 10m/s.                                |'), nl,
+    write('| Parametri di simulazione:                                        |'), nl,
+    write('| secondi di simulazione   = 100s,                                 |'), nl,
+    write('| costante gravitazionale  = 9.81m/(s^2).                          |'), nl,
+    write('| Parametro richiesto:                                             |'), nl,
+    write('| passo temporale, determina la distanza temporale                 |'), nl,
+    write('| tra due punti di simulazione, un valore basso                    |'), nl,
+    write('| permette una simulazione piu\' accurata                           |'), nl,
+    write('--------------------------------------------------------------------'), nl,
+    acquisisci_dato_dt('Digita la lunghezza del passo temporale: ',DT),            nl,
+    calc_fugoide_semplice(DT, FS),
+    write(FS),                                                                     nl,
 
-    write('Digita la lunghezza del passo temporale: '), nl,
-    acquisisci_dato(DT),
-    main_fugoide_semplice(DT, FS),
-    mostra_dati_lista(FS),
+    write('--------------------------------------------------------------------'), nl,
+    write('| Calcolo del moto fugoide con attrito                             |'), nl,
+    write('| Parametri iniziali:                                              |'), nl,
+    write('| velocita\' iniziale                    = velocita\' di trim,       |'), nl,
+    write('| angolo iniziale                       = 0rad,                    |'), nl,
+    write('| spostamento laterale  iniziale        = 0m,                      |'), nl,
+    write('| spostamento verticale iniziale        = 1000m.                   |'), nl,
+    write('| Parametri di simulazione:                                        |'), nl,
+    write('| secondi di simulazione                = 100s,                    |'), nl,
+    write('| velocita\' di trim                     = 30m/s,                   |'), nl,
+    write('| costante gravitazionale               = 9.81m/(s^2),             |'), nl,
+    write('| coefficiente di resistenza dell aria  = 0.025,                   |'), nl,
+    write('| coefficiente di portanza              = 1N.                      |'), nl,
+    write('| Parametro richiesto:                                             |'), nl,
+    write('| passo temporale, determina la distanza temporale                 |'), nl,
+    write('| tra due punti di simulazione, un valore basso                    |'), nl,
+    write('| permette una simulazione piu\' accurata                           |'), nl,
+    write('--------------------------------------------------------------------'), nl,
+    acquisisci_dato_dt('Digita la lunghezza del passo temporale: ',DT1),           nl,
+    calc_fugoide_completo(DT1, FC),
+    write(FC),                                                                     nl,
 
-    write ('--------------------------------------------------------------------'), nl,
-    write ('| Calcolo del moto fugoide con attrito                             |'), nl,
-    write ('| Parametri iniziali:                                              |'), nl,
-    write ('| velocita\' iniziale                    = velocita\' di trim,     |'), nl,
-    write ('| angolo iniziale                       = 0rad,                    |'), nl,
-    write ('| spostamento laterale  iniziale        = 0m,                      |'), nl,
-    write ('| spostamento verticale iniziale        = 1000m,                   |'), nl,
-    write ('| Parametri di simulazione:                                        |'), nl,
-    write ('| secondi di simulazione                = 100s,                    |'), nl,
-    write ('| velocita\' di trim                     = 30m/s,                  |'), nl,
-    write ('| costante gravitazionale               = 9.81m/(s^2),             |'), nl,
-    write ('| coefficiente di resistenza dell aria  = 0.025,                   |'), nl,
-    write ('| coefficiente di portanza              = 1N.                      |'), nl,
-    write ('| Parametro richiesto:                                             |'), nl,
-    write ('| passo temporale, determina la distanza temporale                 |'), nl,
-    write ('| tra due punti di simulazione, un valore basso                    |'), nl,
-    write ('| permette una simulazione piu\' accurata                          |'), nl,
-    write ('--------------------------------------------------------------------'), nl,
-    write ('Digita la lunghezza del passo temporale: '), nl,
-    acquisisci_dato(DT),
-    main_fugoide_completo(DT, FC),
-    mostra_dati_lista(FC),
+    write('--------------------------------------------------------------------'), nl,
+    write('| Calcolo dell\'equazione di convezione lineare a una dimensione    |'), nl,
+    write('| Parametri iniziali:                                              |'), nl,
+    write('| limite superiore del dominio spaziale    = 2.0,                  |'), nl,
+    write('| limite inferiore del dominio spaziale    = 0.0,                  |'), nl, 
+    write('| valore della parte alta della funzione   = 2.0,                  |'), nl, 
+    write('| valore della parte bassa della funzione  = 1.0.                  |'), nl,
+    write('| Parametri di simulazione:                                        |'), nl,
+    write('| numero di passi temporali da effettuare  = 25,                   |'), nl, 
+    write('| velocita\' dell\'onda                      = 1.0.                  |'), nl, 
+    write('| Parametri richiesti all\'utente:                                  |'), nl, 
+    write('| numero di punti che compongono la funzione d\'onda,               |'), nl,
+    write('| un valore alto permette una simulazione piu\' accurata.           |'), nl,
+    write('| Passo temporale, determina la distanza temporale                 |'), nl,
+    write('| tra due punti di simulazione, un valore basso                    |'), nl,
+    write('| permette una simulazione piu\' accurata                           |'), nl,
+    write('--------------------------------------------------------------------'), nl,
+    acquisisci_dati_conv('Digita il numero di punti totali della funzione di onda: ',
+                         'Digita la lunghezza del passo temporale: ',
+                          NXC,DT2),                                                nl,
+    calc_convezione(NXC,DT2,CONV),
+    write(CONV),                                                                   nl,
 
-    write ('--------------------------------------------------------------------'), nl,
-    write ('| Calcolo dell\'equazione di convezione lineare a una dimensione   |'), nl,
-    write ('| Parametri iniziali:                                              |'), nl,
-    write ('| limite superiore del dominio spaziale    = 2.0,                  |'), nl,
-    write ('| limite inferiore del dominio spaziale    = 0.0,                  |'), nl, 
-    write ('| valore della parte alta della funzione   = 2.0,                  |'), nl, 
-    write ('| valore della parte bassa della funzione  = 1.0.                  |'), nl,
-    write ('| Parametri di simulazione:                                        |'), nl,
-    write ('| numero di passi temporali da effettuare  = 25 ,                  |'), nl, 
-    write ('| velocita\' dell\'onda                      = 1.0.                |'), nl, 
-    write ('| Parametri richiesti all\'utente:                                 |'), nl, 
-    write ('| numero di punti che compongono la funzione d\'onda,              |'), nl,
-    write ('| un valore alto permette una simulazione piu\' accurata.          |'), nl,
-    write ('| Passo temporale, determina la distanza temporale                 |'), nl,
-    write ('| tra due punti di simulazione, un valore basso                    |'), nl,
-    write ('| permette una simulazione piu\' accurata                          |'), nl,
-    write ('--------------------------------------------------------------------'), nl,
-    write ('Digita il numero di punti totali della funzione di onda: '),
-    acquisisci_dato(NX),
-    write ('Digita la lunghezza del passo temporale della funzione di onda: '),
-    acquisisci_dato(DT),
-    main_convezione(DT, NX, CONV),
-    mostra_dati_lista(CONV),
 
-    write ('--------------------------------------------------------------------'), nl,
-    write ('|Calcolo dell\'equazione di Burgers a una dimensione               |'), nl,
-    write ('| Parametri iniziali:                                              |'), nl,
-    write ('| limite superiore del dominio spaziale    = 2.0 * pi,             |'), nl,
-    write ('| limite inferiore del dominio spaziale    = 0.0.                  |'), nl, 
-    write ('| Parametri di simulazione:                                        |'), nl,
-    write ('| tempo finale di simulazione              = 0.6s,                 |'), nl, 
-    write ('| coefficiente di diffusione               = 1.0m^2/s,             |'), nl, 
-    write ('| costante di Courant-Friedrichs-Lewy      = 0.1.                  |'), nl, 
-    write ('| Parametri richiesti all\'utente:                                 |'), nl, 
-    write ('| numero di punti che compongono la funzione d\'onda               |'), nl,
-    write ('--------------------------------------------------------------------'), nl,
-    write ('Digita il numero di punti totali della funzione di onda: '), 
-    acquisisci_dato(NX),
-    main_burgers(NX, BURG),
-    mostra_dati_lista(BURG),
+    write('--------------------------------------------------------------------'), nl,
+    write('|Calcolo dell\'equazione di Burgers a una dimensione                |'), nl,
+    write('| Parametri iniziali:                                              |'), nl,
+    write('| limite superiore del dominio spaziale    = 2.0 * pi,             |'), nl,
+    write('| limite inferiore del dominio spaziale    = 0.0.                  |'), nl, 
+    write('| Parametri di simulazione:                                        |'), nl,
+    write('| tempo finale di simulazione              = 0.6s,                 |'), nl, 
+    write('| coefficiente di diffusione               = 1.0m^2/s,             |'), nl, 
+    write('| costante di Courant-Friedrichs-Lewy      = 0.1.                  |'), nl, 
+    write('| Parametri richiesti all\'utente:                                  |'), nl, 
+    write('| numero di punti che compongono la funzione d\'onda                |'), nl,
+    write('--------------------------------------------------------------------'), nl,
+    acquisisci_dato_nxb('Digita il numero di punti totali della funzione di onda: ',
+                                                                            NXB),  nl,    
+    calc_burgers(NXB,BURG),
+    write(BURG).
 
 /* Inizio sezione validazione input */
 
@@ -98,15 +95,15 @@ main :-
      cosa deve essere acquisito;
    - Il secondo è il numero di punti totali della funzione. */
 
-   acquisisci_dato_nx(MSG,NX) :- write(MSG),
-                                 read(NXV),
-                                 integer(NXV),
-                                 NXV >= 0,
-                                 NX is NXV,
-                                 !;     
-                                 write('Acquisizione errata!'), nl,
-                                 write('Il valore deve essere un numero naturale.'), nl,
-                                 acquisisci_dato_nx(MSG,NX).
+   acquisisci_dato_nxb(MSG,NX) :- write(MSG),
+                                  read(NXV),
+                                  integer(NXV),
+                                  NXV >= 0,
+                                  NX is NXV,
+                                  !;     
+                                  write('Acquisizione errata!'), nl,
+                                  write('Il valore deve essere un numero naturale.'), nl,
+                                  acquisisci_dato_nxb(MSG,NX).
 
 
 /* Il predicato acquisisci_dato_dt acquisisce l'input dell'utente 
@@ -125,14 +122,14 @@ acquisisci_dato_dt(MSG,DT) :- write(MSG),
                               acquisisci_dato_dt(MSG,DT).
 
 
-acquisisci_dato_conv(MSG1,MSG2,NX,DT) :- write(MSG1),
+acquisisci_dati_conv(MSG1,MSG2,NX,DT) :- write(MSG1),
                                          read(NXV),
                                          integer(NXV),
                                          acquisisci_dato_nxc(NXV,MSG2,NX,DT),
                                          !;     
                                          write('Acquisizione errata!'), nl,
                                          write('Il valore deve essere un numero naturale.'), nl,
-                                         acquisisci_dato_conv(MSG1,MSG2,NX,DT).
+                                         acquisisci_dati_conv(MSG1,MSG2,NX,DT).
 
 acquisisci_dato_nxc(NX,_,NX,_)    :- (NX == 0;
                                       NX == 1).
@@ -240,10 +237,10 @@ al tempo t_n ed un opportuno passo temporale:
 - il terzo argomento e' lo spostamento laterale del velivolo;
 - il quarto argomento e' lo spostamento verticale del velivolo;
 - il quinto argomento e' la lunghezza del passo temporale dt;
-- il sesto argomento e' la velocita' del velivolo; 
-- il settimo argomento e' l'angolo del velivolo;
-- il ottavo argomento e' lo spostamento laterale del velivolo;
-- il nono argomento e' lo spostamento verticale del velivolo. */
+- il sesto argomento e' la velocita' del velivolo ricalcolata; 
+- il settimo argomento e' l'angolo del velivolo ricalcolato;
+- il ottavo argomento e' lo spostamento laterale del velivolo ricalcolato;
+- il nono argomento e' lo spostamento verticale del velivolo ricalcolato. */
 
 passo_eulero(V,THETA,X,Y,DT,V1,THETA1,X1,Y1) :- rhs(V,THETA,VT,THETAT,XT,YT),
                                                 V1      is (V + (VT * DT)),
@@ -257,8 +254,8 @@ moto fugoide:
 - il secondo argomento e' l'angolazione del velivolo;
 - il terzo argomento   e' la velocita' del velivolo ricalcolata;
 - il quarto argomento  e' l'angolazione del velivolo ricalcolata;
-- il quinto argomento  e' lo spostamento laterale del velivolo;
-- il sesto argomento   e' lo spostamento verticale del velivolo. */
+- il quinto argomento  e' lo spostamento laterale del velivolo ricalcolato;
+- il sesto argomento   e' lo spostamento verticale del velivolo ricalcolato. */
 
 rhs(V,THETA,V1,THETA1,X1,Y1) :-  CG is 9.81,     /* Costante gravitazionale terrestre */
                                  CR is 0.025,    /* Coefficiente di resistenza all'aria */

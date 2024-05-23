@@ -8,7 +8,7 @@ main :-
     nl, 
     nl,
     write('Calcolo del moto di fugoide senza attrito'),   	                          nl,
-    acquisisci_dato_dt('Digita la lunghezza del passo temporale: ',DT1),                   nl,
+    acquisisci_dato_dt('Digita la lunghezza del passo temporale: ',DT1),                  nl,
     main_fugoide_semplice(DT1, FS),
     write(FS),
     nl,
