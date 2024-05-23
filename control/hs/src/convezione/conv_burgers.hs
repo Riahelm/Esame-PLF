@@ -1,14 +1,18 @@
 
 
 {- coefficiente di diffusione -}
-
 nu :: Double
 nu = 0.07  
 
-{- La funzione main_burgers ... -}
+{- La funzione calc_burgers calcola l'integrazione numerica
+   dell'equazione di burgers a una dimensione:
+   - il primo argomento e' il numero di punti totali della funzione
+     d'onda;
+   - il secondo argomento e' l'integrazione numerica completa dell'equa-
+     -zione lineare unidimensionale di burgers. -}
 
-main_burgers :: Int -> [Double]
-main_burgers nx = tempo_burg (cond_iniziale nx onda_dente_sega lmt_inf lmt_sup) nt nx nu dx dt
+calc_burgers :: Int -> [Double]
+calc_burgers nx = tempo_burg nt nx nu dx dt (cond_iniziale nx onda_dente_sega lmt_inf lmt_sup)
                      where
                        lmt_inf = 0.0                                    -- limite inferiore del dominio spaziale 
                        lmt_sup = 2.0 * pi                               -- limite superiore del dominio spaziale 
@@ -18,20 +22,40 @@ main_burgers nx = tempo_burg (cond_iniziale nx onda_dente_sega lmt_inf lmt_sup) 
                        t_fine = 0.6                                     -- tempo totale di simulazione 
                        nt     = floor(t_fine / dt)                      -- numero complessivo di passi temporali che deve effettuare l'algoritmo 
 
-{- La funzione tempo_burg ... -}
 
-tempo_burg :: [Double] -> Int -> Int -> Double -> Double -> Double -> [Double]
-tempo_burg onda 0 _ _ _ _      = onda
-tempo_burg onda nt nx nu dx dt = tempo_burg (bordo_inf : spazio_burg onda 1 nu dx dt) (nt - 1) nx nu dx dt
+{- La funzione tempo_burg calcola numericamente l'integrale della
+   funzione rispetto al parametro temporale dt:
+   - il primo argomento e' il numero di passi temporali totali che la
+     funzione d'onda deve compiere; 
+   - il seconddo argomento e' il numero di passi spaziali utilizzati dal
+     predicato spazio_burg;
+   - il terzo argomento e' il coefficiente di diffusione;         
+   - il quarto argomento e' la lunghezza del passo spaziale;
+   - il quinto argomento e' la lunghezza del passo temporale;
+   - il sesto argomento e' la funzione d'onda ricalcolata;
+   - l' settimo argomento e' la funzione d'onda risultante. -}
+
+tempo_burg :: Int -> Int -> Double -> Double -> Double -> [Double] -> [Double]
+tempo_burg 0 _ _ _ _ onda      = onda
+tempo_burg nt nx nu dx dt onda = tempo_burg (nt - 1) nx nu dx dt (bordo_inf : spazio_burg 1 nu dx dt onda)
                                        where
                                          bordo_inf = head onda - head onda * dt/dx * (head onda - last onda) +
                                                      nu*dt/dx**2 * ((head $ tail onda) - 2*(head onda) + last onda) -- condizione di bordo inferiore
 
-{- La funzione spazio_burg ... -}
+{- La funzione spazio_burg calcola numericamente l'integrale della
+   funzione rispetto al parametro spaziale dx:
+   - il primo argomento e' l'indice per accedere agli elementi della 
+     lista, viene utlizzato da passo_eulero; 
+   - il secondo argomento e' il coefficiente di diffusione;  
+   - il terzo argomento e' la lunghezza del passo spaziale;
+   - il quarto argomento e' la lunghezza del passo temporale;
+   - il quinto argomento e' la funzione d'onda;
+   - il sesto argomento e' la funzione d'onda ricalcolata con il passo_
+     eulero e bordo_sup. -}
 
-spazio_burg :: [Double] -> Int -> Double -> Double -> Double -> [Double]
-spazio_burg lx i un dx dt  | i == length lx - 1 = [bordo_sup]
-                              | otherwise          = (passo_eulero) : spazio_burg lx (i+1) un dx dt
+spazio_burg :: Int -> Double -> Double -> Double -> [Double] -> [Double]
+spazio_burg i un dx dt lx | i == length lx - 1 = [bordo_sup]
+                          | otherwise          = (passo_eulero) : spazio_burg (i+1) un dx dt lx
                                   where
                                     bordo_sup    = (last lx) - (last lx) * dt/dx * ((last lx) - (last $ init lx)) +
                                                    nu*dt/dx**2*(head lx - 2*(last lx) + (last $ init lx))
@@ -40,7 +64,13 @@ spazio_burg lx i un dx dt  | i == length lx - 1 = [bordo_sup]
 
 
 
-{- La funzione onda_dente_sega ... -}
+{- La funzione onda_dente_sega calcola la funzione d'onda a dente di 
+   sega 'u':
+   - il primo argomento e' la lista di punti equidistanti del dominio
+     spaziale;
+   - il secondo argomento e' la funzione d'onda calcolata. 
+   Per il calcolo dell'onda si fa uso dei predicati phi e phi_primo
+   che sono rispettavamente la funzione e la sua derivata.  -}
 
 onda_dente_sega :: Double -> Double
 onda_dente_sega x = u t0 x nu
@@ -53,7 +83,12 @@ onda_dente_sega x = u t0 x nu
 
 
 {- La funzione calc_convezione calcola l'integrazione numerica
-   dell'equazione di convezione lineare a una dimensione. -}
+   dell'equazione di convezione lineare a una dimensione:
+   - il primo argomento e' il numero di punti totali della funzione
+     d'onda;
+   - il secondo argomento e' la lunghezza del passo temporale;
+   - il terzo argomento e' l'integrazione numerica completa dell'equa-
+     -zione lineare unidimensionale di convezione.  -}
 
 calc_convezione :: Int -> Double -> [Double]
 calc_convezione nx dt | nx == 0 || nx == 1    = cond_iniziale nx onda_quadra lmt_inf lmt_sup
@@ -70,7 +105,7 @@ calc_convezione nx dt | nx == 0 || nx == 1    = cond_iniziale nx onda_quadra lmt
    - il primo argomento e' il numero di passi temporali totali che la
      funzione d'onda deve compiere; 
    - il secondo argomento e' il numero di passi spaziali utilizzati dal
-     predicato conv_spazio;
+     predicato spazio_conv;
    - il terzo argomento e' la costante di velocità dell'onda;     
    - il quarto argomento e' la lunghezza del passo spaziale;
    - il quinto argomento e' la lunghezza del passo temporale;
@@ -143,7 +178,6 @@ gen_punti_equi :: Int -> Double -> Double -> [Double]
 gen_punti_equi 0 _ _      = []
 gen_punti_equi nx inf sup = calc_punti 0 (nx - 1) inf (sup  - inf)
 
-{- La funzione calc_punti ... -}
 
 calc_punti :: Int -> Int -> Double -> Double -> [Double]
 calc_punti i nx inf dst | i == nx   = [inf]
