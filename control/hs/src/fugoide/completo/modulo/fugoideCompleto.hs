@@ -1,6 +1,7 @@
 module FugoideCompleto(main_fugoide_completo) where
 
 import Quadrupla           
+import Coppia
 import CondizioniComplete
 import DatiCompleti
 
@@ -49,19 +50,20 @@ calc_moto dA dt len | len == 0                  = [dBD]
                         del velivolo al momento t_(n+1) 
 -}
 metodo_eulero :: Quadrupla Float -> Float -> Quadrupla Float
-metodo_eulero dA@(v,theta,x,y) dt = somma_quadrupla dA (moltiplica_quadrupla_per_scalare (rhs dA) dt)
+metodo_eulero dA@(v,theta,x,y) dt = somma_quadrupla dA (moltiplica_quadrupla_per_scalare (rhs dB) dt)
+                                    where
+                                        dB = (v,theta)
 
 {-  Funzione per l'applicazione dell'equazione del moto fugoide
-    Dati in ingresso:   una quadrupla di numeri floating-point, ovvero la velocita', angolo, spostamento laterale e verticale 
-                        del velivolo.
+    Dati in ingresso:   una coppia di numeri floating-point, ovvero la velocita' e l'angolo
     Dati in uscita:     una quadrupla di numeri floating-point, ovvero la velocita', angolo, spostamento laterale e verticale 
                         del velivolo dopo aver applicato l'equazione per il moto fugoide
 -}
-rhs :: Quadrupla Float -> Quadrupla Float
-rhs dA@(v,theta,x,y) = (- (cG * sin theta) - (cR / cP)*cG/vTrim**2*v**2,
-                        - (cG * cos theta / v) + cG/vTrim**2*v,
-                        v*cos theta,
-                        v*sin theta)
+rhs :: Coppia Float -> Quadrupla Float
+rhs dA@(v,theta)    = (- (cG * sin theta) - (cR / cP)*cG/vTrim**2*v**2,
+                       - (cG * cos theta / v) + cG/vTrim**2*v,
+                       v*cos theta,
+                       v*sin theta)
    where
       cG = 9.81   -- Costante gravitazionale terrestre
       cR = 0.025  -- Coefficiente di resistenza all'aria

@@ -1,6 +1,6 @@
 
 
-{- coefficiente di diffusione -}
+{- Coefficiente di diffusione -}
 nu :: Double
 nu = 0.07  
 
@@ -10,47 +10,45 @@ nu = 0.07
      d'onda. -}
 
 calc_burgers :: Int -> [Double]
-calc_burgers nx = tempo_burg nt nx nu dx dt (cond_iniziale nx onda_dente_sega lmt_inf lmt_sup)
+calc_burgers nx = tempo_burg nt nx dx dt (cond_iniziale nx onda_dente_sega lmt_inf lmt_sup)
                      where
                        lmt_inf = 0.0                                    -- limite inferiore del dominio spaziale 
                        lmt_sup = 2.0 * pi                               -- limite superiore del dominio spaziale 
                        dx     = lmt_sup / (fromIntegral(nx :: Int) - 1) -- distanza tra qualsiasi coppia di punti della griglia adiacenti 
-                       sigma  = 0.1                                     -- costante di Courant-Friedrichs_Lewy (CFL)
+                       sigma  = 0.1                                     -- costante di Courant-Friedrichs-Lewy (CFL)
                        dt     = sigma * dx**2 / nu                      -- lunghezza del passo temporale 
                        t_fine = 0.6                                     -- tempo totale di simulazione 
                        nt     = floor(t_fine / dt)                      -- numero complessivo di passi temporali che deve effettuare l'algoritmo 
 
 
-{- La funzione tempo_burg calcola numericamente l'integrale della
+{- La funzione tempo_burg calcola numericamente l'integrazione della
    funzione rispetto al parametro temporale dt:
    - il primo argomento e' il numero di passi temporali totali che la
      funzione d'onda deve compiere; 
-   - il seconddo argomento e' il numero di passi spaziali utilizzati dal
-     predicato spazio_burg;
-   - il terzo argomento e' il coefficiente di diffusione;         
-   - il quarto argomento e' la lunghezza del passo spaziale;
-   - il quinto argomento e' la lunghezza del passo temporale;
-   - il sesto argomento e' la funzione d'onda ricalcolata. }
+   - il secondo argomento e' il numero di passi spaziali utilizzati dalla
+     funzione spazio_burg;       
+   - il terzo argomento e' la lunghezza del passo spaziale;
+   - il quarto argomento e' la lunghezza del passo temporale;
+   - il quinto argomento e' la funzione d'onda ricalcolata. -}
 
-tempo_burg :: Int -> Int -> Double -> Double -> Double -> [Double] -> [Double]
-tempo_burg 0 _ _ _ _ onda      = onda
-tempo_burg nt nx nu dx dt onda = tempo_burg (nt - 1) nx nu dx dt (bordo_inf : spazio_burg 1 nu dx dt onda)
+tempo_burg :: Int -> Int  -> Double -> Double -> [Double] -> [Double]
+tempo_burg 0 _ _ _ onda     = onda
+tempo_burg nt nx dx dt onda = tempo_burg (nt - 1) nx dx dt (bordo_inf : spazio_burg 1 dx dt onda)
                                        where
                                          bordo_inf = head onda - head onda * dt/dx * (head onda - last onda) +
                                                      nu*dt/dx**2 * ((head $ tail onda) - 2*(head onda) + last onda) -- condizione di bordo inferiore
 
-{- La funzione spazio_burg calcola numericamente l'integrale della
+{- La funzione spazio_burg calcola numericamente l'integrazione della
    funzione rispetto al parametro spaziale dx:
    - il primo argomento e' l'indice per accedere agli elementi della 
      lista, viene utlizzato da passo_eulero; 
-   - il secondo argomento e' il coefficiente di diffusione;  
-   - il terzo argomento e' la lunghezza del passo spaziale;
-   - il quarto argomento e' la lunghezza del passo temporale;
-   - il quinto argomento e' la funzione d'onda. -}
+   - il secondo argomento e' la lunghezza del passo spaziale;
+   - il terzo argomento e' la lunghezza del passo temporale;
+   - il quarto argomento e' la funzione d'onda. -}
 
-spazio_burg :: Int -> Double -> Double -> Double -> [Double] -> [Double]
-spazio_burg i un dx dt lx | i == length lx - 1 = [bordo_sup]
-                          | otherwise          = (passo_eulero) : spazio_burg (i+1) un dx dt lx
+spazio_burg :: Int -> Double -> Double -> [Double] -> [Double]
+spazio_burg i dx dt lx | i == length lx - 1 = [bordo_sup]
+                       | otherwise          = (passo_eulero) : spazio_burg (i+1) dx dt lx
                                   where
                                     bordo_sup    = (last lx) - (last lx) * dt/dx * ((last lx) - (last $ init lx)) +
                                                    nu*dt/dx**2*(head lx - 2*(last lx) + (last $ init lx))
@@ -64,7 +62,7 @@ spazio_burg i un dx dt lx | i == length lx - 1 = [bordo_sup]
    - il suo unico argomento e' la lista di punti equidistanti del 
      dominio spaziale. 
    Per il calcolo dell'onda si fa uso dei predicati phi e phi_primo
-   che sono rispettavamente la funzione e la sua derivata.  -}
+   che sono rispettivamente la funzione e la sua derivata.  -}
 
 onda_dente_sega :: Double -> Double
 onda_dente_sega x = u t0 x nu
@@ -92,7 +90,7 @@ calc_convezione nx dt | nx == 0 || nx == 1    = cond_iniziale nx onda_quadra lmt
                               dx      = lmt_sup / (fromIntegral(nx :: Int) - 1) -- distanza tra qualsiasi coppia di punti della griglia adiacenti 
                               c       = 1.0                                     -- velocità dell'onda 
 
-{- La funzione tempo_conv calcola numericamente l'integrale della
+{- La funzione tempo_conv calcola numericamente l'integrazione della
    funzione rispetto al parametro temporale dt:
    - il primo argomento e' il numero di passi temporali totali che la
      funzione d'onda deve compiere; 
@@ -108,7 +106,7 @@ tempo_conv 0 _ _ _ _ onda     = onda
 tempo_conv nt nx c dx dt onda = tempo_conv (nt - 1) nx c dx dt ((head onda) : spazio_conv 1 c dx dt onda) 
 
 
-{- La funzione spazio_conv calcola numericamente l'integrale della
+{- La funzione spazio_conv calcola numericamente l'integrazione della
    funzione rispetto al parametro spaziale dx:
    - il primo argomento e' il numero di passi temporali che la funzione
      d'onda ha compiuto;
@@ -161,7 +159,7 @@ onda_quadra x | x >= 0.5 && x <= 1.0 = onda_sup
 
 gen_punti_equi :: Int -> Double -> Double -> [Double]
 gen_punti_equi 0 _ _      = []
-gen_punti_equi nx inf sup = calc_punti 0 (nx - 1) inf (sup  - inf)
+gen_punti_equi nx inf sup = calc_punti 0 (nx - 1) inf (sup - inf)
 
 
 calc_punti :: Int -> Int -> Double -> Double -> [Double]

@@ -41,22 +41,29 @@ calc_moto(V,THETA,X,Y,DT,LEN,[Y1|T]) :- LEN > 0,
    - il ottavo argomento e' lo spostamento laterale del velivolo;
    - il nono argomento e' lo spostamento verticale del velivolo. */
 
-passo_eulero(V,THETA,X,Y,DT,V1,THETA1,X1,Y1) :- rhs(V,THETA,X,Y,VT,THETAT,XT,YT),
+passo_eulero(V,THETA,X,Y,DT,V1,THETA1,X1,Y1) :- rhs(V,THETA,VT,THETAT,XT,YT),
                                                 V1      is (V + (VT * DT)),
                                                 THETA1  is (THETA + (THETAT * DT)),
                                                 X1      is (X + (XT * DT)),
                                                 Y1      is (Y + (YT * DT)). 
 
-/* Il predicato rhs ...??? */
+/* Il predicato rhs viene utilizzato per l'applicazione dell'equazione del 
+   moto fugoide:
+   - il primo argomento   e' la velocita' del velivolo;
+   - il secondo argomento e' l'angolazione del velivolo;
+   - il terzo argomento   e' la velocita' del velivolo ricalcolata;
+   - il quarto argomento  e' l'angolazione del velivolo ricalcolata;
+   - il quinto argomento  e' lo spostamento laterale del velivolo;
+   - il sesto argomento   e' lo spostamento verticale del velivolo. */
 
-rhs(V,THETA,_,_,V1,THETA1,X1,Y1) :- CG is 9.81,     /* Costante gravitazionale terrestre */
-                                    CR is 0.025,    /* Coefficiente di resistenza all'aria */
-                                    CP is 1.0,      /* Coefficiente di portanza */
-                                    VTRIM is 30.0,  /* Velocita' di trim del velivolo */
-                                    V1 is (- (CG * sin(THETA)) - (CR / CP) * CG/VTRIM**2*V**2),
-                                    THETA1 is (- (CG * cos(THETA) / V) + (CG/VTRIM**2*V)),
-                                    X1 is (V * cos(THETA)),
-                                    Y1 is (V * sin(THETA)).
+rhs(V,THETA,V1,THETA1,X1,Y1) :-  CG is 9.81,     /* Costante gravitazionale terrestre */
+                                 CR is 0.025,    /* Coefficiente di resistenza all'aria */
+                                 CP is 1.0,      /* Coefficiente di portanza */
+                                 VTRIM is 30.0,  /* Velocita' di trim del velivolo */
+                                 V1 is (- (CG * sin(THETA)) - (CR / CP) * CG/VTRIM**2*V**2),
+                                 THETA1 is (- (CG * cos(THETA) / V) + (CG/VTRIM**2*V)),
+                                 X1 is (V * cos(THETA)),
+                                 Y1 is (V * sin(THETA)).
 
 
 /* Il predicato calc_fugoide_semplice calcola il moto fugoide con attrito di 
