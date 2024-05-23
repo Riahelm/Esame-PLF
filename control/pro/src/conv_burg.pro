@@ -1,6 +1,11 @@
 
 
-/* Predicato MAIN */
+/* Il predicato calc_burgers calcola l'integrazione numerica
+   dell'equazione di burgers a una dimensione:
+   - il primo termine e' il numero di punti totali della funzione
+     d'onda;
+   - il secondo termine e' l'integrazione numerica completa dell'equa-
+     -zione lineare unidimensionale di burgers.*/
 calc_burgers(NX,F) :- NX1 is NX - 1,
                       T   is 0.6,
                       S   is 0.1,
@@ -13,23 +18,6 @@ calc_burgers(NX,F) :- NX1 is NX - 1,
                       cond_iniziale_burg(NX,INF,SUP,ONDA),
                       tempo_burg(0,NT,NX1,NU,DX,DT,ONDA,F).
 
-/* Il predicato calc_convezione calcola l'integrazione numerica
-   dell'equazione di convezione lineare a una dimensione.*/
-calc_convezione(NX,_,F)  :- (NX == 0;
-                            NX == 1),
-                            INF is 0.0,
-                            SUP is 2.0,
-                            cond_iniziale_conv(NX,INF,SUP,F).
-calc_convezione(NX,DT,F) :- NX > 1,
-                            NT  is 25,
-                            NX1 is NX - 1,
-                            C   is 1.0,
-                            INF is 0.0,
-                            SUP is 2.0,
-                            DX  is SUP / NX1,
-                            cond_iniziale_conv(NX,INF,SUP,ONDA),
-                            tempo_conv(0,NT,NX1,C,DX,DT,ONDA,F).
-
 
 /* Il predicato tempo_burg calcola numericamente l'integrale della
    funzione rispetto al parametro temporale DT:
@@ -38,7 +26,7 @@ calc_convezione(NX,DT,F) :- NX > 1,
    - il secondo termine e' il numero di passi temporali totali che la
      funzione d'onda deve compiere; 
    - il terzo termine e' il numero di passi spaziali utilizzati dal
-     predicato conv_spazio;
+     predicato spazio_burg;
    - il quarto termine e' il coefficiente di diffusione;         
    - il quinto termine e' la lunghezza del passo spaziale;
    - il sesto termine e' la lunghezza del passo temporale;
@@ -64,7 +52,7 @@ tempo_burg(I,NT,NX1,NU,DX,DT,ONDA,F) :- I < NT,
    - il quinto termine e' la lunghezza del passo temporale;
    - il sesto termine e' la funzione d'onda;
    - il settimo termine e' la funzione d'onda ricalcolata con il passo_
-     eulero e bordo_sup. */
+     eulero_burg e bordo_sup. */
 
 spazio_burg(NX1,NX1,NU,DX,DT,ONDA,[F]) :- bordo_sup(ONDA,NU,DX,DT,F).
 spazio_burg(I,NX1,NU,DX,DT,ONDA,[E|F]) :- I < NX1,
@@ -100,7 +88,7 @@ bordo_sup(ONDA,NU,DX,DT,BS) :- last(ONDA,C),
                                testa(ONDA,T),
                                BS is C - C*DT/DX * (C - P) + NU*DT/DX^2 * (T - 2*C + P).
 
-/* Il predicato passo_eulero effettua il passo di Eulero:
+/* Il predicato passo_eulero_burg effettua il passo di Eulero:
    - il primo termine e' la funzione d'onda;
    - il secondo termine e' l'indice dell'elemento corrente della lista;
    - il terzo termine e' il coefficiente di diffusione;
@@ -120,10 +108,10 @@ passo_eulero_burg(ONDA,I0,NU,DX,DT,EU) :- I1 is I0 + 1,
 
 /* Il predicato cond_iniziale_burg calcola la condizione iniziale (una 
    funzione) per il calcolo numerico dell'equazione di Burgers:
-   - il primo argomento e' il numero di punti della griglia spaziale;
-   - il secondo argomento e' il limite inferiore del dominio spaziale;
-   - il terzo argomento e' il limite superiore del dominio spaziale; 
-   - il quarto argomento e' la funzione "onda a dente di sega". */
+   - il primo termine e' il numero di punti della griglia spaziale;
+   - il secondo termine e' il limite inferiore del dominio spaziale;
+   - il terzo termine e' il limite superiore del dominio spaziale; 
+   - il quarto termine e' la funzione "onda a dente di sega". */
 
 cond_iniziale_burg(NX,INF,SUP,ONDA) :- gen_punti_equi(NX,INF,SUP,L),
                                        onda_dente_sega(L,ONDA).
@@ -131,11 +119,11 @@ cond_iniziale_burg(NX,INF,SUP,ONDA) :- gen_punti_equi(NX,INF,SUP,L),
 
 /* Il predicato onda_dente_sega calcola la funzione d'onda a dente di 
     sega 'u':
-   - il primo argomento e' la lista di punti equidistanti del dominio
+   - il primo termine e' la lista di punti equidistanti del dominio
      spaziale;
-   - il secondo argomento e' la funzione d'onda calcolata. 
+   - il secondo termine e' la funzione d'onda calcolata. 
    Per il calcolo dell'onda si fa uso dei predicati phi e phi_primo
-   che sono rispettavamente una funzione e la sua derivata. */
+   che sono rispettavamente la funzione e la sua derivata. */
 
 onda_dente_sega([],[]).
 onda_dente_sega([X|LX],[U|LU]) :- T0 is 0.0,
@@ -151,6 +139,31 @@ phi_primo(X,T0,NU,F) :- F is -(-8*T0 + 2*X)*exp(-((-4*T0 + X)^2)/(4*NU*(T0 + 1))
 phi(X,T0,NU,F) :- F is exp(-((X-4*T0)^2)/(4*NU*(T0+1))) + exp(-((X-4*T0-2*pi)^2)/(4*NU*(T0+1))).
 
 
+
+/* Il predicato calc_convezione calcola l'integrazione numerica
+   dell'equazione di convezione lineare a una dimensione:
+   - il primo termine e' il numero di punti totali della funzione
+     d'onda;
+   - il secondo termine e' la lunghezza del passo temporale;
+   - il terzo termine e' l'integrazione numerica completa dell'equa-
+     -zione lineare unidimensionale di convezione. */
+
+calc_convezione(NX,_,F)  :- (NX == 0;
+                            NX == 1),
+                            INF is 0.0,
+                            SUP is 2.0,
+                            cond_iniziale_conv(NX,INF,SUP,F).
+calc_convezione(NX,DT,F) :- NX > 1,
+                            NT  is 25,
+                            NX1 is NX - 1,
+                            C   is 1.0,
+                            INF is 0.0,
+                            SUP is 2.0,
+                            DX  is SUP / NX1,
+                            cond_iniziale_conv(NX,INF,SUP,ONDA),
+                            tempo_conv(0,NT,NX1,C,DX,DT,ONDA,F).
+
+
 /* Il predicato tempo_conv calcola numericamente l'integrale della
    funzione rispetto al parametro temporale DT:
    - il primo termine e' il numero di passi temporali che la funzione
@@ -158,7 +171,7 @@ phi(X,T0,NU,F) :- F is exp(-((X-4*T0)^2)/(4*NU*(T0+1))) + exp(-((X-4*T0-2*pi)^2)
    - il secondo termine e' il numero di passi temporali totali che la
      funzione d'onda deve compiere; 
    - il terzo termine e' il numero di passi spaziali utilizzati dal
-     predicato conv_spazio;
+     predicato spazio_conv;
    - il quarto termine e' la costante di velocità dell'onda;     
    - il quinto termine e' la lunghezza del passo spaziale;
    - il sesto termine e' la lunghezza del passo temporale;
@@ -210,19 +223,19 @@ passo_eulero_conv(E0,E1,C,DX,DT,EU) :- EU is E1 - C * (DT/DX) * (E1 - E0).
 
 /* Il predicato cond_iniziale_conv calcola la condizione iniziale (una funzione)
    per l'integrazione numerica dell'equazione di convezione:
-   - il primo argomento e' il numero di punti della griglia spaziale;
-   - il secondo argomento e' il limite inferiore del dominio spaziale;
-   - il terzo argomento e' il limite superiore del dominio spaziale; 
-   - il quarto argomento e' la funzione d'onda quadra. */
+   - il primo termine e' il numero di punti della griglia spaziale;
+   - il secondo termine e' il limite inferiore del dominio spaziale;
+   - il terzo termine e' il limite superiore del dominio spaziale; 
+   - il quarto termine e' la funzione d'onda quadra. */
 
 cond_iniziale_conv(NX,INF,SUP,ONDA) :- gen_punti_equi(NX,INF,SUP,L),
                                        onda_quadra(L,ONDA).
 
 
 /* Il predicato onda_quadra calcola la funzione d'onda quadra:
-   - il primo argomento e' la lista di punti equidistanti del dominio
+   - il primo termine e' la lista di punti equidistanti del dominio
      spaziale;
-   - il secondo argomento e' la funzione d'onda calcolata. */
+   - il secondo termine e' la funzione d'onda calcolata. */
 
 onda_quadra([],[]).
 onda_quadra([X|L1],[OSI|T]) :- X >= 0.5,
@@ -237,10 +250,10 @@ onda_quadra([X|L1],[OSI|T]) :- (X < 0.5;
 
 
 /* Il predicato gen_punti_equi genera una lista di punti equidistanti tra loro:
-   - il primo argomento e' il numero di punti che si vuole generare;
-   - il secondo argomento e' il limite inferiore della lista di punti;
-   - il terzo argomento e' il limite superiore della lista di punti;
-   - il quarto argomento e' la lista di punti equidistanti. 
+   - il primo termine e' il numero di punti che si vuole generare;
+   - il secondo termine e' il limite inferiore della lista di punti;
+   - il terzo termine e' il limite superiore della lista di punti;
+   - il quarto termine e' la lista di punti equidistanti. 
    Per il calcolo dei punti si fa uso del predicato calc_punti.*/
 
 gen_punti_equi(0,_,_,[]).
