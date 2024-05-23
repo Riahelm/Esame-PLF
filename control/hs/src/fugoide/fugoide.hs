@@ -99,15 +99,14 @@ calc_moto dA dt len | len == 0               = [dBD]
    - il secondo argomento e' la lunghezza del passo temporale dt. -}
 
 passo_eulero :: Quadrupla Float -> Float -> Quadrupla Float
-passo_eulero dA@(v,theta,x,y) dt = somma_quadrupla dA (molt_quadrupla_scalare (rhs dA) dt)
+passo_eulero dA@(v,theta,x,y) dt = somma_quadrupla dA (molt_quadrupla_scalare (rhs (v,theta)) dt)
 
 
 {- La funzione rhs viene utilizzata per l'applicazione dell'equazione del moto fugoide:
-   - il suo unico argomento e' una quadrupla di valori, ovvero la velocita', angolo, 
-     spostamento laterale e verticale del velivolo. -}
+   - il suo unico argomento e' una coppia di valori, ovvero la velocita' e l'angolo del velivolo. -}
 
-rhs :: Quadrupla Float -> Quadrupla Float
-rhs dA@(v,theta,x,y) = (- (cG * sin theta) - (cR / cP)*cG/vTrim**2*v**2,
+rhs :: Coppia Float -> Quadrupla Float
+rhs_completo dA@(v,theta) = (- (cG * sin theta) - (cR / cP)*cG/vTrim**2*v**2,
                         - (cG * cos theta / v) + cG/vTrim**2*v,
                         v*cos theta,
                         v*sin theta)
