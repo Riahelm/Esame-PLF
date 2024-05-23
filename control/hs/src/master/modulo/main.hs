@@ -6,7 +6,12 @@ import Convezione
 import Burgers
 
 main::IO()
-main = do putStrLn "--------------------------------------------------------------------"
+main = do 
+          putStrLn "Progetto della sessione autunnale del corso Programmazione Logica e Funzionale"
+          putStrLn "Anno 2023/2024                                                                "
+          putStrLn "Corso tenuto dal prof. Marco Bernardo                                         "
+          putStrLn "Progetto realizzato da: Barzotti Nicolas e Ramagnano Gabriele                 "
+          putStrLn "--------------------------------------------------------------------"
           putStrLn "| Calcolo del moto fugoide senza attrito                           |"
           putStrLn "| Parametri iniziali:                                              |"
           putStrLn "| altitudine iniziale      = 100m,                                 |"
@@ -68,7 +73,7 @@ main = do putStrLn "------------------------------------------------------------
           putStrLn $ show (main_convezione (read nx :: Int) (read dt :: Double))
 
           putStrLn "--------------------------------------------------------------------"
-          putStrLn "Calcolo dell'equazione di Burgers a una dimensione"
+          putStrLn "| Calcolo dell'equazione di Burgers a una dimensione               |"
           putStrLn "| Parametri iniziali:                                              |"
           putStrLn "| limite superiore del dominio spaziale    = 2.0 * pi,             |"
           putStrLn "| limite inferiore del dominio spaziale    = 0.0.                  |" 
