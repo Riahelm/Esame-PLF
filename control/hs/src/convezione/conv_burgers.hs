@@ -6,10 +6,8 @@ nu = 0.07
 
 {- La funzione calc_burgers calcola l'integrazione numerica
    dell'equazione di burgers a una dimensione:
-   - il primo argomento e' il numero di punti totali della funzione
-     d'onda;
-   - il secondo argomento e' l'integrazione numerica completa dell'equa-
-     -zione lineare unidimensionale di burgers. -}
+   - il suo unico argomento e' il numero di punti totali della funzione
+     d'onda. -}
 
 calc_burgers :: Int -> [Double]
 calc_burgers nx = tempo_burg nt nx nu dx dt (cond_iniziale nx onda_dente_sega lmt_inf lmt_sup)
@@ -32,8 +30,7 @@ calc_burgers nx = tempo_burg nt nx nu dx dt (cond_iniziale nx onda_dente_sega lm
    - il terzo argomento e' il coefficiente di diffusione;         
    - il quarto argomento e' la lunghezza del passo spaziale;
    - il quinto argomento e' la lunghezza del passo temporale;
-   - il sesto argomento e' la funzione d'onda ricalcolata;
-   - l' settimo argomento e' la funzione d'onda risultante. -}
+   - il sesto argomento e' la funzione d'onda ricalcolata. }
 
 tempo_burg :: Int -> Int -> Double -> Double -> Double -> [Double] -> [Double]
 tempo_burg 0 _ _ _ _ onda      = onda
@@ -49,9 +46,7 @@ tempo_burg nt nx nu dx dt onda = tempo_burg (nt - 1) nx nu dx dt (bordo_inf : sp
    - il secondo argomento e' il coefficiente di diffusione;  
    - il terzo argomento e' la lunghezza del passo spaziale;
    - il quarto argomento e' la lunghezza del passo temporale;
-   - il quinto argomento e' la funzione d'onda;
-   - il sesto argomento e' la funzione d'onda ricalcolata con il passo_
-     eulero e bordo_sup. -}
+   - il quinto argomento e' la funzione d'onda. -}
 
 spazio_burg :: Int -> Double -> Double -> Double -> [Double] -> [Double]
 spazio_burg i un dx dt lx | i == length lx - 1 = [bordo_sup]
@@ -66,9 +61,8 @@ spazio_burg i un dx dt lx | i == length lx - 1 = [bordo_sup]
 
 {- La funzione onda_dente_sega calcola la funzione d'onda a dente di 
    sega 'u':
-   - il primo argomento e' la lista di punti equidistanti del dominio
-     spaziale;
-   - il secondo argomento e' la funzione d'onda calcolata. 
+   - il suo unico argomento e' la lista di punti equidistanti del 
+     dominio spaziale. 
    Per il calcolo dell'onda si fa uso dei predicati phi e phi_primo
    che sono rispettavamente la funzione e la sua derivata.  -}
 
@@ -86,9 +80,7 @@ onda_dente_sega x = u t0 x nu
    dell'equazione di convezione lineare a una dimensione:
    - il primo argomento e' il numero di punti totali della funzione
      d'onda;
-   - il secondo argomento e' la lunghezza del passo temporale;
-   - il terzo argomento e' l'integrazione numerica completa dell'equa-
-     -zione lineare unidimensionale di convezione.  -}
+   - il secondo argomento e' la lunghezza del passo temporale. -}
 
 calc_convezione :: Int -> Double -> [Double]
 calc_convezione nx dt | nx == 0 || nx == 1    = cond_iniziale nx onda_quadra lmt_inf lmt_sup
@@ -109,8 +101,7 @@ calc_convezione nx dt | nx == 0 || nx == 1    = cond_iniziale nx onda_quadra lmt
    - il terzo argomento e' la costante di velocità dell'onda;     
    - il quarto argomento e' la lunghezza del passo spaziale;
    - il quinto argomento e' la lunghezza del passo temporale;
-   - il sesto argomento e' la funzione d'onda ricalcolata;
-   - l' settimo argomento e' la funzione d'onda risultante.  -}
+   - il sesto argomento e' la funzione d'onda ricalcolata. -}
 
 tempo_conv :: Int -> Int -> Double -> Double -> Double -> [Double] -> [Double]
 tempo_conv 0 _ _ _ _ onda     = onda
@@ -124,9 +115,7 @@ tempo_conv nt nx c dx dt onda = tempo_conv (nt - 1) nx c dx dt ((head onda) : sp
    - il secondo argomento e' la costante di velocità dell'onda;      
    - il terzo argomento e' la lunghezza del passo spaziale;
    - il quarto argomento e' la lunghezza del passo temporale;
-   - il quinto argomento e' la funzione d'onda;
-   - il sesto argomento e' la funzione d'onda ricalcolata con il passo_
-     eulero  -}
+   - il quinto argomento e' la funzione d'onda. -}
 
 spazio_conv :: Int -> Double -> Double -> Double -> [Double] -> [Double] 
 spazio_conv i c dx dt lx  | i == length lx - 1 = [passo_eulero]
@@ -143,9 +132,7 @@ spazio_conv i c dx dt lx  | i == length lx - 1 = [passo_eulero]
    - il secondo argomento e' la funzione onda_quadra (onda_dente_sega) 
      utilizzata per il calcolo delle omonime funzioni;
    - il terzo argomento e' il limite inferiore del dominio spaziale;
-   - il quarto argomento e' il limite superiore del dominio spaziale; 
-   - il quinto argomento e' la funzione d'onda quadra (o a dente di
-     sega) calcolata. -}
+   - il quarto argomento e' il limite superiore del dominio spaziale. -}
 
 cond_iniziale :: Int -> (Double -> Double) -> Double -> Double -> [Double]
 cond_iniziale nx onda lmt_inf lmt_sup = [onda x | x <- lx]
@@ -154,9 +141,8 @@ cond_iniziale nx onda lmt_inf lmt_sup = [onda x | x <- lx]
 
 
 {- La funzione onda_quadra calcola la funzione d'onda quadra:
-   - il primo argomento e' la lista di punti equidistanti del dominio
-     spaziale;
-   - il secondo argomento e' la funzione d'onda calcolata. -}
+   - il suo unico argomento e' la lista di punti equidistanti del dominio
+     spaziale. -}
 
 onda_quadra :: Double -> Double
 onda_quadra x | x >= 0.5 && x <= 1.0 = onda_sup
@@ -170,8 +156,7 @@ onda_quadra x | x >= 0.5 && x <= 1.0 = onda_sup
 {- La funzione gen_punti_equi genera una lista di punti equidistanti tra loro:
    - il primo argomento e' il numero di punti che si vuole generare;
    - il secondo argomento e' il limite inferiore della lista di punti;
-   - il terzo argomento e' il limite superiore della lista di punti;
-   - il quarto argomento e' la lista di punti equidistanti.
+   - il terzo argomento e' il limite superiore della lista di punti.
    Per il calcolo dei punti si fa uso della funzione calc_punti. -}
 
 gen_punti_equi :: Int -> Double -> Double -> [Double]
