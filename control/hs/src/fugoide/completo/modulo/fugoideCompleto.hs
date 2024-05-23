@@ -13,12 +13,12 @@ import DatiCompleti
 main_fugoide_completo :: Float -> [Float]
 main_fugoide_completo dt  = y0 : calc_moto (v0, theta0, x0, y0) dt passiTemporali
    where
-      v0                = vTrim           -- La velocita' iniziale, in questo caso quella di trim
-      theta0            = 0.0             -- Angolo iniziale del velivolo
-      x0                = 0.0             -- Spostamento orizzontale iniziale del velivolo
-      y0                = 1000.0          -- Altitudine iniziale del velivolo
-      tempo             = 100.0           -- Numero di secondi di simulazione
-      passiTemporali    = floor(tempo/dt) -- Numero di punti in cui effettuare il calcolo
+      v0                = vTrim               -- La velocita' iniziale, in questo caso quella di trim
+      theta0            = 0.0                 -- Angolo iniziale del velivolo
+      x0                = 0.0                 -- Spostamento orizzontale iniziale del velivolo
+      y0                = 1000.0              -- Altitudine iniziale del velivolo
+      tempo             = 100.0               -- Numero di secondi di simulazione
+      passiTemporali    = floor(tempo/dt) + 1 -- Numero di punti in cui effettuare il calcolo
 
 {-  Funzione per il calcolo numerico dell'integrazione del moto fugoide 
         Dati di input:  una quadrupla di numeri floating-point, questi sono velocita', angolo, spostamento laterale e verticale del velivolo,
