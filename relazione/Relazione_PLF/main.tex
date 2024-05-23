@@ -22,9 +22,11 @@
 
 \begin{titlepage}
 	\centering
-    \centerline{\includegraphics{Resources/photo5798637185031846732.jpg}}
+	\begin{figure}
+	\vspace{2.5cm}
+    \centerline{\includegraphics[height=3.2cm]{Resources/logo-uniurb-2016.jpg.eps}}
+    \end{figure}
 	\vspace*{\baselineskip}
-    \vspace{15\baselineskip}
 	\LARGE{\bfseries Relazione relativa al progetto d'esame di Programmazione Logica e Funzionale }\\
 	\Large{\ sessione estiva --- a.a. 2023/2024}\\ [0.6cm]
 	\large{\textbf{\scshape{Corso di Laurea in Informatica Applicata\\ Università di Urbino}}}\\[3cm]
@@ -36,78 +38,15 @@
 	
 \end{titlepage}
 
-\newpage
+\index 
+%\newpage
 \tableofcontents
-\newpage
+%\newpage
 
-\section{Specifica del Problema}
-
-    Scrivere un programma Haskell e un programma Prolog che acquisiscono da tastiera un insieme finito di parametri numerici e poi stampano su schermo il risultato del calcolo numerico per l’integrazione di equazioni differenziali di moto fugoide senza frizione, di moto fugoide con frizione, di convezione lineare a una dimensione ed di Burgers a una dimensione.
-    
-\section{Analisi del Problema}
-
-\subsection{Dati di Ingresso del Problema}
-
-I dati in ingresso al problema sono stati suddivisi in base alla equazione da integrare numericamente, ne segue quindi la loro descrizione: 
-
-\subsubsection*{Fugoide Senza Attrito}
-    Il dato in ingresso è un numero reale maggiore di zero.
-    Questo rappresenta il passo temporale per l'integrazione dell'equazione del moto fugoide senza attrito.
-\subsubsection*{Fugoide Con Attrito}
-    Il dato in ingresso è un numero reale maggiore di zero. Questo rappresenta il passo temporale per l'integrazione dell'equazione del moto fugoide con attrito.
-\subsubsection*{Convezione}
-    I dati in ingresso per l'integrazione dell'equazione di convezione sono:
-    \begin{enumerate}
-        \item un numero intero maggiore di zero, rappresenta il numero di punti della funzione d'onda;
-        \item un numero reale maggiore di zero, rappresenta la lunghezza del passo temporale.
-    \end{enumerate}
-\subsubsection*{Burgers}
-    I dati in ingresso per l'integrazione dell'equazione di Burgers sono:
-    \begin{enumerate}
-        \item un numero intero maggiore di zero, rappresenta il numero di punti della funzione d'onda;
-        \item un numero reale maggiore di zero, rappresenta la lunghezza del passo temporale.
-    \end{enumerate}
-\subsection{Dati di Uscita del Problema}
-
-    \subsubsection*{Fugoide Senza Attrito}
-    Il dato in uscita all'integrazione dell'equazione del moto fugoide senza attrito è una sequenza di numeri reali che rappresentano la funzione di traiettoria dell'areomobile.
-    \subsubsection*{Fugoide Con Attrito}
-    Il dato in uscita all'integrazione dell'equazione del moto fugoide con attrito è una sequenza di numeri reali che rappresentano la funzione di traiettoria dell'areomobile.
-    \subsubsection*{Convezione}
-    Il dato in uscita all'integrazione dell'equazione di convezione a una dimensione è una sequenza di numeri reali che rappresentano i valori finali della funzione d'onda quadrata.
-    \subsubsection*{Burgers}
-    Il dato in uscita all'integrazione dell'equazione di Burgers a una dimensione è una sequenza di numeri reali che rappresentano i valori finali della la funzione a dente di sega.
-\subsection{Relazioni Intercorrenti tra i Dati del Problema}
-
-    \subsubsection*{Fugoide Senza Attrito}
-    \input{AnFugSemplice}
-    \newpage
-    \subsubsection*{Fugoide Con Attrito}
-    \input{AnFugCompleto}
-    \newpage
-    \subsubsection*{Convezione}
-    \input{AnConvezione}
-    \newpage
-    \subsubsection*{Burgers}
-    \input{AnBurgers}
-
-\section{Progettazione dell'Algoritmo}
-\subsection{Scelte di Progetto}
-    \subsubsection{Haskell}
-    \subsubsection{Prolog}
-
-\subsection{Passi dell'Algoritmo}
-
-\section{Implementazione dell'algoritmo}
-
-\subsection{Haskell}
-
-\subsection{Prolog}
-
-\section{Testing}
-
-\subsection{Haskell}
-
-\subsection{Prolog}
+\include{01_specifica/specifica}   
+\include{02_analisi/analisi} 
+\include{03_progettazione/prog_algoritmo}
+\include{04_implementazione/impl_algoritmo}
+\include{05_testing/test}
 
 \end{document}

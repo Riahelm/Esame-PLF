@@ -1,0 +1,192 @@
+\section{Analisi del Problema}
+
+\subsection{Dati di Ingresso del Problema}
+
+I dati in ingresso al problema sono stati suddivisi in base all'equazione da integrare numericamente, ne segue quindi la loro descrizione.
+
+\subsubsection*{Fugoide Senza Attrito}
+Il dato in ingresso è un numero reale maggiore di zero.
+Questo rappresenta il passo temporale per l'integrazione dell'equazione del moto fugoide senza attrito.
+\subsubsection*{Fugoide Con Attrito}
+Il dato in ingresso è un numero reale maggiore di zero. Questo rappresenta il passo temporale per l'integrazione dell'equazione del moto fugoide con attrito.
+\subsubsection*{Convezione}
+    I dati in ingresso per l'integrazione dell'equazione di convezione sono:
+    \begin{enumerate}
+        \item un numero intero naturale, rappresenta il numero di punti della funzione d'onda;
+        \item un numero reale maggiore di zero, rappresenta la lunghezza del passo temporale.
+    \end{enumerate}
+\subsubsection*{Burgers}
+Il dato in ingresso per l'integrazione dell'equazione di Burgers è un numero intero naturale. Questo rappresenta il numero di punti della funzione d'onda.
+
+\subsection{Dati di Uscita del Problema}
+
+\subsubsection*{Fugoide Senza Attrito}
+Il dato in uscita all'integrazione dell'equazione del moto fugoide senza attrito è una sequenza di numeri reali che rappresentano la funzione di traiettoria dell'areomobile.
+\subsubsection*{Fugoide Con Attrito}
+Il dato in uscita all'integrazione dell'equazione del moto fugoide con attrito è una sequenza di numeri reali che rappresentano la funzione di traiettoria dell'areomobile.
+\subsubsection*{Convezione}
+Il dato in uscita all'integrazione dell'equazione di convezione a una dimensione è una sequenza di numeri reali che rappresentano i valori finali della funzione d'onda quadrata.
+\subsubsection*{Burgers}
+Il dato in uscita all'integrazione dell'equazione di Burgers a una dimensione è una sequenza di numeri reali che rappresentano i valori finali della la funzione a dente di sega.
+
+\subsection{Relazioni Intercorrenti tra i Dati del Problema}
+
+\subsubsection*{Fugoide Senza Attrito}
+L’equazione per il moto di fugoide senza frizione è un’equazione differenziale ordinaria del secondo ordine:
+
+\begin{equation}
+z(t)'' = g - \frac{g \,z(t)}{z_t} = g \left(1 - \frac{z(t)}{z_t}\right).
+\end{equation}
+
+\noindent
+Possiamo trasformare questa equazione del secondo ordine in un sistema di equazioni del primo ordine:
+
+\begin{equation}
+z'(t) = b(t)
+\end{equation}
+
+\begin{equation}
+b'(t) = g\left(1-\frac{z(t)}{z_t}\right).
+\end{equation}
+
+\noindent
+Un altro modo di considerare un sistema di due equazioni ordinarie del primo ordine è scrivere il sistema differenziale come un’unica equazione vettoriale:
+
+\begin{equation}
+\vec{u}  = \begin{pmatrix} z \\ b \end{pmatrix}
+\end{equation}
+
+\begin{equation}
+\vec{u}'(t)  = \begin{pmatrix} b\\ g-g\frac{z(t)}{z_t} \end{pmatrix}.
+\end{equation}
+
+\noindent
+La soluzione approssimativa al tempo $t_n$ è $u_n$ e la soluzione numerica dell’equazione differenziale consiste nel calcolare una sequenza di soluzioni con la seguente formula, basata sull’equazione:
+
+\begin{equation}
+u_{n+1} = u_n + \Delta t \,f(u_n) + O(\Delta t)^2.
+\end{equation}
+
+\noindent
+Questa formula è chiamata metodo di Eulero. Per le equazioni di moto fugoide, il metodo di Eulero fornisce il seguente algoritmo:
+
+\begin{align}
+z_{n+1} & = z_n + \Delta t \, b_n \\
+b_{n+1} & = b_n + \Delta t \left(g - \frac{g}{z_t} \, z_n \right).
+\end{align}
+
+\subsubsection*{Fugoide Con Attrito}
+L’equazione per il moto fugoide con attrito è un sistema di equazioni differenziali ordinarie del primo ordine: 
+
+\begin{align}
+m \frac{dv}{dt} & = - W \sin\theta - D \\
+m v \, \frac{d\theta}{dt} & = - W \cos\theta + L.
+\end{align}
+
+\noindent
+Per visualizzare le traiettorie di volo previste da questo modello, che dipendono sia dalla velocità di avanzamento $v$ sia dall’angolo della traiettoria $theta$, occorre calcolare la posizione dell'aliante ad ogni istante di tempo $t$. La posizione dell’aliante su un piano verticale sarà determinata dalle coordinate $(x,y)$: 
+
+\begin{align}
+x'(t) & = v \cos(\theta) \\
+y'(t) & = v \sin(\theta).
+\end{align}
+
+\noindent
+L’intero sistema di equazioni discretizzate con il metodo di Eulero è:
+
+\begin{align}
+v^{n+1} & = v^n + \Delta t \left(- g\, \sin\theta^n - \frac{C_D}{C_L} \frac{g}{v_t^2} (v^n)^2 \right) \\
+\theta^{n+1} & = \theta^n + \Delta t \left(- \frac{g}{v^n}\,\cos\theta^n + \frac{g}{v_t^2}\, v^n \right) \\
+x^{n+1} & = x^n + \Delta t \, v^n \cos\theta^n \\
+y^{n+1} & = y^n + \Delta t \, v^n \sin\theta^n.
+\end{align}
+
+\noindent
+Scritto in forma vettoriale risulta: 
+
+$$u'(t) = f(u)$$
+
+\begin{align}
+u & = \begin{pmatrix} v \\ \theta \\ x \\ y \end{pmatrix} & f(u) & = \begin{pmatrix} - g\, \sin\theta - \frac{C_D}{C_L} \frac{g}{v_t^2} v^2 \\ - \frac{g}{v}\,\cos\theta + \frac{g}{v_t^2}\, v \\ v\cos\theta \\ v\sin\theta \end{pmatrix}.
+\end{align}
+
+\noindent
+Le condizioni iniziali sono rappresentate dalle costanti di integrazione definite dal valore della derivata al tempo $t = 0$ :
+
+$$
+v(0) = v_0 \quad \text{and} \quad \theta(0) = \theta_0
+$$
+$$
+x(0) = x_0 \quad \text{and} \quad y(0) = y_0.
+$$
+
+\subsubsection*{Convezione}
+L’equazione di convezione lineare unidimensionale è un’equazione differenziale alle derivate parziali: 
+
+\begin{equation}
+\frac{\partial u}{\partial t} + c \frac{\partial u}{\partial x} = 0.
+\end{equation}
+
+\noindent
+Per la soluzione numerica di $u(x,t)$ si sono utilizzati i pedici per denotare la posizione spaziale, come $u_i$, e gli apici per denotare l’istante temporale, come $u_n$ : 
+
+$$
+\begin{matrix}
+& &\bullet & & \bullet & &  \bullet \\
+& &u^{n+1}_{i-1} & & u^{n+1}_i & & u^{n+1}_{i+1} \\
+& &\bullet & & \bullet & &  \bullet \\
+& &u^n_{i-1} & & u^n_i & & u^n_{i+1} \\
+& &\bullet & & \bullet & &  \bullet \\
+& &u^{n-1}_{i-1} & & u^{n-1}_i & & u^{n-1}_{i+1}. \\
+\end{matrix}
+$$
+
+\noindent
+L’equazione per fornire la soluzione numerica del problema è data da:
+
+\begin{equation}
+u_i^{n+1} = u_i^n - c \frac{\Delta t}{\Delta x}(u_i^n-u_{i-1}^n).
+\end{equation}
+
+\noindent
+Le condizioni iniziali per una funzione d’onda quadra sono definite così:
+
+\begin{equation}
+u(x,0)=\begin{cases}2 & \text{dove } 0.5\leq x \leq 1,\\
+1 & \text{altrimenti} 
+\end{cases}
+\end{equation}
+
+\noindent
+dove il dominio della soluzione numerica è definito in $x\in(0,2)$.
+Poniamo inoltre delle condizioni al contorno su $x$: sia $u = 1$ quando $x = 0$.
+
+\subsubsection*{Burgers}
+L’equazione di Burgers unidimensionale è un’equazione differenziale alle derivate parziali: 
+
+\begin{equation}
+\frac{\partial u}{\partial t} + u \frac{\partial u}{\partial x} = \nu \frac{\partial ^2u}{\partial x^2}.
+\end{equation}
+
+\noindent
+L’equazione per fornire la soluzione numerica del problema è data da: 
+
+\begin{equation}
+u_i^{n+1} = u_i^n - u_i^n \frac{\Delta t}{\Delta x} (u_i^n - u_{i-1}^n) + \nu \frac{\Delta t}{\Delta x^2}(u_{i+1}^n - 2u_i^n + u_{i-1}^n)
+\end{equation}
+
+\noindent
+dove $u$: 
+
+\begin{equation}
+- \frac{2\nu\left(-\frac{(-8t + 2x) e^{-\frac{(-4t + x)^2}{4\nu(t + 1)}}}{4\nu(t + 1)} - \frac{(-8t + 2x - 4\pi) e^{-\frac{(-4t + x - 2\pi)^2}{4\nu(t + 1)}}}{4\nu(t + 1)} \right)}{e^{-\frac{(-4t + x - 2\pi)^2}{4\nu(t + 1)}} + e^{-\frac{(-4t + x)^2}{4\nu(t + 1)}}} + 4
+\end{equation}
+
+\noindent
+e le condizioni iniziali sono definite con $u(x, 0)$. Le condizioni al contorno sono: 
+
+\begin{equation}
+u(0) = u(2\pi).
+\end{equation}
+
+
