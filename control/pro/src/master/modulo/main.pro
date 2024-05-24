@@ -146,8 +146,8 @@ acquisisci_dato_nxb(NX) :- write('Digita il numero di punti totali della funzion
    - il primo argomento   e' la lunghezza del passo temporale dt;
    - il secondo argomento e' la funzione di moto fugoide risultante. */
 
-calc_fugoide_semplice(DT,[Z0|T]) :-  Z0 is 100.0,                    /* Altitudine iniziale del velivolo. */
-                                     B0 is 10.0,                     /* Angolo iniziale del velivolo. */
+calc_fugoide_semplice(DT,[Z0|T]) :-  Z0 is 100.0,                    /* Altitudine iniziale del velivolo.             */
+                                     B0 is 10.0,                     /* Angolo iniziale del velivolo.                 */
                                      PASSI is (floor(100.0/DT) + 1), /* Numero di punti in cui effettuare il calcolo. */
                                      calc_moto(Z0,B0,DT,PASSI,T).
 
@@ -204,11 +204,11 @@ derivata_u(Y,V,V,V1) :- CG is 9.81,     /* Costante gravitazionale terrestre. */
    - il primo argomento   e' la lunghezza del passo temporale dt;
    - il secondo argomento e' la funzione di moto fugoide risultante. */
 
-  calc_fugoide_completo(DT,[Y0|T]) :-  V0 is 30.0,                     /* La velocita' iniziale, in questo caso quella di trim. */
-                                       THETA0 is 0.0,                  /* Angolo iniziale del velivolo. */
-                                       X0 is 0.0,                      /* Spostamento orizzontale iniziale del velivolo. */
-                                       Y0 is 1000.0,                   /* Altitudine iniziale del velivolo. */
-                                       PASSI is (floor(100.0/DT) + 1), /* Numero di punti in cui effettuare il calcolo. */
+  calc_fugoide_completo(DT,[Y0|T]) :-  V0 is 30.0,                     /* La velocita' iniziale, in questo caso quella di trim.  */
+                                       THETA0 is 0.0,                  /* Angolo iniziale del velivolo.                          */
+                                       X0 is 0.0,                      /* Spostamento orizzontale iniziale del velivolo.         */
+                                       Y0 is 1000.0,                   /* Altitudine iniziale del velivolo.                      */
+                                       PASSI is (floor(100.0/DT) + 1), /* Numero di punti in cui effettuare il calcolo.          */
                                        calc_moto(V0,THETA0,X0,Y0,DT,PASSI,T).
 
 
@@ -258,10 +258,10 @@ passo_eulero(V,THETA,X,Y,DT,V1,THETA1,X1,Y1) :- derivata_u(V,THETA,VT,THETAT,XT,
    - il quinto argomento  e' lo spostamento laterale del velivolo ricalcolato;
    - il sesto argomento   e' lo spostamento verticale del velivolo ricalcolato. */
 
-derivata_u(V,THETA,V1,THETA1,X1,Y1) :-  CG is 9.81,     /* Costante gravitazionale terrestre. */
+derivata_u(V,THETA,V1,THETA1,X1,Y1) :-  CG is 9.81,     /* Costante gravitazionale terrestre.   */
                                         CR is 0.025,    /* Coefficiente di resistenza all'aria. */
-                                        CP is 1.0,      /* Coefficiente di portanza. */
-                                        VTRIM is 30.0,  /* Velocita' di trim del velivolo. */
+                                        CP is 1.0,      /* Coefficiente di portanza.            */
+                                        VTRIM is 30.0,  /* Velocita' di trim del velivolo.      */
                                         V1 is (- (CG * sin(THETA)) - (CR / CP) * CG/VTRIM**2*V**2),
                                         THETA1 is (- (CG * cos(THETA) / V) + (CG/VTRIM**2*V)),
                                         X1 is (V * cos(THETA)),
@@ -289,13 +289,13 @@ calc_convezione(NX,_,F)  :- (NX == 0;
                             cond_iniziale_conv(NX,INF,SUP,F).
 calc_convezione(NX,DT,F) :- NX > 1,
                             NT  is 25,          /* Numero complessivo di passi temporali
-                                                   che deve effettuare l'algoritmo. */
+                                                   che deve effettuare l'algoritmo.       */
                             NX1 is NX - 1,
-                            C   is 1.0,         /* Velocita' dell'onda. */
+                            C   is 1.0,         /* Velocita' dell'onda.                   */
                             INF is 0.0,         /* Limite inferiore del dominio spaziale. */
                             SUP is 2.0,         /* Limite superiore del dominio spaziale. */
                             DX  is SUP / NX1,   /* Distanza tra qualsiasi coppia di
-                                                   punti della griglia adiacenti. */
+                                                   punti della griglia adiacenti.         */
                             cond_iniziale_conv(NX,INF,SUP,ONDA),
                             tempo_conv(0,NT,NX1,C,DX,DT,ONDA,F).
 
@@ -404,14 +404,16 @@ calc_burgers(NX,F) :- (NX == 0;
                       SUP is 2.0 * pi,    /* Limite superiore del dominio spaziale. */
                       cond_iniziale_burg(NX,INF,SUP,F).
 calc_burgers(NX,F) :- NX1 is NX - 1,
-                      T   is 0.6,
-                      S   is 0.1,
-                      NU  is 0.07,
-                      INF is 0.0,
-                      SUP is 2.0 * pi,
-                      DX  is SUP / NX1,
-                      DT  is S * DX^2 / NU,
-                      NT  is floor(T/DT),
+                      T   is 0.6,            /* Tempo totale di simulazione.                */
+                      S   is 0.1,            /* Costante di Courant-Friendrichs-Lewy (CFL). */
+                      NU  is 0.07,           /* Coefficiente di diffusione.                 */
+                      INF is 0.0,            /* Limite inferiore del dominio spaziale.      */
+                      SUP is 2.0 * pi,       /* Limite superiore del dominio spaziale.      */
+                      DX  is SUP / NX1,      /* Distanza tra qualsiasi coppia di punti
+                                                della griglia adiacenti.                    */
+                      DT  is S * DX^2 / NU,  /* Lunghezza del passo temporale.              */
+                      NT  is floor(T/DT),    /* Numero complessivo di passi temporali
+                                                che deve effettuare l'algoritmo.            */
                       cond_iniziale_burg(NX,INF,SUP,ONDA),
                       tempo_burg(0,NT,NX1,NU,DX,DT,ONDA,F).
 
