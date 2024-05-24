@@ -87,7 +87,7 @@ main :-
 /* Inizio sezione input/output */
 
 
-/* Il predicato acquisisci_dato_dt  acquisisce un parametro numerico
+/* Il predicato acquisisci_dato_dt acquisisce un parametro numerico
    reale positivo di simulazione, ovvero la lunghezza del passo temporale. */
 
 acquisisci_dato_dt(DT) :- write('Digita lunghezza del passo temporale: '),
@@ -143,7 +143,7 @@ acquisisci_dato_nxb(NX) :- write('Digita il numero di punti totali della funzion
 
 /* Il predicato calc_fugoide_semplice calcola il moto fugoide con attrito di 
    un velivolo generico:
-   - il primo argomento e' la lunghezza del passo temporale dt;
+   - il primo argomento   e' la lunghezza del passo temporale dt;
    - il secondo argomento e' la funzione di moto fugoide risultante. */
 
 calc_fugoide_semplice(DT,[Z0|T]) :-  Z0 is 100.0,                    /* Altitudine iniziale del velivolo*/
@@ -153,12 +153,12 @@ calc_fugoide_semplice(DT,[Z0|T]) :-  Z0 is 100.0,                    /* Altitudi
 
 
 /* La funzione calc_moto calcola numericamente l'integrazione del moto fugoide:
-- il primo argomento e' l'altitudine del velivolo;
-- il secondo argomento e' la velocita' del velivolo;
-- il terzo argomento e' la lunghezza del passo temporale dt;
-- il quarto argomento e' il numero di passi che sono ancora da effettuare;
-- il quinto argmoento e' una lista di valori numerici che rappresentano 
-l'altitudine del velivolo per ogni passo temporale. */
+   - il primo argomento   e' l'altitudine del velivolo;
+   - il secondo argomento e' la velocita' del velivolo;
+   - il terzo argomento   e' la lunghezza del passo temporale dt;
+   - il quarto argomento  e' il numero di passi che sono ancora da effettuare;
+   - il quinto argomento  e' una lista di valori numerici che rappresentano 
+     l'altitudine del velivolo per ogni passo temporale. */
 
 calc_moto(Y,V,DT,0,[YT])     :- passo_eulero(Y,V,DT,YT,_).  
 calc_moto(Y,V,DT,LEN,[YT|T]) :- LEN > 0,
@@ -168,33 +168,29 @@ calc_moto(Y,V,DT,LEN,[YT|T]) :- LEN > 0,
 
 
 /* Il predicato passo_eulero applica il metodo di Eulero ad una coppia di numeri. La
-funzione approssima la soluzione al tempo t_(n+1) tramite il valore della funzione 
-al tempo t_n ed un opportuno passo temporale: 
-- il primo argomento e' l'altitudine del velivolo;
-- il secondo argomento e' la velocita' del velivolo;
-- il terzo argomento e' la lunghezza del passo temporale dt;
-- il quarto argomento e' l'altitudine del velivolo ricalcolata;
-- il quinto argomento e' la velocita' del velivolo ricalcolata. */
+   funzione approssima la soluzione al tempo t_(n+1) tramite il valore della funzione 
+   al tempo t_n ed un opportuno passo temporale: 
+   - il primo argomento   e' l'altitudine del velivolo;
+   - il secondo argomento e' la velocita' del velivolo;
+   - il terzo argomento   e' la lunghezza del passo temporale dt;
+   - il quarto argomento  e' l'altitudine del velivolo ricalcolata;
+   - il quinto argomento  e' la velocita' del velivolo ricalcolata. */
 
-passo_eulero(Y,V,DT,Y1,V1) :- rhs(Y,V,YT,VT),
+passo_eulero(Y,V,DT,Y1,V1) :- derivata_u(Y,V,YT,VT),
                               Y1 is (Y + (YT * DT)),
                               V1 is (V + (VT * DT)).
 
 
-/* Il predicato rhs viene utilizzato per l'applicazione dell'equazione del 
-moto fugoide:
-- il primo argomento e' l'altitudine del velivolo;
-- il secondo argomento e' l'angolazione del velivolo;
-- il terzo argomento e' l'altitudine del velivolo ricalcolata;
-- il quarto argomento e' l'angolazione del velivolo ricalcolata. */
+/* Il predicato derivata_u viene utilizzato per l'applicazione dell'equazione del 
+   moto fugoide:
+   - il primo argomento   e' l'altitudine del velivolo;
+   - il secondo argomento e' l'angolazione del velivolo;
+   - il terzo argomento   e' l'altitudine del velivolo ricalcolata;
+   - il quarto argomento  e' l'angolazione del velivolo ricalcolata. */
 
-rhs(Y,V,V,V1) :- CG is 9.81,     /* Costante gravitazionale terrestre */
-                 ZT is 100.0,    /* Altitudine centrale all'oscillazione */
-                 V1 is CG * (1-Y/ZT).
-/* Il predicato calc_fugoide_completo calcola il moto fugoide con attrito di 
-   un velivolo generico:
-  - il primo argomento e' la lunghezza del passo temporale dt;
-  - il secondo argomento e' la funzione di moto fugoide risultante. */
+derivata_u(Y,V,V,V1) :- CG is 9.81,     /* Costante gravitazionale terrestre */
+                        ZT is 100.0,    /* Altitudine centrale all'oscillazione */
+                        V1 is CG * (1-Y/ZT).
 
 
 /* Fine sezione fugoide semplice */
@@ -202,6 +198,11 @@ rhs(Y,V,V,V1) :- CG is 9.81,     /* Costante gravitazionale terrestre */
 
 /* Inizio sezione fugoide completo */
 
+
+/* Il predicato calc_fugoide_completo calcola il moto fugoide con attrito di 
+   un velivolo generico:
+   - il primo argomento   e' la lunghezza del passo temporale dt;
+   - il secondo argomento e' la funzione di moto fugoide risultante. */
 
   calc_fugoide_completo(DT,[Y0|T]) :-  V0 is 30.0,                     /* La velocita' iniziale, in questo caso quella di trim */
                                        THETA0 is 0.0,                  /* Angolo iniziale del velivolo */
@@ -212,14 +213,14 @@ rhs(Y,V,V,V1) :- CG is 9.81,     /* Costante gravitazionale terrestre */
 
 
 /* La funzione calc_moto calcola numericamente l'integrazione del moto fugoide:
-- il primo argomento e' la velocita' del velivolo; 
-- il secondo argomento e' l'angolo del velivolo;
-- il terzo argomento e' lo spostamento laterale del velivolo;
-- il quarto argomento e' lo spostamento verticale del velivolo;
-- il quinto argomento e' la lunghezza del passo temporale dt;
-- il sesto argomento e' il numero di passi che sono ancora da effettuare;
-- il settimo argomento e' una lista di valori numerici che rappresentano 
-l'altitudine del velivolo per ogni passo temporale. */
+   - il primo argomento   e' la velocita' del velivolo; 
+   - il secondo argomento e' l'angolo del velivolo;
+   - il terzo argomento   e' lo spostamento laterale del velivolo;
+   - il quarto argomento  e' lo spostamento verticale del velivolo;
+   - il quinto argomento  e' la lunghezza del passo temporale dt;
+   - il sesto argomento   e' il numero di passi che sono ancora da effettuare;
+   - il settimo argomento e' una lista di valori numerici che rappresentano 
+     l'altitudine del velivolo per ogni passo temporale. */
 
 calc_moto(V,THETA,X,Y,DT,0,[Y1])     :- passo_eulero(V,THETA,X,Y,DT,_,_,_,Y1).
 calc_moto(V,THETA,X,Y,DT,LEN,[Y1|T]) :- LEN > 0,
@@ -227,42 +228,44 @@ calc_moto(V,THETA,X,Y,DT,LEN,[Y1|T]) :- LEN > 0,
                                         LEN1 is (LEN - 1),
                                         calc_moto(V1,THETA1,X1,Y1,DT,LEN1,T).
 
-/* Il predicato passo_eulero applica il metodo di Eulero ad una coppia di numeri. La
-funzione approssima la soluzione al tempo t_(n+1) tramite il valore della funzione 
-al tempo t_n ed un opportuno passo temporale: 
-- il primo argomento e' la velocita' del velivolo; 
-- il secondo argomento e' l'angolo del velivolo;
-- il terzo argomento e' lo spostamento laterale del velivolo;
-- il quarto argomento e' lo spostamento verticale del velivolo;
-- il quinto argomento e' la lunghezza del passo temporale dt;
-- il sesto argomento e' la velocita' del velivolo ricalcolata; 
-- il settimo argomento e' l'angolo del velivolo ricalcolato;
-- il ottavo argomento e' lo spostamento laterale del velivolo ricalcolato;
-- il nono argomento e' lo spostamento verticale del velivolo ricalcolato. */
 
-passo_eulero(V,THETA,X,Y,DT,V1,THETA1,X1,Y1) :- rhs(V,THETA,VT,THETAT,XT,YT),
+/* Il predicato passo_eulero applica il metodo di Eulero ad una quadrupla di numeri. La
+   funzione approssima la soluzione al tempo t_(n+1) tramite il valore della funzione 
+   al tempo t_n ed un opportuno passo temporale: 
+   - il primo argomento   e' la velocita' del velivolo; 
+   - il secondo argomento e' l'angolo del velivolo;
+   - il terzo argomento   e' lo spostamento laterale del velivolo;
+   - il quarto argomento  e' lo spostamento verticale del velivolo;
+   - il quinto argomento  e' la lunghezza del passo temporale dt;
+   - il sesto argomento   e' la velocita' del velivolo ricalcolata; 
+   - il settimo argomento e' l'angolo del velivolo ricalcolato;
+   - il ottavo argomento  e' lo spostamento laterale del velivolo ricalcolato;
+   - il nono argomento    e' lo spostamento verticale del velivolo ricalcolato. */
+
+passo_eulero(V,THETA,X,Y,DT,V1,THETA1,X1,Y1) :- derivata_u(V,THETA,VT,THETAT,XT,YT),
                                                 V1      is (V + (VT * DT)),
                                                 THETA1  is (THETA + (THETAT * DT)),
                                                 X1      is (X + (XT * DT)),
                                                 Y1      is (Y + (YT * DT)). 
 
-/* Il predicato rhs viene utilizzato per l'applicazione dell'equazione del 
-moto fugoide:
-- il primo argomento   e' la velocita' del velivolo;
-- il secondo argomento e' l'angolazione del velivolo;
-- il terzo argomento   e' la velocita' del velivolo ricalcolata;
-- il quarto argomento  e' l'angolazione del velivolo ricalcolata;
-- il quinto argomento  e' lo spostamento laterale del velivolo ricalcolato;
-- il sesto argomento   e' lo spostamento verticale del velivolo ricalcolato. */
 
-rhs(V,THETA,V1,THETA1,X1,Y1) :-  CG is 9.81,     /* Costante gravitazionale terrestre */
-                                 CR is 0.025,    /* Coefficiente di resistenza all'aria */
-                                 CP is 1.0,      /* Coefficiente di portanza */
-                                 VTRIM is 30.0,  /* Velocita' di trim del velivolo */
-                                 V1 is (- (CG * sin(THETA)) - (CR / CP) * CG/VTRIM**2*V**2),
-                                 THETA1 is (- (CG * cos(THETA) / V) + (CG/VTRIM**2*V)),
-                                 X1 is (V * cos(THETA)),
-                                 Y1 is (V * sin(THETA)).
+/* Il predicato derivata_u viene utilizzato per l'applicazione dell'equazione del 
+   moto fugoide:
+   - il primo argomento   e' la velocita' del velivolo;
+   - il secondo argomento e' l'angolazione del velivolo;
+   - il terzo argomento   e' la velocita' del velivolo ricalcolata;
+   - il quarto argomento  e' l'angolazione del velivolo ricalcolata;
+   - il quinto argomento  e' lo spostamento laterale del velivolo ricalcolato;
+   - il sesto argomento   e' lo spostamento verticale del velivolo ricalcolato. */
+
+derivata_u(V,THETA,V1,THETA1,X1,Y1) :-  CG is 9.81,     /* Costante gravitazionale terrestre */
+                                        CR is 0.025,    /* Coefficiente di resistenza all'aria */
+                                        CP is 1.0,      /* Coefficiente di portanza */
+                                        VTRIM is 30.0,  /* Velocita' di trim del velivolo */
+                                        V1 is (- (CG * sin(THETA)) - (CR / CP) * CG/VTRIM**2*V**2),
+                                        THETA1 is (- (CG * cos(THETA) / V) + (CG/VTRIM**2*V)),
+                                        X1 is (V * cos(THETA)),
+                                        Y1 is (V * sin(THETA)).
 
 
 /* Fine sezione fugoide completo */
@@ -277,7 +280,7 @@ dell'equazione di convezione lineare a una dimensione:
 d'onda;
 - il secondo argomento e' la lunghezza del passo temporale;
 - il terzo argomento e' l'integrazione numerica completa dell'equa-
--zione lineare unidimensionale di convezione. */
+  -zione lineare unidimensionale di convezione. */
 
 calc_convezione(NX,_,F)  :- (NX == 0;
                              NX == 1),
@@ -295,19 +298,19 @@ calc_convezione(NX,DT,F) :- NX > 1,
                             tempo_conv(0,NT,NX1,C,DX,DT,ONDA,F).
 
 
-/* Il predicato tempo_conv calcola numericamente l'integrale della
-funzione rispetto al parametro temporale DT:
-- il primo argomento e' il numero di passi temporali che la funzione
-d'onda ha compiuto;
-- il secondo argomento e' il numero di passi temporali totali che la
-funzione d'onda deve compiere; 
-- il terzo argomento e' il numero di passi spaziali utilizzati dal
-predicato spazio_conv;
-- il quarto argomento e' la costante di velocità dell'onda;     
-- il quinto argomento e' la lunghezza del passo spaziale;
-- il sesto argomento e' la lunghezza del passo temporale;
-- il settimo argomento e' la funzione d'onda ricalcolata;
-- l' ottavo argomento e' la funzione d'onda risultante. */
+/* Il predicato tempo_conv calcola numericamente l'integrazione della
+   funzione rispetto al parametro temporale DT:
+   - il primo argomento e' il numero di passi temporali che la funzione
+     d'onda ha compiuto;
+   - il secondo argomento e' il numero di passi temporali totali che la
+     funzione d'onda deve compiere; 
+   - il terzo argomento e' il numero di passi spaziali utilizzati dal
+     predicato spazio_conv;
+   - il quarto argomento e' la costante di velocità dell'onda;     
+   - il quinto argomento e' la lunghezza del passo spaziale;
+   - il sesto argomento e' la lunghezza del passo temporale;
+   - il settimo argomento e' la funzione d'onda ricalcolata;
+   - l' ottavo argomento e' la funzione d'onda risultante. */
 
 tempo_conv(NT,NT,_,_,_,_,F,F).
 tempo_conv(I,NT,NX1,C,DX,DT,ONDA,F) :- I < NT,

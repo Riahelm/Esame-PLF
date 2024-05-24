@@ -183,7 +183,6 @@ calc_fugoide_semplice dt  = z0 : calc_moto_semplice (z0, b0) dt passi_temporali
       passi_temporali = floor(tempo/dt) + 1 -- Numero di punti in cui effettuare il calcolo
 
 
-
 {- La funzione calc_moto_semplice calcola numericamente l'integrazione del moto fugoide:
    - il primo argomento e' una coppia di valori, ovvero altitudine e velocita' 
      del velivolo;
@@ -197,6 +196,7 @@ calc_moto_semplice dA@(dAA,_) dt len | len == 0               = [dBA]
       dB@(dBA,_)           = passo_eulero_semplice dA dt
       calc_prossimo_punto  = calc_moto_semplice dB dt (len - 1)
 
+
 {- La funzione passo_eulero_semplice applica il metodo di Eulero ad una coppia di numeri. La
    funzione approssima la soluzione al tempo t_(n+1) tramite il valore della funzione 
    al tempo t_n ed un opportuno passo temporale:
@@ -205,15 +205,15 @@ calc_moto_semplice dA@(dAA,_) dt len | len == 0               = [dBA]
    - il secondo argomento e' la lunghezza del passo temporale dt. -}
 
 passo_eulero_semplice :: Coppia Double -> Double -> Coppia Double
-passo_eulero_semplice dA@(y@altitudine, v@velocita) dt = somma_coppia dA (molt_coppia_scalare (rhs_semplice dA) dt)
+passo_eulero_semplice dA@(y@altitudine, v@velocita) dt = somma_coppia dA (molt_coppia_scalare (derivata_u_semplice dA) dt)
 
 
-{- La funzione rhs_semplice viene utilizzata per l'applicazione dell'equazione del moto fugoide:
+{- La funzione derivata_u_semplice viene utilizzata per l'applicazione dell'equazione del moto fugoide:
    - il suo unico argomento e' una coppia di valori, ovvero altitudine e velocita' 
      del velivolo. -}
 
-rhs_semplice :: Coppia Double -> Coppia Double
-rhs_semplice dA@(y@alt, v@vel) = (v, cG * (1-y/zt))
+derivata_u_semplice :: Coppia Double -> Coppia Double
+derivata_u_semplice dA@(y@alt, v@vel) = (v, cG * (1-y/zt))
    where
       zt = 100.0 -- Altitudine centrale all'oscillazione
 
@@ -261,17 +261,17 @@ calc_moto_completo dA dt len | len == 0   = [dBD]
    - il secondo argomento e' la lunghezza del passo temporale dt. -}
 
 passo_eulero_completo :: Quadrupla Double -> Double -> Quadrupla Double
-passo_eulero_completo dA@(v,theta,x,y) dt = somma_quadrupla dA (molt_quadrupla_scalare (rhs_completo (v,theta)) dt)
+passo_eulero_completo dA@(v,theta,x,y) dt = somma_quadrupla dA (molt_quadrupla_scalare (derivata_u_completo (v,theta)) dt)
 
 
-{- La funzione rhs_completo viene utilizzata per l'applicazione dell'equazione del moto fugoide:
+{- La funzione derivata_u_completo viene utilizzata per l'applicazione dell'equazione del moto fugoide:
    - il suo unico argomento e' una coppia di valori, ovvero la velocita' e l'angolo del velivolo. -}
 
-rhs_completo :: Coppia Double -> Quadrupla Double
-rhs_completo dA@(v,theta) = (- (cG * sin theta) - (cR / cP)*cG/vTrim**2*v**2,
-                             - (cG * cos theta / v) + cG/vTrim**2*v,
-                             v*cos theta,
-                             v*sin theta)
+derivata_u_completo :: Coppia Double -> Quadrupla Double
+derivata_u_completo dA@(v,theta) = (- (cG * sin theta) - (cR / cP)*cG/vTrim**2*v**2,
+                                    - (cG * cos theta / v) + cG/vTrim**2*v,
+                                    v*cos theta,
+                                    v*sin theta)
    where
       cR = 0.025  -- Coefficiente di resistenza all'aria
       cP = 1.0    -- Coefficiente di portanza
@@ -289,6 +289,7 @@ rhs_completo dA@(v,theta) = (- (cG * sin theta) - (cR / cP)*cG/vTrim**2*v**2,
 somma_coppia :: (Num a) => Coppia a -> Coppia a -> Coppia a
 somma_coppia (a1,b1) (a2,b2) = (a1+a2, b1+b2)
 
+
 {- La funzione molt_coppia_scalare prende una coppia di elementi numerici
    ed un valore numerico e restituisce la coppia risultante dalla 
    moltiplicazione rispettiva degli elementi:
@@ -298,11 +299,13 @@ somma_coppia (a1,b1) (a2,b2) = (a1+a2, b1+b2)
 molt_coppia_scalare :: (Num a) => Coppia a -> a -> Coppia a
 molt_coppia_scalare (a1,b1) b = (a1*b, b1*b)
 
+
 {- La funzione somma_quadrupla prende due quadruple dello stesso tipo e 
    restituisce la quadrupla risultante dalla somma rispettiva degli elementi -}
 
 somma_quadrupla :: (Num a) => Quadrupla a -> Quadrupla a -> Quadrupla a
 somma_quadrupla (a1,b1,c1,d1) (a2,b2,c2,d2) = (a1+a2, b1+b2, c1+c2, d1+d2)
+
 
 {- La funzione molt_quadrupla_scalare prende una quadrupla di elementi numerici
    ed un valore numerico e restituisce la quadrupla risultante dalla 
@@ -336,6 +339,7 @@ calc_convezione nx dt | nx == 0 || nx == 1    = cond_iniziale nx onda_quadra lmt
       dx      = lmt_sup / (fromIntegral(nx :: Int) - 1) -- distanza tra qualsiasi coppia di punti della griglia adiacenti 
       c       = 1.0                                     -- velocità dell'onda 
 
+
 {- La funzione tempo_conv calcola numericamente l'integrazione della
    funzione rispetto al parametro temporale dt:
    - il primo argomento e' il numero di passi temporali totali che la
@@ -366,6 +370,7 @@ spazio_conv i c dx dt lx  | i == length lx - 1 = [passo_eulero]
                           | otherwise          = (passo_eulero) : spazio_conv (i+1) c dx dt lx
    where
       passo_eulero =  lx !! i - c * dt /dx *(lx !! i - lx !! (i-1))
+
 
 {- La funzione onda_quadra calcola la funzione d'onda quadra:
    - il suo unico argomento e' la lista di punti equidistanti del dominio
@@ -419,6 +424,7 @@ tempo_burg nt nx dx dt onda = tempo_burg (nt - 1) nx dx dt (bordo_inf : spazio_b
       bordo_inf = head onda - head onda * dt/dx * (head onda - last onda) +
                   nu*dt/dx**2 * ((head $ tail onda) - 2*(head onda) + last onda) -- condizione di bordo inferiore
 
+
 {- La funzione spazio_burg calcola numericamente l'integrazione della
    funzione rispetto al parametro spaziale dx:
    - il primo argomento e' l'indice per accedere agli elementi della 
@@ -435,7 +441,6 @@ spazio_burg i dx dt lx | i == length lx - 1 = [bordo_sup]
                      nu*dt/dx**2*(head lx - 2*(last lx) + (last $ init lx))
       passo_eulero = (lx !! i - lx !! i * dt/dx * (lx !! i - lx !! (i-1)) + 
                       nu*dt/dx**2*(lx !! (i+1) - 2*(lx !! i) + lx !! (i-1)))
-
 
 
 {- La funzione onda_dente_sega calcola la funzione d'onda a dente di 
@@ -473,6 +478,7 @@ cond_iniziale :: Int -> (Double -> Double) -> Double -> Double -> [Double]
 cond_iniziale nx onda lmt_inf lmt_sup = [onda x | x <- lx]
    where
       lx = gen_punti_equi nx lmt_inf lmt_sup
+
 
 {- La funzione gen_punti_equi genera una lista di punti equidistanti tra loro:
    - il primo argomento e' il numero di punti che si vuole generare;
