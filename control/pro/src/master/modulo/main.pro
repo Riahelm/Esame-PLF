@@ -9,11 +9,11 @@ main :-
     write('--------------------------------------------------------------------'), nl,
     write('| Calcolo del moto fugoide senza attrito                           |'), nl,
     write('| Parametri iniziali:                                              |'), nl,
-    write('| altitudine iniziale      = 100m,                                 |'), nl,
+    write('| altitudine iniziale        = 100m,                               |'), nl,
     write('| velocita\'   iniziale      = 10m/s.                               |'), nl,
     write('| Parametri di simulazione:                                        |'), nl,
-    write('| secondi di simulazione   = 100s,                                 |'), nl,
-    write('| costante gravitazionale  = 9.81m/(s^2).                          |'), nl,
+    write('| secondi di simulazione     = 100s,                               |'), nl,
+    write('| costante gravitazionale    = 9.81m/(s^2).                        |'), nl,
     write('| Parametro richiesto:                                             |'), nl,
     write('| passo temporale, determina la distanza temporale                 |'), nl,
     write('| tra due punti di simulazione, un valore basso                    |'), nl,
@@ -26,13 +26,13 @@ main :-
     write('--------------------------------------------------------------------'), nl,
     write('| Calcolo del moto fugoide con attrito                             |'), nl,
     write('| Parametri iniziali:                                              |'), nl,
-    write('| velocita\'  iniziale                    = velocita\'  di trim,     |'), nl,
+    write('| velocita\'  iniziale                  = velocita\'  di trim,       |'), nl,
     write('| angolo iniziale                       = 0rad,                    |'), nl,
     write('| spostamento laterale  iniziale        = 0m,                      |'), nl,
     write('| spostamento verticale iniziale        = 1000m.                   |'), nl,
     write('| Parametri di simulazione:                                        |'), nl,
     write('| secondi di simulazione                = 100s,                    |'), nl,
-    write('| velocita\'  di trim                     = 30m/s,                  |'), nl,
+    write('| velocita\'  di trim                   = 30m/s,                    |'), nl,
     write('| costante gravitazionale               = 9.81m/(s^2),             |'), nl,
     write('| coefficiente di resistenza dell aria  = 0.025,                   |'), nl,
     write('| coefficiente di portanza              = 1N.                      |'), nl,
@@ -54,7 +54,7 @@ main :-
     write('| valore della parte bassa della funzione  = 1.0.                  |'), nl,
     write('| Parametri di simulazione:                                        |'), nl,
     write('| numero di passi temporali da effettuare  = 25,                   |'), nl, 
-    write('| velocita\'  dell\' onda                      = 1.0.                |'), nl, 
+    write('| velocita\'  dell\' onda                  = 1.0.                    |'), nl, 
     write('| Parametri richiesti all\' utente:                                 |'), nl, 
     write('| numero di punti che compongono la funzione d\' onda,              |'), nl,
     write('| un valore alto permette una simulazione piu\'  accurata.          |'), nl,
@@ -68,7 +68,7 @@ main :-
 
 
     write('--------------------------------------------------------------------'), nl,
-    write('|Calcolo dell\' equazione di Burgers a una dimensione               |'), nl,
+    write('| Calcolo dell\' equazione di Burgers a una dimensione              |'), nl,
     write('| Parametri iniziali:                                              |'), nl,
     write('| limite superiore del dominio spaziale    = 2.0 * pi,             |'), nl,
     write('| limite inferiore del dominio spaziale    = 0.0.                  |'), nl, 
@@ -399,10 +399,10 @@ onda_quadra([X|L1],[OSI|T]) :- (X < 0.5;
      -zione lineare unidimensionale di Burgers.*/
 
 calc_burgers(NX,F) :- (NX == 0;
-                         NX == 1),
-                        INF is 0.0,         /* Limite inferiore del dominio spaziale. */
-                        SUP is 2.0 * pi,    /* Limite superiore del dominio spaziale. */
-                        cond_iniziale_burg(NX,INF,SUP,F).
+                       NX == 1),
+                      INF is 0.0,         /* Limite inferiore del dominio spaziale. */
+                      SUP is 2.0 * pi,    /* Limite superiore del dominio spaziale. */
+                      cond_iniziale_burg(NX,INF,SUP,F).
 calc_burgers(NX,F) :- NX1 is NX - 1,
                       T   is 0.6,
                       S   is 0.1,
