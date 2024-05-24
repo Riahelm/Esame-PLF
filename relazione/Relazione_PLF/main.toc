@@ -1,0 +1,15 @@
+\babel@toc {italian}{}
+\babel@toc {italian}{}
+\contentsline {section}{\numberline {1}Specifica del Problema}{2}%
+\contentsline {section}{\numberline {2}Analisi del Problema}{3}%
+\contentsline {subsection}{\numberline {2.1}Dati di Ingresso del Problema}{3}%
+\contentsline {subsection}{\numberline {2.2}Dati di Uscita del Problema}{3}%
+\contentsline {subsection}{\numberline {2.3}Relazioni Intercorrenti tra i Dati del Problema}{3}%
+\contentsline {section}{\numberline {3}Progettazione dell'Algoritmo}{7}%
+\contentsline {subsection}{\numberline {3.1}Scelte di Progetto}{7}%
+\contentsline {subsubsection}{\numberline {3.1.1}Haskell}{7}%
+\contentsline {subsubsection}{\numberline {3.1.2}Prolog}{7}%
+\contentsline {subsection}{\numberline {3.2}Passi dell'Algoritmo}{7}%
+\contentsline {section}{\numberline {4}Testing}{8}%
+\contentsline {subsection}{\numberline {4.1}Haskell}{8}%
+\contentsline {subsection}{\numberline {4.2}Prolog}{8}%

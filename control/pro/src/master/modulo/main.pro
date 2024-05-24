@@ -19,7 +19,7 @@ main :-
     write('| tra due punti di simulazione, un valore basso                    |'), nl,
     write('| permette una simulazione piu\' accurata                           |'), nl,
     write('--------------------------------------------------------------------'), nl,
-    acquisisci_dato_dt('Digita la lunghezza del passo temporale: ',DT),            nl,
+    acquisisci_dato_dt(DT),                                                        nl,
     calc_fugoide_semplice(DT, FS),
     write(FS),                                                                     nl,
 
@@ -41,7 +41,7 @@ main :-
     write('| tra due punti di simulazione, un valore basso                    |'), nl,
     write('| permette una simulazione piu\' accurata                           |'), nl,
     write('--------------------------------------------------------------------'), nl,
-    acquisisci_dato_dt('Digita la lunghezza del passo temporale: ',DT1),           nl,
+    acquisisci_dato_dt(DT1),                                                       nl,
     calc_fugoide_completo(DT1, FC),
     write(FC),                                                                     nl,
 
@@ -62,10 +62,8 @@ main :-
     write('| tra due punti di simulazione, un valore basso                    |'), nl,
     write('| permette una simulazione piu\' accurata                           |'), nl,
     write('--------------------------------------------------------------------'), nl,
-    acquisisci_dati_conv('Digita il numero di punti totali della funzione di onda: ',
-                         'Digita la lunghezza del passo temporale: ',
-                          NXC,DT2),                                                nl,
-    calc_convezione(NXC,DT2,CONV),
+    acquisisci_dati_conv(NXC,DT2),                                                 nl,
+    calc_convezione(NXC,DT2,CONV), 
     write(CONV),                                                                   nl,
 
 
@@ -81,63 +79,63 @@ main :-
     write('| Parametri richiesti all\'utente:                                  |'), nl, 
     write('| numero di punti che compongono la funzione d\'onda                |'), nl,
     write('--------------------------------------------------------------------'), nl,
-    acquisisci_dato_nxb('Digita il numero di punti totali della funzione di onda: ',
-                                                                            NXB),  nl,    
+    acquisisci_dato_nxb(NXB),                                                      nl,    
     calc_burgers(NXB,BURG),
     write(BURG).
 
-/* Inizio sezione validazione input */
+/* Inizio sezione input/output */
 
 
-/* Il predicato acquisisci_dato_nx acquisisce l'input dell'utente 
-   sui punti totali della funzione e ne controlla la validità:
-   - Il primo termine è il messaggio da stampare a schermo ed indica
-     cosa deve essere acquisito;
-   - Il secondo è il numero di punti totali della funzione. */
+/* Il predicato acquisisci_dato_dt  acquisisce un parametro numerico
+   reale di simulazione, ovvero la lunghezza del passo temporale. */
 
-   acquisisci_dato_nxb(MSG,NX) :- write(MSG),
-                                  read(NXV),
-                                  integer(NXV),
-                                  NXV >= 0,
-                                  NX is NXV,
-                                  !;     
-                                  write('Acquisizione errata!'), nl,
-                                  write('Il valore deve essere un numero naturale.'), nl,
-                                  acquisisci_dato_nxb(MSG,NX).
+acquisisci_dato_dt(DT) :- write('Digita lunghezza del passo temporale: '),
+                          read(DTV),
+                          DTV > 0,
+                          DT is DTV,
+                          !;     
+                          write('Acquisizione errata!'), nl,
+                          write('Il valore deve essere maggiore di zero.'), nl,
+                          acquisisci_dato_dt(DT).
 
 
-/* Il predicato acquisisci_dato_dt acquisisce l'input dell'utente 
-sulla lunghezza del passo temporale e ne controlla la validità:
-- Il primo termine è il messaggio da stampare a schermo ed indica
-cosa deve essere acquisito;
-- Il secondo è la lunghezza del passo temporale. */
+/* Il predicato acquisici_dati_conv acquisisce due parametri numerici
+   di simulazione per l'equazione di convezione: il primo, un naturale per il 
+   numero di punti della funzione d'onda; il secondo un reale per la lunghezza
+   del passo temporale. */
 
-acquisisci_dato_dt(MSG,DT) :- write(MSG),
-                              read(DTV),
-                              DTV > 0,
-                              DT is DTV,
-                              !;     
-                              write('Acquisizione errata!'), nl,
-                              write('Il valore deve essere maggiore di zero.'), nl,
-                              acquisisci_dato_dt(MSG,DT).
+acquisisci_dati_conv(NX,DT) :- write('Digita il numero di punti totali della funzione d\'onda: '),
+                               read(NXV),
+                               integer(NXV),
+                               acquisisci_dato_nxc(NXV,NX,DT),
+                               !;     
+                               write('Acquisizione errata!'), nl,
+                               write('Il valore deve essere un numero naturale.'), nl,
+                               acquisisci_dati_conv(NX,DT).
+
+acquisisci_dato_nxc(NX,NX,_)  :- (NX == 0;
+                                  NX == 1).
+acquisisci_dato_nxc(NX,NX,DT) :- NX > 1,
+                                 acquisisci_dato_dt(DT).
 
 
-acquisisci_dati_conv(MSG1,MSG2,NX,DT) :- write(MSG1),
-                                         read(NXV),
-                                         integer(NXV),
-                                         acquisisci_dato_nxc(NXV,MSG2,NX,DT),
-                                         !;     
-                                         write('Acquisizione errata!'), nl,
-                                         write('Il valore deve essere un numero naturale.'), nl,
-                                         acquisisci_dati_conv(MSG1,MSG2,NX,DT).
+/* Il predicato acquisisci_dato_nxb acquisisce un parametro numerico
+   naturale di simulazione, ovvero il numero totale di punti della funzione
+   d'onda per il calcolo dell'ecquazione di Burgers.  */
 
-acquisisci_dato_nxc(NX,_,NX,_)    :- (NX == 0;
-                                      NX == 1).
-acquisisci_dato_nxc(NX,MSG,NX,DT) :- NX > 1,
-                                     acquisisci_dato_dt(MSG,DT).
+acquisisci_dato_nxb(NX) :- write('Digita il numero di punti totali della funzione d\'onda: '),
+                           read(NXV),
+                           integer(NXV),
+                           NXV >= 0,
+                           NX is NXV,
+                           !;     
+                           write('Acquisizione errata!'), nl,
+                           write('Il valore deve essere un numero naturale.'), nl,
+                           acquisisci_dato_nxb(NX).
+
       
 
-/* Fine sezione validazione input */
+/* Fine sezione input/output */
 
 
 /* Inizio sezione fugoide semplice */
@@ -552,13 +550,13 @@ calc_punti(I,N1,INF,DST,[INF|L]) :- I < N1,
                                     calc_punti(I1,N1,INF1,DST,L).
 
 /* Predicato che inserisce un elemento in testa alla lista */
-inserisci_elem(X, L, [X | L]).
+inserisci_elem(X,L,[X|L]).
 
 /* Predicato che estrae la lista di elementi successivi al primo */
 estrai_lista([_|LX],LX).
 
 /* Predicato per estrarre il primo elemento di una lista */
-testa([X|_], X).
+testa([X|_],X).
 
 /* Predicato che restituisce il penultimo elemento di una lista */
 penultimo(LX,X) :- reverse(LX,LXInv),
@@ -566,8 +564,8 @@ penultimo(LX,X) :- reverse(LX,LXInv),
                    testa(Y,X).
 
 /* Predicato per aggiungere un elemento alla fine di una lista */
-accoda_elem(X, [], [X]).
-accoda_elem(X, [Y | L], [Y | LX]) :- accoda_elem(X, L, LX).
+accoda_elem(X,[],[X]).
+accoda_elem(X,[Y|L],[Y|LX]) :- accoda_elem(X,L,LX).
 
 
 /* Fine sezione funzioni condivise */

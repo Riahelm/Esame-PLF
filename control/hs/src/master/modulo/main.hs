@@ -1,10 +1,11 @@
 module Main where
 
 import Data.List {- necessario per usare: 
+                    - !!,     che estrae l'n-esimo elemento di una lista;
                     - head,   che estrae il primo elemento di una lista;
                     - last,   che estrae l'ultimo elemento di una lista; 
                     - tail,   che estrae gli elementi di una lista successivi al primo;
-                    - init,   che estrae gli elementi elementi di una lista escluso l'ultimo;
+                    - init,   che estrae gli elementi di una lista precedenti all'ultimo;
                     - length, che ritorna la lunghezza della lista. -}
 
 
@@ -28,7 +29,7 @@ main = do
           putStrLn "| permette una simulazione piu' accurata                           |"
           putStrLn "--------------------------------------------------------------------"
 
-          dt <- acquisisci_dato_dt "Digita la lunghezza del passo temporale: "
+          dt <- acquisisci_dato_dt
           putStrLn $ show (calc_fugoide_semplice (read dt :: Double))
 
           putStrLn "--------------------------------------------------------------------"
@@ -37,7 +38,7 @@ main = do
           putStrLn "| velocita' iniziale                    = velocita' di trim,       |"
           putStrLn "| angolo iniziale                       = 0rad,                    |"
           putStrLn "| spostamento laterale  iniziale        = 0m,                      |"
-          putStrLn "| spostamento verticale iniziale        = 1000m,                   |"
+          putStrLn "| spostamento verticale iniziale        = 1000m.                   |"
           putStrLn "| Parametri di simulazione:                                        |"
           putStrLn "| secondi di simulazione                = 100s,                    |"
           putStrLn "| velocita' di trim                     = 30m/s,                   |"
@@ -50,7 +51,7 @@ main = do
           putStrLn "| permette una simulazione piu' accurata                           |"
           putStrLn "--------------------------------------------------------------------"
 
-          dt <- acquisisci_dato_dt "Digita lunghezza del passo temporale: "
+          dt <- acquisisci_dato_dt
           putStrLn $ show (calc_fugoide_completo (read dt :: Double))
 
           putStrLn "--------------------------------------------------------------------"
@@ -71,8 +72,7 @@ main = do
           putStrLn "| permette una simulazione piu' accurata                           |"
           putStrLn "--------------------------------------------------------------------"
 
-          (nx,dt) <- acquisisci_dati_conv "Digita il numero di punti totali della funzione d'onda: "
-                                          "Digita la lunghezza del passo temporale della funzione d'onda: "
+          (nx,dt) <- acquisisci_dati_conv 
           putStrLn $ show (calc_convezione (read nx :: Int) (read dt :: Double))
 
           putStrLn "--------------------------------------------------------------------"
@@ -88,57 +88,62 @@ main = do
           putStrLn "| numero di punti che compongono la funzione d'onda                |"
           putStrLn "--------------------------------------------------------------------"
 
-          nx <- acquisisci_dato_nxb "Digita il numero di punti totali della funzione d'onda: "
+          nx <- acquisisci_dato_nxb 
           putStrLn $ show (calc_burgers (read nx :: Int))
 
 
-{- Inizio sezione validazione input/output -}
+{- Inizio sezione input/output -}
+
+{- L'azione input/output acquisisci_dato_dt acquisisce un parametro numerico
+   reale di simulazione, ovvero la lunghezza del passo temporale.-}
+
+acquisisci_dato_dt :: IO String
+acquisisci_dato_dt = do putStr "Digita lunghezza del passo temporale: "
+                        dt <- getLine
+                        if ((read dt :: Double) > 0)
+                          then return dt
+                        else do putStrLn "Acquisizione errata!"
+                                putStrLn "Il valore deve essere maggiore di zero."
+                                acquisisci_dato_dt 
 
 
-{- La funzione acquisisci_dato_dt viene utilizzata per la lunghezza
-   del passo temporale dt. -}
-
-acquisisci_dato_dt :: String -> IO String
-acquisisci_dato_dt s = do putStr s
-                          dato <- getLine
-                          if ((read dato :: Double) > 0)
-                            then return dato
-                          else do putStrLn "Acquisizione errata!"
-                                  putStrLn "Il valore deve essere maggiore di zero."
-                                  acquisisci_dato_dt s
 
 
-{- La funzione acquisisci_dato_nxb viene utilizzata per validare il
-   numero totale dei punti della funzione d'onda. -}
+{- L'azione input/output acquisisci_dati_conv acquisisce due parametri numerici
+   di simulazione per l'equazione di convezione: il primo, un naturale per il 
+   numero di punti della funzione d'onda; il secondo un reale per la lunghezza
+   del passo temporale. -}
 
-acquisisci_dato_nxb:: String -> IO String
-acquisisci_dato_nxb s = do putStr s
-                           dato <- getLine
-                           if ((read dato :: Integer) >= 0)
-                             then return dato
-                           else do putStrLn "Acquisizione errata!"
+acquisisci_dati_conv :: IO (String, String)
+acquisisci_dati_conv = do putStr "Digita il numero di punti totali della funzione d'onda: "
+                          nx <- getLine
+                          if (((read nx  :: Integer) == 0) ||
+                             ((read nx  :: Integer) == 1)) 
+                            then return (nx, "0")
+                          else if ((read nx :: Integer) > 1)
+                            then do dt <- acquisisci_dato_dt
+                                    return (nx, dt)
+                          else  do putStrLn "Acquisizione errata!"
                                    putStrLn "Il valore deve essere un numero naturale."
-                                   acquisisci_dato_nxb s
+                                   acquisisci_dati_conv
 
 
-{- La funzione acquisisci_dati_conv viene utilizzata per validare 
-   i dati in ingresso della funzione main_convezione. -}
+{- L'azione input/output acquisisci_dato_nxb acquisisce un parametro numerico
+   naturale di simulazione, ovvero il numero totale di punti della funzione
+   d'onda per il calcolo dell'ecquazione di Burgers. -}
 
-acquisisci_dati_conv :: String -> String-> IO (String, String)
-acquisisci_dati_conv s' s'' = do putStr s'
-                                 dato <- getLine
-                                 if (((read dato  :: Integer) == 0) ||
-                                     ((read dato  :: Integer) == 1)) 
-                                    then return (dato, "0")
-                                 else if ((read dato :: Integer) > 1)
-                                    then  do dt <- acquisisci_dato_dt s''
-                                             return (dato, dt)
-                                 else  do putStrLn "Acquisizione errata!"
-                                          putStrLn "Il valore deve essere un numero naturale."
-                                          acquisisci_dati_conv s' s''
+acquisisci_dato_nxb :: IO String
+acquisisci_dato_nxb = do putStr "Digita il numero di punti totali della funzione d'onda: "
+                         nx <- getLine
+                         if ((read nx :: Integer) >= 0)
+                           then return nx
+                         else do putStrLn "Acquisizione errata!"
+                                 putStrLn "Il valore deve essere un numero naturale."
+                                 acquisisci_dato_nxb 
 
 
-{- Fine sezione validazione input/output -}
+
+{- Fine sezione input/output -}
 
 
 {- Costanti globali -}
@@ -407,7 +412,7 @@ calc_burgers nx = tempo_burg nt nx dx dt (cond_iniziale nx onda_dente_sega lmt_i
    - il quarto argomento e' la lunghezza del passo temporale;
    - il quinto argomento e' la funzione d'onda ricalcolata. -}
 
-tempo_burg :: Int -> Int  -> Double -> Double -> [Double] -> [Double]
+tempo_burg :: Int -> Int -> Double -> Double -> [Double] -> [Double]
 tempo_burg 0 _ _ _ onda     = onda
 tempo_burg nt nx dx dt onda = tempo_burg (nt - 1) nx dx dt (bordo_inf : spazio_burg 1 dx dt onda)
    where
