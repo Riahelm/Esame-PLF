@@ -1,6 +1,100 @@
 \section{Progettazione dell'Algoritmo}
 \subsection{Scelte di Progetto}
-    \subsubsection{Haskell}
-    \subsubsection{Prolog}
 
 \subsection{Passi dell'Algoritmo}
+I passi dell'algoritmo per risolvere il problema sono i seguenti:
+
+\begin{enumerate}
+\item Acquisire la lunghezza del passo temporale per l'equazione di moto fugoide senza attrito.
+\item Calcolare e stampare l'integrazione numerica dell'equazione di moto fugoide senza attrito.
+\item Acquisire la lunghezza del passo temporale per l'equazione di moto fugoide con attrito.
+\item Calcolare e stampare l'integrazione numerica dell'equazione di moto fugoide con attrito.
+\item Acquisire il numero di punti totali della funzione d'onda per l'equazione di convezione lineare unidimensionale:
+\item Calcolare e stampare l'integrazione numerica dell'equazione di convezione lineare unidimensionale.
+\item Acquisire il numero di punti totali della funzione d'onda per l'equazione di Burgers unidimensionale.
+\item Calcolare e stamapre l'integrazione numerica dell'equazione di Burgers unidimensionale:
+\end{enumerate}
+
+\subsubsection*{2.1 passo}
+\begin{itemize}
+\item Alla condizione iniziale $z_0$ si concatena il resto del calcolo numerico per l'integrazione dell'equazione:
+\begin{itemize}
+\item Caso base: se il numero di passi temporali è pari a zero, si effettua un passo di integrazione numerica.
+\item Caso generale: se il numero di passi temporali è maggiore di zero, si effettua un passo di integrazione numerica e poi, una volta decrementato di uno il numero di passi temporali, si procede ricorsivamente sul numero di passi rimanenti. 
+\end{itemize}
+\end{itemize}
+
+\subsubsection*{4.1 passo}
+\begin{itemize}
+\item Alla condizione iniziale $y_0$ si concatena il resto del calcolo numerico per l'integrazione dell'equazione:
+\begin{itemize}
+\item Caso base: se il numero di passi temporali e' pari a zero, si effettua un passo di integrazione numerica.
+\item Caso generale: se il numero di passi temporali è maggiore di zero, si effettua un passo di integrazione numerica e poi, una volta decrementato di uno il numero di passi temporali, si procede ricorsivamente sul numero di passi rimanenti. 
+\end{itemize}
+\end{itemize}
+
+\subsubsection*{5.1 passo}
+\begin{itemize}
+\item Se il numero di punti è pari a 0 o 1, la lunghezza del passo temporale viene impostata a zero.
+\item Se il numero di punti è maggiore di 1, si acquisisce la lunghezza del passo temporale.
+\end{itemize}
+
+\subsubsection*{6.1 passo}
+\begin{itemize}
+\item Se il numero di punti è 0 o 1, l'integrazione numerica dell'equazione è uguale al calcolo della condizione iniziale.
+\item Se il numero di punti è maggiore di 1, si calcola la condizione iniziale dell'equazione e si procede con la sua integrazione numerica.
+\end{itemize}
+
+\subsubsection*{6.2 passo}
+\begin{itemize}
+\item Calcolo della condizione iniziale:
+\begin{itemize}
+\item Si genera una lista di punti equidistanti fra loro rappresentante il dominio della funzione d'onda quadra.
+\item Si calcola su ogni punto del dominio la funzione d'onda quadra. 
+\end{itemize}
+\item Calcolo dell'integrazione numerica a partire dalla condizione iniziale:
+\begin{itemize}
+\item Si calcola numericamente l'integrazione della funzione rispetto al tempo:
+\begin{itemize}
+\item[-] Caso base: se il numero di passi temporali è uguale a zero, viene restituita la funzione d'onda quadra.
+\item[-] Caso generale: se il numero di passi temporali è maggiore di zero, si decrementaa di uno il numero di passi temporali, si calcola la condizione di bordo e la si aggiunge in testa al calcolo numerico dell'integrazione della funzione rispetto allo spazio. Quest'ultima viene effettuata come segue:
+\begin{itemize}
+\item Caso base: se si raggiunge il numero di passi spaziali totale, si effettua un passo di integrazione numerica.
+\item Caso generale: se il numero di passi spaziali complessivo non è stato ancora raggiunto, si effettua un passo di integrazione numerica e poi, una volta incrementato di uno il numero di passi spaziali, si procede ricorsivamente sul numero di passi rimanenti. 
+\end{itemize}
+\end{itemize}
+\end{itemize}
+\end{itemize}
+
+\subsubsection*{8.1 passo}
+\begin{itemize}
+\item Se il numero di punti è 0 o 1, l'integrazione numerica dell'equazione è uguale al calcolo della condizione iniziale.
+\item Se il numero di punti è maggiore di 1, si calcola la condizione iniziale dell'equazione e si procede con la sua integrazione numerica. 
+\end{itemize}
+
+\subsubsection*{8.2 passo}
+\begin{itemize}
+\item Calcolo della condizione iniziale:
+\begin{itemize}
+\item Si genera una lista di punti equidistanti fra loro rappresentante il dominio della funzione d'onda a dente di sega.
+\item Si calcola su ogni punto del dominio la funzione d'onda a dente di sega. 
+\end{itemize}
+\item Calcolo dell'integrazione numerica a partire dalla condizione iniziale:
+\begin{itemize}
+\item Si calcola numericamente l'integrazione della funzione rispetto al tempo:
+\begin{itemize}
+\item[-] Caso base: se il numero di passi temporali è uguale a zero, viene restituita la funzione d'onda a dente di sega.
+\item[-] Caso generale: se il numero di passi temporali è maggiore di zero, si decrementaa di uno il numero di passi temporali, si calcola la condizione di bordo e la si aggiunge in testa al calcolo numerico dell'integrazione della funzione rispetto allo spazio. Quest'ultima viene effettuata come segue:
+\begin{itemize}
+\item Caso base: se si raggiunge il numero di passi spaziali totale, si effettua un passo di integrazione numerica.
+\item Caso generale: se il numero di passi spaziali complessivo non è stato ancora raggiunto, si effettua un passo di integrazione numerica e poi, una volta incrementato di uno il numero di passi spaziali, si procede ricorsivamente sul numero di passi rimanenti. 
+\end{itemize}
+\end{itemize}
+\end{itemize}
+\end{itemize}
+
+
+
+
+
+

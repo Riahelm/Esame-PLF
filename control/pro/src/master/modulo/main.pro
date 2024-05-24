@@ -391,17 +391,23 @@ onda_quadra([X|L1],[OSI|T]) :- (X < 0.5;
      d'onda;
    - il secondo argomento e' l'integrazione numerica completa dell'equa-
      -zione lineare unidimensionale di burgers.*/
-     calc_burgers(NX,F) :- NX1 is NX - 1,
-                           T   is 0.6,
-                           S   is 0.1,
-                           NU  is 0.07,
-                           INF is 0.0,
-                           SUP is 2.0 * pi,
-                           DX  is SUP / NX1,
-                           DT  is S * DX^2 / NU,
-                           NT  is floor(T/DT),
-                           cond_iniziale_burg(NX,INF,SUP,ONDA),
-                           tempo_burg(0,NT,NX1,NU,DX,DT,ONDA,F).
+calc_burgers(NX,F)  :- (NX == 0;
+                        NX == 1),
+                       INF is 0.0,
+                       SUP is 2.0 * pi,
+                       cond_iniziale_burg(NX,INF,SUP,F).
+
+calc_burgers(NX,F) :- NX1 is NX - 1,
+                      T   is 0.6,
+                      S   is 0.1,
+                      NU  is 0.07,
+                      INF is 0.0,
+                      SUP is 2.0 * pi,
+                      DX  is SUP / NX1,
+                      DT  is S * DX^2 / NU,
+                      NT  is floor(T/DT),
+                      cond_iniziale_burg(NX,INF,SUP,ONDA),
+                      tempo_burg(0,NT,NX1,NU,DX,DT,ONDA,F).
 
 
 /* Il predicato tempo_burg calcola numericamente l'integrale della

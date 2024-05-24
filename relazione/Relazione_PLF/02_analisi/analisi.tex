@@ -72,7 +72,7 @@ Questa formula è chiamata metodo di Eulero. Per le equazioni di moto fugoide, i
 
 \begin{align}
 z_{n+1} & = z_n + \Delta t \, b_n \\
-b_{n+1} & = b_n + \Delta t \left(g - \frac{g}{z_t} \, z_n \right).
+b_{n+1} & = b_n + \Delta t \left(g - \frac{g}{z_t} \, z_n \right)
 \end{align}
 
 \noindent
@@ -88,6 +88,9 @@ dove:
 \noindent
 Il numero di passi di simulazione $n$ viene calcolato $n = \frac{T}{\Delta t}$, dove $T$ è il
 tempo totale di simulazione.
+
+\noindent 
+La condizione iniziale è il valore della derivata al tempo $t=0$ ed è l'altitudine iniziale del velivolo $z_0$.
 
 \subsubsection*{Fugoide Con Attrito}
 L’equazione per il moto fugoide con attrito è un sistema di equazioni differenziali ordinarie del primo ordine: 
@@ -121,7 +124,7 @@ Scritto in forma vettoriale risulta:
 $$u'(t) = f(u)$$
 
 \begin{align}
-u & = \begin{pmatrix} v \\ \theta \\ x \\ y \end{pmatrix} & f(u) & = \begin{pmatrix} - g\, \sin\theta - \frac{C_D}{C_L} \frac{g}{v_t^2} v^2 \\ - \frac{g}{v}\,\cos\theta + \frac{g}{v_t^2}\, v \\ v\cos\theta \\ v\sin\theta \end{pmatrix}.
+u & = \begin{pmatrix} v \\ \theta \\ x \\ y \end{pmatrix} & f(u) & = \begin{pmatrix} - g\, \sin\theta - \frac{C_D}{C_L} \frac{g}{v_t^2} v^2 \\ - \frac{g}{v}\,\cos\theta + \frac{g}{v_t^2}\, v \\ v\cos\theta \\ v\sin\theta \end{pmatrix}
 \end{align}
 
 \noindent
@@ -177,7 +180,7 @@ $$
 L’equazione per fornire la soluzione numerica del problema è data da:
 
 \begin{equation}
-u_i^{n+1} = u_i^n - c \frac{\Delta t}{\Delta x}(u_i^n-u_{i-1}^n).
+u_i^{n+1} = u_i^n - c \frac{\Delta t}{\Delta x}(u_i^n-u_{i-1}^n)
 \end{equation}
 
 \noindent
@@ -185,7 +188,7 @@ dove:
 \begin{itemize}
 \item $\Delta t$ è la lunghezza del passo temporale;
 \item $\Delta x$ è la lunghezza del passo spaziale;
-\item $c$ è la velocità dell'onda;
+\item $c$ è la velocità dell'onda.
 \end{itemize}
 
 
@@ -218,14 +221,23 @@ u_i^{n+1} = u_i^n - u_i^n \frac{\Delta t}{\Delta x} (u_i^n - u_{i-1}^n) + \nu \f
 \end{equation}
 
 \noindent
-dove $u$: 
-
+dove: 
+\begin{itemize}
+\item $\nu$ è il coefficiente di diffusione dell'onda;
+\item $u$:
 \begin{equation}
-- \frac{2\nu\left(-\frac{(-8t + 2x) e^{-\frac{(-4t + x)^2}{4\nu(t + 1)}}}{4\nu(t + 1)} - \frac{(-8t + 2x - 4\pi) e^{-\frac{(-4t + x - 2\pi)^2}{4\nu(t + 1)}}}{4\nu(t + 1)} \right)}{e^{-\frac{(-4t + x - 2\pi)^2}{4\nu(t + 1)}} + e^{-\frac{(-4t + x)^2}{4\nu(t + 1)}}} + 4
-\end{equation}
+- \frac{2\nu\left(-\frac{(-8t + 2x) e^{-\frac{(-4t + x)^2}{4\nu(t + 1)}}}{4\nu(t + 1)} - \frac{(-8t + 2x - 4\pi) e^{-\frac{(-4t + x - 2\pi)^2}{4\nu(t + 1)}}}{4\nu(t + 1)} \right)}{e^{-\frac{(-4t + x - 2\pi)^2}{4\nu(t + 1)}} + e^{-\frac{(-4t + x)^2}{4\nu(t + 1)}}} + 4 
+\end{equation}	
+\end{itemize}
+.
+
 
 \noindent
-e le condizioni iniziali sono definite con $u(x, 0)$. Le condizioni al contorno sono: 
+Il passo spaziale $\Delta x$ viene calcolato come precedentemente mostrato per l'equazione di convezione. Il passo temporale $\Delta t$ viene invece calcolato come $\Delta t = \frac{\sigma\Delta x^2}{n - 1}$, dove $\sigma$ è la
+costante di Courant-Friedrichs-Lewy (CFL) e $n$ il numero di punti della funzione d'onda discretizzata. Il numero di passi temporali totali è $\frac{T}{\Delta t}$, dove $T$ è il tempo totale di simulazione.
+
+\noindent
+Le condizioni iniziali sono definite con $u(x, 0)$. Le condizioni al contorno sono: 
 
 \begin{equation}
 u(0) = u(2\pi).
