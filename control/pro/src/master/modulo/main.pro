@@ -10,14 +10,14 @@ main :-
     write('| Calcolo del moto fugoide senza attrito                           |'), nl,
     write('| Parametri iniziali:                                              |'), nl,
     write('| altitudine iniziale      = 100m,                                 |'), nl,
-    write('| velocita\'  iniziale      = 10m/s.                                |'), nl,
+    write('| velocita\'  iniziale      = 10m/s.                               |'), nl,
     write('| Parametri di simulazione:                                        |'), nl,
     write('| secondi di simulazione   = 100s,                                 |'), nl,
     write('| costante gravitazionale  = 9.81m/(s^2).                          |'), nl,
     write('| Parametro richiesto:                                             |'), nl,
     write('| passo temporale, determina la distanza temporale                 |'), nl,
     write('| tra due punti di simulazione, un valore basso                    |'), nl,
-    write('| permette una simulazione piu\' accurata                           |'), nl,
+    write('| permette una simulazione piu\' accurata                          |'), nl,
     write('--------------------------------------------------------------------'), nl,
     acquisisci_dato_dt(DT),                                                        nl,
     calc_fugoide_semplice(DT, FS),
@@ -26,27 +26,27 @@ main :-
     write('--------------------------------------------------------------------'), nl,
     write('| Calcolo del moto fugoide con attrito                             |'), nl,
     write('| Parametri iniziali:                                              |'), nl,
-    write('| velocita\' iniziale                    = velocita\' di trim,       |'), nl,
+    write('| velocita\' iniziale                    = velocita\' di trim,     |'), nl,
     write('| angolo iniziale                       = 0rad,                    |'), nl,
     write('| spostamento laterale  iniziale        = 0m,                      |'), nl,
     write('| spostamento verticale iniziale        = 1000m.                   |'), nl,
     write('| Parametri di simulazione:                                        |'), nl,
     write('| secondi di simulazione                = 100s,                    |'), nl,
-    write('| velocita\' di trim                     = 30m/s,                   |'), nl,
+    write('| velocita\' di trim                     = 30m/s,                  |'), nl,
     write('| costante gravitazionale               = 9.81m/(s^2),             |'), nl,
     write('| coefficiente di resistenza dell aria  = 0.025,                   |'), nl,
     write('| coefficiente di portanza              = 1N.                      |'), nl,
     write('| Parametro richiesto:                                             |'), nl,
     write('| passo temporale, determina la distanza temporale                 |'), nl,
     write('| tra due punti di simulazione, un valore basso                    |'), nl,
-    write('| permette una simulazione piu\' accurata                           |'), nl,
+    write('| permette una simulazione piu\' accurata                          |'), nl,
     write('--------------------------------------------------------------------'), nl,
     acquisisci_dato_dt(DT1),                                                       nl,
     calc_fugoide_completo(DT1, FC),
     write(FC),                                                                     nl,
 
     write('--------------------------------------------------------------------'), nl,
-    write('| Calcolo dell\'equazione di convezione lineare a una dimensione    |'), nl,
+    write('| Calcolo dell\'equazione di convezione lineare a una dimensione   |'), nl,
     write('| Parametri iniziali:                                              |'), nl,
     write('| limite superiore del dominio spaziale    = 2.0,                  |'), nl,
     write('| limite inferiore del dominio spaziale    = 0.0,                  |'), nl, 
@@ -54,13 +54,13 @@ main :-
     write('| valore della parte bassa della funzione  = 1.0.                  |'), nl,
     write('| Parametri di simulazione:                                        |'), nl,
     write('| numero di passi temporali da effettuare  = 25,                   |'), nl, 
-    write('| velocita\' dell\'onda                      = 1.0.                  |'), nl, 
-    write('| Parametri richiesti all\'utente:                                  |'), nl, 
-    write('| numero di punti che compongono la funzione d\'onda,               |'), nl,
-    write('| un valore alto permette una simulazione piu\' accurata.           |'), nl,
+    write('| velocita\' dell\'onda                      = 1.0.                |'), nl, 
+    write('| Parametri richiesti all\'utente:                                 |'), nl, 
+    write('| numero di punti che compongono la funzione d\'onda,              |'), nl,
+    write('| un valore alto permette una simulazione piu\' accurata.          |'), nl,
     write('| Passo temporale, determina la distanza temporale                 |'), nl,
     write('| tra due punti di simulazione, un valore basso                    |'), nl,
-    write('| permette una simulazione piu\' accurata                           |'), nl,
+    write('| permette una simulazione piu\' accurata                          |'), nl,
     write('--------------------------------------------------------------------'), nl,
     acquisisci_dati_conv(NXC,DT2),                                                 nl,
     calc_convezione(NXC,DT2,CONV), 
@@ -68,7 +68,7 @@ main :-
 
 
     write('--------------------------------------------------------------------'), nl,
-    write('|Calcolo dell\'equazione di Burgers a una dimensione                |'), nl,
+    write('|Calcolo dell\'equazione di Burgers a una dimensione               |'), nl,
     write('| Parametri iniziali:                                              |'), nl,
     write('| limite superiore del dominio spaziale    = 2.0 * pi,             |'), nl,
     write('| limite inferiore del dominio spaziale    = 0.0.                  |'), nl, 
@@ -76,18 +76,19 @@ main :-
     write('| tempo finale di simulazione              = 0.6s,                 |'), nl, 
     write('| coefficiente di diffusione               = 1.0m^2/s,             |'), nl, 
     write('| costante di Courant-Friedrichs-Lewy      = 0.1.                  |'), nl, 
-    write('| Parametri richiesti all\'utente:                                  |'), nl, 
-    write('| numero di punti che compongono la funzione d\'onda                |'), nl,
+    write('| Parametri richiesti all\'utente:                                 |'), nl, 
+    write('| numero di punti che compongono la funzione d\'onda               |'), nl,
     write('--------------------------------------------------------------------'), nl,
     acquisisci_dato_nxb(NXB),                                                      nl,    
     calc_burgers(NXB,BURG),
     write(BURG).
 
+
 /* Inizio sezione input/output */
 
 
 /* Il predicato acquisisci_dato_dt  acquisisce un parametro numerico
-   reale di simulazione, ovvero la lunghezza del passo temporale. */
+   reale positivo di simulazione, ovvero la lunghezza del passo temporale. */
 
 acquisisci_dato_dt(DT) :- write('Digita lunghezza del passo temporale: '),
                           read(DTV),
@@ -99,10 +100,10 @@ acquisisci_dato_dt(DT) :- write('Digita lunghezza del passo temporale: '),
                           acquisisci_dato_dt(DT).
 
 
-/* Il predicato acquisici_dati_conv acquisisce due parametri numerici
+/* Il predicato acquisisci_dati_conv acquisisce due parametri numerici
    di simulazione per l'equazione di convezione: il primo, un naturale per il 
-   numero di punti della funzione d'onda; il secondo un reale per la lunghezza
-   del passo temporale. */
+   numero di punti della funzione d'onda; il secondo un reale positivo 
+   per la lunghezza del passo temporale. */
 
 acquisisci_dati_conv(NX,DT) :- write('Digita il numero di punti totali della funzione d\'onda: '),
                                read(NXV),
@@ -121,7 +122,7 @@ acquisisci_dato_nxc(NX,NX,DT) :- NX > 1,
 
 /* Il predicato acquisisci_dato_nxb acquisisce un parametro numerico
    naturale di simulazione, ovvero il numero totale di punti della funzione
-   d'onda per il calcolo dell'ecquazione di Burgers.  */
+   d'onda per il calcolo dell'equazione di Burgers. */
 
 acquisisci_dato_nxb(NX) :- write('Digita il numero di punti totali della funzione d\'onda: '),
                            read(NXV),
@@ -134,7 +135,6 @@ acquisisci_dato_nxb(NX) :- write('Digita il numero di punti totali della funzion
                            acquisisci_dato_nxb(NX).
 
       
-
 /* Fine sezione input/output */
 
 
@@ -142,9 +142,9 @@ acquisisci_dato_nxb(NX) :- write('Digita il numero di punti totali della funzion
 
 
 /* Il predicato calc_fugoide_semplice calcola il moto fugoide con attrito di 
-un velivolo generico:
-- il primo argomento e' la lunghezza del passo temporale dt;
-- il secondo argomento e' la funzione di moto fugoide risultante. */
+   un velivolo generico:
+   - il primo argomento e' la lunghezza del passo temporale dt;
+   - il secondo argomento e' la funzione di moto fugoide risultante. */
 
 calc_fugoide_semplice(DT,[Z0|T]) :-  Z0 is 100.0,                    /* Altitudine iniziale del velivolo*/
                                      B0 is 10.0,                     /* Angolo iniziale del velivolo */
