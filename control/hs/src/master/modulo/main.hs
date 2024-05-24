@@ -338,14 +338,14 @@ calc_convezione nx dt | nx == 0 || nx == 1    = cond_iniziale nx onda_quadra lmt
 
 {- La funzione tempo_conv calcola numericamente l'integrazione della
    funzione rispetto al parametro temporale dt:
-   - il primo argomento  e' il numero di passi temporali totali che la
+   - il primo argomento   e' il numero di passi temporali totali che la
      funzione d'onda deve compiere; 
    - il secondo argomento e' il numero di passi spaziali utilizzati dal
      predicato spazio_conv;
-   - il terzo argomento  e' la costante di velocità dell'onda;     
-   - il quarto argomento e' la lunghezza del passo spaziale;
-   - il quinto argomento e' la lunghezza del passo temporale;
-   - il sesto argomento  e' la funzione d'onda ricalcolata. -}
+   - il terzo argomento   e' la costante di velocità dell'onda;     
+   - il quarto argomento  e' la lunghezza del passo spaziale;
+   - il quinto argomento  e' la lunghezza del passo temporale;
+   - il sesto argomento   e' la funzione d'onda ricalcolata. -}
 
 tempo_conv :: Int -> Int -> Double -> Double -> Double -> [Double] -> [Double]
 tempo_conv 0 _ _ _ _ onda     = onda
