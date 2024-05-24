@@ -213,7 +213,7 @@ passo_eulero_semplice dA@(y@altitudine, v@velocita) dt = somma_coppia dA (molt_c
 derivata_u_semplice :: Coppia Double -> Coppia Double
 derivata_u_semplice dA@(y@alt, v@vel) = (v, cG * (1-y/zt))
    where
-      zt = 100.0 -- Altitudine centrale all'oscillazione
+      zt = 100.0 -- Altitudine centrale all'oscillazione.
 
 
 {- Fine sezione fugoide semplice -}
