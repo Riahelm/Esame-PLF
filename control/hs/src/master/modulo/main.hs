@@ -189,10 +189,9 @@ calc_fugoide_semplice dt  = z0 : calc_moto_semplice (z0, b0) dt passi_temporali
 
 calc_moto_semplice :: Coppia Double -> Double -> Int -> [Double]
 calc_moto_semplice dA@(dAA,_) dt len | len == 0               = [dBA]
-                                     | otherwise              = dBA : calc_prossimo_punto
+                                     | otherwise              = dBA : calc_moto_semplice dB dt (len - 1)
    where
       dB@(dBA,_)           = passo_eulero_semplice dA dt
-      calc_prossimo_punto  = calc_moto_semplice dB dt (len - 1)
 
 
 {- La funzione passo_eulero_semplice applica il metodo di Eulero ad una coppia di numeri. La
@@ -245,10 +244,9 @@ calc_fugoide_completo dt  = y0 : calc_moto_completo (v0, theta0, x0, y0) dt pass
 
 calc_moto_completo :: Quadrupla Double -> Double -> Int -> [Double]
 calc_moto_completo dA dt len | len == 0   = [dBD]
-                             | otherwise  = dBD : calc_prossimo_punto
+                             | otherwise  = dBD : calc_moto_completo dB dt (len - 1)
    where
       dB@(_,_,_, dBD)      = passo_eulero_completo dA dt
-      calc_prossimo_punto  = calc_moto_completo dB dt (len - 1)
 
 
 {- La funzione passo_eulero_completo applica il metodo di Eulero ad una quadrupla di numeri. La
