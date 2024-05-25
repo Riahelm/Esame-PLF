@@ -5,17 +5,17 @@
 I passi dell'algoritmo per risolvere il problema sono i seguenti:
 
 \begin{enumerate}
-\item Acquisire la lunghezza del passo temporale per l'equazione di moto fugoide senza attrito.
-\item Calcolare e stampare l'integrazione numerica dell'equazione di moto fugoide senza attrito.
-\item Acquisire la lunghezza del passo temporale per l'equazione di moto fugoide con attrito.
-\item Calcolare e stampare l'integrazione numerica dell'equazione di moto fugoide con attrito.
-\item Acquisire il numero di punti totali della funzione d'onda per l'equazione di convezione lineare unidimensionale:
-\item Calcolare e stampare l'integrazione numerica dell'equazione di convezione lineare unidimensionale.
-\item Acquisire il numero di punti totali della funzione d'onda per l'equazione di Burgers unidimensionale.
-\item Calcolare e stamapre l'integrazione numerica dell'equazione di Burgers unidimensionale:
+\item Acquisire la lunghezza del passo temporale per l'equazione di moto fugoide senza attrito: \textbf{v1.}
+\item Calcolare e stampare l'integrazione numerica dell'equazione di moto fugoide senza attrito: \textbf{2.1}.
+\item Acquisire la lunghezza del passo temporale per l'equazione di moto fugoide con attrito: \textbf{v1.}
+\item Calcolare e stampare l'integrazione numerica dell'equazione di moto fugoide con attrito: \textbf{4.1}.
+\item Acquisire il numero di punti totali della funzione d'onda per l'equazione di convezione lineare unidimensionale: \textbf{v2.} e \textbf{5.1}.
+\item Calcolare e stampare l'integrazione numerica dell'equazione di convezione lineare unidimensionale: \textbf{6.1}.
+\item Acquisire il numero di punti totali della funzione d'onda per l'equazione di Burgers unidimensionale: \textbf{v2.}
+\item Calcolare e stampare l'integrazione numerica dell'equazione di Burgers unidimensionale: \textbf{8.1}.
 \end{enumerate}
 
-\subsubsection*{2.1 passo}
+\subsubsection*{2.1 Calcolo del moto fugoide senza attrito} 
 \begin{itemize}
 \item Alla condizione iniziale $z_0$ si concatena il resto del calcolo numerico per l'integrazione dell'equazione:
 \begin{itemize}
@@ -24,33 +24,33 @@ I passi dell'algoritmo per risolvere il problema sono i seguenti:
 \end{itemize}
 \end{itemize}
 
-\subsubsection*{4.1 passo}
+\subsubsection*{4.1 Calcolo del moto fugoide con attrito}
 \begin{itemize}
 \item Alla condizione iniziale $y_0$ si concatena il resto del calcolo numerico per l'integrazione dell'equazione:
 \begin{itemize}
-\item Caso base: se il numero di passi temporali e' pari a zero, si effettua un passo di integrazione numerica.
+\item Caso base: se il numero di passi temporali è pari a zero, si effettua un passo di integrazione numerica.
 \item Caso generale: se il numero di passi temporali è maggiore di zero, si effettua un passo di integrazione numerica e poi, una volta decrementato di uno il numero di passi temporali, si procede ricorsivamente sul numero di passi rimanenti. 
 \end{itemize}
 \end{itemize}
 
-\subsubsection*{5.1 passo}
+\subsubsection*{5.1 Acquisizione dati di convezione}
 \begin{itemize}
-\item Se il numero di punti è pari a 0 o 1, la lunghezza del passo temporale viene impostata a zero.
-\item Se il numero di punti è maggiore di 1, si acquisisce la lunghezza del passo temporale.
+\item Se il numero di punti è pari a zero o uno, la lunghezza del passo temporale assume come valore di default zero (oppure non viene considerata).
+\item Se il numero di punti è maggiore di uno, si acquisisce la lunghezza del passo temporale: \textbf{v1.}
 \end{itemize}
 
-\subsubsection*{6.1 passo}
+\subsubsection*{6.1 Calcolo dell'equazione di convezione}
 \begin{itemize}
-\item Se il numero di punti è 0 o 1, l'integrazione numerica dell'equazione è uguale al calcolo della condizione iniziale.
-\item Se il numero di punti è maggiore di 1, si calcola la condizione iniziale dell'equazione e si procede con la sua integrazione numerica.
+\item Se il numero di punti è zero o uno, l'integrazione numerica dell'equazione è uguale al calcolo della condizione iniziale.
+\item Se il numero di punti è maggiore di uno, si calcola la condizione iniziale dell'equazione e si procede con la sua integrazione numerica: \textbf{6.2}.
 \end{itemize}
 
-\subsubsection*{6.2 passo}
+\subsubsection*{6.2 Convezione: condizione iniziale e integrazione numerica temporale e spaziale}
 \begin{itemize}
 \item Calcolo della condizione iniziale:
 \begin{itemize}
-\item Si genera una lista di punti equidistanti fra loro rappresentante il dominio della funzione d'onda quadra.
-\item Si calcola su ogni punto del dominio la funzione d'onda quadra. 
+\item Si genera una lista di punti equidistanti fra loro rappresentante il dominio della funzione d'onda quadra: \textbf{a.} 
+\item Si calcola su ogni punto del dominio la funzione d'onda quadra (vedi onda $u$, in \ref{analisi}, 20). 
 \end{itemize}
 \item Calcolo dell'integrazione numerica a partire dalla condizione iniziale:
 \begin{itemize}
@@ -66,18 +66,18 @@ I passi dell'algoritmo per risolvere il problema sono i seguenti:
 \end{itemize}
 \end{itemize}
 
-\subsubsection*{8.1 passo}
+\subsubsection*{8.1 Calcolo dell'equazione di Burgers}
 \begin{itemize}
-\item Se il numero di punti è 0 o 1, l'integrazione numerica dell'equazione è uguale al calcolo della condizione iniziale.
-\item Se il numero di punti è maggiore di 1, si calcola la condizione iniziale dell'equazione e si procede con la sua integrazione numerica. 
+\item Se il numero di punti è zero o uno, l'integrazione numerica dell'equazione è uguale al calcolo della condizione iniziale.
+\item Se il numero di punti è maggiore di uno, si calcola la condizione iniziale dell'equazione e si procede con la sua integrazione numerica: \textbf{8.2}. 
 \end{itemize}
 
-\subsubsection*{8.2 passo}
+\subsubsection*{8.2 Burgers: condizione iniziale e integrazione numerica temporale e spaziale}
 \begin{itemize}
 \item Calcolo della condizione iniziale:
 \begin{itemize}
-\item Si genera una lista di punti equidistanti fra loro rappresentante il dominio della funzione d'onda a dente di sega.
-\item Si calcola su ogni punto del dominio la funzione d'onda a dente di sega. 
+\item Si genera una lista di punti equidistanti fra loro rappresentante il dominio della funzione d'onda a dente di sega: \textbf{a.} 
+\item Si calcola su ogni punto del dominio la funzione d'onda a dente di sega (vedi onda $u$, in \ref{analisi}, 23). 
 \end{itemize}
 \item Calcolo dell'integrazione numerica a partire dalla condizione iniziale:
 \begin{itemize}
@@ -93,6 +93,27 @@ I passi dell'algoritmo per risolvere il problema sono i seguenti:
 \end{itemize}
 \end{itemize}
 
+\subsubsection*{a. Generazione di punti equidistanti}
+\begin{itemize}
+\item Se il numero di punti da generare è zero, si restituisce una lista vuota.
+\item Se il numero di punti da generare è maggiore di zero, si calcola la distanza tra il bordo superiore e quello inferiore del dominio, si decrementa di uno il numero di punti totali e partendo dal bordo inferiore del dominio:
+\begin{itemize}
+\item Caso base: se si è raggiunto il numero massimo di punti da generare, nella lista verrà aggiunto il bordo inferiore del dominio.
+\item Caso generale: se il numero massimo di punti da generare non è stato ancora raggiunto, si aggiunge il punto del bordo inferiore del dominio alla lista, si incrementa di uno il numero di punti calcolati, si calcola il punto successivo della lista sostituendolo al precedente bordo inferiore del dominio e si procede ricorsivamente sul numero di punti da generare rimasti.
+\end{itemize}
+\end{itemize}
+
+\subsubsection*{v1. Validazione dell'acquisizione della lunghezza del passo temporale}
+\begin{itemize}
+\item Caso base: se il valore del passo temporale è maggiore di zero, allora il dato viene acquisito.
+\item Caso generale: altrimenti si stampa su schermo un messaggio di errore e viene ripetuta l'acquisizione.
+\end{itemize}
+
+\subsubsection*{v2. Validazione dell'acquisizione del numero di punti di una funzione}
+\begin{itemize}
+\item Caso base: se il numero di punti è un intero positivo, il valore viene acquisito.
+\item Caso generale: altrimenti si stampa su schermo un messaggio di errore e viene ripetuta l'acquisizione.
+\end{itemize}
 
 
 

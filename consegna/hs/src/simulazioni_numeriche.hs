@@ -10,8 +10,7 @@ import Data.List {- necessario per usare:
 
 
 main::IO()
-main = do 
-          putStrLn "Progetto della sessione estiva del corso Programmazione Logica e Funzionale   "
+main = do putStrLn "Progetto della sessione estiva del corso Programmazione Logica e Funzionale   "
           putStrLn "Anno 2023/2024                                                                "
           putStrLn "Corso tenuto dal prof. Marco Bernardo                                         "
           putStrLn "Progetto realizzato da: Barzotti Nicolas e Ramagnano Gabriele                 "

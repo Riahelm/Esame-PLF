@@ -414,7 +414,6 @@ calc_burgers(NX,F) :- NX1 is NX - 1,
                       DT  is S * DX^2 / NU,  /* Lunghezza del passo temporale.              */
                       NT  is floor(T/DT),    /* Numero complessivo di passi temporali
                                                 che deve effettuare l'algoritmo.            */
->>>>>>> b15c2597dc5309609e55d67fcf25ee1e009be8d8
                       cond_iniziale_burg(NX,INF,SUP,ONDA),
                       tempo_burg(0,NT,NX1,NU,DX,DT,ONDA,F).
 

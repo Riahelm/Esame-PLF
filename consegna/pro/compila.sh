@@ -1,0 +1,1 @@
+gplc src/simulazioni_numeriche.pro -o bin/simulazioni_numeriche
