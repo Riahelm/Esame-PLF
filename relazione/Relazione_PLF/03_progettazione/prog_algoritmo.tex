@@ -2,7 +2,7 @@
 \subsection{Scelte di Progetto}
 
 \subsubsection*{3.1.1 Dati del problema}
-Gli insiemi finiti di numeri reali si prestano in modo naturale ad essere implementati mediante strutture dati lineari. Queste verranno allocate dinamicamente in quanto non si conosce a priori il numero di punti di ciascuna funzione, in maniera da non imporre limitazioni rispetto alla specifica del problema.
+Gli insiemi finiti di numeri reali (codomini di ciascuna funzione) si prestano in modo naturale ad essere implementati mediante strutture dati lineari. Queste verranno allocate dinamicamente in quanto non si conosce a priori il numero di punti del dominio di ciascuna funzione, in maniera da non imporre limitazioni rispetto alla specifica del problema.
 
 \subsubsection*{3.1.2 Stampa a schermo}
 Per guidare al meglio l'utente durante la fase di acquisizione dei dati, si è scelto di stampare a schermo una descrizione dei parametri utilizzati da ciascun modello di simulazione. Questi sono stati divisi in:
@@ -99,11 +99,11 @@ I passi dell'algoritmo per risolvere il problema sono i seguenti:
 
 \subsubsection*{a. Generazione di punti equidistanti}
 \begin{itemize}
-\item Se il numero di punti da generare è zero, si restituisce una lista vuota.
-\item Se il numero di punti da generare è maggiore di zero, si calcola la distanza tra il bordo superiore e quello inferiore del dominio, si decrementa di uno il numero di punti totali e partendo dal bordo inferiore del dominio:
+\item Se il numero di punti da generare è zero, si restituisce una sequenza di punti è vuota.
+\item Se il numero di punti da generare è maggiore di zero, si calcola la distanza tra l'estremo superiore e quello inferiore del dominio, si decrementa di uno il numero di punti totali e partendo dall'estremo inferiore del dominio:
 \begin{itemize}
-\item Caso base: se si è raggiunto il numero massimo di punti da generare, nella lista verrà aggiunto il bordo inferiore del dominio.
-\item Caso generale: se il numero massimo di punti da generare non è stato ancora raggiunto, si aggiunge il punto del bordo inferiore del dominio alla lista, si incrementa di uno il numero di punti calcolati, si calcola il punto successivo della lista sostituendolo al precedente bordo inferiore del dominio e si procede ricorsivamente sul numero di punti da generare rimasti.
+\item Caso base: se si è raggiunto il numero massimo di punti da generare, si aggiunge alla sequenza di punti l'estremo inferiore del dominio.
+\item Caso generale: se il numero massimo di punti da generare non è stato ancora raggiunto, si aggiunge alla sequenza il punto dell'estremo inferiore del dominio, si incrementa di uno il numero di punti calcolati, si calcola il punto successivo della lista sostituendolo al precedente estremo inferiore del dominio e si procede ricorsivamente sul numero di punti da generare rimasti.
 \end{itemize}
 \end{itemize}
 

@@ -11,8 +11,8 @@ import Data.List {- necessario per usare:
 {- Costanti globali -}
 
 {- Limiti del dominio spaziale dell'equazione di convezione -}
-lmt_inf_conv = 0.0  -- Limite inferiore del dominio spaziale.
-lmt_sup_conv = 2.0  -- Limite superiore del dominio spaziale.
+inf_conv = 0.0  -- Estremo inferiore del dominio spaziale.
+sup_conv = 2.0  -- Estremo superiore del dominio spaziale.
 
 {- Forza gravitazionale terrestre. -}
 c_grv :: Double
@@ -142,7 +142,7 @@ acqui_dati_e_calc_conv = do putStr "Digita il numero di punti totali della funzi
                             nx <- getLine
                             if (((read nx  :: Integer) == 0) ||
                                ((read nx  :: Integer) == 1)) 
-                              then putStrLn $ show (cond_iniziale (read nx :: Int) onda_quadra lmt_inf_conv lmt_sup_conv)
+                              then putStrLn $ show (cond_iniziale (read nx :: Int) onda_quadra inf_conv sup_conv)
                             else if ((read nx :: Integer) > 1)
                               then do dt <- acquisisci_dato_dt
                                       putStrLn $ show (calc_convezione (read nx :: Int) (read dt :: Double))
@@ -329,11 +329,11 @@ molt_quadrupla_scalare (a1,b1,c1,d1) b = (a1*b, b1*b, c1*b, d1*b)
    - il secondo argomento e' la lunghezza del passo temporale. -}
 
 calc_convezione :: Int -> Double -> [Double]
-calc_convezione nx dt = tempo_conv nt nx c dx dt (cond_iniziale nx onda_quadra lmt_inf_conv lmt_sup_conv)
+calc_convezione nx dt = tempo_conv nt nx c dx dt (cond_iniziale nx onda_quadra inf_conv sup_conv)
    where
-      nt = 25                                           -- Numero complessivo di passi temporali che deve effettuare l'algoritmo.
-      dx = lmt_sup_conv / (fromIntegral(nx :: Int) - 1) -- Distanza tra qualsiasi coppia di punti della griglia adiacenti.
-      c  = 1.0                                          -- Velocita' dell'onda.
+      nt = 25                                       -- Numero complessivo di passi temporali che deve effettuare l'algoritmo.
+      dx = sup_conv / (fromIntegral(nx :: Int) - 1) -- Distanza tra qualsiasi coppia di punti della griglia adiacenti.
+      c  = 1.0                                      -- Velocita' dell'onda.
 
 
 {- La funzione tempo_conv calcola numericamente l'integrazione della
@@ -392,16 +392,16 @@ onda_quadra x | x >= 0.5 && x <= 1.0 = onda_sup
      d'onda. -}
 
 calc_burgers :: Int -> [Double]
-calc_burgers nx | nx == 0 || nx == 1 = cond_iniziale nx onda_dente_sega lmt_inf lmt_sup                       
-                | otherwise          = tempo_burg nt nx dx dt (cond_iniziale nx onda_dente_sega lmt_inf lmt_sup)
+calc_burgers nx | nx == 0 || nx == 1 = cond_iniziale nx onda_dente_sega inf sup                       
+                | otherwise          = tempo_burg nt nx dx dt (cond_iniziale nx onda_dente_sega inf sup)
    where
-      lmt_inf  = 0.0                                     -- Limite inferiore del dominio spaziale. 
-      lmt_sup  = 2.0 * pi                                -- Limite superiore del dominio spaziale. 
-      dx       = lmt_sup / (fromIntegral(nx :: Int) - 1) -- Distanza tra qualsiasi coppia di punti della griglia adiacenti.
-      sigma    = 0.1                                     -- Costante di Courant-Friedrichs-Lewy (CFL).
-      dt       = sigma * dx**2 / nu                      -- Lunghezza del passo temporale.
-      t_fine   = 0.6                                     -- Tempo totale di simulazione.
-      nt       = floor(t_fine / dt)                      -- Numero complessivo di passi temporali che deve effettuare l'algoritmo.
+      inf      = 0.0                                 -- Estremo inferiore del dominio spaziale. 
+      sup      = 2.0 * pi                            -- Estremo superiore del dominio spaziale. 
+      dx       = sup / (fromIntegral(nx :: Int) - 1) -- Distanza tra qualsiasi coppia di punti della griglia adiacenti.
+      sigma    = 0.1                                 -- Costante di Courant-Friedrichs-Lewy (CFL).
+      dt       = sigma * dx**2 / nu                  -- Lunghezza del passo temporale.
+      t_fine   = 0.6                                 -- Tempo totale di simulazione.
+      nt       = floor(t_fine / dt)                  -- Numero complessivo di passi temporali che deve effettuare l'algoritmo.
 
 
 {- La funzione tempo_burg calcola numericamente l'integrazione della
@@ -416,10 +416,10 @@ calc_burgers nx | nx == 0 || nx == 1 = cond_iniziale nx onda_dente_sega lmt_inf 
 
 tempo_burg :: Int -> Int -> Double -> Double -> [Double] -> [Double]
 tempo_burg 0 _ _ _ onda     = onda
-tempo_burg nt nx dx dt onda = tempo_burg (nt - 1) nx dx dt (bordo_inf : spazio_burg 1 dx dt onda)
+tempo_burg nt nx dx dt onda = tempo_burg (nt - 1) nx dx dt (bordo : spazio_burg 1 dx dt onda)
    where
-      bordo_inf = head onda - head onda * dt/dx * (head onda - last onda) +
-                  nu*dt/dx**2 * ((head $ tail onda) - 2*(head onda) + last onda) -- Condizione di bordo inferiore.
+      bordo = head onda - head onda * dt/dx * (head onda - last onda) +
+              nu*dt/dx**2 * ((head $ tail onda) - 2*(head onda) + last onda) -- Condizione di bordo.
 
 
 {- La funzione spazio_burg calcola numericamente l'integrazione della
@@ -431,10 +431,10 @@ tempo_burg nt nx dx dt onda = tempo_burg (nt - 1) nx dx dt (bordo_inf : spazio_b
    - il quarto argomento  e' la funzione d'onda. -}
 
 spazio_burg :: Int -> Double -> Double -> [Double] -> [Double]
-spazio_burg i dx dt lx | i == length lx - 1 = [bordo_sup]
+spazio_burg i dx dt lx | i == length lx - 1 = [bordo]
                        | otherwise          = (passo_eulero) : spazio_burg (i+1) dx dt lx
    where
-      bordo_sup    = (last lx) - (last lx) * dt/dx * ((last lx) - (last $ init lx)) +
+      bordo        = (last lx) - (last lx) * dt/dx * ((last lx) - (last $ init lx)) +
                      nu*dt/dx**2*(head lx - 2*(last lx) + (last $ init lx))
       passo_eulero = (lx !! i - lx !! i * dt/dx * (lx !! i - lx !! (i-1)) + 
                       nu*dt/dx**2*(lx !! (i+1) - 2*(lx !! i) + lx !! (i-1)))
@@ -468,19 +468,19 @@ onda_dente_sega x = u t0 x nu
    - il primo argomento   e' il numero di punti della griglia spaziale;
    - il secondo argomento e' la funzione onda_quadra (onda_dente_sega) 
      utilizzata per il calcolo delle omonime funzioni;
-   - il terzo argomento   e' il limite inferiore del dominio spaziale;
-   - il quarto argomento  e' il limite superiore del dominio spaziale. -}
+   - il terzo argomento   e' l'estremo inferiore del dominio spaziale;
+   - il quarto argomento  e' l'estremo superiore del dominio spaziale. -}
 
 cond_iniziale :: Int -> (Double -> Double) -> Double -> Double -> [Double]
-cond_iniziale nx onda lmt_inf lmt_sup = [onda x | x <- lx]
+cond_iniziale nx onda inf sup = [onda x | x <- lx]
    where
-      lx = gen_punti_equi nx lmt_inf lmt_sup
+      lx = gen_punti_equi nx inf sup
 
 
 {- La funzione gen_punti_equi genera una lista di punti equidistanti tra loro:
    - il primo argomento   e' il numero di punti che si vuole generare;
-   - il secondo argomento e' il limite inferiore della lista di punti;
-   - il terzo argomento   e' il limite superiore della lista di punti.
+   - il secondo argomento e' l'estremo inferiore della lista di punti;
+   - il terzo argomento   e' l'estremo superiore della lista di punti.
    Per il calcolo dei punti si fa uso della funzione calc_punti. -}
 
 gen_punti_equi :: Int -> Double -> Double -> [Double]
