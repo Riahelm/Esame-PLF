@@ -12,6 +12,10 @@
       Inserire obbligatoriamente anche i test sulla validazione!
       --> aggiorna validazione per includere il tempo finale nel fugoide
 8) Sistemare la funzione linspace (Gab)
+---------------------------------------------------------------------------------------#new
+9) Uniformare lo stile, cambiare il nome delle costanti globali: es. cG -> c_g
+10) Abbreviare i nomi di funzioni e/o variabili per non uscire dai bordi della relazione
+11) Cambiare le definizioni di bordo superiore e inferiore del dominio !!!
 
 
 #Prolog TODOs:

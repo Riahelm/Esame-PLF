@@ -204,7 +204,14 @@ u(x,0)=\begin{cases}2 & \text{dove } 0.5\leq x \leq 1,\\
 \noindent
 dove il dominio della soluzione numerica è definito in $x\in(0,2)$. In questo modo la lunghezza del passo spaziale viene calcolata come $\Delta x = \frac{d}{n - 1}$, dove $d$ è la distanza tra il limite inferiore e il limite superiore del dominio della soluzione numerica, $n$ il numero di punti della funzione d'onda discretizzata. Il numero totale di passi temporali $i$ è invece costante.
 \noindent
-Poniamo inoltre delle condizioni al contorno su $x$: sia $u = 1$ quando $x = 0$.
+Poniamo inoltre delle condizioni al contorno su $x$ in modo tale da ottenere il primo punto della funzione invariato per tutto il calcolo:
+
+\begin{equation}
+u(0,t) = c 
+\end{equation}
+
+\noindent
+dove $c$ è una costante e il suo valore è pari al valore del primo punto della funzione.
 
 \subsubsection*{Burgers}
 L’equazione di Burgers unidimensionale è un’equazione differenziale alle derivate parziali: 
@@ -237,7 +244,14 @@ Il passo spaziale $\Delta x$ viene calcolato come precedentemente mostrato per l
 costante di Courant-Friedrichs-Lewy (CFL) e $n$ il numero di punti della funzione d'onda discretizzata. Il numero di passi temporali totali è $\frac{T}{\Delta t}$, dove $T$ è il tempo totale di simulazione.
 
 \noindent
-Le condizioni iniziali sono definite con $u(x, 0)$. Le condizioni al contorno sono: 
+Le condizioni iniziali sono definite:
+
+\begin{equation}
+u(x, 0).
+\end{equation}
+
+\noindent
+Le condizioni al contorno sono: 
 
 \begin{equation}
 u(0) = u(2\pi).

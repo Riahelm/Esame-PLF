@@ -1,4 +1,4 @@
-module Main where
+module SimulazioniNumeriche where
 
 import Data.List {- necessario per usare: 
                     - !!,     che estrae l'n-esimo elemento di una lista;
@@ -8,8 +8,33 @@ import Data.List {- necessario per usare:
                     - init,   che estrae gli elementi di una lista precedenti all'ultimo;
                     - length, che ritorna la lunghezza della lista. -}
 
+{- Costanti globali -}
 
-main::IO()
+{- Limiti del dominio spaziale dell'equazione di convezione -}
+lmt_inf_conv = 0.0  -- Limite inferiore del dominio spaziale.
+lmt_sup_conv = 2.0  -- Limite superiore del dominio spaziale.
+
+{- Forza gravitazionale terrestre. -}
+c_grv :: Double
+c_grv = 9.81 
+
+{- Coefficiente di diffusione -}
+nu :: Double
+nu = 0.07  
+
+{- Velocita' di trim del velivolo, misurato in m/s -}
+v_trim :: Double
+v_trim = 30.0     
+
+{- Tipo di dato che rappresenta una coppia di elementi uguali. -}
+type Coppia a = (a,a)
+
+{-  Tipo di dato che rappresenta una quadrupla di elementi uguali. -}
+type Quadrupla a = (a,a,a,a)
+
+
+
+main :: IO()
 main = do putStrLn "Progetto della sessione estiva del corso Programmazione Logica e Funzionale   "
           putStrLn "Anno 2023/2024                                                                "
           putStrLn "Corso tenuto dal prof. Marco Bernardo                                         "
@@ -71,8 +96,7 @@ main = do putStrLn "Progetto della sessione estiva del corso Programmazione Logi
           putStrLn "| permette una simulazione piu' accurata                           |"
           putStrLn "--------------------------------------------------------------------"
 
-          (nx,dt) <- acquisisci_dati_conv 
-          putStrLn $ show (calc_convezione (read nx :: Int) (read dt :: Double))
+          acqui_dati_e_calc_conv 
 
           putStrLn "--------------------------------------------------------------------"
           putStrLn "| Calcolo dell'equazione di Burgers a una dimensione               |"
@@ -107,28 +131,29 @@ acquisisci_dato_dt = do putStr "Digita lunghezza del passo temporale: "
                                 acquisisci_dato_dt 
 
 
-{- L'azione input/output acquisisci_dati_conv acquisisce due parametri numerici
+{- L'azione input/output acqui_dati_e_calc_conv acquisisce due parametri numerici
    di simulazione per l'equazione di convezione: il primo, un naturale per il 
    numero di punti della funzione d'onda; il secondo un reale per la lunghezza
-   del passo temporale. -}
+   del passo temporale. In seguito all'acquisizione dei parametri calcola l'inte- 
+  -grazione numerica dell'equazione di convezione. -}
 
-acquisisci_dati_conv :: IO (String, String)
-acquisisci_dati_conv = do putStr "Digita il numero di punti totali della funzione d'onda: "
-                          nx <- getLine
-                          if (((read nx  :: Integer) == 0) ||
-                             ((read nx  :: Integer) == 1)) 
-                            then return (nx, "0")
-                          else if ((read nx :: Integer) > 1)
-                            then do dt <- acquisisci_dato_dt
-                                    return (nx, dt)
-                          else  do putStrLn "Acquisizione errata!"
-                                   putStrLn "Il valore deve essere un numero naturale."
-                                   acquisisci_dati_conv
+acqui_dati_e_calc_conv :: IO ()
+acqui_dati_e_calc_conv = do putStr "Digita il numero di punti totali della funzione d'onda: "
+                            nx <- getLine
+                            if (((read nx  :: Integer) == 0) ||
+                               ((read nx  :: Integer) == 1)) 
+                              then putStrLn $ show (cond_iniziale (read nx :: Int) onda_quadra lmt_inf_conv lmt_sup_conv)
+                            else if ((read nx :: Integer) > 1)
+                              then do dt <- acquisisci_dato_dt
+                                      putStrLn $ show (calc_convezione (read nx :: Int) (read dt :: Double))
+                            else  do putStrLn "Acquisizione errata!"
+                                     putStrLn "Il valore deve essere un numero naturale."
+                                     acqui_dati_e_calc_conv
 
 
 {- L'azione input/output acquisisci_dato_nxb acquisisce un parametro numerico
    naturale di simulazione, ovvero il numero totale di punti della funzione
-   d'onda per il calcolo dell'ecquazione di Burgers. -}
+   d'onda per il calcolo dell'equazione di Burgers. -}
 
 acquisisci_dato_nxb :: IO String
 acquisisci_dato_nxb = do putStr "Digita il numero di punti totali della funzione d'onda: "
@@ -143,27 +168,6 @@ acquisisci_dato_nxb = do putStr "Digita il numero di punti totali della funzione
 {- Fine sezione input/output -}
 
 
-{- Costanti globali -}
-
-{- Forza gravitazionale terrestre. -}
-cG :: Double
-cG = 9.81 
-
-{- Coefficiente di diffusione -}
-nu :: Double
-nu = 0.07  
-
-{- Velocita' di trim del velivolo, misurato in m/s -}
-vTrim :: Double
-vTrim = 30.0     
-
-{- Tipo di dato che rappresenta una coppia di elementi uguali. -}
-type Coppia a = (a,a)
-
-{-  Tipo di dato che rappresenta una quadrupla di elementi uguali -}
-type Quadrupla a = (a,a,a,a)
-
-
 {- Inizio sezione fugoide semplice -}
 
 
@@ -172,7 +176,7 @@ type Quadrupla a = (a,a,a,a)
    - il suo unico argomento e' la lunghezza del passo temporale dt. -}
 
 calc_fugoide_semplice :: Double -> [Double]
-calc_fugoide_semplice dt  = z0 : calc_moto_semplice (z0, b0) dt passi_temporali
+calc_fugoide_semplice dt = z0 : calc_moto_semplice (z0, b0) dt passi_temporali
    where
       z0              = 100.0               -- Altitudine iniziale del velivolo.
       b0              = 10.0                -- Velocita' iniziale del velivolo.
@@ -187,10 +191,10 @@ calc_fugoide_semplice dt  = z0 : calc_moto_semplice (z0, b0) dt passi_temporali
    - il terzo argomento e' il numero di passi che sono ancora da effettuare. -}
 
 calc_moto_semplice :: Coppia Double -> Double -> Int -> [Double]
-calc_moto_semplice dA@(dAA,_) dt len | len == 0               = [dBA]
-                                     | otherwise              = dBA : calc_moto_semplice dB dt (len - 1)
+calc_moto_semplice dA@(dAA,_) dt len | len == 0  = [dBA]
+                                     | otherwise = dBA : calc_moto_semplice dB dt (len - 1)
    where
-      dB@(dBA,_)           = passo_eulero_semplice dA dt
+      dB@(dBA,_) = passo_eulero_semplice dA dt
 
 
 {- La funzione passo_eulero_semplice applica il metodo di Eulero ad una coppia di numeri. La
@@ -201,7 +205,7 @@ calc_moto_semplice dA@(dAA,_) dt len | len == 0               = [dBA]
    - il secondo argomento e' la lunghezza del passo temporale dt. -}
 
 passo_eulero_semplice :: Coppia Double -> Double -> Coppia Double
-passo_eulero_semplice dA@(y@altitudine, v@velocita) dt = somma_coppia dA (molt_coppia_scalare (derivata_u_semplice dA) dt)
+passo_eulero_semplice dA@(y@alt, v@vel) dt = somma_coppia dA (molt_coppia_scalare (derivata_u_semplice dA) dt)
 
 
 {- La funzione derivata_u_semplice viene utilizzata per l'applicazione dell'equazione del moto fugoide:
@@ -209,7 +213,7 @@ passo_eulero_semplice dA@(y@altitudine, v@velocita) dt = somma_coppia dA (molt_c
      del velivolo. -}
 
 derivata_u_semplice :: Coppia Double -> Coppia Double
-derivata_u_semplice dA@(y@alt, v@vel) = (v, cG * (1-y/zt))
+derivata_u_semplice dA@(y@alt, v@vel) = (v, c_grv * (1-y/zt))
    where
       zt = 100.0 -- Altitudine centrale all'oscillazione.
 
@@ -225,14 +229,14 @@ derivata_u_semplice dA@(y@alt, v@vel) = (v, cG * (1-y/zt))
    - il suo unico argomento e' la lunghezza del passo temporale dt. -}
 
 calc_fugoide_completo :: Double -> [Double]
-calc_fugoide_completo dt  = y0 : calc_moto_completo (v0, theta0, x0, y0) dt passiTemporali
+calc_fugoide_completo dt = y0 : calc_moto_completo (v0, theta0, x0, y0) dt passi_temporali
    where
-      v0             = vTrim               -- La velocita' iniziale, in questo caso quella di trim.
-      theta0         = 0.0                 -- Angolo iniziale del velivolo.
-      x0             = 0.0                 -- Spostamento orizzontale iniziale del velivolo.
-      y0             = 1000.0              -- Altitudine iniziale del velivolo.
-      tempo          = 100.0               -- Numero di secondi di simulazione.
-      passiTemporali = floor(tempo/dt) + 1 -- Numero di punti in cui effettuare il calcolo.
+      v0             = v_trim                -- La velocita' iniziale, in questo caso quella di trim.
+      theta0         = 0.0                   -- Angolo iniziale del velivolo.
+      x0             = 0.0                   -- Spostamento orizzontale iniziale del velivolo.
+      y0             = 1000.0                -- Altitudine iniziale del velivolo.
+      tempo          = 100.0                 -- Numero di secondi di simulazione.
+      passi_temporali = floor(tempo/dt) + 1  -- Numero di punti in cui effettuare il calcolo.
 
 
 {- La funzione calc_moto_completo calcola numericamente l'integrazione del moto fugoide:
@@ -245,7 +249,7 @@ calc_moto_completo :: Quadrupla Double -> Double -> Int -> [Double]
 calc_moto_completo dA dt len | len == 0   = [dBD]
                              | otherwise  = dBD : calc_moto_completo dB dt (len - 1)
    where
-      dB@(_,_,_, dBD)      = passo_eulero_completo dA dt
+      dB@(_,_,_,dBD) = passo_eulero_completo dA dt
 
 
 {- La funzione passo_eulero_completo applica il metodo di Eulero ad una quadrupla di numeri. La
@@ -263,13 +267,13 @@ passo_eulero_completo dA@(v,theta,x,y) dt = somma_quadrupla dA (molt_quadrupla_s
    - il suo unico argomento e' una coppia di valori, ovvero la velocita' e l'angolo del velivolo. -}
 
 derivata_u_completo :: Coppia Double -> Quadrupla Double
-derivata_u_completo dA@(v,theta) = (- (cG * sin theta) - (cR / cP)*cG/vTrim**2*v**2,
-                                    - (cG * cos theta / v) + cG/vTrim**2*v,
+derivata_u_completo dA@(v,theta) = (- (c_grv * sin theta) - (c_res / c_prt)*c_grv/v_trim**2*v**2,
+                                    - (c_grv * cos theta / v) + c_grv/v_trim**2*v,
                                     v*cos theta,
                                     v*sin theta)
    where
-      cR = 0.025  -- Coefficiente di resistenza all'aria.
-      cP = 1.0    -- Coefficiente di portanza.
+      c_res = 0.025  -- Coefficiente di resistenza all'aria.
+      c_prt = 1.0    -- Coefficiente di portanza.
 
 
 {- Fine sezione fugoide completo -}
@@ -325,14 +329,11 @@ molt_quadrupla_scalare (a1,b1,c1,d1) b = (a1*b, b1*b, c1*b, d1*b)
    - il secondo argomento e' la lunghezza del passo temporale. -}
 
 calc_convezione :: Int -> Double -> [Double]
-calc_convezione nx dt | nx == 0 || nx == 1    = cond_iniziale nx onda_quadra lmt_inf lmt_sup
-                      | otherwise             = tempo_conv nt nx c dx dt (cond_iniziale nx onda_quadra lmt_inf lmt_sup)
+calc_convezione nx dt = tempo_conv nt nx c dx dt (cond_iniziale nx onda_quadra lmt_inf_conv lmt_sup_conv)
    where
-      lmt_inf = 0.0                                     -- Limite inferiore del dominio spaziale.
-      lmt_sup = 2.0                                     -- Limite superiore del dominio spaziale.
-      nt      = 25                                      -- Numero complessivo di passi temporali che deve effettuare l'algoritmo.
-      dx      = lmt_sup / (fromIntegral(nx :: Int) - 1) -- Distanza tra qualsiasi coppia di punti della griglia adiacenti.
-      c       = 1.0                                     -- Velocita' dell'onda.
+      nt = 25                                           -- Numero complessivo di passi temporali che deve effettuare l'algoritmo.
+      dx = lmt_sup_conv / (fromIntegral(nx :: Int) - 1) -- Distanza tra qualsiasi coppia di punti della griglia adiacenti.
+      c  = 1.0                                          -- Velocita' dell'onda.
 
 
 {- La funzione tempo_conv calcola numericamente l'integrazione della

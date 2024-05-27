@@ -1,6 +1,18 @@
 \section{Progettazione dell'Algoritmo}
 \subsection{Scelte di Progetto}
 
+\subsubsection*{3.1.1 Dati del problema}
+Gli insiemi finiti di numeri reali si prestano in modo naturale ad essere implementati mediante strutture dati lineari. Queste verranno allocate dinamicamente in quanto non si conosce a priori il numero di punti di ciascuna funzione, in maniera da non imporre limitazioni rispetto alla specifica del problema.
+
+\subsubsection*{3.1.2 Stampa a schermo}
+Per guidare al meglio l'utente durante la fase di acquisizione dei dati, si è scelto di stampare a schermo una descrizione dei parametri utilizzati da ciascun modello di simulazione. Questi sono stati divisi in:
+\begin{itemize}
+\item parametri iniziali: sono dei valori costanti che vengono utilizzati per impostare le condizioni iniziali di ciascuna simulazione numerica;
+\item parametri di simulazione: sono dei valori costanti fissati a priori che limitano l'esperienza di personalizzazione della simulazione numerica dell'utente ai soli dati richiesti in ingresso;
+\item parametri richiesti all'utente: sono i dati che l'utente può inserire per ciascuna simulazione. Per ciascun dato viene fornita un'indicazione sui valori più appropriati da fornire. 
+\end{itemize} 
+
+
 \subsection{Passi dell'Algoritmo}
 I passi dell'algoritmo per risolvere il problema sono i seguenti:
 
@@ -17,81 +29,73 @@ I passi dell'algoritmo per risolvere il problema sono i seguenti:
 
 \subsubsection*{2.1 Calcolo del moto fugoide senza attrito} 
 \begin{itemize}
-\item Alla condizione iniziale $z_0$ si concatena il resto del calcolo numerico per l'integrazione dell'equazione:
+\item Alla condizione iniziale $z_0$ si aggiunge il resto del calcolo per l'integrazione numerica dell'equazione:
 \begin{itemize}
-\item Caso base: se il numero di passi temporali è pari a zero, si effettua un passo di integrazione numerica.
+\item Caso base: se il numero di passi temporali è pari a zero, si effettua un passo di integrazione numerica (vedi metodo di Eulero, in \ref{analisi}, 6).
 \item Caso generale: se il numero di passi temporali è maggiore di zero, si effettua un passo di integrazione numerica e poi, una volta decrementato di uno il numero di passi temporali, si procede ricorsivamente sul numero di passi rimanenti. 
 \end{itemize}
 \end{itemize}
 
 \subsubsection*{4.1 Calcolo del moto fugoide con attrito}
 \begin{itemize}
-\item Alla condizione iniziale $y_0$ si concatena il resto del calcolo numerico per l'integrazione dell'equazione:
+\item Alla condizione iniziale $y_0$ si aggiunge il resto del calcolo per l'integrazione numerica dell'equazione:
 \begin{itemize}
-\item Caso base: se il numero di passi temporali è pari a zero, si effettua un passo di integrazione numerica.
+\item Caso base: se il numero di passi temporali è pari a zero, si effettua un passo di integrazione numerica (vedi metodo di Eulero, in \ref{analisi}, 17).
 \item Caso generale: se il numero di passi temporali è maggiore di zero, si effettua un passo di integrazione numerica e poi, una volta decrementato di uno il numero di passi temporali, si procede ricorsivamente sul numero di passi rimanenti. 
 \end{itemize}
 \end{itemize}
 
 \subsubsection*{5.1 Acquisizione dati di convezione}
 \begin{itemize}
-\item Se il numero di punti è pari a zero o uno, la lunghezza del passo temporale assume come valore di default zero (oppure non viene considerata).
-\item Se il numero di punti è maggiore di uno, si acquisisce la lunghezza del passo temporale: \textbf{v1.}
+\item Se il numero di punti è pari a zero o uno, viene calcolata solamente la condizione iniziale: \textbf{6.1}
+\item Se il numero di punti è maggiore di uno, si acquisisce la lunghezza del passo temporale (\textbf{v1.}), si calcola la condizione iniziale (\textbf{6.1}) e si procede con l'integrazione numerica: \textbf{6.2} 
 \end{itemize}
 
-\subsubsection*{6.1 Calcolo dell'equazione di convezione}
-\begin{itemize}
-\item Se il numero di punti è zero o uno, l'integrazione numerica dell'equazione è uguale al calcolo della condizione iniziale.
-\item Se il numero di punti è maggiore di uno, si calcola la condizione iniziale dell'equazione e si procede con la sua integrazione numerica: \textbf{6.2}.
-\end{itemize}
-
-\subsubsection*{6.2 Convezione: condizione iniziale e integrazione numerica temporale e spaziale}
-\begin{itemize}
-\item Calcolo della condizione iniziale:
+\subsubsection*{6.1 Calcolo della condizione iniziale per l'equazione di convezione}
 \begin{itemize}
 \item Si genera una lista di punti equidistanti fra loro rappresentante il dominio della funzione d'onda quadra: \textbf{a.} 
 \item Si calcola su ogni punto del dominio la funzione d'onda quadra (vedi onda $u$, in \ref{analisi}, 20). 
 \end{itemize}
-\item Calcolo dell'integrazione numerica a partire dalla condizione iniziale:
+
+\subsubsection*{6.2 Calcolo dell'integrazione numerica per l'equazione di convezione}
 \begin{itemize}
 \item Si calcola numericamente l'integrazione della funzione rispetto al tempo:
 \begin{itemize}
 \item[-] Caso base: se il numero di passi temporali è uguale a zero, viene restituita la funzione d'onda quadra.
-\item[-] Caso generale: se il numero di passi temporali è maggiore di zero, si decrementaa di uno il numero di passi temporali, si calcola la condizione di bordo e la si aggiunge in testa al calcolo numerico dell'integrazione della funzione rispetto allo spazio. Quest'ultima viene effettuata come segue:
+\item[-] Caso generale: se il numero di passi temporali è maggiore di zero, si decrementa di uno il numero di passi temporali, si calcola la condizione al contorno (vedi \ref{analisi}, 21)  e la si aggiunge in testa al calcolo numerico dell'integrazione della funzione rispetto allo spazio. Quest'ultima viene effettuata come segue:
 \begin{itemize}
-\item Caso base: se si raggiunge il numero di passi spaziali totale, si effettua un passo di integrazione numerica.
-\item Caso generale: se il numero di passi spaziali complessivo non è stato ancora raggiunto, si effettua un passo di integrazione numerica e poi, una volta incrementato di uno il numero di passi spaziali, si procede ricorsivamente sul numero di passi rimanenti. 
-\end{itemize}
+\item Caso base: se si raggiunge il numero di passi spaziali totale, si effettua un passo di integrazione numerica
+(vedi metodo di Eulero, in \ref{analisi}, 19).
+\item Caso generale: se il numero di passi spaziali complessivo non è stato ancora raggiunto, si effettua un passo di integrazione numerica e poi, una volta incrementato di uno il numero di passi spaziali effettuati, si procede ricorsivamente sul numero di passi rimanenti. 
 \end{itemize}
 \end{itemize}
 \end{itemize}
 
 \subsubsection*{8.1 Calcolo dell'equazione di Burgers}
 \begin{itemize}
-\item Se il numero di punti è zero o uno, l'integrazione numerica dell'equazione è uguale al calcolo della condizione iniziale.
-\item Se il numero di punti è maggiore di uno, si calcola la condizione iniziale dell'equazione e si procede con la sua integrazione numerica: \textbf{8.2}. 
+\item Se il numero di punti è zero o uno, l'integrazione numerica dell'equazione è uguale al calcolo della condizione iniziale: \textbf{8.2}.
+\item Se il numero di punti è maggiore di uno, si calcola la condizione iniziale dell'equazione (\textbf{8.2}) e si procede con la sua integrazione numerica: \textbf{8.3}. 
 \end{itemize}
 
-\subsubsection*{8.2 Burgers: condizione iniziale e integrazione numerica temporale e spaziale}
-\begin{itemize}
-\item Calcolo della condizione iniziale:
+\subsubsection*{8.2 Calcolo della condizione iniziale per l'equazione di Burgers}
 \begin{itemize}
 \item Si genera una lista di punti equidistanti fra loro rappresentante il dominio della funzione d'onda a dente di sega: \textbf{a.} 
-\item Si calcola su ogni punto del dominio la funzione d'onda a dente di sega (vedi onda $u$, in \ref{analisi}, 23). 
+\item Si applica la condizione iniziale (vedi \ref{analisi}, 25) alla funzione d'onda a dente di sega (vedi onda $u$, in \ref{analisi}, 24). 
 \end{itemize}
-\item Calcolo dell'integrazione numerica a partire dalla condizione iniziale:
+
+\subsubsection*{8.3 Calcolo dell'integrazione numerica per l'equazione di Burgers}
 \begin{itemize}
 \item Si calcola numericamente l'integrazione della funzione rispetto al tempo:
 \begin{itemize}
 \item[-] Caso base: se il numero di passi temporali è uguale a zero, viene restituita la funzione d'onda a dente di sega.
-\item[-] Caso generale: se il numero di passi temporali è maggiore di zero, si decrementaa di uno il numero di passi temporali, si calcola la condizione di bordo e la si aggiunge in testa al calcolo numerico dell'integrazione della funzione rispetto allo spazio. Quest'ultima viene effettuata come segue:
+\item[-] Caso generale: se il numero di passi temporali è maggiore di zero, si decrementa di uno il numero di passi temporali, si calcola la condizione al contorno (vedi \ref{analisi}, 26) e la si aggiunge in testa al calcolo numerico dell'integrazione della funzione rispetto allo spazio. Quest'ultima viene effettuata come segue:
 \begin{itemize}
-\item Caso base: se si raggiunge il numero di passi spaziali totale, si effettua un passo di integrazione numerica.
-\item Caso generale: se il numero di passi spaziali complessivo non è stato ancora raggiunto, si effettua un passo di integrazione numerica e poi, una volta incrementato di uno il numero di passi spaziali, si procede ricorsivamente sul numero di passi rimanenti. 
+\item Caso base: se si raggiunge il numero di passi spaziali totale, si calcola la condizione di bordo (vedi \ref{analisi}, 26).
+\item Caso generale: se il numero di passi spaziali complessivo non è stato ancora raggiunto, si effettua un passo di integrazione numerica (vedi metodo di Eulero, in \ref{analisi}, 23) e poi, una volta incrementato di uno il numero di passi spaziali effettuati, si procede ricorsivamente sul numero di passi rimanenti. 
 \end{itemize}
 \end{itemize}
 \end{itemize}
-\end{itemize}
+
 
 \subsubsection*{a. Generazione di punti equidistanti}
 \begin{itemize}
