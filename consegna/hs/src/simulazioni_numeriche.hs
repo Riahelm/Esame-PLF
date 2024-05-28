@@ -41,6 +41,7 @@ main = do putStrLn "Progetto della sessione estiva del corso Programmazione Logi
           putStrLn "Anno 2023/2024                                                                "
           putStrLn "Corso tenuto dal prof. Marco Bernardo                                         "
           putStrLn "Progetto realizzato da: Barzotti Nicolas e Ramagnano Gabriele                 "
+          
           putStrLn "--------------------------------------------------------------------"
           putStrLn "| Calcolo del moto fugoide senza attrito                           |"
           putStrLn "| Parametri iniziali:                                              |"

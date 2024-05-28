@@ -22,6 +22,7 @@ main :-
     write('| permette una simulazione piu\' accurata.                          |'), nl,
     write('| Il valore del passo temporale deve essere maggiore di zero.      |'), nl,
     write('--------------------------------------------------------------------'), nl,
+
     acquisisci_dato_dt(DT),                                                        nl,
     calc_fugoide_semplice(DT, FS),
     write(FS),                                                                     nl,
@@ -45,6 +46,7 @@ main :-
     write('| permette una simulazione piu\' accurata.                          |'), nl,
     write('| Il valore del passo temporale deve essere maggiore di zero.      |'), nl,
     write('--------------------------------------------------------------------'), nl,
+
     acquisisci_dato_dt(DT1),                                                       nl,
     calc_fugoide_completo(DT1, FC),
     write(FC),                                                                     nl,
@@ -68,10 +70,10 @@ main :-
     write('| permette una simulazione piu\' accurata.                          |'), nl,
     write('| Il valore del passo temporale deve essere maggiore di zero.      |'), nl,
     write('--------------------------------------------------------------------'), nl,
+
     acquisisci_dati_conv(NXC,DT2),                                                 nl,
     calc_convezione(NXC,DT2,CONV), 
     write(CONV),                                                                   nl,
-
 
     write('--------------------------------------------------------------------'), nl,
     write('| Calcolo dell\'equazione di Burgers a una dimensione               |'), nl,
@@ -86,6 +88,7 @@ main :-
     write('| numero di punti che compongono la funzione d\'onda.               |'), nl,
     write('| Il valore del numero di punti dell\'onda deve essere un naturale. |'), nl,
     write('--------------------------------------------------------------------'), nl,
+
     acquisisci_dato_nxb(NXB),                                                      nl,    
     calc_burgers(NXB,BURG),
     write(BURG).
