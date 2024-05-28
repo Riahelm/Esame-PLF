@@ -1,5 +1,5 @@
-module SimulazioniNumeriche where
 
+{- Programma Haskell per effettuare simulazioni numeriche -}
 import Data.List {- necessario per usare: 
                     - !!,      che estrae l'n-esimo elemento di una lista;
                     - head,    che estrae il primo elemento di una lista;
