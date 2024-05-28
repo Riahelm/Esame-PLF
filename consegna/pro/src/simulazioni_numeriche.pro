@@ -214,12 +214,12 @@ derivata_u(Y,V,V,V1) :- CG is 9.81,     /* Costante gravitazionale terrestre. */
    - il primo argomento   e' la lunghezza del passo temporale dt;
    - il secondo argomento e' la funzione di moto fugoide risultante. */
 
-  calc_fugoide_completo(DT,[Y0|T]) :-  V0 is 30.0,                     /* La velocita' iniziale, in questo caso quella di trim.  */
-                                       THETA0 is 0.0,                  /* Angolo iniziale del velivolo.                          */
-                                       X0 is 0.0,                      /* Spostamento orizzontale iniziale del velivolo.         */
-                                       Y0 is 1000.0,                   /* Altitudine iniziale del velivolo.                      */
-                                       PASSI is (floor(100.0/DT) + 1), /* Numero di punti in cui effettuare il calcolo.          */
-                                       calc_moto(V0,THETA0,X0,Y0,DT,PASSI,T).
+  calc_fugoide_completo(DT,[[X0|Y0]|T]) :-  V0 is 30.0,                     /* La velocita' iniziale, in questo caso quella di trim.  */
+                                            THETA0 is 0.0,                  /* Angolo iniziale del velivolo.                          */
+                                            X0 is 0.0,                      /* Spostamento orizzontale iniziale del velivolo.         */
+                                            Y0 is 1000.0,                   /* Altitudine iniziale del velivolo.                      */
+                                            PASSI is (floor(100.0/DT) + 1), /* Numero di punti in cui effettuare il calcolo.          */
+                                            calc_moto(V0,THETA0,X0,Y0,DT,PASSI,T).
 
 
 /* La funzione calc_moto calcola numericamente l'integrazione del moto fugoide:
@@ -232,15 +232,15 @@ derivata_u(Y,V,V,V1) :- CG is 9.81,     /* Costante gravitazionale terrestre. */
    - il settimo argomento e' una lista di valori numerici che rappresentano 
      l'altitudine del velivolo per ogni passo temporale. */
 
-calc_moto(V,THETA,X,Y,DT,0,[Y1])     :- passo_eulero(V,THETA,X,Y,DT,_,_,_,Y1).
-calc_moto(V,THETA,X,Y,DT,LEN,[Y1|T]) :- LEN > 0,
-                                        passo_eulero(V,THETA,X,Y,DT,V1,THETA1,X1,Y1),
-                                        LEN1 is (LEN - 1),
-                                        calc_moto(V1,THETA1,X1,Y1,DT,LEN1,T).
+calc_moto(V,THETA,X,Y,DT,0,[X1,Y1])       :- passo_eulero(V,THETA,X,Y,DT,_,_,X1,Y1).
+calc_moto(V,THETA,X,Y,DT,LEN,[[X1|Y1]|T]) :- LEN > 0,
+                                             passo_eulero(V,THETA,X,Y,DT,V1,THETA1,X1,Y1),
+                                             LEN1 is (LEN - 1),
+                                             calc_moto(V1,THETA1,X1,Y1,DT,LEN1,T).
 
 
-/* Il predicato passo_eulero applica il metodo di Eulero ad una quadrupla di numeri. La
-   funzione approssima la soluzione al tempo t_(n+1) tramite il valore della funzione 
+/* Il predicato passo_eulero applica il metodo di Eulero ad una quadrupla di numeri. Il
+   predicato approssima la soluzione al tempo t_(n+1) tramite il valore del predicato 
    al tempo t_n ed un opportuno passo temporale: 
    - il primo argomento   e' la velocita' del velivolo; 
    - il secondo argomento e' l'angolo del velivolo;

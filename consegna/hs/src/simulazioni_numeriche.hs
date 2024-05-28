@@ -236,8 +236,8 @@ derivata_u_semplice dA@(y@alt, v@vel) = (v, c_grv * (1-y/zt))
    un velivolo generico:
    - il suo unico argomento e' la lunghezza del passo temporale dt. -}
 
-calc_fugoide_completo :: Double -> [Double]
-calc_fugoide_completo dt = y0 : calc_moto_completo (v0, theta0, x0, y0) dt passi_temporali
+calc_fugoide_completo :: Double -> [[Double]]
+calc_fugoide_completo dt = [x0, y0] : calc_moto_completo (v0, theta0, x0, y0) dt passi_temporali
    where
       v0             = v_trim                -- La velocita' iniziale, in questo caso quella di trim.
       theta0         = 0.0                   -- Angolo iniziale del velivolo.
@@ -253,11 +253,11 @@ calc_fugoide_completo dt = y0 : calc_moto_completo (v0, theta0, x0, y0) dt passi
    - il secondo argomento e' la lunghezza del passo temporale dt;
    - il terzo argomento   e' il numero di passi che sono ancora da effettuare. -}
 
-calc_moto_completo :: Quadrupla Double -> Double -> Int -> [Double]
-calc_moto_completo dA dt len | len == 0   = [dBD]
-                             | otherwise  = dBD : calc_moto_completo dB dt (len - 1)
+calc_moto_completo :: Quadrupla Double -> Double -> Int -> [[Double]]
+calc_moto_completo dA dt len | len == 0   = [[dBC, dBD]]
+                             | otherwise  = [dBC, dBD] : calc_moto_completo dB dt (len - 1)
    where
-      dB@(_,_,_,dBD) = passo_eulero_completo dA dt
+      dB@(_,_,dBC,dBD) = passo_eulero_completo dA dt
 
 
 {- La funzione passo_eulero_completo applica il metodo di Eulero ad una quadrupla di numeri. La
