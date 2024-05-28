@@ -2,7 +2,6 @@
 /* Programma Prolog per effettuare simulazioni numeriche */
 
 main :-
-    nl,
     write('Progetto della sessione estiva del corso Programmazione Logica e Funzionale'), nl,
     write('Anno 2023/2024'), nl,
     write('Corso tenuto dal prof. Marco Bernardo'), nl,
@@ -422,13 +421,13 @@ calc_burgers(NX,F) :- NX1 is NX - 1,
                       DX  is abs(SUP - INF) / NX1, /* Distanza tra qualsiasi coppia di punti
                                                       della griglia adiacenti.                    */
                       DT  is S * DX^2 / NU,        /* Lunghezza del passo temporale.              */
-                      NT  is floor(T/DT),    /* Numero complessivo di passi temporali
-                                                che deve effettuare l'algoritmo.            */
+                      NT  is floor(T/DT),          /* Numero complessivo di passi temporali
+                                                      che deve effettuare l'algoritmo.            */
                       cond_iniziale_burg(NX,INF,SUP,ONDA),
                       tempo_burg(0,NT,NX1,NU,DX,DT,ONDA,F).
 
 
-/* Il predicato tempo_burg calcola numericamente l'integrale della
+/* Il predicato tempo_burg calcola numericamente l'integrazione della
    funzione rispetto al parametro temporale DT:
    - il primo argomento e' il numero di passi temporali che la funzione
      d'onda ha compiuto;
@@ -451,7 +450,7 @@ tempo_burg(I,NT,NX1,NU,DX,DT,ONDA,F) :- I < NT,
                                         tempo_burg(I1,NT,NX1,NU,DX,DT,R,F).
 
 
-/* Il predicato spazio_burg calcola numericamente l'integrale della
+/* Il predicato spazio_burg calcola numericamente l'integrazione della
    funzione rispetto al parametro spaziale DX:
    - il primo argomento   e' l'indice per accedere agli elementi della 
      lista, viene utlizzato da passo_eulero; 
@@ -567,10 +566,10 @@ gen_punti_equi(0,_,_,[]).
 gen_punti_equi(N,INF,SUP,L) :- N > 0,
                                DST is abs(SUP - INF),
                                N1  is N - 1, 
-			       ((SUP > INF,
-                               calc_punti(0,N1,INF,DST,L));
-                               (calc_punti(0,N1,SUP,DST,L1),
-                               reverse(L1,L))).
+			                      ((SUP > INF,
+                                calc_punti(0,N1,INF,DST,L));
+                                (calc_punti(0,N1,SUP,DST,L1),
+                                reverse(L1,L))).
 
 
 calc_punti(N1,N1,INF,_,[INF]).
