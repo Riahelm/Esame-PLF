@@ -6,7 +6,7 @@ main :-
     write('Progetto della sessione estiva del corso Programmazione Logica e Funzionale'), nl,
     write('Anno 2023/2024'), nl,
     write('Corso tenuto dal prof. Marco Bernardo'), nl,
-    write('Progetto realizzato da: Barzotti Nicolas e Ramagnano Gabriele'), nl, nl, nl,
+    write('Progetto realizzato da: Barzotti Nicolas e Ramagnano Gabriele'), nl,
 
     write('--------------------------------------------------------------------'), nl,
     write('| Calcolo del moto fugoide senza attrito                           |'), nl,
