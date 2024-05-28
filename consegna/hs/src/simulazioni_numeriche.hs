@@ -149,7 +149,7 @@ acqui_dati_e_calc_conv :: IO ()
 acqui_dati_e_calc_conv = do putStr "Digita il numero di punti totali della funzione d'onda: "
                             nx <- getLine
                             if (((read nx  :: Integer) == 0) ||
-                               ((read nx  :: Integer) == 1)) 
+                                ((read nx  :: Integer) == 1)) 
                               then putStrLn $ show (cond_iniziale (read nx :: Int) onda_quadra inf_conv sup_conv)
                             else if ((read nx :: Integer) > 1)
                               then do dt <- acquisisci_dato_dt
@@ -193,10 +193,10 @@ calc_fugoide_semplice dt = z0 : calc_moto_semplice (z0, b0) dt passi_temporali
 
 
 {- La funzione calc_moto_semplice calcola numericamente l'integrazione del moto fugoide:
-   - il primo argomento e' una coppia di valori, ovvero altitudine e velocita' 
+   - il primo argomento   e' una coppia di valori, ovvero altitudine e velocita' 
      del velivolo;
    - il secondo argomento e' la lunghezza del passo temporale dt;
-   - il terzo argomento e' il numero di passi che sono ancora da effettuare. -}
+   - il terzo argomento   e' il numero di passi che sono ancora da effettuare. -}
 
 calc_moto_semplice :: Coppia Double -> Double -> Int -> [Double]
 calc_moto_semplice dA@(dAA,_) dt len | len == 0  = [dBA]
@@ -263,7 +263,7 @@ calc_moto_completo dA dt len | len == 0   = [[dBC, dBD]]
 {- La funzione passo_eulero_completo applica il metodo di Eulero ad una quadrupla di numeri. La
    funzione approssima la soluzione al tempo t_(n+1) tramite il valore della funzione 
    al tempo t_n ed un opportuno passo temporale:
-   - il primo argomento   e' una coppia di valori, ovvero la velocita', angolo, spostamento 
+   - il primo argomento   e' una quadrupla di valori, ovvero la velocita', angolo, spostamento 
      laterale e verticale del velivolo al momento t_n;
    - il secondo argomento e' la lunghezza del passo temporale dt. -}
 
@@ -371,7 +371,7 @@ tempo_conv nt nx c dx dt onda = tempo_conv (nt - 1) nx c dx dt ((head onda) : sp
 
 spazio_conv :: Int -> Double -> Double -> Double -> [Double] -> [Double] 
 spazio_conv i c dx dt lx  | i == length lx - 1 = [passo_eulero]
-                          | otherwise          = (passo_eulero) : spazio_conv (i+1) c dx dt lx
+                          | otherwise          = passo_eulero : spazio_conv (i+1) c dx dt lx
    where
       passo_eulero =  lx !! i - c * dt /dx *(lx !! i - lx !! (i-1))
 
