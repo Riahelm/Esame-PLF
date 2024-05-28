@@ -154,7 +154,7 @@ acquisisci_dato_nxb(NX) :- write('Digita il numero di punti totali della funzion
 /* Il predicato calc_fugoide_semplice calcola il moto fugoide con attrito di 
    un velivolo generico:
    - il primo argomento   e' la lunghezza del passo temporale dt;
-   - il secondo argomento e' la funzione di moto fugoide risultante. */
+   - il secondo argomento e' la funzione di traiettoria risultante. */
 
 calc_fugoide_semplice(DT,[Z0|T]) :-  Z0 is 100.0,                    /* Altitudine iniziale del velivolo.             */
                                      B0 is 10.0,                     /* Angolo iniziale del velivolo.                 */
@@ -212,7 +212,7 @@ derivata_u(Y,V,V,V1) :- CG is 9.81,     /* Costante gravitazionale terrestre. */
 /* Il predicato calc_fugoide_completo calcola il moto fugoide con attrito di 
    un velivolo generico:
    - il primo argomento   e' la lunghezza del passo temporale dt;
-   - il secondo argomento e' la funzione di moto fugoide risultante. */
+   - il secondo argomento e' la funzione di traiettoria risultante. */
 
   calc_fugoide_completo(DT,[[X0|Y0]|T]) :-  V0 is 30.0,                     /* La velocita' iniziale, in questo caso quella di trim.  */
                                             THETA0 is 0.0,                  /* Angolo iniziale del velivolo.                          */
@@ -229,8 +229,8 @@ derivata_u(Y,V,V,V1) :- CG is 9.81,     /* Costante gravitazionale terrestre. */
    - il quarto argomento  e' lo spostamento verticale del velivolo;
    - il quinto argomento  e' la lunghezza del passo temporale dt;
    - il sesto argomento   e' il numero di passi che sono ancora da effettuare;
-   - il settimo argomento e' una lista di valori numerici che rappresentano 
-     l'altitudine del velivolo per ogni passo temporale. */
+   - il settimo argomento e' una lista di coppie di valori numerici che rappresentano 
+     spostamento laterale e l'altitudine del velivolo per ogni passo temporale. */
 
 calc_moto(V,THETA,X,Y,DT,0,[X1,Y1])       :- passo_eulero(V,THETA,X,Y,DT,_,_,X1,Y1).
 calc_moto(V,THETA,X,Y,DT,LEN,[[X1|Y1]|T]) :- LEN > 0,
