@@ -9,7 +9,7 @@ Per guidare al meglio l'utente durante la fase di acquisizione dei dati, si è s
 \begin{itemize}
 \item parametri iniziali: sono dei valori costanti che vengono utilizzati per impostare le condizioni iniziali di ciascuna simulazione numerica;
 \item parametri di simulazione: sono dei valori costanti fissati a priori che limitano l'esperienza di personalizzazione della simulazione numerica dell'utente ai soli dati richiesti in ingresso;
-\item parametri richiesti all'utente: sono i dati che l'utente può inserire per ciascuna simulazione. Per ciascun dato viene fornita un'indicazione sui valori più appropriati da fornire. 
+\item parametri richiesti all'utente: sono i dati che l'utente può inserire per ciascuna simulazione. Per ciascun dato viene fornita un'indicazione sui valori più appropriati da digitare. 
 \end{itemize} 
 
 
@@ -103,7 +103,7 @@ I passi dell'algoritmo per risolvere il problema sono i seguenti:
 \item Se il numero di punti da generare è maggiore di zero, si calcola la distanza tra l'estremo superiore e quello inferiore del dominio, si decrementa di uno il numero di punti totali e partendo dall'estremo inferiore del dominio:
 \begin{itemize}
 \item Caso base: se si è raggiunto il numero massimo di punti da generare, si aggiunge alla sequenza di punti l'estremo inferiore del dominio.
-\item Caso generale: se il numero massimo di punti da generare non è stato ancora raggiunto, si aggiunge alla sequenza il punto dell'estremo inferiore del dominio, si incrementa di uno il numero di punti calcolati, si calcola il punto successivo della lista sostituendolo al precedente estremo inferiore del dominio e si procede ricorsivamente sul numero di punti da generare rimasti.
+\item Caso generale: se il numero massimo di punti da generare non è stato ancora raggiunto, si aggiunge alla sequenza il punto dell'estremo inferiore del dominio, si incrementa di uno il numero di punti calcolati, si calcola il punto successivo che diventa il nuovo estremo inferiore del dominio e si procede ricorsivamente sul numero di punti da generare rimasti.
 \end{itemize}
 \end{itemize}
 

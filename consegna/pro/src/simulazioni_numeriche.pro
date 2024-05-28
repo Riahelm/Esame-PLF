@@ -105,7 +105,7 @@ acquisisci_dato_dt(DT) :- write('Digita lunghezza del passo temporale: '),
    numero di punti della funzione d'onda; il secondo un reale positivo 
    per la lunghezza del passo temporale. */
 
-acquisisci_dati_conv(NX,DT) :- write('Digita il numero di punti totali della funzione d\' onda: '),
+acquisisci_dati_conv(NX,DT) :- write('Digita il numero di punti totali della funzione d\'onda: '),
                                read(NXV),
                                integer(NXV),
                                acquisisci_dato_nxc(NXV,NX,DT),
@@ -124,7 +124,7 @@ acquisisci_dato_nxc(NX,NX,DT) :- NX > 1,
    naturale di simulazione, ovvero il numero totale di punti della funzione
    d'onda per il calcolo dell'equazione di Burgers. */
 
-acquisisci_dato_nxb(NX) :- write('Digita il numero di punti totali della funzione d\' onda: '),
+acquisisci_dato_nxb(NX) :- write('Digita il numero di punti totali della funzione d\'onda: '),
                            read(NXV),
                            integer(NXV),
                            NXV >= 0,
@@ -284,18 +284,18 @@ derivata_u(V,THETA,V1,THETA1,X1,Y1) :-  CG is 9.81,     /* Costante gravitaziona
 
 calc_convezione(NX,_,F)  :- (NX == 0;
                              NX == 1),
-                            INF is 0.0,         /* Limite inferiore del dominio spaziale. */
-                            SUP is 2.0,         /* Limite superiore del dominio spaziale. */
+                            INF is 0.0,                  /* Limite inferiore del dominio spaziale. */
+                            SUP is 2.0,                  /* Limite superiore del dominio spaziale. */
                             cond_iniziale_conv(NX,INF,SUP,F).
 calc_convezione(NX,DT,F) :- NX > 1,
-                            NT  is 25,          /* Numero complessivo di passi temporali
-                                                   che deve effettuare l'algoritmo.       */
+                            NT  is 25,                   /* Numero complessivo di passi temporali
+                                                            che deve effettuare l'algoritmo.       */
                             NX1 is NX - 1,
-                            C   is 1.0,         /* Velocita' dell'onda.                   */
-                            INF is 0.0,         /* Limite inferiore del dominio spaziale. */
-                            SUP is 2.0,         /* Limite superiore del dominio spaziale. */
-                            DX  is SUP / NX1,   /* Distanza tra qualsiasi coppia di
-                                                   punti della griglia adiacenti.         */
+                            C   is 1.0,                  /* Velocita' dell'onda.                   */
+                            INF is 0.0,                  /* Limite inferiore del dominio spaziale. */
+                            SUP is 2.0,                  /* Limite superiore del dominio spaziale. */
+                            DX  is abs(SUP - INF) / NX1, /* Distanza tra qualsiasi coppia di
+                                                            punti della griglia adiacenti.         */
                             cond_iniziale_conv(NX,INF,SUP,ONDA),
                             tempo_conv(0,NT,NX1,C,DX,DT,ONDA,F).
 
@@ -404,14 +404,14 @@ calc_burgers(NX,F) :- (NX == 0;
                       SUP is 2.0 * pi,    /* Limite superiore del dominio spaziale. */
                       cond_iniziale_burg(NX,INF,SUP,F).
 calc_burgers(NX,F) :- NX1 is NX - 1,
-                      T   is 0.6,            /* Tempo totale di simulazione.                */
-                      S   is 0.1,            /* Costante di Courant-Friendrichs-Lewy (CFL). */
-                      NU  is 0.07,           /* Coefficiente di diffusione.                 */
-                      INF is 0.0,            /* Limite inferiore del dominio spaziale.      */
-                      SUP is 2.0 * pi,       /* Limite superiore del dominio spaziale.      */
-                      DX  is SUP / NX1,      /* Distanza tra qualsiasi coppia di punti
-                                                della griglia adiacenti.                    */
-                      DT  is S * DX^2 / NU,  /* Lunghezza del passo temporale.              */
+                      T   is 0.6,                  /* Tempo totale di simulazione.                */
+                      S   is 0.1,                  /* Costante di Courant-Friendrichs-Lewy (CFL). */
+                      NU  is 0.07,                 /* Coefficiente di diffusione.                 */
+                      INF is 0.0,                  /* Limite inferiore del dominio spaziale.      */
+                      SUP is 2.0 * pi,             /* Limite superiore del dominio spaziale.      */
+                      DX  is abs(SUP - INF) / NX1, /* Distanza tra qualsiasi coppia di punti
+                                                      della griglia adiacenti.                    */
+                      DT  is S * DX^2 / NU,        /* Lunghezza del passo temporale.              */
                       NT  is floor(T/DT),    /* Numero complessivo di passi temporali
                                                 che deve effettuare l'algoritmo.            */
                       cond_iniziale_burg(NX,INF,SUP,ONDA),
@@ -555,9 +555,12 @@ phi(X,T0,NU,F) :- F is exp(-((X-4*T0)^2)/(4*NU*(T0+1))) + exp(-((X-4*T0-2*pi)^2)
 
 gen_punti_equi(0,_,_,[]).
 gen_punti_equi(N,INF,SUP,L) :- N > 0,
-                               DST is SUP - INF,
-                               N1  is N - 1,
-                               calc_punti(0,N1,INF,DST,L).
+                               DST is abs(SUP - INF),
+                               N1  is N - 1, 
+			       ((SUP > INF,
+                               calc_punti(0,N1,INF,DST,L));
+                               (calc_punti(0,N1,SUP,DST,L1),
+                               reverse(L1,L))).
 
 
 calc_punti(N1,N1,INF,_,[INF]).

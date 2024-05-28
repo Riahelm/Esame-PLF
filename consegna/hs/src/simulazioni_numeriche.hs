@@ -1,12 +1,14 @@
 module SimulazioniNumeriche where
 
 import Data.List {- necessario per usare: 
-                    - !!,     che estrae l'n-esimo elemento di una lista;
-                    - head,   che estrae il primo elemento di una lista;
-                    - last,   che estrae l'ultimo elemento di una lista; 
-                    - tail,   che estrae gli elementi di una lista successivi al primo;
-                    - init,   che estrae gli elementi di una lista precedenti all'ultimo;
-                    - length, che ritorna la lunghezza della lista. -}
+                    - !!,      che estrae l'n-esimo elemento di una lista;
+                    - head,    che estrae il primo elemento di una lista;
+                    - last,    che estrae l'ultimo elemento di una lista; 
+                    - tail,    che estrae gli elementi di una lista successivi al primo;
+                    - init,    che estrae gli elementi di una lista precedenti all'ultimo;
+                    - abs,     che ritorno il valore assoluto di un numero;
+                    - reverse, che ritorna una lista di elementi in ordine inverso;
+                    - length,  che ritorna la lunghezza della lista. -}
 
 {- Costanti globali -}
 
@@ -331,9 +333,9 @@ molt_quadrupla_scalare (a1,b1,c1,d1) b = (a1*b, b1*b, c1*b, d1*b)
 calc_convezione :: Int -> Double -> [Double]
 calc_convezione nx dt = tempo_conv nt nx c dx dt (cond_iniziale nx onda_quadra inf_conv sup_conv)
    where
-      nt = 25                                       -- Numero complessivo di passi temporali che deve effettuare l'algoritmo.
-      dx = sup_conv / (fromIntegral(nx :: Int) - 1) -- Distanza tra qualsiasi coppia di punti della griglia adiacenti.
-      c  = 1.0                                      -- Velocita' dell'onda.
+      nt = 25                                                       -- Numero complessivo di passi temporali che deve effettuare l'algoritmo.
+      dx = abs(sup_conv - inf_conv) / (fromIntegral(nx :: Int) - 1) -- Distanza tra qualsiasi coppia di punti della griglia adiacenti.
+      c  = 1.0                                                      -- Velocita' dell'onda.
 
 
 {- La funzione tempo_conv calcola numericamente l'integrazione della
@@ -395,13 +397,13 @@ calc_burgers :: Int -> [Double]
 calc_burgers nx | nx == 0 || nx == 1 = cond_iniziale nx onda_dente_sega inf sup                       
                 | otherwise          = tempo_burg nt nx dx dt (cond_iniziale nx onda_dente_sega inf sup)
    where
-      inf      = 0.0                                 -- Estremo inferiore del dominio spaziale. 
-      sup      = 2.0 * pi                            -- Estremo superiore del dominio spaziale. 
-      dx       = sup / (fromIntegral(nx :: Int) - 1) -- Distanza tra qualsiasi coppia di punti della griglia adiacenti.
-      sigma    = 0.1                                 -- Costante di Courant-Friedrichs-Lewy (CFL).
-      dt       = sigma * dx**2 / nu                  -- Lunghezza del passo temporale.
-      t_fine   = 0.6                                 -- Tempo totale di simulazione.
-      nt       = floor(t_fine / dt)                  -- Numero complessivo di passi temporali che deve effettuare l'algoritmo.
+      inf      = 0.0                                            -- Estremo inferiore del dominio spaziale. 
+      sup      = 2.0 * pi                                       -- Estremo superiore del dominio spaziale. 
+      dx       = abs(sup - inf) / (fromIntegral(nx :: Int) - 1) -- Distanza tra qualsiasi coppia di punti della griglia adiacenti.
+      sigma    = 0.1                                            -- Costante di Courant-Friedrichs-Lewy (CFL).
+      dt       = sigma * dx**2 / nu                             -- Lunghezza del passo temporale.
+      t_fine   = 0.6                                            -- Tempo totale di simulazione.
+      nt       = floor(t_fine / dt)                             -- Numero complessivo di passi temporali che deve effettuare l'algoritmo.
 
 
 {- La funzione tempo_burg calcola numericamente l'integrazione della
@@ -484,8 +486,10 @@ cond_iniziale nx onda inf sup = [onda x | x <- lx]
    Per il calcolo dei punti si fa uso della funzione calc_punti. -}
 
 gen_punti_equi :: Int -> Double -> Double -> [Double]
-gen_punti_equi 0 _ _      = []
-gen_punti_equi nx inf sup = calc_punti 0 (nx - 1) inf (sup - inf)
+gen_punti_equi 0 _ _                  = []
+gen_punti_equi nx inf sup | sup > inf = calc_punti 0 (nx - 1) inf (abs $ sup - inf) 
+                          | otherwise = reverse(calc_punti 0 (nx - 1) sup (abs $ sup - inf))
+
 
 
 calc_punti :: Int -> Int -> Double -> Double -> [Double]

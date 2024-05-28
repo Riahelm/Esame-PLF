@@ -7,9 +7,12 @@
 
 gen_punti_equi(0,_,_,[]). 
 gen_punti_equi(N,INF,SUP,L) :- N > 0,
-                               DST is SUP - INF,
+                               DST is abs(SUP - INF),
                                N1  is N - 1, 
-                               calc_punti(0,N1,INF,DST,L).
+			       ((SUP > INF,
+                               calc_punti(0,N1,INF,DST,L));
+                               (calc_punti(0,N1,SUP,DST,L1),
+                               reverse(L1,L))).
 
 calc_punti(N1,N1,INF,_,[INF]).
 calc_punti(I,N1,INF,DST,[INF|L]) :- I < N1,
