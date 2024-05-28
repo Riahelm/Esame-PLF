@@ -52,7 +52,8 @@ main = do putStrLn "Progetto della sessione estiva del corso Programmazione Logi
           putStrLn "| Parametro richiesto:                                             |"
           putStrLn "| passo temporale, determina la distanza temporale                 |"
           putStrLn "| tra due punti di simulazione, un valore basso                    |"
-          putStrLn "| permette una simulazione piu' accurata                           |"
+          putStrLn "| permette una simulazione piu' accurata.                          |"
+          putStrLn "| Il valore del passo temporale deve essere maggiore di zero.      |"
           putStrLn "--------------------------------------------------------------------"
 
           dt <- acquisisci_dato_dt
@@ -74,7 +75,8 @@ main = do putStrLn "Progetto della sessione estiva del corso Programmazione Logi
           putStrLn "| Parametro richiesto:                                             |"
           putStrLn "| passo temporale, determina la distanza temporale                 |"
           putStrLn "| tra due punti di simulazione, un valore basso                    |"
-          putStrLn "| permette una simulazione piu' accurata                           |"
+          putStrLn "| permette una simulazione piu' accurata.                          |"
+          putStrLn "| Il valore del passo temporale deve essere maggiore di zero.      |"
           putStrLn "--------------------------------------------------------------------"
 
           dt <- acquisisci_dato_dt
@@ -83,8 +85,8 @@ main = do putStrLn "Progetto della sessione estiva del corso Programmazione Logi
           putStrLn "--------------------------------------------------------------------"
           putStrLn "| Calcolo dell'equazione di convezione lineare a una dimensione    |"
           putStrLn "| Parametri iniziali:                                              |"
-          putStrLn "| limite superiore del dominio spaziale    = 2.0,                  |"
-          putStrLn "| limite inferiore del dominio spaziale    = 0.0,                  |" 
+          putStrLn "| estremo superiore del dominio spaziale   = 2.0,                  |"
+          putStrLn "| estremo inferiore del dominio spaziale   = 0.0,                  |" 
           putStrLn "| valore della parte alta della funzione   = 2.0,                  |" 
           putStrLn "| valore della parte bassa della funzione  = 1.0.                  |"
           putStrLn "| Parametri di simulazione:                                        |"
@@ -93,24 +95,27 @@ main = do putStrLn "Progetto della sessione estiva del corso Programmazione Logi
           putStrLn "| Parametri richiesti all'utente:                                  |" 
           putStrLn "| numero di punti che compongono la funzione d'onda,               |"
           putStrLn "| un valore alto permette una simulazione piu' accurata.           |"
+          putStrLn "| Il valore di punti dell'onda deve essere un numero naturale.     |"
           putStrLn "| Passo temporale, determina la distanza temporale                 |"
           putStrLn "| tra due punti di simulazione, un valore basso                    |"
-          putStrLn "| permette una simulazione piu' accurata                           |"
+          putStrLn "| permette una simulazione piu' accurata.                          |"
+          putStrLn "| Il valore del passo temporale deve essere maggiore di zero.      |"
           putStrLn "--------------------------------------------------------------------"
 
-          acqui_dati_e_calc_conv 
+          acqui_dati_e_calc_conv
 
           putStrLn "--------------------------------------------------------------------"
           putStrLn "| Calcolo dell'equazione di Burgers a una dimensione               |"
           putStrLn "| Parametri iniziali:                                              |"
-          putStrLn "| limite superiore del dominio spaziale    = 2.0 * pi,             |"
-          putStrLn "| limite inferiore del dominio spaziale    = 0.0.                  |" 
+          putStrLn "| estremo superiore del dominio spaziale   = 2.0 * pi,             |"
+          putStrLn "| estremo inferiore del dominio spaziale   = 0.0.                  |" 
           putStrLn "| Parametri di simulazione:                                        |"
           putStrLn "| tempo finale di simulazione              = 0.6s,                 |" 
           putStrLn "| coefficiente di diffusione               = 1.0m^2/s,             |" 
           putStrLn "| costante di Courant-Friedrichs-Lewy      = 0.1.                  |" 
           putStrLn "| Parametri richiesti all'utente:                                  |" 
-          putStrLn "| numero di punti che compongono la funzione d'onda                |"
+          putStrLn "| numero di punti che compongono la funzione d'onda.               |"
+          putStrLn "| Il valore di punti dell'onda deve essere un numero naturale.     |"
           putStrLn "--------------------------------------------------------------------"
 
           nx <- acquisisci_dato_nxb 

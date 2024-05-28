@@ -17,7 +17,8 @@ main :-
     write('| Parametro richiesto:                                             |'), nl,
     write('| passo temporale, determina la distanza temporale                 |'), nl,
     write('| tra due punti di simulazione, un valore basso                    |'), nl,
-    write('| permette una simulazione piu\'   accurata                         |'), nl,
+    write('| permette una simulazione piu\'   accurata.                        |'), nl,
+    write('| Il valore del passo temporale deve essere maggiore di zero.      |'), nl,
     write('--------------------------------------------------------------------'), nl,
     acquisisci_dato_dt(DT),                                                        nl,
     calc_fugoide_semplice(DT, FS),
@@ -39,7 +40,8 @@ main :-
     write('| Parametro richiesto:                                             |'), nl,
     write('| passo temporale, determina la distanza temporale                 |'), nl,
     write('| tra due punti di simulazione, un valore basso                    |'), nl,
-    write('| permette una simulazione piu\'  accurata                          |'), nl,
+    write('| permette una simulazione piu\'  accurata.                         |'), nl,
+    write('| Il valore del passo temporale deve essere maggiore di zero.      |'), nl,
     write('--------------------------------------------------------------------'), nl,
     acquisisci_dato_dt(DT1),                                                       nl,
     calc_fugoide_completo(DT1, FC),
@@ -48,8 +50,8 @@ main :-
     write('--------------------------------------------------------------------'), nl,
     write('| Calcolo dell\' equazione di convezione lineare a una dimensione   |'), nl,
     write('| Parametri iniziali:                                              |'), nl,
-    write('| limite superiore del dominio spaziale    = 2.0,                  |'), nl,
-    write('| limite inferiore del dominio spaziale    = 0.0,                  |'), nl, 
+    write('| estremo superiore del dominio spaziale   = 2.0,                  |'), nl,
+    write('| estremo inferiore del dominio spaziale   = 0.0,                  |'), nl, 
     write('| valore della parte alta della funzione   = 2.0,                  |'), nl, 
     write('| valore della parte bassa della funzione  = 1.0.                  |'), nl,
     write('| Parametri di simulazione:                                        |'), nl,
@@ -58,9 +60,11 @@ main :-
     write('| Parametri richiesti all\' utente:                                 |'), nl, 
     write('| numero di punti che compongono la funzione d\' onda,              |'), nl,
     write('| un valore alto permette una simulazione piu\'  accurata.          |'), nl,
+    write('| Il valore di punti dell\' onda deve essere un numero naturale.    |'), nl,
     write('| Passo temporale, determina la distanza temporale                 |'), nl,
     write('| tra due punti di simulazione, un valore basso                    |'), nl,
-    write('| permette una simulazione piu\'  accurata                          |'), nl,
+    write('| permette una simulazione piu\'  accurata.                         |'), nl,
+    write('| Il valore del passo temporale deve essere maggiore di zero.      |'), nl,
     write('--------------------------------------------------------------------'), nl,
     acquisisci_dati_conv(NXC,DT2),                                                 nl,
     calc_convezione(NXC,DT2,CONV), 
@@ -70,14 +74,15 @@ main :-
     write('--------------------------------------------------------------------'), nl,
     write('| Calcolo dell\' equazione di Burgers a una dimensione              |'), nl,
     write('| Parametri iniziali:                                              |'), nl,
-    write('| limite superiore del dominio spaziale    = 2.0 * pi,             |'), nl,
-    write('| limite inferiore del dominio spaziale    = 0.0.                  |'), nl, 
+    write('| estremo superiore del dominio spaziale   = 2.0 * pi,             |'), nl,
+    write('| estremo inferiore del dominio spaziale   = 0.0.                  |'), nl, 
     write('| Parametri di simulazione:                                        |'), nl,
     write('| tempo finale di simulazione              = 0.6s,                 |'), nl, 
     write('| coefficiente di diffusione               = 1.0m^2/s,             |'), nl, 
     write('| costante di Courant-Friedrichs-Lewy      = 0.1.                  |'), nl, 
     write('| Parametri richiesti all\' utente:                                 |'), nl, 
-    write('| numero di punti che compongono la funzione d\' onda               |'), nl,
+    write('| numero di punti che compongono la funzione d\' onda.              |'), nl,
+    write('| Il valore di punti dell\' onda deve essere un numero naturale.    |'), nl,
     write('--------------------------------------------------------------------'), nl,
     acquisisci_dato_nxb(NXB),                                                      nl,    
     calc_burgers(NXB,BURG),
@@ -359,8 +364,8 @@ passo_eulero_conv(E0,E1,C,DX,DT,EU) :- EU is E1 - C * (DT/DX) * (E1 - E0).
 /* Il predicato cond_iniziale_conv calcola la condizione iniziale (una funzione)
    per l'integrazione numerica dell'equazione di convezione:
    - il primo argomento   e' il numero di punti della griglia spaziale;
-   - il secondo argomento e' il limite inferiore del dominio spaziale;
-   - il terzo argomento   e' il limite superiore del dominio spaziale; 
+   - il secondo argomento e' l'estremo inferiore del dominio spaziale;
+   - il terzo argomento   e' l'estremo superiore del dominio spaziale; 
    - il quarto argomento  e' la funzione d'onda quadra. */
 
 cond_iniziale_conv(NX,INF,SUP,ONDA) :- gen_punti_equi(NX,INF,SUP,L),
@@ -510,8 +515,8 @@ passo_eulero_burg(ONDA,I0,NU,DX,DT,EU) :- I1 is I0 + 1,
 /* Il predicato cond_iniziale_burg calcola la condizione iniziale (una 
    funzione) per il calcolo numerico dell'equazione di Burgers:
    - il primo argomento   e' il numero di punti della griglia spaziale;
-   - il secondo argomento e' il limite inferiore del dominio spaziale;
-   - il terzo argomento   e' il limite superiore del dominio spaziale; 
+   - il secondo argomento e' l'estremo inferiore del dominio spaziale;
+   - il terzo argomento   e' l'estremo superiore del dominio spaziale; 
    - il quarto argomento  e' la funzione "onda a dente di sega". */
 
 cond_iniziale_burg(NX,INF,SUP,ONDA) :- gen_punti_equi(NX,INF,SUP,L),
@@ -548,8 +553,8 @@ phi(X,T0,NU,F) :- F is exp(-((X-4*T0)^2)/(4*NU*(T0+1))) + exp(-((X-4*T0-2*pi)^2)
 
 /* Il predicato gen_punti_equi genera una lista di punti equidistanti tra loro:
    - il primo argomento   e' il numero di punti che si vuole generare;
-   - il secondo argomento e' il limite inferiore della lista di punti;
-   - il terzo argomento   e' il limite superiore della lista di punti;
+   - il secondo argomento e' l'estremo inferiore della lista di punti;
+   - il terzo argomento   e' l'estremo superiore della lista di punti;
    - il quarto argomento  e' la lista di punti equidistanti. 
    Per il calcolo dei punti si fa uso del predicato calc_punti. */
 
