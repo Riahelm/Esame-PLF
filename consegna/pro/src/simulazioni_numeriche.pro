@@ -23,7 +23,7 @@ main :-
     write('| Il valore del passo temporale deve essere maggiore di zero.      |'), nl,
     write('--------------------------------------------------------------------'), nl,
 
-    acquisisci_dato_dt(DT),                                                        nl,
+    acquisisci_dato_dt(DT),                                                        
     calc_fugoide_semplice(DT, FS),
     write(FS),                                                                     nl,
 
@@ -47,7 +47,7 @@ main :-
     write('| Il valore del passo temporale deve essere maggiore di zero.      |'), nl,
     write('--------------------------------------------------------------------'), nl,
 
-    acquisisci_dato_dt(DT1),                                                       nl,
+    acquisisci_dato_dt(DT1),                                                       
     calc_fugoide_completo(DT1, FC),
     write(FC),                                                                     nl,
 
@@ -71,7 +71,7 @@ main :-
     write('| Il valore del passo temporale deve essere maggiore di zero.      |'), nl,
     write('--------------------------------------------------------------------'), nl,
 
-    acquisisci_dati_conv(NXC,DT2),                                                 nl,
+    acquisisci_dati_conv(NXC,DT2),                                                 
     calc_convezione(NXC,DT2,CONV), 
     write(CONV),                                                                   nl,
 
@@ -89,7 +89,7 @@ main :-
     write('| Il valore del numero di punti dell\'onda deve essere un naturale. |'), nl,
     write('--------------------------------------------------------------------'), nl,
 
-    acquisisci_dato_nxb(NXB),                                                      nl,    
+    acquisisci_dato_nxb(NXB),                                                          
     calc_burgers(NXB,BURG),
     write(BURG).
 
