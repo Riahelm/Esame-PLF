@@ -239,12 +239,12 @@ derivata_u_semplice dA@(y@alt, v@vel) = (v, c_grv * (1-y/zt))
 calc_fugoide_completo :: Double -> [[Double]]
 calc_fugoide_completo dt = [x0, y0] : calc_moto_completo (v0, theta0, x0, y0) dt passi_temporali
    where
-      v0             = v_trim                -- La velocita' iniziale, in questo caso quella di trim.
-      theta0         = 0.0                   -- Angolo iniziale del velivolo.
-      x0             = 0.0                   -- Spostamento orizzontale iniziale del velivolo.
-      y0             = 1000.0                -- Altitudine iniziale del velivolo.
-      tempo          = 100.0                 -- Numero di secondi di simulazione.
-      passi_temporali = floor(tempo/dt) + 1  -- Numero di punti in cui effettuare il calcolo.
+      v0              = v_trim                -- La velocita' iniziale, in questo caso quella di trim.
+      theta0          = 0.0                   -- Angolo iniziale del velivolo.
+      x0              = 0.0                   -- Spostamento orizzontale iniziale del velivolo.
+      y0              = 1000.0                -- Altitudine iniziale del velivolo.
+      tempo           = 100.0                 -- Numero di secondi di simulazione.
+      passi_temporali = floor(tempo/dt) + 1   -- Numero di punti in cui effettuare il calcolo.
 
 
 {- La funzione calc_moto_completo calcola numericamente l'integrazione del moto fugoide:

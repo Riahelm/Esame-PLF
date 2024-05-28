@@ -162,7 +162,7 @@ calc_fugoide_semplice(DT,[Z0|T]) :-  Z0 is 100.0,                    /* Altitudi
                                      calc_moto(Z0,B0,DT,PASSI,T).
 
 
-/* La funzione calc_moto calcola numericamente l'integrazione del moto fugoide:
+/* Il predicato calc_moto calcola numericamente l'integrazione del moto fugoide:
    - il primo argomento   e' l'altitudine del velivolo;
    - il secondo argomento e' la velocita' del velivolo;
    - il terzo argomento   e' la lunghezza del passo temporale dt;
@@ -177,8 +177,8 @@ calc_moto(Y,V,DT,LEN,[YT|T]) :- LEN > 0,
                                 calc_moto(YT,VT,DT,LEN1,T).
 
 
-/* Il predicato passo_eulero applica il metodo di Eulero ad una coppia di numeri. La
-   funzione approssima la soluzione al tempo t_(n+1) tramite il valore della funzione 
+/* Il predicato passo_eulero applica il metodo di Eulero ad una coppia di numeri. Il
+   predicato approssima la soluzione al tempo t_(n+1) tramite il valore del predicato 
    al tempo t_n ed un opportuno passo temporale: 
    - il primo argomento   e' l'altitudine del velivolo;
    - il secondo argomento e' la velocita' del velivolo;
@@ -222,7 +222,7 @@ derivata_u(Y,V,V,V1) :- CG is 9.81,     /* Costante gravitazionale terrestre. */
                                             calc_moto(V0,THETA0,X0,Y0,DT,PASSI,T).
 
 
-/* La funzione calc_moto calcola numericamente l'integrazione del moto fugoide:
+/* Il predicato calc_moto calcola numericamente l'integrazione del moto fugoide:
    - il primo argomento   e' la velocita' del velivolo; 
    - il secondo argomento e' l'angolo del velivolo;
    - il terzo argomento   e' lo spostamento laterale del velivolo;
