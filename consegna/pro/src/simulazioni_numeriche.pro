@@ -2,11 +2,10 @@
 /* Programma Prolog per effettuare simulazioni numeriche */
 
 main :-
-    nl,
     write('Progetto della sessione estiva del corso Programmazione Logica e Funzionale'), nl,
     write('Anno 2023/2024'), nl,
     write('Corso tenuto dal prof. Marco Bernardo'), nl,
-    write('Progetto realizzato da: Barzotti Nicolas e Ramagnano Gabriele'), nl, nl, nl,
+    write('Progetto realizzato da: Barzotti Nicolas e Ramagnano Gabriele'), nl, 
 
     write('--------------------------------------------------------------------'), nl,
     write('| Calcolo del moto fugoide senza attrito                           |'), nl,
@@ -23,7 +22,7 @@ main :-
     write('| Il valore del passo temporale deve essere maggiore di zero.      |'), nl,
     write('--------------------------------------------------------------------'), nl,
 
-    acquisisci_dato_dt(DT),                                                        nl,
+    acquisisci_dato_dt(DT),                                                        
     calc_fugoide_semplice(DT, FS),
     write(FS),                                                                     nl,
 
@@ -47,7 +46,7 @@ main :-
     write('| Il valore del passo temporale deve essere maggiore di zero.      |'), nl,
     write('--------------------------------------------------------------------'), nl,
 
-    acquisisci_dato_dt(DT1),                                                       nl,
+    acquisisci_dato_dt(DT1),                                                       
     calc_fugoide_completo(DT1, FC),
     write(FC),                                                                     nl,
 
@@ -71,7 +70,7 @@ main :-
     write('| Il valore del passo temporale deve essere maggiore di zero.      |'), nl,
     write('--------------------------------------------------------------------'), nl,
 
-    acquisisci_dati_conv(NXC,DT2),                                                 nl,
+    acquisisci_dati_conv(NXC,DT2),                                                 
     calc_convezione(NXC,DT2,CONV), 
     write(CONV),                                                                   nl,
 
@@ -89,7 +88,7 @@ main :-
     write('| Il valore del numero di punti dell\'onda deve essere un naturale. |'), nl,
     write('--------------------------------------------------------------------'), nl,
 
-    acquisisci_dato_nxb(NXB),                                                      nl,    
+    acquisisci_dato_nxb(NXB),                                                         
     calc_burgers(NXB,BURG),
     write(BURG).
 
