@@ -1,4 +1,6 @@
 
+/* Programma Prolog per effettuare simulazioni numeriche */
+
 main :-
     nl,
     write('Progetto della sessione estiva del corso Programmazione Logica e Funzionale'), nl,
