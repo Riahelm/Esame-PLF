@@ -4,34 +4,34 @@
 
 I dati in ingresso al problema sono stati suddivisi in base all'equazione da integrare numericamente, ne segue quindi la loro descrizione.
 
-\subsubsection*{Fugoide Senza Attrito}
+\subsubsection*{Moto Fugoide Senza Attrito}
 Il dato in ingresso è un numero reale maggiore di zero.
 Questo rappresenta il passo temporale per l'integrazione dell'equazione del moto fugoide senza attrito.
-\subsubsection*{Fugoide Con Attrito}
+\subsubsection*{Moto Fugoide Con Attrito}
 Il dato in ingresso è un numero reale maggiore di zero. Questo rappresenta il passo temporale per l'integrazione dell'equazione del moto fugoide con attrito.
-\subsubsection*{Convezione}
+\subsubsection*{Moto di Convezione}
     I dati in ingresso per l'integrazione dell'equazione di convezione sono:
     \begin{enumerate}
-        \item un numero naturale, rappresenta il numero di punti della funzione d'onda;
+        \item un numero naturale, rappresenta il numero di punti della funzione d'onda quadra;
         \item un numero reale maggiore di zero, rappresenta la lunghezza del passo temporale.
     \end{enumerate}
-\subsubsection*{Burgers}
-Il dato in ingresso per l'integrazione dell'equazione di Burgers è un numero naturale. Questo rappresenta il numero di punti della funzione d'onda.
+\subsubsection*{Moto di Convezione e Diffusione (Burgers)}
+Il dato in ingresso per l'integrazione dell'equazione di Burgers (la quale viene utilizzata per risolvere il problema del moto di convezione e diffusione dell'onda) è un numero naturale. Questo rappresenta il numero di punti della funzione d'onda a dente di sega.
 
 \subsection{Dati di Uscita del Problema}
 
-\subsubsection*{Fugoide Senza Attrito}
+\subsubsection*{Moto Fugoide Senza Attrito}
 Il dato in uscita dell'integrazione dell'equazione del moto fugoide senza attrito è una sequenza di numeri reali che rappresentano la funzione di traiettoria dell'areomobile.
-\subsubsection*{Fugoide Con Attrito}
+\subsubsection*{Moto Fugoide Con Attrito}
 Il dato in uscita dell'integrazione dell'equazione del moto fugoide con attrito è una sequenza di numeri reali che rappresentano la funzione di traiettoria dell'areomobile.
-\subsubsection*{Convezione}
+\subsubsection*{Moto di Convezione}
 Il dato in uscita dell'integrazione dell'equazione di convezione lineare a una dimensione è una sequenza di numeri reali che rappresentano i valori finali della funzione d'onda quadra.
-\subsubsection*{Burgers}
+\subsubsection*{Moto di Convezione e Diffusione (Burgers)}
 Il dato in uscita all'integrazione dell'equazione di Burgers a una dimensione è una sequenza di numeri reali che rappresentano i valori finali della la funzione a dente di sega.
 
 \subsection{Relazioni Intercorrenti tra i Dati del Problema}\label{analisi}
 
-\subsubsection*{Fugoide Senza Attrito}
+\subsubsection*{Moto Fugoide Senza Attrito}
 L’equazione per il moto di fugoide senza attrito è un’equazione differenziale ordinaria del secondo ordine:
 
 \begin{equation}
@@ -92,7 +92,7 @@ tempo totale di simulazione.
 \noindent 
 La condizione iniziale è il valore della derivata al tempo $t=0$ ed è l'altitudine iniziale del velivolo $z_0$.
 
-\subsubsection*{Fugoide Con Attrito}
+\subsubsection*{Moto Fugoide Con Attrito}
 L’equazione per il moto fugoide con attrito è un sistema di equazioni differenziali ordinarie del primo ordine: 
 
 \begin{align}
@@ -155,7 +155,7 @@ $$
 x(0) = x_0 \quad \text{and} \quad y(0) = y_0.
 $$
 
-\subsubsection*{Convezione}
+\subsubsection*{Moto di Convezione}
 L’equazione di convezione lineare unidimensionale è un’equazione differenziale alle derivate parziali: 
 
 \begin{equation}
@@ -213,8 +213,8 @@ u(0,t) = c
 \noindent
 dove $c$ è una costante e il suo valore è pari al valore del primo punto della funzione.
 
-\subsubsection*{Burgers}
-L’equazione di Burgers unidimensionale è un’equazione differenziale alle derivate parziali: 
+\subsubsection*{Moto di Convezione e Diffusione (Burgers)}
+L’equazione di Burgers unidimensionale è un’equazione differenziale alle derivate parziali che fonde in sè un'equazione di convezione e una di diffusione: 
 
 \begin{equation}
 \frac{\partial u}{\partial t} + u \frac{\partial u}{\partial x} = \nu \frac{\partial ^2u}{\partial x^2}.
