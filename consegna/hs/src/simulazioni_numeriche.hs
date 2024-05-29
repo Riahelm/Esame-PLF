@@ -6,13 +6,13 @@ import Data.List {- necessario per usare:
                     - last,    che estrae l'ultimo elemento di una lista; 
                     - tail,    che estrae gli elementi di una lista successivi al primo;
                     - init,    che estrae gli elementi di una lista precedenti all'ultimo;
-                    - abs,     che ritorno il valore assoluto di un numero;
+                    - abs,     che ritorna il valore assoluto di un numero;
                     - reverse, che ritorna una lista di elementi in ordine inverso;
                     - length,  che ritorna la lunghezza della lista. -}
 
 {- Costanti globali -}
 
-{- Limiti del dominio spaziale dell'equazione di convezione -}
+{- Estremi del dominio spaziale dell'equazione di convezione -}
 inf_conv = 0.0  -- Estremo inferiore del dominio spaziale.
 sup_conv = 2.0  -- Estremo superiore del dominio spaziale.
 
@@ -20,11 +20,11 @@ sup_conv = 2.0  -- Estremo superiore del dominio spaziale.
 c_grv :: Double
 c_grv = 9.81 
 
-{- Coefficiente di diffusione -}
+{- Coefficiente di diffusione. -}
 nu :: Double
 nu = 0.07  
 
-{- Velocita' di trim del velivolo, misurato in m/s -}
+{- Velocita' di trim del velivolo, misurato in m/s. -}
 v_trim :: Double
 v_trim = 30.0     
 
@@ -179,8 +179,7 @@ acquisisci_dato_nxb = do putStr "Digita il numero di punti totali della funzione
 {- Inizio sezione fugoide semplice -}
 
 
-{- La funzione calc_fugoide_semplice calcola il moto fugoide privo di attrito di 
-   un velivolo generico:
+{- La funzione calc_fugoide_semplice calcola il moto fugoide privo di attrito di un velivolo generico:
    - il suo unico argomento e' la lunghezza del passo temporale dt. -}
 
 calc_fugoide_semplice :: Double -> [Double]
@@ -205,8 +204,8 @@ calc_moto_semplice dA@(dAA,_) dt len | len == 0  = [dBA]
       dB@(dBA,_) = passo_eulero_semplice dA dt
 
 
-{- La funzione passo_eulero_semplice applica il metodo di Eulero ad una coppia di numeri. La
-   funzione approssima la soluzione al tempo t_(n+1) tramite il valore della funzione 
+{- La funzione passo_eulero_semplice applica il metodo di Eulero ad una coppia di numeri.
+   La funzione approssima la soluzione al tempo t_(n+1) tramite il valore della funzione 
    al tempo t_n ed un opportuno passo temporale:
    - il primo argomento   e' una coppia di valori, ovvero la posizione e direzione del 
      velivolo al momento t_n;
@@ -217,8 +216,7 @@ passo_eulero_semplice dA@(y@alt, v@vel) dt = somma_coppia dA (molt_coppia_scalar
 
 
 {- La funzione derivata_u_semplice viene utilizzata per l'applicazione dell'equazione del moto fugoide:
-   - il suo unico argomento e' una coppia di valori, ovvero altitudine e velocita' 
-     del velivolo. -}
+   - il suo unico argomento e' una coppia di valori, ovvero altitudine e velocita' del velivolo. -}
 
 derivata_u_semplice :: Coppia Double -> Coppia Double
 derivata_u_semplice dA@(y@alt, v@vel) = (v, c_grv * (1-y/zt))
@@ -232,8 +230,7 @@ derivata_u_semplice dA@(y@alt, v@vel) = (v, c_grv * (1-y/zt))
 {- Inizio sezione fugoide completo -}
 
 
-{- La funzione calc_fugoide_completo calcola il moto fugoide con attrito di 
-   un velivolo generico:
+{- La funzione calc_fugoide_completo calcola il moto fugoide con attrito di un velivolo generico:
    - il suo unico argomento e' la lunghezza del passo temporale dt. -}
 
 calc_fugoide_completo :: Double -> [[Double]]
@@ -260,8 +257,8 @@ calc_moto_completo dA dt len | len == 0   = [[dBC, dBD]]
       dB@(_,_,dBC,dBD) = passo_eulero_completo dA dt
 
 
-{- La funzione passo_eulero_completo applica il metodo di Eulero ad una quadrupla di numeri. La
-   funzione approssima la soluzione al tempo t_(n+1) tramite il valore della funzione 
+{- La funzione passo_eulero_completo applica il metodo di Eulero ad una quadrupla di numeri. 
+   La funzione approssima la soluzione al tempo t_(n+1) tramite il valore della funzione 
    al tempo t_n ed un opportuno passo temporale:
    - il primo argomento   e' una quadrupla di valori, ovvero la velocita', angolo, spostamento 
      laterale e verticale del velivolo al momento t_n;
@@ -330,16 +327,15 @@ molt_quadrupla_scalare (a1,b1,c1,d1) b = (a1*b, b1*b, c1*b, d1*b)
 {- Inizio sezione convezione lineare -}
 
 
-{- La funzione calc_convezione calcola l'integrazione numerica
-   dell'equazione di convezione lineare a una dimensione:
-   - il primo argomento   e' il numero di punti totali della funzione
-     d'onda;
+{- La funzione calc_convezione calcola l'integrazione numerica dell'equazione di convezione 
+   lineare a una dimensione:
+   - il primo argomento   e' il numero di punti totali della funzione d'onda;
    - il secondo argomento e' la lunghezza del passo temporale. -}
 
 calc_convezione :: Int -> Double -> [Double]
 calc_convezione nx dt = tempo_conv nt nx c dx dt (cond_iniziale nx onda_quadra inf_conv sup_conv)
    where
-      nt = 25                                                       -- Numero complessivo di passi temporali che deve effettuare l'algoritmo.
+      nt = 25                                                       -- Numero complessivo di passi temporali.
       dx = abs(sup_conv - inf_conv) / (fromIntegral(nx :: Int) - 1) -- Distanza tra qualsiasi coppia di punti della griglia adiacenti.
       c  = 1.0                                                      -- Velocita' dell'onda.
 
@@ -377,8 +373,7 @@ spazio_conv i c dx dt lx  | i == length lx - 1 = [passo_eulero]
 
 
 {- La funzione onda_quadra calcola la funzione d'onda quadra:
-   - il suo unico argomento e' la lista di punti equidistanti del dominio
-     spaziale. -}
+   - il suo unico argomento e' la lista di punti equidistanti del dominio spaziale. -}
 
 onda_quadra :: Double -> Double
 onda_quadra x | x >= 0.5 && x <= 1.0 = onda_sup
@@ -394,10 +389,8 @@ onda_quadra x | x >= 0.5 && x <= 1.0 = onda_sup
 {- Inizio sezione equazione di Burgers -}
 
 
-{- La funzione calc_burgers calcola l'integrazione numerica
-   dell'equazione di Burgers a una dimensione:
-   - il suo unico argomento e' il numero di punti totali della funzione
-     d'onda. -}
+{- La funzione calc_burgers calcola l'integrazione numerica dell'equazione di Burgers a una dimensione:
+   - il suo unico argomento e' il numero di punti totali della funzione d'onda. -}
 
 calc_burgers :: Int -> [Double]
 calc_burgers nx | nx == 0 || nx == 1 = cond_iniziale nx onda_dente_sega inf sup                       
@@ -409,11 +402,11 @@ calc_burgers nx | nx == 0 || nx == 1 = cond_iniziale nx onda_dente_sega inf sup
       sigma    = 0.1                                            -- Costante di Courant-Friedrichs-Lewy (CFL).
       dt       = sigma * dx**2 / nu                             -- Lunghezza del passo temporale.
       t_fine   = 0.6                                            -- Tempo totale di simulazione.
-      nt       = floor(t_fine / dt)                             -- Numero complessivo di passi temporali che deve effettuare l'algoritmo.
+      nt       = floor(t_fine / dt)                             -- Numero complessivo di passi temporali.
 
 
-{- La funzione tempo_burg calcola numericamente l'integrazione della
-   funzione rispetto al parametro temporale dt:
+{- La funzione tempo_burg calcola numericamente l'integrazione della funzione rispetto al 
+   parametro temporale dt:
    - il primo argomento   e' il numero di passi temporali totali che la
      funzione d'onda deve compiere; 
    - il secondo argomento e' il numero di passi spaziali utilizzati dalla
@@ -443,17 +436,15 @@ spazio_burg i dx dt lx | i == length lx - 1 = [bordo]
                        | otherwise          = (passo_eulero) : spazio_burg (i+1) dx dt lx
    where
       bordo        = (last lx) - (last lx) * dt/dx * ((last lx) - (last $ init lx)) +
-                     nu*dt/dx**2*(head lx - 2*(last lx) + (last $ init lx))
+                     nu*dt/dx**2*(head lx - 2*(last lx) + (last $ init lx)) -- Condizione di bordo.
       passo_eulero = (lx !! i - lx !! i * dt/dx * (lx !! i - lx !! (i-1)) + 
                       nu*dt/dx**2*(lx !! (i+1) - 2*(lx !! i) + lx !! (i-1)))
 
 
-{- La funzione onda_dente_sega calcola la funzione d'onda a dente di 
-   sega 'u':
-   - il suo unico argomento e' la lista di punti equidistanti del 
-     dominio spaziale. 
-   Per il calcolo dell'onda si fa uso dei predicati phi e phi_primo
-   che sono rispettivamente la funzione e la sua derivata.  -}
+{- La funzione onda_dente_sega calcola la funzione d'onda a dente di sega 'u':
+   - il suo unico argomento e' la lista di punti equidistanti del dominio spaziale. 
+   Per il calcolo dell'onda si fa uso dei predicati phi e phi_primo che sono 
+   rispettivamente la funzione e la sua derivata.  -}
 
 onda_dente_sega :: Double -> Double
 onda_dente_sega x = u t0 x nu

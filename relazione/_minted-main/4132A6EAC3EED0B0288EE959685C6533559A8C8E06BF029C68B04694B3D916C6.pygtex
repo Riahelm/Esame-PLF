@@ -1,0 +1,601 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+cm}{/* Programma Prolog per effettuare simulazioni numeriche */}
+
+\PYG{n+nf}{main} \PYG{o}{:\PYGZhy{}} 
+        \PYG{n+nf}{write}\PYG{p}{(}\PYG{l+s+sAtom}{\PYGZsq{}Progetto della sessione estiva del corso Programmazione Logica e Funzionale\PYGZsq{}}\PYG{p}{),} \PYG{l+s+sAtom}{nl}\PYG{p}{,}
+        \PYG{n+nf}{write}\PYG{p}{(}\PYG{l+s+sAtom}{\PYGZsq{}Anno 2023/2024\PYGZsq{}}\PYG{p}{),} \PYG{l+s+sAtom}{nl}\PYG{p}{,}
+        \PYG{n+nf}{write}\PYG{p}{(}\PYG{l+s+sAtom}{\PYGZsq{}Corso tenuto dal prof. Marco Bernardo\PYGZsq{}}\PYG{p}{),} \PYG{l+s+sAtom}{nl}\PYG{p}{,}
+        \PYG{n+nf}{write}\PYG{p}{(}\PYG{l+s+sAtom}{\PYGZsq{}Progetto realizzato da: Barzotti Nicolas e Ramagnano Gabriele\PYGZsq{}}\PYG{p}{),} \PYG{l+s+sAtom}{nl}\PYG{p}{,} 
+
+        \PYG{n+nf}{write}\PYG{p}{(}\PYG{l+s+sAtom}{\PYGZsq{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZsq{}}\PYG{p}{),} \PYG{l+s+sAtom}{nl}\PYG{p}{,}
+        \PYG{n+nf}{write}\PYG{p}{(}\PYG{l+s+sAtom}{\PYGZsq{}| Calcolo del moto fugoide senza attrito                           |\PYGZsq{}}\PYG{p}{),} \PYG{l+s+sAtom}{nl}\PYG{p}{,}
+        \PYG{n+nf}{write}\PYG{p}{(}\PYG{l+s+sAtom}{\PYGZsq{}| Parametri iniziali:                                              |\PYGZsq{}}\PYG{p}{),} \PYG{l+s+sAtom}{nl}\PYG{p}{,}
+        \PYG{n+nf}{write}\PYG{p}{(}\PYG{l+s+sAtom}{\PYGZsq{}| altitudine iniziale        = 100m,                               |\PYGZsq{}}\PYG{p}{),} \PYG{l+s+sAtom}{nl}\PYG{p}{,}
+        \PYG{n+nf}{write}\PYG{p}{(}\PYG{l+s+sAtom}{\PYGZsq{}| velocita\PYGZbs{}\PYGZsq{}} \PYG{l+s+sAtom}{iniziale}         \PYG{o}{=} \PYG{l+m+mi}{10}\PYG{l+s+sAtom}{m}\PYG{o}{/}\PYG{l+s+sAtom}{s}\PYG{p}{.}                              \PYG{p}{|}\PYG{l+s+sAtom}{\PYGZsq{}), nl,}
+\PYG{l+s+sAtom}{        write(\PYGZsq{}}\PYG{p}{|} \PYG{n+nv}{Parametri} \PYG{l+s+sAtom}{di} \PYG{n+nn}{simulazione}\PYG{p}{:}                                        \PYG{p}{|}\PYG{l+s+sAtom}{\PYGZsq{}), nl,}
+\PYG{l+s+sAtom}{        write(\PYGZsq{}}\PYG{p}{|} \PYG{l+s+sAtom}{secondi} \PYG{l+s+sAtom}{di} \PYG{l+s+sAtom}{simulazione}     \PYG{o}{=} \PYG{l+m+mi}{100}\PYG{l+s+sAtom}{s}\PYG{p}{,}                               \PYG{p}{|}\PYG{l+s+sAtom}{\PYGZsq{}), nl,}
+\PYG{l+s+sAtom}{        write(\PYGZsq{}}\PYG{p}{|} \PYG{l+s+sAtom}{costante} \PYG{l+s+sAtom}{gravitazionale}    \PYG{o}{=} \PYG{l+m+mf}{9.81}\PYG{l+s+sAtom}{m/}\PYG{p}{(}\PYG{l+s+sAtom}{s\PYGZca{}}\PYG{l+m+mi}{2}\PYG{p}{).}                        \PYG{p}{|}\PYG{l+s+sAtom}{\PYGZsq{}), nl,}
+\PYG{l+s+sAtom}{        write(\PYGZsq{}}\PYG{p}{|} \PYG{n+nv}{Parametro} \PYG{n+nn}{richiesto}\PYG{p}{:}                                             \PYG{p}{|}\PYG{l+s+sAtom}{\PYGZsq{}), nl,}
+\PYG{l+s+sAtom}{        write(\PYGZsq{}}\PYG{p}{|} \PYG{l+s+sAtom}{passo} \PYG{l+s+sAtom}{temporale}\PYG{p}{,} \PYG{l+s+sAtom}{determina} \PYG{l+s+sAtom}{la} \PYG{l+s+sAtom}{distanza} \PYG{l+s+sAtom}{temporale}                 \PYG{p}{|}\PYG{l+s+sAtom}{\PYGZsq{}), nl,}
+\PYG{l+s+sAtom}{        write(\PYGZsq{}}\PYG{p}{|} \PYG{l+s+sAtom}{tra} \PYG{l+s+sAtom}{due} \PYG{l+s+sAtom}{punti} \PYG{l+s+sAtom}{di} \PYG{l+s+sAtom}{simulazione}\PYG{p}{,} \PYG{l+s+sAtom}{un} \PYG{l+s+sAtom}{valore} \PYG{l+s+sAtom}{basso}                    \PYG{p}{|}\PYG{l+s+sAtom}{\PYGZsq{}), nl,}
+\PYG{l+s+sAtom}{        write(\PYGZsq{}}\PYG{p}{|} \PYG{l+s+sAtom}{permette} \PYG{l+s+sAtom}{una} \PYG{l+s+sAtom}{simulazione} \PYG{l+s+sAtom}{piu\PYGZbs{}\PYGZsq{} accurata.                          |\PYGZsq{}}\PYG{p}{),} \PYG{l+s+sAtom}{nl}\PYG{p}{,}
+        \PYG{n+nf}{write}\PYG{p}{(}\PYG{l+s+sAtom}{\PYGZsq{}| Il valore del passo temporale deve essere maggiore di zero.      |\PYGZsq{}}\PYG{p}{),} \PYG{l+s+sAtom}{nl}\PYG{p}{,}
+        \PYG{n+nf}{write}\PYG{p}{(}\PYG{l+s+sAtom}{\PYGZsq{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZsq{}}\PYG{p}{),} \PYG{l+s+sAtom}{nl}\PYG{p}{,}
+
+        \PYG{n+nf}{acquisisci\PYGZus{}dato\PYGZus{}dt}\PYG{p}{(}\PYG{n+nv}{DT}\PYG{p}{),}                                                        
+        \PYG{n+nf}{calc\PYGZus{}fugoide\PYGZus{}semplice}\PYG{p}{(}\PYG{n+nv}{DT}\PYG{p}{,} \PYG{n+nv}{FS}\PYG{p}{),}
+        \PYG{n+nf}{write}\PYG{p}{(}\PYG{n+nv}{FS}\PYG{p}{),}                                                                     \PYG{l+s+sAtom}{nl}\PYG{p}{,}
+
+        \PYG{n+nf}{write}\PYG{p}{(}\PYG{l+s+sAtom}{\PYGZsq{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZsq{}}\PYG{p}{),} \PYG{l+s+sAtom}{nl}\PYG{p}{,}
+        \PYG{n+nf}{write}\PYG{p}{(}\PYG{l+s+sAtom}{\PYGZsq{}| Calcolo del moto fugoide con attrito                             |\PYGZsq{}}\PYG{p}{),} \PYG{l+s+sAtom}{nl}\PYG{p}{,}
+        \PYG{n+nf}{write}\PYG{p}{(}\PYG{l+s+sAtom}{\PYGZsq{}| Parametri iniziali:                                              |\PYGZsq{}}\PYG{p}{),} \PYG{l+s+sAtom}{nl}\PYG{p}{,}
+        \PYG{n+nf}{write}\PYG{p}{(}\PYG{l+s+sAtom}{\PYGZsq{}| velocita\PYGZbs{}\PYGZsq{}} \PYG{l+s+sAtom}{iniziale}                    \PYG{o}{=} \PYG{l+s+sAtom}{velocita\PYGZbs{}\PYGZsq{} di trim,       |\PYGZsq{}}\PYG{p}{),} \PYG{l+s+sAtom}{nl}\PYG{p}{,}
+        \PYG{n+nf}{write}\PYG{p}{(}\PYG{l+s+sAtom}{\PYGZsq{}| angolo iniziale                       = 0rad,                    |\PYGZsq{}}\PYG{p}{),} \PYG{l+s+sAtom}{nl}\PYG{p}{,}
+        \PYG{n+nf}{write}\PYG{p}{(}\PYG{l+s+sAtom}{\PYGZsq{}| spostamento laterale iniziale         = 0m,                      |\PYGZsq{}}\PYG{p}{),} \PYG{l+s+sAtom}{nl}\PYG{p}{,}
+        \PYG{n+nf}{write}\PYG{p}{(}\PYG{l+s+sAtom}{\PYGZsq{}| spostamento verticale iniziale        = 1000m.                   |\PYGZsq{}}\PYG{p}{),} \PYG{l+s+sAtom}{nl}\PYG{p}{,}
+        \PYG{n+nf}{write}\PYG{p}{(}\PYG{l+s+sAtom}{\PYGZsq{}| Parametri di simulazione:                                        |\PYGZsq{}}\PYG{p}{),} \PYG{l+s+sAtom}{nl}\PYG{p}{,}
+        \PYG{n+nf}{write}\PYG{p}{(}\PYG{l+s+sAtom}{\PYGZsq{}| secondi di simulazione                = 100s,                    |\PYGZsq{}}\PYG{p}{),} \PYG{l+s+sAtom}{nl}\PYG{p}{,}
+        \PYG{n+nf}{write}\PYG{p}{(}\PYG{l+s+sAtom}{\PYGZsq{}| velocita\PYGZbs{}\PYGZsq{}} \PYG{l+s+sAtom}{di} \PYG{l+s+sAtom}{trim}                     \PYG{o}{=} \PYG{l+m+mi}{30}\PYG{l+s+sAtom}{m}\PYG{o}{/}\PYG{l+s+sAtom}{s}\PYG{p}{,}                   \PYG{p}{|}\PYG{l+s+sAtom}{\PYGZsq{}), nl,}
+\PYG{l+s+sAtom}{        write(\PYGZsq{}}\PYG{p}{|} \PYG{l+s+sAtom}{costante} \PYG{l+s+sAtom}{gravitazionale}               \PYG{o}{=} \PYG{l+m+mf}{9.81}\PYG{l+s+sAtom}{m/}\PYG{p}{(}\PYG{l+s+sAtom}{s\PYGZca{}}\PYG{l+m+mi}{2}\PYG{p}{),}             \PYG{p}{|}\PYG{l+s+sAtom}{\PYGZsq{}), nl,}
+\PYG{l+s+sAtom}{        write(\PYGZsq{}}\PYG{p}{|} \PYG{l+s+sAtom}{coefficiente} \PYG{l+s+sAtom}{di} \PYG{l+s+sAtom}{resistenza} \PYG{l+s+sAtom}{dell\PYGZbs{}\PYGZsq{}aria  = 0.025,                   |\PYGZsq{}}\PYG{p}{),} \PYG{l+s+sAtom}{nl}\PYG{p}{,}
+        \PYG{n+nf}{write}\PYG{p}{(}\PYG{l+s+sAtom}{\PYGZsq{}| coefficiente di portanza              = 1N.                      |\PYGZsq{}}\PYG{p}{),} \PYG{l+s+sAtom}{nl}\PYG{p}{,}
+        \PYG{n+nf}{write}\PYG{p}{(}\PYG{l+s+sAtom}{\PYGZsq{}| Parametro richiesto:                                             |\PYGZsq{}}\PYG{p}{),} \PYG{l+s+sAtom}{nl}\PYG{p}{,}
+        \PYG{n+nf}{write}\PYG{p}{(}\PYG{l+s+sAtom}{\PYGZsq{}| passo temporale, determina la distanza temporale                 |\PYGZsq{}}\PYG{p}{),} \PYG{l+s+sAtom}{nl}\PYG{p}{,}
+        \PYG{n+nf}{write}\PYG{p}{(}\PYG{l+s+sAtom}{\PYGZsq{}| tra due punti di simulazione, un valore basso                    |\PYGZsq{}}\PYG{p}{),} \PYG{l+s+sAtom}{nl}\PYG{p}{,}
+        \PYG{n+nf}{write}\PYG{p}{(}\PYG{l+s+sAtom}{\PYGZsq{}| permette una simulazione piu\PYGZbs{}\PYGZsq{}} \PYG{l+s+sAtom}{accurata}\PYG{p}{.}                          \PYG{p}{|}\PYG{l+s+sAtom}{\PYGZsq{}), nl,}
+\PYG{l+s+sAtom}{        write(\PYGZsq{}}\PYG{p}{|} \PYG{n+nv}{Il} \PYG{l+s+sAtom}{valore} \PYG{l+s+sAtom}{del} \PYG{l+s+sAtom}{passo} \PYG{l+s+sAtom}{temporale} \PYG{l+s+sAtom}{deve} \PYG{l+s+sAtom}{essere} \PYG{l+s+sAtom}{maggiore} \PYG{l+s+sAtom}{di} \PYG{l+s+sAtom}{zero}\PYG{p}{.}      \PYG{p}{|}\PYG{l+s+sAtom}{\PYGZsq{}), nl,}
+\PYG{l+s+sAtom}{        write(\PYGZsq{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZsq{}), nl,}
+
+\PYG{l+s+sAtom}{        acquisisci\PYGZus{}dato\PYGZus{}dt(DT1),                                                       }
+\PYG{l+s+sAtom}{        calc\PYGZus{}fugoide\PYGZus{}completo(DT1, FC),}
+\PYG{l+s+sAtom}{        write(FC),                                                                     nl,}
+
+\PYG{l+s+sAtom}{        write(\PYGZsq{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZsq{}), nl,}
+\PYG{l+s+sAtom}{        write(\PYGZsq{}}\PYG{p}{|} \PYG{n+nv}{Calcolo} \PYG{l+s+sAtom}{dell\PYGZbs{}\PYGZsq{} equazione di convezione lineare a una dimensione   |\PYGZsq{}}\PYG{p}{),} \PYG{l+s+sAtom}{nl}\PYG{p}{,}
+        \PYG{n+nf}{write}\PYG{p}{(}\PYG{l+s+sAtom}{\PYGZsq{}| Parametri iniziali:                                              |\PYGZsq{}}\PYG{p}{),} \PYG{l+s+sAtom}{nl}\PYG{p}{,}
+        \PYG{n+nf}{write}\PYG{p}{(}\PYG{l+s+sAtom}{\PYGZsq{}| estremo superiore del dominio spaziale   = 2.0,                  |\PYGZsq{}}\PYG{p}{),} \PYG{l+s+sAtom}{nl}\PYG{p}{,}
+        \PYG{n+nf}{write}\PYG{p}{(}\PYG{l+s+sAtom}{\PYGZsq{}| estremo inferiore del dominio spaziale   = 0.0,                  |\PYGZsq{}}\PYG{p}{),} \PYG{l+s+sAtom}{nl}\PYG{p}{,} 
+        \PYG{n+nf}{write}\PYG{p}{(}\PYG{l+s+sAtom}{\PYGZsq{}| valore della parte alta della funzione   = 2.0,                  |\PYGZsq{}}\PYG{p}{),} \PYG{l+s+sAtom}{nl}\PYG{p}{,} 
+        \PYG{n+nf}{write}\PYG{p}{(}\PYG{l+s+sAtom}{\PYGZsq{}| valore della parte bassa della funzione  = 1.0.                  |\PYGZsq{}}\PYG{p}{),} \PYG{l+s+sAtom}{nl}\PYG{p}{,}
+        \PYG{n+nf}{write}\PYG{p}{(}\PYG{l+s+sAtom}{\PYGZsq{}| Parametri di simulazione:                                        |\PYGZsq{}}\PYG{p}{),} \PYG{l+s+sAtom}{nl}\PYG{p}{,}
+        \PYG{n+nf}{write}\PYG{p}{(}\PYG{l+s+sAtom}{\PYGZsq{}| numero di passi temporali da effettuare  = 25,                   |\PYGZsq{}}\PYG{p}{),} \PYG{l+s+sAtom}{nl}\PYG{p}{,} 
+        \PYG{n+nf}{write}\PYG{p}{(}\PYG{l+s+sAtom}{\PYGZsq{}| velocita\PYGZbs{}\PYGZsq{}} \PYG{l+s+sAtom}{dell\PYGZbs{}\PYGZsq{}onda                      = 1.0.                  |\PYGZsq{}}\PYG{p}{),} \PYG{l+s+sAtom}{nl}\PYG{p}{,} 
+        \PYG{n+nf}{write}\PYG{p}{(}\PYG{l+s+sAtom}{\PYGZsq{}| Parametri richiesti all\PYGZbs{}\PYGZsq{}}\PYG{n+nn}{utente}\PYG{p}{:}                                  \PYG{p}{|}\PYG{l+s+sAtom}{\PYGZsq{}), nl, }
+\PYG{l+s+sAtom}{        write(\PYGZsq{}}\PYG{p}{|} \PYG{l+s+sAtom}{numero} \PYG{l+s+sAtom}{di} \PYG{l+s+sAtom}{punti} \PYG{l+s+sAtom}{che} \PYG{l+s+sAtom}{compongono} \PYG{l+s+sAtom}{la} \PYG{l+s+sAtom}{funzione} \PYG{l+s+sAtom}{d\PYGZbs{}\PYGZsq{}onda,               |\PYGZsq{}}\PYG{p}{),} \PYG{l+s+sAtom}{nl}\PYG{p}{,}
+        \PYG{n+nf}{write}\PYG{p}{(}\PYG{l+s+sAtom}{\PYGZsq{}| un valore alto permette una simulazione piu\PYGZbs{}\PYGZsq{}} \PYG{l+s+sAtom}{accurata}\PYG{p}{.}           \PYG{p}{|}\PYG{l+s+sAtom}{\PYGZsq{}), nl,}
+\PYG{l+s+sAtom}{        write(\PYGZsq{}}\PYG{p}{|} \PYG{n+nv}{Il} \PYG{l+s+sAtom}{valore} \PYG{l+s+sAtom}{del} \PYG{l+s+sAtom}{numero} \PYG{l+s+sAtom}{di} \PYG{l+s+sAtom}{punti} \PYG{l+s+sAtom}{dell\PYGZbs{}\PYGZsq{}onda deve essere un naturale. |\PYGZsq{}}\PYG{p}{),} \PYG{l+s+sAtom}{nl}\PYG{p}{,}
+        \PYG{n+nf}{write}\PYG{p}{(}\PYG{l+s+sAtom}{\PYGZsq{}| Passo temporale, determina la distanza temporale                 |\PYGZsq{}}\PYG{p}{),} \PYG{l+s+sAtom}{nl}\PYG{p}{,}
+        \PYG{n+nf}{write}\PYG{p}{(}\PYG{l+s+sAtom}{\PYGZsq{}| tra due punti di simulazione, un valore basso                    |\PYGZsq{}}\PYG{p}{),} \PYG{l+s+sAtom}{nl}\PYG{p}{,}
+        \PYG{n+nf}{write}\PYG{p}{(}\PYG{l+s+sAtom}{\PYGZsq{}| permette una simulazione piu\PYGZbs{}\PYGZsq{}} \PYG{l+s+sAtom}{accurata}\PYG{p}{.}                          \PYG{p}{|}\PYG{l+s+sAtom}{\PYGZsq{}), nl,}
+\PYG{l+s+sAtom}{        write(\PYGZsq{}}\PYG{p}{|} \PYG{n+nv}{Il} \PYG{l+s+sAtom}{valore} \PYG{l+s+sAtom}{del} \PYG{l+s+sAtom}{passo} \PYG{l+s+sAtom}{temporale} \PYG{l+s+sAtom}{deve} \PYG{l+s+sAtom}{essere} \PYG{l+s+sAtom}{maggiore} \PYG{l+s+sAtom}{di} \PYG{l+s+sAtom}{zero}\PYG{p}{.}      \PYG{p}{|}\PYG{l+s+sAtom}{\PYGZsq{}), nl,}
+\PYG{l+s+sAtom}{        write(\PYGZsq{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZsq{}), nl,}
+
+\PYG{l+s+sAtom}{        acquisisci\PYGZus{}dati\PYGZus{}conv(NXC,DT2),                                                 }
+\PYG{l+s+sAtom}{        calc\PYGZus{}convezione(NXC,DT2,CONV), }
+\PYG{l+s+sAtom}{        write(CONV),                                                                   nl,}
+
+\PYG{l+s+sAtom}{        write(\PYGZsq{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZsq{}), nl,}
+\PYG{l+s+sAtom}{        write(\PYGZsq{}}\PYG{p}{|} \PYG{n+nv}{Calcolo} \PYG{l+s+sAtom}{dell\PYGZbs{}\PYGZsq{}equazione di Burgers a una dimensione               |\PYGZsq{}}\PYG{p}{),} \PYG{l+s+sAtom}{nl}\PYG{p}{,}
+        \PYG{n+nf}{write}\PYG{p}{(}\PYG{l+s+sAtom}{\PYGZsq{}| Parametri iniziali:                                              |\PYGZsq{}}\PYG{p}{),} \PYG{l+s+sAtom}{nl}\PYG{p}{,}
+        \PYG{n+nf}{write}\PYG{p}{(}\PYG{l+s+sAtom}{\PYGZsq{}| estremo superiore del dominio spaziale   = 2.0 * pi,             |\PYGZsq{}}\PYG{p}{),} \PYG{l+s+sAtom}{nl}\PYG{p}{,}
+        \PYG{n+nf}{write}\PYG{p}{(}\PYG{l+s+sAtom}{\PYGZsq{}| estremo inferiore del dominio spaziale   = 0.0.                  |\PYGZsq{}}\PYG{p}{),} \PYG{l+s+sAtom}{nl}\PYG{p}{,} 
+        \PYG{n+nf}{write}\PYG{p}{(}\PYG{l+s+sAtom}{\PYGZsq{}| Parametri di simulazione:                                        |\PYGZsq{}}\PYG{p}{),} \PYG{l+s+sAtom}{nl}\PYG{p}{,}
+        \PYG{n+nf}{write}\PYG{p}{(}\PYG{l+s+sAtom}{\PYGZsq{}| tempo finale di simulazione              = 0.6s,                 |\PYGZsq{}}\PYG{p}{),} \PYG{l+s+sAtom}{nl}\PYG{p}{,} 
+        \PYG{n+nf}{write}\PYG{p}{(}\PYG{l+s+sAtom}{\PYGZsq{}| coefficiente di diffusione               = 1.0m\PYGZca{}2/s,             |\PYGZsq{}}\PYG{p}{),} \PYG{l+s+sAtom}{nl}\PYG{p}{,} 
+        \PYG{n+nf}{write}\PYG{p}{(}\PYG{l+s+sAtom}{\PYGZsq{}| costante di Courant\PYGZhy{}Friedrichs\PYGZhy{}Lewy      = 0.1.                  |\PYGZsq{}}\PYG{p}{),} \PYG{l+s+sAtom}{nl}\PYG{p}{,} 
+        \PYG{n+nf}{write}\PYG{p}{(}\PYG{l+s+sAtom}{\PYGZsq{}| Parametri richiesti all\PYGZbs{}\PYGZsq{}}\PYG{n+nn}{utente}\PYG{p}{:}                                  \PYG{p}{|}\PYG{l+s+sAtom}{\PYGZsq{}), nl, }
+\PYG{l+s+sAtom}{        write(\PYGZsq{}}\PYG{p}{|} \PYG{l+s+sAtom}{numero} \PYG{l+s+sAtom}{di} \PYG{l+s+sAtom}{punti} \PYG{l+s+sAtom}{che} \PYG{l+s+sAtom}{compongono} \PYG{l+s+sAtom}{la} \PYG{l+s+sAtom}{funzione} \PYG{l+s+sAtom}{d\PYGZbs{}\PYGZsq{}onda.               |\PYGZsq{}}\PYG{p}{),} \PYG{l+s+sAtom}{nl}\PYG{p}{,}
+        \PYG{n+nf}{write}\PYG{p}{(}\PYG{l+s+sAtom}{\PYGZsq{}| Il valore del numero di punti dell\PYGZbs{}\PYGZsq{}onda} \PYG{l+s+sAtom}{deve} \PYG{l+s+sAtom}{essere} \PYG{l+s+sAtom}{un} \PYG{l+s+sAtom}{naturale}\PYG{p}{.} \PYG{p}{|}\PYG{l+s+sAtom}{\PYGZsq{}), nl,}
+\PYG{l+s+sAtom}{        write(\PYGZsq{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZsq{}), nl,}
+
+\PYG{l+s+sAtom}{        acquisisci\PYGZus{}dato\PYGZus{}nxb(NXB),                                                          }
+\PYG{l+s+sAtom}{        calc\PYGZus{}burgers(NXB,BURG),}
+\PYG{l+s+sAtom}{        write(BURG).}
+
+
+\PYG{l+s+sAtom}{/* Inizio sezione input/output */}
+\PYG{l+s+sAtom}{   }
+
+\PYG{l+s+sAtom}{/* Il predicato acquisisci\PYGZus{}dato\PYGZus{}dt acquisisce un parametro numerico}
+\PYG{l+s+sAtom}{   reale positivo di simulazione, ovvero la lunghezza del passo temporale. */}
+
+\PYG{l+s+sAtom}{acquisisci\PYGZus{}dato\PYGZus{}dt(DT) :\PYGZhy{} write(\PYGZsq{}}\PYG{n+nv}{Digita} \PYG{l+s+sAtom}{lunghezza} \PYG{l+s+sAtom}{del} \PYG{l+s+sAtom}{passo} \PYG{n+nn}{temporale}\PYG{p}{:} \PYG{l+s+sAtom}{\PYGZsq{}),}
+\PYG{l+s+sAtom}{                          read(DTV),}
+\PYG{l+s+sAtom}{                          DTV \PYGZgt{} 0,}
+\PYG{l+s+sAtom}{                          DT is DTV,}
+\PYG{l+s+sAtom}{                          !;     }
+\PYG{l+s+sAtom}{                          write(\PYGZsq{}}\PYG{n+nv}{Acquisizione} \PYG{l+s+sAtom}{errata}\PYG{p}{!}\PYG{l+s+sAtom}{\PYGZsq{}), nl,}
+\PYG{l+s+sAtom}{                          write(\PYGZsq{}}\PYG{n+nv}{Il} \PYG{l+s+sAtom}{valore} \PYG{l+s+sAtom}{deve} \PYG{l+s+sAtom}{essere} \PYG{l+s+sAtom}{maggiore} \PYG{l+s+sAtom}{di} \PYG{l+s+sAtom}{zero}\PYG{p}{.}\PYG{l+s+sAtom}{\PYGZsq{}), nl,}
+\PYG{l+s+sAtom}{                          acquisisci\PYGZus{}dato\PYGZus{}dt(DT).}
+
+
+\PYG{l+s+sAtom}{/* Il predicato acquisisci\PYGZus{}dati\PYGZus{}conv acquisisce due parametri numerici di simulazione }
+\PYG{l+s+sAtom}{   per l\PYGZsq{}equazione} \PYG{l+s+sAtom}{di} \PYG{n+nn}{convezione}\PYG{p}{:} \PYG{l+s+sAtom}{il} \PYG{l+s+sAtom}{primo}\PYG{p}{,} \PYG{l+s+sAtom}{un} \PYG{l+s+sAtom}{naturale} \PYG{l+s+sAtom}{per} \PYG{l+s+sAtom}{il} \PYG{l+s+sAtom}{numero} \PYG{l+s+sAtom}{di} \PYG{l+s+sAtom}{punti} \PYG{l+s+sAtom}{della} 
+   \PYG{l+s+sAtom}{funzione} \PYG{l+s+sAtom}{d\PYGZsq{}onda; il secondo un reale positivo per la lunghezza del passo temporale. */}
+
+\PYG{l+s+sAtom}{acquisisci\PYGZus{}dati\PYGZus{}conv(NX,DT) :\PYGZhy{} write(\PYGZsq{}}\PYG{n+nv}{Digita} \PYG{l+s+sAtom}{il} \PYG{l+s+sAtom}{numero} \PYG{l+s+sAtom}{di} \PYG{l+s+sAtom}{punti} \PYG{l+s+sAtom}{totali} \PYG{l+s+sAtom}{della} \PYG{l+s+sAtom}{funzione} \PYG{l+s+sAtom}{d\PYGZbs{}\PYGZsq{}onda: \PYGZsq{}}\PYG{p}{),}
+                               \PYG{n+nf}{read}\PYG{p}{(}\PYG{n+nv}{NXV}\PYG{p}{),}
+                               \PYG{n+nf}{integer}\PYG{p}{(}\PYG{n+nv}{NXV}\PYG{p}{),}
+                               \PYG{n+nf}{acquisisci\PYGZus{}dato\PYGZus{}nxc}\PYG{p}{(}\PYG{n+nv}{NXV}\PYG{p}{,}\PYG{n+nv}{NX}\PYG{p}{,}\PYG{n+nv}{DT}\PYG{p}{),}
+                               \PYG{p}{!;}     
+                               \PYG{n+nf}{write}\PYG{p}{(}\PYG{l+s+sAtom}{\PYGZsq{}Acquisizione errata!\PYGZsq{}}\PYG{p}{),} \PYG{l+s+sAtom}{nl}\PYG{p}{,}
+                               \PYG{n+nf}{write}\PYG{p}{(}\PYG{l+s+sAtom}{\PYGZsq{}Il valore deve essere un numero naturale.\PYGZsq{}}\PYG{p}{),} \PYG{l+s+sAtom}{nl}\PYG{p}{,}
+                               \PYG{n+nf}{acquisisci\PYGZus{}dati\PYGZus{}conv}\PYG{p}{(}\PYG{n+nv}{NX}\PYG{p}{,}\PYG{n+nv}{DT}\PYG{p}{).}
+
+\PYG{n+nf}{acquisisci\PYGZus{}dato\PYGZus{}nxc}\PYG{p}{(}\PYG{n+nv}{NX}\PYG{p}{,}\PYG{n+nv}{NX}\PYG{p}{,}\PYG{k}{\PYGZus{}}\PYG{p}{)}  \PYG{p}{:\PYGZhy{}} \PYG{p}{(}\PYG{n+nv}{NX} \PYG{o}{==} \PYG{l+m+mi}{0}\PYG{p}{;}
+                                  \PYG{n+nv}{NX} \PYG{o}{==} \PYG{l+m+mi}{1}\PYG{p}{).}
+\PYG{n+nf}{acquisisci\PYGZus{}dato\PYGZus{}nxc}\PYG{p}{(}\PYG{n+nv}{NX}\PYG{p}{,}\PYG{n+nv}{NX}\PYG{p}{,}\PYG{n+nv}{DT}\PYG{p}{)} \PYG{p}{:\PYGZhy{}} \PYG{n+nv}{NX} \PYG{o}{\PYGZgt{}} \PYG{l+m+mi}{1}\PYG{p}{,}
+                                 \PYG{n+nf}{acquisisci\PYGZus{}dato\PYGZus{}dt}\PYG{p}{(}\PYG{n+nv}{DT}\PYG{p}{).}
+
+
+\PYG{c+cm}{/* Il predicato acquisisci\PYGZus{}dato\PYGZus{}nxb acquisisce un parametro numerico naturale }
+\PYG{c+cm}{   di simulazione, ovvero il numero totale di punti della funzione}
+\PYG{c+cm}{   d\PYGZsq{}onda per il calcolo dell\PYGZsq{}equazione di Burgers. */}
+
+\PYG{n+nf}{acquisisci\PYGZus{}dato\PYGZus{}nxb}\PYG{p}{(}\PYG{n+nv}{NX}\PYG{p}{)} \PYG{p}{:\PYGZhy{}} \PYG{n+nf}{write}\PYG{p}{(}\PYG{l+s+sAtom}{\PYGZsq{}Digita il numero di punti totali della funzione d\PYGZbs{}\PYGZsq{}}\PYG{n+nn}{onda}\PYG{p}{:} \PYG{l+s+sAtom}{\PYGZsq{}),}
+\PYG{l+s+sAtom}{                           read(NXV),}
+\PYG{l+s+sAtom}{                           integer(NXV),}
+\PYG{l+s+sAtom}{                           NXV \PYGZgt{}= 0,}
+\PYG{l+s+sAtom}{                           NX is NXV,}
+\PYG{l+s+sAtom}{                           !;     }
+\PYG{l+s+sAtom}{                           write(\PYGZsq{}}\PYG{n+nv}{Acquisizione} \PYG{l+s+sAtom}{errata}\PYG{p}{!}\PYG{l+s+sAtom}{\PYGZsq{}), nl,}
+\PYG{l+s+sAtom}{                           write(\PYGZsq{}}\PYG{n+nv}{Il} \PYG{l+s+sAtom}{valore} \PYG{l+s+sAtom}{deve} \PYG{l+s+sAtom}{essere} \PYG{l+s+sAtom}{un} \PYG{l+s+sAtom}{numero} \PYG{l+s+sAtom}{naturale}\PYG{p}{.}\PYG{l+s+sAtom}{\PYGZsq{}), nl,}
+\PYG{l+s+sAtom}{                           acquisisci\PYGZus{}dato\PYGZus{}nxb(NX).}
+
+\PYG{l+s+sAtom}{      }
+\PYG{l+s+sAtom}{/* Fine sezione input/output */}
+
+
+\PYG{l+s+sAtom}{/* Inizio sezione fugoide semplice */}
+
+
+\PYG{l+s+sAtom}{/* Il predicato calc\PYGZus{}fugoide\PYGZus{}semplice calcola il moto fugoide privo di attrito di un velivolo generico:}
+\PYG{l+s+sAtom}{   \PYGZhy{} il primo argomento   e\PYGZsq{}} \PYG{l+s+sAtom}{la} \PYG{l+s+sAtom}{lunghezza} \PYG{l+s+sAtom}{del} \PYG{l+s+sAtom}{passo} \PYG{l+s+sAtom}{temporale} \PYG{l+s+sAtom}{dt}\PYG{p}{;}
+   \PYG{o}{\PYGZhy{}} \PYG{l+s+sAtom}{il} \PYG{l+s+sAtom}{secondo} \PYG{l+s+sAtom}{argomento} \PYG{l+s+sAtom}{e\PYGZsq{} la funzione di traiettoria risultante. */}
+
+\PYG{l+s+sAtom}{calc\PYGZus{}fugoide\PYGZus{}semplice(DT,[Z0|T]) :\PYGZhy{}  Z0 is 100.0,                    /* Altitudine iniziale del velivolo.             */}
+\PYG{l+s+sAtom}{                                     B0 is 10.0,                     /* Angolo iniziale del velivolo.                 */}
+\PYG{l+s+sAtom}{                                     PASSI is (floor(100.0/DT) + 1), /* Numero di punti in cui effettuare il calcolo. */}
+\PYG{l+s+sAtom}{                                     calc\PYGZus{}moto(Z0,B0,DT,PASSI,T).}
+
+
+\PYG{l+s+sAtom}{/* Il predicato calc\PYGZus{}moto calcola numericamente l\PYGZsq{}integrazione} \PYG{l+s+sAtom}{del} \PYG{l+s+sAtom}{moto} \PYG{n+nn}{fugoide}\PYG{p}{:}
+   \PYG{o}{\PYGZhy{}} \PYG{l+s+sAtom}{il} \PYG{l+s+sAtom}{primo} \PYG{l+s+sAtom}{argomento}   \PYG{l+s+sAtom}{e\PYGZsq{} l\PYGZsq{}altitudine} \PYG{l+s+sAtom}{del} \PYG{l+s+sAtom}{velivolo}\PYG{p}{;}
+   \PYG{o}{\PYGZhy{}} \PYG{l+s+sAtom}{il} \PYG{l+s+sAtom}{secondo} \PYG{l+s+sAtom}{argomento} \PYG{l+s+sAtom}{e\PYGZsq{} la velocita\PYGZsq{}} \PYG{l+s+sAtom}{del} \PYG{l+s+sAtom}{velivolo}\PYG{p}{;}
+   \PYG{o}{\PYGZhy{}} \PYG{l+s+sAtom}{il} \PYG{l+s+sAtom}{terzo} \PYG{l+s+sAtom}{argomento}   \PYG{l+s+sAtom}{e\PYGZsq{} la lunghezza del passo temporale dt;}
+\PYG{l+s+sAtom}{   \PYGZhy{} il quarto argomento  e\PYGZsq{}} \PYG{l+s+sAtom}{il} \PYG{l+s+sAtom}{numero} \PYG{l+s+sAtom}{di} \PYG{l+s+sAtom}{passi} \PYG{l+s+sAtom}{che} \PYG{l+s+sAtom}{sono} \PYG{l+s+sAtom}{ancora} \PYG{l+s+sAtom}{da} \PYG{l+s+sAtom}{effettuare}\PYG{p}{;}
+   \PYG{o}{\PYGZhy{}} \PYG{l+s+sAtom}{il} \PYG{l+s+sAtom}{quinto} \PYG{l+s+sAtom}{argomento}  \PYG{l+s+sAtom}{e\PYGZsq{} una lista di valori numerici che rappresentano }
+\PYG{l+s+sAtom}{     l\PYGZsq{}altitudine} \PYG{l+s+sAtom}{del} \PYG{l+s+sAtom}{velivolo} \PYG{l+s+sAtom}{per} \PYG{l+s+sAtom}{ogni} \PYG{l+s+sAtom}{passo} \PYG{l+s+sAtom}{temporale}\PYG{p}{.} \PYG{l+s+sAtom}{*/}
+
+\PYG{n+nf}{calc\PYGZus{}moto}\PYG{p}{(}\PYG{n+nv}{Y}\PYG{p}{,}\PYG{n+nv}{V}\PYG{p}{,}\PYG{n+nv}{DT}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,[}\PYG{n+nv}{YT}\PYG{p}{])}     \PYG{p}{:\PYGZhy{}} \PYG{n+nf}{passo\PYGZus{}eulero}\PYG{p}{(}\PYG{n+nv}{Y}\PYG{p}{,}\PYG{n+nv}{V}\PYG{p}{,}\PYG{n+nv}{DT}\PYG{p}{,}\PYG{n+nv}{YT}\PYG{p}{,}\PYG{k}{\PYGZus{}}\PYG{p}{).}  
+\PYG{n+nf}{calc\PYGZus{}moto}\PYG{p}{(}\PYG{n+nv}{Y}\PYG{p}{,}\PYG{n+nv}{V}\PYG{p}{,}\PYG{n+nv}{DT}\PYG{p}{,}\PYG{n+nv}{LEN}\PYG{p}{,[}\PYG{n+nv}{YT}\PYG{p}{|}\PYG{n+nv}{T}\PYG{p}{])} \PYG{p}{:\PYGZhy{}} \PYG{n+nv}{LEN} \PYG{o}{\PYGZgt{}} \PYG{l+m+mi}{0}\PYG{p}{,}
+                                \PYG{n+nf}{passo\PYGZus{}eulero}\PYG{p}{(}\PYG{n+nv}{Y}\PYG{p}{,}\PYG{n+nv}{V}\PYG{p}{,}\PYG{n+nv}{DT}\PYG{p}{,}\PYG{n+nv}{YT}\PYG{p}{,}\PYG{n+nv}{VT}\PYG{p}{),}
+                                \PYG{n+nv}{LEN1} \PYG{o}{is} \PYG{p}{(}\PYG{n+nv}{LEN} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}\PYG{p}{),}
+                                \PYG{n+nf}{calc\PYGZus{}moto}\PYG{p}{(}\PYG{n+nv}{YT}\PYG{p}{,}\PYG{n+nv}{VT}\PYG{p}{,}\PYG{n+nv}{DT}\PYG{p}{,}\PYG{n+nv}{LEN1}\PYG{p}{,}\PYG{n+nv}{T}\PYG{p}{).}
+
+
+\PYG{c+cm}{/* Il predicato passo\PYGZus{}eulero applica il metodo di Eulero ad una coppia di numeri. Il}
+\PYG{c+cm}{   predicato approssima la soluzione al tempo t\PYGZus{}(n+1) tramite il valore del predicato }
+\PYG{c+cm}{   al tempo t\PYGZus{}n ed un opportuno passo temporale: }
+\PYG{c+cm}{   \PYGZhy{} il primo argomento   e\PYGZsq{} l\PYGZsq{}altitudine del velivolo;}
+\PYG{c+cm}{   \PYGZhy{} il secondo argomento e\PYGZsq{} la velocita\PYGZsq{} del velivolo;}
+\PYG{c+cm}{   \PYGZhy{} il terzo argomento   e\PYGZsq{} la lunghezza del passo temporale dt;}
+\PYG{c+cm}{   \PYGZhy{} il quarto argomento  e\PYGZsq{} l\PYGZsq{}altitudine del velivolo ricalcolata;}
+\PYG{c+cm}{   \PYGZhy{} il quinto argomento  e\PYGZsq{} la velocita\PYGZsq{} del velivolo ricalcolata. */}
+
+\PYG{n+nf}{passo\PYGZus{}eulero}\PYG{p}{(}\PYG{n+nv}{Y}\PYG{p}{,}\PYG{n+nv}{V}\PYG{p}{,}\PYG{n+nv}{DT}\PYG{p}{,}\PYG{n+nv}{Y1}\PYG{p}{,}\PYG{n+nv}{V1}\PYG{p}{)} \PYG{p}{:\PYGZhy{}} \PYG{n+nf}{derivata\PYGZus{}u}\PYG{p}{(}\PYG{n+nv}{Y}\PYG{p}{,}\PYG{n+nv}{V}\PYG{p}{,}\PYG{n+nv}{YT}\PYG{p}{,}\PYG{n+nv}{VT}\PYG{p}{),}
+                              \PYG{n+nv}{Y1} \PYG{o}{is} \PYG{p}{(}\PYG{n+nv}{Y} \PYG{o}{+} \PYG{p}{(}\PYG{n+nv}{YT} \PYG{o}{*} \PYG{n+nv}{DT}\PYG{p}{)),}
+                              \PYG{n+nv}{V1} \PYG{o}{is} \PYG{p}{(}\PYG{n+nv}{V} \PYG{o}{+} \PYG{p}{(}\PYG{n+nv}{VT} \PYG{o}{*} \PYG{n+nv}{DT}\PYG{p}{)).}
+
+
+\PYG{c+cm}{/* Il predicato derivata\PYGZus{}u viene utilizzato per l\PYGZsq{}applicazione dell\PYGZsq{}equazione del }
+\PYG{c+cm}{   moto fugoide:}
+\PYG{c+cm}{   \PYGZhy{} il primo argomento   e\PYGZsq{} l\PYGZsq{}altitudine del velivolo;}
+\PYG{c+cm}{   \PYGZhy{} il secondo argomento e\PYGZsq{} l\PYGZsq{}angolazione del velivolo;}
+\PYG{c+cm}{   \PYGZhy{} il terzo argomento   e\PYGZsq{} l\PYGZsq{}altitudine del velivolo ricalcolata;}
+\PYG{c+cm}{   \PYGZhy{} il quarto argomento  e\PYGZsq{} l\PYGZsq{}angolazione del velivolo ricalcolata. */}
+
+\PYG{n+nf}{derivata\PYGZus{}u}\PYG{p}{(}\PYG{n+nv}{Y}\PYG{p}{,}\PYG{n+nv}{V}\PYG{p}{,}\PYG{n+nv}{V}\PYG{p}{,}\PYG{n+nv}{V1}\PYG{p}{)} \PYG{p}{:\PYGZhy{}} \PYG{n+nv}{CG} \PYG{o}{is} \PYG{l+m+mf}{9.81}\PYG{p}{,}     \PYG{c+cm}{/* Costante gravitazionale terrestre. */}
+                        \PYG{n+nv}{ZT} \PYG{o}{is} \PYG{l+m+mf}{100.0}\PYG{p}{,}    \PYG{c+cm}{/* Altitudine centrale all\PYGZsq{}oscillazione. */}
+                        \PYG{n+nv}{V1} \PYG{o}{is} \PYG{n+nv}{CG} \PYG{o}{*} \PYG{p}{(}\PYG{l+m+mi}{1}\PYG{o}{\PYGZhy{}}\PYG{n+nv}{Y}\PYG{o}{/}\PYG{n+nv}{ZT}\PYG{p}{).}
+
+
+\PYG{c+cm}{/* Fine sezione fugoide semplice */}
+
+
+\PYG{c+cm}{/* Inizio sezione fugoide completo */}
+
+
+\PYG{c+cm}{/* Il predicato calc\PYGZus{}fugoide\PYGZus{}completo calcola il moto fugoide con attrito di un velivolo generico:}
+\PYG{c+cm}{   \PYGZhy{} il primo argomento   e\PYGZsq{} la lunghezza del passo temporale dt;}
+\PYG{c+cm}{   \PYGZhy{} il secondo argomento e\PYGZsq{} la funzione di traiettoria risultante. */}
+
+  \PYG{n+nf}{calc\PYGZus{}fugoide\PYGZus{}completo}\PYG{p}{(}\PYG{n+nv}{DT}\PYG{p}{,[[}\PYG{n+nv}{X0}\PYG{p}{|}\PYG{n+nv}{Y0}\PYG{p}{]|}\PYG{n+nv}{T}\PYG{p}{])} \PYG{p}{:\PYGZhy{}} \PYG{n+nv}{V0} \PYG{o}{is} \PYG{l+m+mf}{30.0}\PYG{p}{,}                     \PYG{c+cm}{/* La velocita\PYGZsq{} iniziale, in questo caso quella di trim. */}
+                                           \PYG{n+nv}{THETA0} \PYG{o}{is} \PYG{l+m+mf}{0.0}\PYG{p}{,}                  \PYG{c+cm}{/* Angolo iniziale del velivolo.                         */}
+                                           \PYG{n+nv}{X0} \PYG{o}{is} \PYG{l+m+mf}{0.0}\PYG{p}{,}                      \PYG{c+cm}{/* Spostamento orizzontale iniziale del velivolo.        */}
+                                           \PYG{n+nv}{Y0} \PYG{o}{is} \PYG{l+m+mf}{1000.0}\PYG{p}{,}                   \PYG{c+cm}{/* Altitudine iniziale del velivolo.                     */}
+                                           \PYG{n+nv}{PASSI} \PYG{o}{is} \PYG{p}{(}\PYG{n+nf}{floor}\PYG{p}{(}\PYG{l+m+mf}{100.0}\PYG{o}{/}\PYG{n+nv}{DT}\PYG{p}{)} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{),} \PYG{c+cm}{/* Numero di punti in cui effettuare il calcolo.         */}
+                                           \PYG{n+nf}{calc\PYGZus{}moto}\PYG{p}{(}\PYG{n+nv}{V0}\PYG{p}{,}\PYG{n+nv}{THETA0}\PYG{p}{,}\PYG{n+nv}{X0}\PYG{p}{,}\PYG{n+nv}{Y0}\PYG{p}{,}\PYG{n+nv}{DT}\PYG{p}{,}\PYG{n+nv}{PASSI}\PYG{p}{,}\PYG{n+nv}{T}\PYG{p}{).}
+
+
+\PYG{c+cm}{/* Il predicato calc\PYGZus{}moto calcola numericamente l\PYGZsq{}integrazione del moto fugoide:}
+\PYG{c+cm}{   \PYGZhy{} il primo argomento   e\PYGZsq{} la velocita\PYGZsq{} del velivolo; }
+\PYG{c+cm}{   \PYGZhy{} il secondo argomento e\PYGZsq{} l\PYGZsq{}angolo del velivolo;}
+\PYG{c+cm}{   \PYGZhy{} il terzo argomento   e\PYGZsq{} lo spostamento laterale del velivolo;}
+\PYG{c+cm}{   \PYGZhy{} il quarto argomento  e\PYGZsq{} lo spostamento verticale del velivolo;}
+\PYG{c+cm}{   \PYGZhy{} il quinto argomento  e\PYGZsq{} la lunghezza del passo temporale dt;}
+\PYG{c+cm}{   \PYGZhy{} il sesto argomento   e\PYGZsq{} il numero di passi che sono ancora da effettuare;}
+\PYG{c+cm}{   \PYGZhy{} il settimo argomento e\PYGZsq{} una lista di coppie di valori numerici che rappresentano }
+\PYG{c+cm}{     spostamento laterale e l\PYGZsq{}altitudine del velivolo per ogni passo temporale. */}
+
+\PYG{n+nf}{calc\PYGZus{}moto}\PYG{p}{(}\PYG{n+nv}{V}\PYG{p}{,}\PYG{n+nv}{THETA}\PYG{p}{,}\PYG{n+nv}{X}\PYG{p}{,}\PYG{n+nv}{Y}\PYG{p}{,}\PYG{n+nv}{DT}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,[}\PYG{n+nv}{X1}\PYG{p}{,}\PYG{n+nv}{Y1}\PYG{p}{])}       \PYG{p}{:\PYGZhy{}} \PYG{n+nf}{passo\PYGZus{}eulero}\PYG{p}{(}\PYG{n+nv}{V}\PYG{p}{,}\PYG{n+nv}{THETA}\PYG{p}{,}\PYG{n+nv}{X}\PYG{p}{,}\PYG{n+nv}{Y}\PYG{p}{,}\PYG{n+nv}{DT}\PYG{p}{,}\PYG{k}{\PYGZus{}}\PYG{p}{,}\PYG{k}{\PYGZus{}}\PYG{p}{,}\PYG{n+nv}{X1}\PYG{p}{,}\PYG{n+nv}{Y1}\PYG{p}{).}
+\PYG{n+nf}{calc\PYGZus{}moto}\PYG{p}{(}\PYG{n+nv}{V}\PYG{p}{,}\PYG{n+nv}{THETA}\PYG{p}{,}\PYG{n+nv}{X}\PYG{p}{,}\PYG{n+nv}{Y}\PYG{p}{,}\PYG{n+nv}{DT}\PYG{p}{,}\PYG{n+nv}{LEN}\PYG{p}{,[[}\PYG{n+nv}{X1}\PYG{p}{|}\PYG{n+nv}{Y1}\PYG{p}{]|}\PYG{n+nv}{T}\PYG{p}{])} \PYG{p}{:\PYGZhy{}} \PYG{n+nv}{LEN} \PYG{o}{\PYGZgt{}} \PYG{l+m+mi}{0}\PYG{p}{,}
+                                             \PYG{n+nf}{passo\PYGZus{}eulero}\PYG{p}{(}\PYG{n+nv}{V}\PYG{p}{,}\PYG{n+nv}{THETA}\PYG{p}{,}\PYG{n+nv}{X}\PYG{p}{,}\PYG{n+nv}{Y}\PYG{p}{,}\PYG{n+nv}{DT}\PYG{p}{,}\PYG{n+nv}{V1}\PYG{p}{,}\PYG{n+nv}{THETA1}\PYG{p}{,}\PYG{n+nv}{X1}\PYG{p}{,}\PYG{n+nv}{Y1}\PYG{p}{),}
+                                             \PYG{n+nv}{LEN1} \PYG{o}{is} \PYG{p}{(}\PYG{n+nv}{LEN} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}\PYG{p}{),}
+                                             \PYG{n+nf}{calc\PYGZus{}moto}\PYG{p}{(}\PYG{n+nv}{V1}\PYG{p}{,}\PYG{n+nv}{THETA1}\PYG{p}{,}\PYG{n+nv}{X1}\PYG{p}{,}\PYG{n+nv}{Y1}\PYG{p}{,}\PYG{n+nv}{DT}\PYG{p}{,}\PYG{n+nv}{LEN1}\PYG{p}{,}\PYG{n+nv}{T}\PYG{p}{).}
+
+
+\PYG{c+cm}{/* Il predicato passo\PYGZus{}eulero applica il metodo di Eulero ad una quadrupla di numeri. Il}
+\PYG{c+cm}{   predicato approssima la soluzione al tempo t\PYGZus{}(n+1) tramite il valore del predicato }
+\PYG{c+cm}{   al tempo t\PYGZus{}n ed un opportuno passo temporale: }
+\PYG{c+cm}{   \PYGZhy{} il primo argomento   e\PYGZsq{} la velocita\PYGZsq{} del velivolo; }
+\PYG{c+cm}{   \PYGZhy{} il secondo argomento e\PYGZsq{} l\PYGZsq{}angolo del velivolo;}
+\PYG{c+cm}{   \PYGZhy{} il terzo argomento   e\PYGZsq{} lo spostamento laterale del velivolo;}
+\PYG{c+cm}{   \PYGZhy{} il quarto argomento  e\PYGZsq{} lo spostamento verticale del velivolo;}
+\PYG{c+cm}{   \PYGZhy{} il quinto argomento  e\PYGZsq{} la lunghezza del passo temporale dt;}
+\PYG{c+cm}{   \PYGZhy{} il sesto argomento   e\PYGZsq{} la velocita\PYGZsq{} del velivolo ricalcolata; }
+\PYG{c+cm}{   \PYGZhy{} il settimo argomento e\PYGZsq{} l\PYGZsq{}angolo del velivolo ricalcolato;}
+\PYG{c+cm}{   \PYGZhy{} il ottavo argomento  e\PYGZsq{} lo spostamento laterale del velivolo ricalcolato;}
+\PYG{c+cm}{   \PYGZhy{} il nono argomento    e\PYGZsq{} lo spostamento verticale del velivolo ricalcolato. */}
+
+\PYG{n+nf}{passo\PYGZus{}eulero}\PYG{p}{(}\PYG{n+nv}{V}\PYG{p}{,}\PYG{n+nv}{THETA}\PYG{p}{,}\PYG{n+nv}{X}\PYG{p}{,}\PYG{n+nv}{Y}\PYG{p}{,}\PYG{n+nv}{DT}\PYG{p}{,}\PYG{n+nv}{V1}\PYG{p}{,}\PYG{n+nv}{THETA1}\PYG{p}{,}\PYG{n+nv}{X1}\PYG{p}{,}\PYG{n+nv}{Y1}\PYG{p}{)} \PYG{p}{:\PYGZhy{}} \PYG{n+nf}{derivata\PYGZus{}u}\PYG{p}{(}\PYG{n+nv}{V}\PYG{p}{,}\PYG{n+nv}{THETA}\PYG{p}{,}\PYG{n+nv}{VT}\PYG{p}{,}\PYG{n+nv}{THETAT}\PYG{p}{,}\PYG{n+nv}{XT}\PYG{p}{,}\PYG{n+nv}{YT}\PYG{p}{),}
+                                                \PYG{n+nv}{V1}      \PYG{o}{is} \PYG{p}{(}\PYG{n+nv}{V} \PYG{o}{+} \PYG{p}{(}\PYG{n+nv}{VT} \PYG{o}{*} \PYG{n+nv}{DT}\PYG{p}{)),}
+                                                \PYG{n+nv}{THETA1}  \PYG{o}{is} \PYG{p}{(}\PYG{n+nv}{THETA} \PYG{o}{+} \PYG{p}{(}\PYG{n+nv}{THETAT} \PYG{o}{*} \PYG{n+nv}{DT}\PYG{p}{)),}
+                                                \PYG{n+nv}{X1}      \PYG{o}{is} \PYG{p}{(}\PYG{n+nv}{X} \PYG{o}{+} \PYG{p}{(}\PYG{n+nv}{XT} \PYG{o}{*} \PYG{n+nv}{DT}\PYG{p}{)),}
+                                                \PYG{n+nv}{Y1}      \PYG{o}{is} \PYG{p}{(}\PYG{n+nv}{Y} \PYG{o}{+} \PYG{p}{(}\PYG{n+nv}{YT} \PYG{o}{*} \PYG{n+nv}{DT}\PYG{p}{)).} 
+
+
+\PYG{c+cm}{/* Il predicato derivata\PYGZus{}u viene utilizzato per l\PYGZsq{}applicazione dell\PYGZsq{}equazione del }
+\PYG{c+cm}{   moto fugoide:}
+\PYG{c+cm}{   \PYGZhy{} il primo argomento   e\PYGZsq{} la velocita\PYGZsq{} del velivolo;}
+\PYG{c+cm}{   \PYGZhy{} il secondo argomento e\PYGZsq{} l\PYGZsq{}angolazione del velivolo;}
+\PYG{c+cm}{   \PYGZhy{} il terzo argomento   e\PYGZsq{} la velocita\PYGZsq{} del velivolo ricalcolata;}
+\PYG{c+cm}{   \PYGZhy{} il quarto argomento  e\PYGZsq{} l\PYGZsq{}angolazione del velivolo ricalcolata;}
+\PYG{c+cm}{   \PYGZhy{} il quinto argomento  e\PYGZsq{} lo spostamento laterale del velivolo ricalcolato;}
+\PYG{c+cm}{   \PYGZhy{} il sesto argomento   e\PYGZsq{} lo spostamento verticale del velivolo ricalcolato. */}
+
+\PYG{n+nf}{derivata\PYGZus{}u}\PYG{p}{(}\PYG{n+nv}{V}\PYG{p}{,}\PYG{n+nv}{THETA}\PYG{p}{,}\PYG{n+nv}{V1}\PYG{p}{,}\PYG{n+nv}{THETA1}\PYG{p}{,}\PYG{n+nv}{X1}\PYG{p}{,}\PYG{n+nv}{Y1}\PYG{p}{)} \PYG{p}{:\PYGZhy{}}  \PYG{n+nv}{CG} \PYG{o}{is} \PYG{l+m+mf}{9.81}\PYG{p}{,}     \PYG{c+cm}{/* Costante gravitazionale terrestre.   */}
+                                        \PYG{n+nv}{CR} \PYG{o}{is} \PYG{l+m+mf}{0.025}\PYG{p}{,}    \PYG{c+cm}{/* Coefficiente di resistenza all\PYGZsq{}aria. */}
+                                        \PYG{n+nv}{CP} \PYG{o}{is} \PYG{l+m+mf}{1.0}\PYG{p}{,}      \PYG{c+cm}{/* Coefficiente di portanza.            */}
+                                        \PYG{n+nv}{VTRIM} \PYG{o}{is} \PYG{l+m+mf}{30.0}\PYG{p}{,}  \PYG{c+cm}{/* Velocita\PYGZsq{} di trim del velivolo.      */}
+                                        \PYG{n+nv}{V1} \PYG{o}{is} \PYG{p}{(}\PYG{o}{\PYGZhy{}} \PYG{p}{(}\PYG{n+nv}{CG} \PYG{o}{*} \PYG{n+nf}{sin}\PYG{p}{(}\PYG{n+nv}{THETA}\PYG{p}{))} \PYG{o}{\PYGZhy{}} \PYG{p}{(}\PYG{n+nv}{CR} \PYG{o}{/} \PYG{n+nv}{CP}\PYG{p}{)} \PYG{o}{*} \PYG{n+nv}{CG}\PYG{o}{/}\PYG{n+nv}{VTRIM}\PYG{l+s+sAtom}{**}\PYG{l+m+mi}{2}\PYG{o}{*}\PYG{n+nv}{V}\PYG{l+s+sAtom}{**}\PYG{l+m+mi}{2}\PYG{p}{),}
+                                        \PYG{n+nv}{THETA1} \PYG{o}{is} \PYG{p}{(}\PYG{o}{\PYGZhy{}} \PYG{p}{(}\PYG{n+nv}{CG} \PYG{o}{*} \PYG{n+nf}{cos}\PYG{p}{(}\PYG{n+nv}{THETA}\PYG{p}{)} \PYG{o}{/} \PYG{n+nv}{V}\PYG{p}{)} \PYG{o}{+} \PYG{p}{(}\PYG{n+nv}{CG}\PYG{o}{/}\PYG{n+nv}{VTRIM}\PYG{l+s+sAtom}{**}\PYG{l+m+mi}{2}\PYG{o}{*}\PYG{n+nv}{V}\PYG{p}{)),}
+                                        \PYG{n+nv}{X1} \PYG{o}{is} \PYG{p}{(}\PYG{n+nv}{V} \PYG{o}{*} \PYG{n+nf}{cos}\PYG{p}{(}\PYG{n+nv}{THETA}\PYG{p}{)),}
+                                        \PYG{n+nv}{Y1} \PYG{o}{is} \PYG{p}{(}\PYG{n+nv}{V} \PYG{o}{*} \PYG{n+nf}{sin}\PYG{p}{(}\PYG{n+nv}{THETA}\PYG{p}{)).}
+
+
+\PYG{c+cm}{/* Fine sezione fugoide completo */}
+
+
+\PYG{c+cm}{/* Inizio sezione convezione lineare */}
+
+
+\PYG{c+cm}{/* Il predicato calc\PYGZus{}convezione calcola l\PYGZsq{}integrazione numerica dell\PYGZsq{}equazione di convezione }
+\PYG{c+cm}{   lineare a una dimensione:}
+\PYG{c+cm}{   \PYGZhy{} il primo argomento   e\PYGZsq{} il numero di punti totali della funzione d\PYGZsq{}onda;}
+\PYG{c+cm}{   \PYGZhy{} il secondo argomento e\PYGZsq{} la lunghezza del passo temporale;}
+\PYG{c+cm}{   \PYGZhy{} il terzo argomento   e\PYGZsq{} l\PYGZsq{}integrazione numerica completa dell\PYGZsq{}equazione lineare }
+\PYG{c+cm}{     unidimensionale di convezione. */}
+
+\PYG{n+nf}{calc\PYGZus{}convezione}\PYG{p}{(}\PYG{n+nv}{NX}\PYG{p}{,}\PYG{k}{\PYGZus{}}\PYG{p}{,}\PYG{n+nv}{F}\PYG{p}{)}  \PYG{p}{:\PYGZhy{}} \PYG{p}{(}\PYG{n+nv}{NX} \PYG{o}{==} \PYG{l+m+mi}{0}\PYG{p}{;}
+                             \PYG{n+nv}{NX} \PYG{o}{==} \PYG{l+m+mi}{1}\PYG{p}{),}
+                            \PYG{n+nv}{INF} \PYG{o}{is} \PYG{l+m+mf}{0.0}\PYG{p}{,}                  \PYG{c+cm}{/* Estremo inferiore del dominio spaziale. */}
+                            \PYG{n+nv}{SUP} \PYG{o}{is} \PYG{l+m+mf}{2.0}\PYG{p}{,}                  \PYG{c+cm}{/* Estremo superiore del dominio spaziale. */}
+                            \PYG{n+nf}{cond\PYGZus{}iniziale\PYGZus{}conv}\PYG{p}{(}\PYG{n+nv}{NX}\PYG{p}{,}\PYG{n+nv}{INF}\PYG{p}{,}\PYG{n+nv}{SUP}\PYG{p}{,}\PYG{n+nv}{F}\PYG{p}{).}
+\PYG{n+nf}{calc\PYGZus{}convezione}\PYG{p}{(}\PYG{n+nv}{NX}\PYG{p}{,}\PYG{n+nv}{DT}\PYG{p}{,}\PYG{n+nv}{F}\PYG{p}{)} \PYG{p}{:\PYGZhy{}} \PYG{n+nv}{NX} \PYG{o}{\PYGZgt{}} \PYG{l+m+mi}{1}\PYG{p}{,}
+                            \PYG{n+nv}{NT}  \PYG{o}{is} \PYG{l+m+mi}{25}\PYG{p}{,}                   \PYG{c+cm}{/* Numero complessivo di passi temporali   */}
+                            \PYG{n+nv}{NX1} \PYG{o}{is} \PYG{n+nv}{NX} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}\PYG{p}{,}
+                            \PYG{n+nv}{C}   \PYG{o}{is} \PYG{l+m+mf}{1.0}\PYG{p}{,}                  \PYG{c+cm}{/* Velocita\PYGZsq{} dell\PYGZsq{}onda.                    */}
+                            \PYG{n+nv}{INF} \PYG{o}{is} \PYG{l+m+mf}{0.0}\PYG{p}{,}                  \PYG{c+cm}{/* Estremo inferiore del dominio spaziale. */}
+                            \PYG{n+nv}{SUP} \PYG{o}{is} \PYG{l+m+mf}{2.0}\PYG{p}{,}                  \PYG{c+cm}{/* Estremo superiore del dominio spaziale. */}
+                            \PYG{n+nv}{DX}  \PYG{o}{is} \PYG{n+nf}{abs}\PYG{p}{(}\PYG{n+nv}{SUP} \PYG{o}{\PYGZhy{}} \PYG{n+nv}{INF}\PYG{p}{)} \PYG{o}{/} \PYG{n+nv}{NX1}\PYG{p}{,} \PYG{c+cm}{/* Distanza tra qualsiasi coppia di}
+\PYG{c+cm}{                                                            punti della griglia adiacenti.          */}
+                            \PYG{n+nf}{cond\PYGZus{}iniziale\PYGZus{}conv}\PYG{p}{(}\PYG{n+nv}{NX}\PYG{p}{,}\PYG{n+nv}{INF}\PYG{p}{,}\PYG{n+nv}{SUP}\PYG{p}{,}\PYG{n+nv}{ONDA}\PYG{p}{),}
+                            \PYG{n+nf}{tempo\PYGZus{}conv}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{n+nv}{NT}\PYG{p}{,}\PYG{n+nv}{NX1}\PYG{p}{,}\PYG{n+nv}{C}\PYG{p}{,}\PYG{n+nv}{DX}\PYG{p}{,}\PYG{n+nv}{DT}\PYG{p}{,}\PYG{n+nv}{ONDA}\PYG{p}{,}\PYG{n+nv}{F}\PYG{p}{).}
+
+
+\PYG{c+cm}{/* Il predicato tempo\PYGZus{}conv calcola numericamente l\PYGZsq{}integrazione della}
+\PYG{c+cm}{   funzione rispetto al parametro temporale DT:}
+\PYG{c+cm}{   \PYGZhy{} il primo argomento   e\PYGZsq{} il numero di passi temporali che la funzione}
+\PYG{c+cm}{     d\PYGZsq{}onda ha compiuto;}
+\PYG{c+cm}{   \PYGZhy{} il secondo argomento e\PYGZsq{} il numero di passi temporali totali che la}
+\PYG{c+cm}{     funzione d\PYGZsq{}onda deve compiere; }
+\PYG{c+cm}{   \PYGZhy{} il terzo argomento   e\PYGZsq{} il numero di passi spaziali utilizzati dal}
+\PYG{c+cm}{     predicato spazio\PYGZus{}conv;}
+\PYG{c+cm}{   \PYGZhy{} il quarto argomento  e\PYGZsq{} la costante di velocità dell\PYGZsq{}onda;     }
+\PYG{c+cm}{   \PYGZhy{} il quinto argomento  e\PYGZsq{} la lunghezza del passo spaziale;}
+\PYG{c+cm}{   \PYGZhy{} il sesto argomento   e\PYGZsq{} la lunghezza del passo temporale;}
+\PYG{c+cm}{   \PYGZhy{} il settimo argomento e\PYGZsq{} la funzione d\PYGZsq{}onda ricalcolata;}
+\PYG{c+cm}{   \PYGZhy{} l\PYGZsq{} ottavo argomento  e\PYGZsq{} la funzione d\PYGZsq{}onda risultante. */}
+
+\PYG{n+nf}{tempo\PYGZus{}conv}\PYG{p}{(}\PYG{n+nv}{NT}\PYG{p}{,}\PYG{n+nv}{NT}\PYG{p}{,}\PYG{k}{\PYGZus{}}\PYG{p}{,}\PYG{k}{\PYGZus{}}\PYG{p}{,}\PYG{k}{\PYGZus{}}\PYG{p}{,}\PYG{k}{\PYGZus{}}\PYG{p}{,}\PYG{n+nv}{F}\PYG{p}{,}\PYG{n+nv}{F}\PYG{p}{).}
+\PYG{n+nf}{tempo\PYGZus{}conv}\PYG{p}{(}\PYG{n+nv}{I}\PYG{p}{,}\PYG{n+nv}{NT}\PYG{p}{,}\PYG{n+nv}{NX1}\PYG{p}{,}\PYG{n+nv}{C}\PYG{p}{,}\PYG{n+nv}{DX}\PYG{p}{,}\PYG{n+nv}{DT}\PYG{p}{,}\PYG{n+nv}{ONDA}\PYG{p}{,}\PYG{n+nv}{F}\PYG{p}{)} \PYG{p}{:\PYGZhy{}} \PYG{n+nv}{I} \PYG{o}{\PYGZlt{}} \PYG{n+nv}{NT}\PYG{p}{,}
+                                       \PYG{n+nv}{I1}  \PYG{o}{is} \PYG{n+nv}{I} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{,}
+                                       \PYG{n+nf}{testa}\PYG{p}{(}\PYG{n+nv}{ONDA}\PYG{p}{,}\PYG{n+nv}{T}\PYG{p}{),}                
+                                       \PYG{n+nf}{spazio\PYGZus{}conv}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{n+nv}{NX1}\PYG{p}{,}\PYG{n+nv}{C}\PYG{p}{,}\PYG{n+nv}{DX}\PYG{p}{,}\PYG{n+nv}{DT}\PYG{p}{,}\PYG{n+nv}{ONDA}\PYG{p}{,}\PYG{n+nv}{F1}\PYG{p}{),} 
+                                       \PYG{n+nf}{inserisci\PYGZus{}elem}\PYG{p}{(}\PYG{n+nv}{T}\PYG{p}{,}\PYG{n+nv}{F1}\PYG{p}{,}\PYG{n+nv}{R}\PYG{p}{),}                
+                                       \PYG{n+nf}{tempo\PYGZus{}conv}\PYG{p}{(}\PYG{n+nv}{I1}\PYG{p}{,}\PYG{n+nv}{NT}\PYG{p}{,}\PYG{n+nv}{NX1}\PYG{p}{,}\PYG{n+nv}{C}\PYG{p}{,}\PYG{n+nv}{DX}\PYG{p}{,}\PYG{n+nv}{DT}\PYG{p}{,}\PYG{n+nv}{R}\PYG{p}{,}\PYG{n+nv}{F}\PYG{p}{).} 
+
+
+\PYG{c+cm}{/* Il predicato spazio\PYGZus{}conv calcola numericamente l\PYGZsq{}integrazione della}
+\PYG{c+cm}{   funzione rispetto al parametro spaziale DX:}
+\PYG{c+cm}{   \PYGZhy{} il primo argomento   e\PYGZsq{} il numero di passi temporali che la funzione}
+\PYG{c+cm}{     d\PYGZsq{}onda ha compiuto;}
+\PYG{c+cm}{   \PYGZhy{} il secondo argomento e\PYGZsq{} il numero di passi temporali totali che la}
+\PYG{c+cm}{     funzione d\PYGZsq{}onda deve compiere; }
+\PYG{c+cm}{   \PYGZhy{} il terzo argomento   e\PYGZsq{} la costante di velocità dell\PYGZsq{}onda;      }
+\PYG{c+cm}{   \PYGZhy{} il quarto argomento  e\PYGZsq{} la lunghezza del passo spaziale;}
+\PYG{c+cm}{   \PYGZhy{} il quinto argomento  e\PYGZsq{} la lunghezza del passo temporale;}
+\PYG{c+cm}{   \PYGZhy{} il sesto argomento   e\PYGZsq{} la funzione d\PYGZsq{}onda;}
+\PYG{c+cm}{   \PYGZhy{} il settimo argomento e\PYGZsq{} la funzione d\PYGZsq{}onda ricalcolata con }
+\PYG{c+cm}{     passo\PYGZus{}eulero\PYGZus{}conv. */}
+
+\PYG{n+nf}{spazio\PYGZus{}conv}\PYG{p}{(}\PYG{n+nv}{NX1}\PYG{p}{,}\PYG{n+nv}{NX1}\PYG{p}{,}\PYG{k}{\PYGZus{}}\PYG{p}{,}\PYG{k}{\PYGZus{}}\PYG{p}{,}\PYG{k}{\PYGZus{}}\PYG{p}{,}\PYG{k}{\PYGZus{}}\PYG{p}{,[]).}
+\PYG{n+nf}{spazio\PYGZus{}conv}\PYG{p}{(}\PYG{n+nv}{I}\PYG{p}{,}\PYG{n+nv}{NX1}\PYG{p}{,}\PYG{n+nv}{C}\PYG{p}{,}\PYG{n+nv}{DX}\PYG{p}{,}\PYG{n+nv}{DT}\PYG{p}{,[}\PYG{n+nv}{E0}\PYG{p}{|}\PYG{n+nv}{LX}\PYG{p}{],[}\PYG{n+nv}{E}\PYG{p}{|}\PYG{n+nv}{T}\PYG{p}{])} \PYG{p}{:\PYGZhy{}} \PYG{n+nv}{I} \PYG{o}{\PYGZlt{}} \PYG{n+nv}{NX1}\PYG{p}{,}
+                                            \PYG{n+nv}{I1} \PYG{o}{is} \PYG{n+nv}{I} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{,}
+                                            \PYG{n+nf}{testa}\PYG{p}{(}\PYG{n+nv}{LX}\PYG{p}{,}\PYG{n+nv}{E1}\PYG{p}{),}
+                                            \PYG{n+nf}{passo\PYGZus{}eulero\PYGZus{}conv}\PYG{p}{(}\PYG{n+nv}{E0}\PYG{p}{,}\PYG{n+nv}{E1}\PYG{p}{,}\PYG{n+nv}{C}\PYG{p}{,}\PYG{n+nv}{DX}\PYG{p}{,}\PYG{n+nv}{DT}\PYG{p}{,}\PYG{n+nv}{EU}\PYG{p}{),}
+                                            \PYG{n+nv}{E}  \PYG{o}{is} \PYG{n+nv}{EU}\PYG{p}{,}
+                                            \PYG{n+nf}{spazio\PYGZus{}conv}\PYG{p}{(}\PYG{n+nv}{I1}\PYG{p}{,}\PYG{n+nv}{NX1}\PYG{p}{,}\PYG{n+nv}{C}\PYG{p}{,}\PYG{n+nv}{DX}\PYG{p}{,}\PYG{n+nv}{DT}\PYG{p}{,}\PYG{n+nv}{LX}\PYG{p}{,}\PYG{n+nv}{T}\PYG{p}{).}
+
+
+\PYG{c+cm}{/* Il predicato passo\PYGZus{}eulero\PYGZus{}conv effettua il passo di Eulero:}
+\PYG{c+cm}{   \PYGZhy{} il primo argomento   e\PYGZsq{} l\PYGZsq{}elemento corrente della lista;}
+\PYG{c+cm}{   \PYGZhy{} il secondo argomento e\PYGZsq{} l\PYGZsq{}elemento successivo a quello corrente della lista;}
+\PYG{c+cm}{   \PYGZhy{} il terzo argomento   e\PYGZsq{} la costante di velocità dell\PYGZsq{}onda;}
+\PYG{c+cm}{   \PYGZhy{} il quarto argomento  e\PYGZsq{} la lunghezza del passo spaziale;}
+\PYG{c+cm}{   \PYGZhy{} il quinto argomento  e\PYGZsq{} la lunghezza del passo temporale;}
+\PYG{c+cm}{   \PYGZhy{} il sesto argomento   e\PYGZsq{} il valore risultante del punto applicato il passo di Eulero. */}
+
+\PYG{n+nf}{passo\PYGZus{}eulero\PYGZus{}conv}\PYG{p}{(}\PYG{n+nv}{E0}\PYG{p}{,}\PYG{n+nv}{E1}\PYG{p}{,}\PYG{n+nv}{C}\PYG{p}{,}\PYG{n+nv}{DX}\PYG{p}{,}\PYG{n+nv}{DT}\PYG{p}{,}\PYG{n+nv}{EU}\PYG{p}{)} \PYG{p}{:\PYGZhy{}} \PYG{n+nv}{EU} \PYG{o}{is} \PYG{n+nv}{E1} \PYG{o}{\PYGZhy{}} \PYG{n+nv}{C} \PYG{o}{*} \PYG{p}{(}\PYG{n+nv}{DT}\PYG{o}{/}\PYG{n+nv}{DX}\PYG{p}{)} \PYG{o}{*} \PYG{p}{(}\PYG{n+nv}{E1} \PYG{o}{\PYGZhy{}} \PYG{n+nv}{E0}\PYG{p}{).}
+
+
+\PYG{c+cm}{/* Il predicato cond\PYGZus{}iniziale\PYGZus{}conv calcola la condizione iniziale (una funzione)}
+\PYG{c+cm}{   per l\PYGZsq{}integrazione numerica dell\PYGZsq{}equazione di convezione:}
+\PYG{c+cm}{   \PYGZhy{} il primo argomento   e\PYGZsq{} il numero di punti della griglia spaziale;}
+\PYG{c+cm}{   \PYGZhy{} il secondo argomento e\PYGZsq{} l\PYGZsq{}estremo inferiore del dominio spaziale;}
+\PYG{c+cm}{   \PYGZhy{} il terzo argomento   e\PYGZsq{} l\PYGZsq{}estremo superiore del dominio spaziale; }
+\PYG{c+cm}{   \PYGZhy{} il quarto argomento  e\PYGZsq{} la funzione d\PYGZsq{}onda quadra. */}
+
+\PYG{n+nf}{cond\PYGZus{}iniziale\PYGZus{}conv}\PYG{p}{(}\PYG{n+nv}{NX}\PYG{p}{,}\PYG{n+nv}{INF}\PYG{p}{,}\PYG{n+nv}{SUP}\PYG{p}{,}\PYG{n+nv}{ONDA}\PYG{p}{)} \PYG{p}{:\PYGZhy{}} \PYG{n+nf}{gen\PYGZus{}punti\PYGZus{}equi}\PYG{p}{(}\PYG{n+nv}{NX}\PYG{p}{,}\PYG{n+nv}{INF}\PYG{p}{,}\PYG{n+nv}{SUP}\PYG{p}{,}\PYG{n+nv}{L}\PYG{p}{),}
+                                       \PYG{n+nf}{onda\PYGZus{}quadra}\PYG{p}{(}\PYG{n+nv}{L}\PYG{p}{,}\PYG{n+nv}{ONDA}\PYG{p}{).}
+
+
+\PYG{c+cm}{/* Il predicato onda\PYGZus{}quadra calcola la funzione d\PYGZsq{}onda quadra:}
+\PYG{c+cm}{   \PYGZhy{} il primo argomento   e\PYGZsq{} la lista di punti equidistanti del dominio spaziale;}
+\PYG{c+cm}{   \PYGZhy{} il secondo argomento e\PYGZsq{} la funzione d\PYGZsq{}onda calcolata. */}
+
+\PYG{n+nf}{onda\PYGZus{}quadra}\PYG{p}{([],[]).}
+\PYG{n+nf}{onda\PYGZus{}quadra}\PYG{p}{([}\PYG{n+nv}{X}\PYG{p}{|}\PYG{n+nv}{L1}\PYG{p}{],[}\PYG{n+nv}{OSI}\PYG{p}{|}\PYG{n+nv}{T}\PYG{p}{])} \PYG{p}{:\PYGZhy{}} \PYG{n+nv}{X} \PYG{o}{\PYGZgt{}=} \PYG{l+m+mf}{0.5}\PYG{p}{,}
+                               \PYG{n+nv}{X} \PYG{o}{=\PYGZlt{}} \PYG{l+m+mf}{1.0}\PYG{p}{,}
+                               \PYG{n+nv}{OSI} \PYG{o}{is} \PYG{l+m+mf}{2.0}\PYG{p}{,}   \PYG{c+cm}{/* Valori assunti dalla parte alta (superiore) }
+\PYG{c+cm}{                                                della funzione d\PYGZsq{}onda quadra. */}
+                               \PYG{n+nf}{onda\PYGZus{}quadra}\PYG{p}{(}\PYG{n+nv}{L1}\PYG{p}{,}\PYG{n+nv}{T}\PYG{p}{).}
+\PYG{n+nf}{onda\PYGZus{}quadra}\PYG{p}{([}\PYG{n+nv}{X}\PYG{p}{|}\PYG{n+nv}{L1}\PYG{p}{],[}\PYG{n+nv}{OSI}\PYG{p}{|}\PYG{n+nv}{T}\PYG{p}{])} \PYG{p}{:\PYGZhy{}} \PYG{p}{(}\PYG{n+nv}{X} \PYG{o}{\PYGZlt{}} \PYG{l+m+mf}{0.5}\PYG{p}{;} 
+                                \PYG{n+nv}{X} \PYG{o}{\PYGZgt{}} \PYG{l+m+mf}{1.0}\PYG{p}{),}
+                               \PYG{n+nv}{OSI} \PYG{o}{is} \PYG{l+m+mf}{1.0}\PYG{p}{,}   \PYG{c+cm}{/* Valori assunti dalla parte bassa (inferiore) }
+\PYG{c+cm}{                                                della funzione d\PYGZsq{}onda quadra. */}
+                               \PYG{n+nf}{onda\PYGZus{}quadra}\PYG{p}{(}\PYG{n+nv}{L1}\PYG{p}{,}\PYG{n+nv}{T}\PYG{p}{).}
+
+
+\PYG{c+cm}{/* Fine sezione convezione lineare */}
+
+
+\PYG{c+cm}{/* Inizio sezione equazione di Burgers */}
+
+
+\PYG{c+cm}{/* Il predicato calc\PYGZus{}burgers calcola l\PYGZsq{}integrazione numerica dell\PYGZsq{}equazione di Burgers }
+\PYG{c+cm}{   a una dimensione:}
+\PYG{c+cm}{   \PYGZhy{} il primo argomento   e\PYGZsq{} il numero di punti totali della funzione d\PYGZsq{}onda;}
+\PYG{c+cm}{   \PYGZhy{} il secondo argomento e\PYGZsq{} l\PYGZsq{}integrazione numerica completa dell\PYGZsq{}equazione }
+\PYG{c+cm}{     unidimensionale di Burgers.*/}
+
+\PYG{n+nf}{calc\PYGZus{}burgers}\PYG{p}{(}\PYG{n+nv}{NX}\PYG{p}{,}\PYG{n+nv}{F}\PYG{p}{)} \PYG{p}{:\PYGZhy{}} \PYG{p}{(}\PYG{n+nv}{NX} \PYG{o}{==} \PYG{l+m+mi}{0}\PYG{p}{;}
+                       \PYG{n+nv}{NX} \PYG{o}{==} \PYG{l+m+mi}{1}\PYG{p}{),}
+                      \PYG{n+nv}{INF} \PYG{o}{is} \PYG{l+m+mf}{0.0}\PYG{p}{,}         \PYG{c+cm}{/* Estremo inferiore del dominio spaziale. */}
+                      \PYG{n+nv}{SUP} \PYG{o}{is} \PYG{l+m+mf}{2.0} \PYG{o}{*} \PYG{l+s+sAtom}{pi}\PYG{p}{,}    \PYG{c+cm}{/* Estremo superiore del dominio spaziale. */}
+                      \PYG{n+nf}{cond\PYGZus{}iniziale\PYGZus{}burg}\PYG{p}{(}\PYG{n+nv}{NX}\PYG{p}{,}\PYG{n+nv}{INF}\PYG{p}{,}\PYG{n+nv}{SUP}\PYG{p}{,}\PYG{n+nv}{F}\PYG{p}{).}
+\PYG{n+nf}{calc\PYGZus{}burgers}\PYG{p}{(}\PYG{n+nv}{NX}\PYG{p}{,}\PYG{n+nv}{F}\PYG{p}{)} \PYG{p}{:\PYGZhy{}} \PYG{n+nv}{NX1} \PYG{o}{is} \PYG{n+nv}{NX} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}\PYG{p}{,}
+                      \PYG{n+nv}{T}   \PYG{o}{is} \PYG{l+m+mf}{0.6}\PYG{p}{,}                  \PYG{c+cm}{/* Tempo totale di simulazione.                */}
+                      \PYG{n+nv}{S}   \PYG{o}{is} \PYG{l+m+mf}{0.1}\PYG{p}{,}                  \PYG{c+cm}{/* Costante di Courant\PYGZhy{}Friendrichs\PYGZhy{}Lewy (CFL). */}
+                      \PYG{n+nv}{NU}  \PYG{o}{is} \PYG{l+m+mf}{0.07}\PYG{p}{,}                 \PYG{c+cm}{/* Coefficiente di diffusione.                 */}
+                      \PYG{n+nv}{INF} \PYG{o}{is} \PYG{l+m+mf}{0.0}\PYG{p}{,}                  \PYG{c+cm}{/* Estremo inferiore del dominio spaziale.     */}
+                      \PYG{n+nv}{SUP} \PYG{o}{is} \PYG{l+m+mf}{2.0} \PYG{o}{*} \PYG{l+s+sAtom}{pi}\PYG{p}{,}             \PYG{c+cm}{/* Estremo superiore del dominio spaziale.     */}
+                      \PYG{n+nv}{DX}  \PYG{o}{is} \PYG{n+nf}{abs}\PYG{p}{(}\PYG{n+nv}{SUP} \PYG{o}{\PYGZhy{}} \PYG{n+nv}{INF}\PYG{p}{)} \PYG{o}{/} \PYG{n+nv}{NX1}\PYG{p}{,} \PYG{c+cm}{/* Distanza tra qualsiasi coppia di punti}
+\PYG{c+cm}{                                                      della griglia adiacenti.                    */}
+                      \PYG{n+nv}{DT}  \PYG{o}{is} \PYG{n+nv}{S} \PYG{o}{*} \PYG{n+nv}{DX}\PYG{l+s+sAtom}{\PYGZca{}}\PYG{l+m+mi}{2} \PYG{o}{/} \PYG{n+nv}{NU}\PYG{p}{,}        \PYG{c+cm}{/* Lunghezza del passo temporale.              */}
+                      \PYG{n+nv}{NT}  \PYG{o}{is} \PYG{n+nf}{floor}\PYG{p}{(}\PYG{n+nv}{T}\PYG{o}{/}\PYG{n+nv}{DT}\PYG{p}{),}          \PYG{c+cm}{/* Numero complessivo di passi temporali       */}
+                      \PYG{n+nf}{cond\PYGZus{}iniziale\PYGZus{}burg}\PYG{p}{(}\PYG{n+nv}{NX}\PYG{p}{,}\PYG{n+nv}{INF}\PYG{p}{,}\PYG{n+nv}{SUP}\PYG{p}{,}\PYG{n+nv}{ONDA}\PYG{p}{),}
+                      \PYG{n+nf}{tempo\PYGZus{}burg}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{n+nv}{NT}\PYG{p}{,}\PYG{n+nv}{NX1}\PYG{p}{,}\PYG{n+nv}{NU}\PYG{p}{,}\PYG{n+nv}{DX}\PYG{p}{,}\PYG{n+nv}{DT}\PYG{p}{,}\PYG{n+nv}{ONDA}\PYG{p}{,}\PYG{n+nv}{F}\PYG{p}{).}
+
+
+\PYG{c+cm}{/* Il predicato tempo\PYGZus{}burg calcola numericamente l\PYGZsq{}integrazione della funzione }
+\PYG{c+cm}{   rispetto al parametro temporale DT:}
+\PYG{c+cm}{   \PYGZhy{} il primo argomento   e\PYGZsq{} il numero di passi temporali che la funzione}
+\PYG{c+cm}{     d\PYGZsq{}onda ha compiuto;}
+\PYG{c+cm}{   \PYGZhy{} il secondo argomento e\PYGZsq{} il numero di passi temporali totali che la}
+\PYG{c+cm}{     funzione d\PYGZsq{}onda deve compiere; }
+\PYG{c+cm}{   \PYGZhy{} il terzo argomento   e\PYGZsq{} il numero di passi spaziali utilizzati dal}
+\PYG{c+cm}{     predicato spazio\PYGZus{}burg;}
+\PYG{c+cm}{   \PYGZhy{} il quarto argomento  e\PYGZsq{} il coefficiente di diffusione;         }
+\PYG{c+cm}{   \PYGZhy{} il quinto argomento  e\PYGZsq{} la lunghezza del passo spaziale;}
+\PYG{c+cm}{   \PYGZhy{} il sesto argomento   e\PYGZsq{} la lunghezza del passo temporale;}
+\PYG{c+cm}{   \PYGZhy{} il settimo argomento e\PYGZsq{} la funzione d\PYGZsq{}onda ricalcolata;}
+\PYG{c+cm}{   \PYGZhy{} l\PYGZsq{} ottavo argomento  e\PYGZsq{} la funzione d\PYGZsq{}onda risultante. */}
+
+\PYG{n+nf}{tempo\PYGZus{}burg}\PYG{p}{(}\PYG{n+nv}{NT}\PYG{p}{,}\PYG{n+nv}{NT}\PYG{p}{,}\PYG{k}{\PYGZus{}}\PYG{p}{,}\PYG{k}{\PYGZus{}}\PYG{p}{,}\PYG{k}{\PYGZus{}}\PYG{p}{,}\PYG{k}{\PYGZus{}}\PYG{p}{,}\PYG{n+nv}{F}\PYG{p}{,}\PYG{n+nv}{F}\PYG{p}{).}
+\PYG{n+nf}{tempo\PYGZus{}burg}\PYG{p}{(}\PYG{n+nv}{I}\PYG{p}{,}\PYG{n+nv}{NT}\PYG{p}{,}\PYG{n+nv}{NX1}\PYG{p}{,}\PYG{n+nv}{NU}\PYG{p}{,}\PYG{n+nv}{DX}\PYG{p}{,}\PYG{n+nv}{DT}\PYG{p}{,}\PYG{n+nv}{ONDA}\PYG{p}{,}\PYG{n+nv}{F}\PYG{p}{)} \PYG{p}{:\PYGZhy{}} \PYG{n+nv}{I} \PYG{o}{\PYGZlt{}} \PYG{n+nv}{NT}\PYG{p}{,}
+                                        \PYG{n+nv}{I1}  \PYG{o}{is} \PYG{n+nv}{I} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{,}
+                                        \PYG{n+nf}{bordo1}\PYG{p}{(}\PYG{n+nv}{ONDA}\PYG{p}{,}\PYG{n+nv}{NU}\PYG{p}{,}\PYG{n+nv}{DX}\PYG{p}{,}\PYG{n+nv}{DT}\PYG{p}{,}\PYG{n+nv}{B1}\PYG{p}{),}
+                                        \PYG{n+nf}{spazio\PYGZus{}burg}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{n+nv}{NX1}\PYG{p}{,}\PYG{n+nv}{NU}\PYG{p}{,}\PYG{n+nv}{DX}\PYG{p}{,}\PYG{n+nv}{DT}\PYG{p}{,}\PYG{n+nv}{ONDA}\PYG{p}{,}\PYG{n+nv}{Z}\PYG{p}{),}
+                                        \PYG{n+nf}{inserisci\PYGZus{}elem}\PYG{p}{(}\PYG{n+nv}{B1}\PYG{p}{,}\PYG{n+nv}{Z}\PYG{p}{,}\PYG{n+nv}{R}\PYG{p}{),}
+                                        \PYG{n+nf}{tempo\PYGZus{}burg}\PYG{p}{(}\PYG{n+nv}{I1}\PYG{p}{,}\PYG{n+nv}{NT}\PYG{p}{,}\PYG{n+nv}{NX1}\PYG{p}{,}\PYG{n+nv}{NU}\PYG{p}{,}\PYG{n+nv}{DX}\PYG{p}{,}\PYG{n+nv}{DT}\PYG{p}{,}\PYG{n+nv}{R}\PYG{p}{,}\PYG{n+nv}{F}\PYG{p}{).}
+
+
+\PYG{c+cm}{/* Il predicato spazio\PYGZus{}burg calcola numericamente l\PYGZsq{}integrazione della}
+\PYG{c+cm}{   funzione rispetto al parametro spaziale DX:}
+\PYG{c+cm}{   \PYGZhy{} il primo argomento   e\PYGZsq{} l\PYGZsq{}indice per accedere agli elementi della }
+\PYG{c+cm}{     lista, viene utlizzato da passo\PYGZus{}eulero; }
+\PYG{c+cm}{   \PYGZhy{} il secondo argomento e\PYGZsq{} il numero di punti della funzione; }
+\PYG{c+cm}{   \PYGZhy{} il terzo argomento   e\PYGZsq{} il coefficiente di diffusione;  }
+\PYG{c+cm}{   \PYGZhy{} il quarto argomento  e\PYGZsq{} la lunghezza del passo spaziale;}
+\PYG{c+cm}{   \PYGZhy{} il quinto argomento  e\PYGZsq{} la lunghezza del passo temporale;}
+\PYG{c+cm}{   \PYGZhy{} il sesto argomento   e\PYGZsq{} la funzione d\PYGZsq{}onda;}
+\PYG{c+cm}{   \PYGZhy{} il settimo argomento e\PYGZsq{} la funzione d\PYGZsq{}onda ricalcolata con }
+\PYG{c+cm}{     il passo\PYGZus{}eulero\PYGZus{}burg e bordo2. */}
+
+\PYG{n+nf}{spazio\PYGZus{}burg}\PYG{p}{(}\PYG{n+nv}{NX1}\PYG{p}{,}\PYG{n+nv}{NX1}\PYG{p}{,}\PYG{n+nv}{NU}\PYG{p}{,}\PYG{n+nv}{DX}\PYG{p}{,}\PYG{n+nv}{DT}\PYG{p}{,}\PYG{n+nv}{ONDA}\PYG{p}{,[}\PYG{n+nv}{F}\PYG{p}{])} \PYG{p}{:\PYGZhy{}} \PYG{n+nf}{bordo2}\PYG{p}{(}\PYG{n+nv}{ONDA}\PYG{p}{,}\PYG{n+nv}{NU}\PYG{p}{,}\PYG{n+nv}{DX}\PYG{p}{,}\PYG{n+nv}{DT}\PYG{p}{,}\PYG{n+nv}{F}\PYG{p}{).}
+\PYG{n+nf}{spazio\PYGZus{}burg}\PYG{p}{(}\PYG{n+nv}{I}\PYG{p}{,}\PYG{n+nv}{NX1}\PYG{p}{,}\PYG{n+nv}{NU}\PYG{p}{,}\PYG{n+nv}{DX}\PYG{p}{,}\PYG{n+nv}{DT}\PYG{p}{,}\PYG{n+nv}{ONDA}\PYG{p}{,[}\PYG{n+nv}{E}\PYG{p}{|}\PYG{n+nv}{F}\PYG{p}{])} \PYG{p}{:\PYGZhy{}} \PYG{n+nv}{I} \PYG{o}{\PYGZlt{}} \PYG{n+nv}{NX1}\PYG{p}{,}
+                                          \PYG{n+nv}{I1} \PYG{o}{is} \PYG{n+nv}{I} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{,}
+                                          \PYG{n+nf}{passo\PYGZus{}eulero\PYGZus{}burg}\PYG{p}{(}\PYG{n+nv}{ONDA}\PYG{p}{,}\PYG{n+nv}{I}\PYG{p}{,}\PYG{n+nv}{NU}\PYG{p}{,}\PYG{n+nv}{DX}\PYG{p}{,}\PYG{n+nv}{DT}\PYG{p}{,}\PYG{n+nv}{E}\PYG{p}{),}
+                                          \PYG{n+nf}{spazio\PYGZus{}burg}\PYG{p}{(}\PYG{n+nv}{I1}\PYG{p}{,}\PYG{n+nv}{NX1}\PYG{p}{,}\PYG{n+nv}{NU}\PYG{p}{,}\PYG{n+nv}{DX}\PYG{p}{,}\PYG{n+nv}{DT}\PYG{p}{,}\PYG{n+nv}{ONDA}\PYG{p}{,}\PYG{n+nv}{F}\PYG{p}{).}
+
+
+\PYG{c+cm}{/* Il predicato bordo1 calcola le condizioni di bordo inferiore della funzione:}
+\PYG{c+cm}{   \PYGZhy{} il primo argomento   e\PYGZsq{} la funzione d\PYGZsq{}onda;}
+\PYG{c+cm}{   \PYGZhy{} il secondo argomento e\PYGZsq{} il coefficiente di diffusione;}
+\PYG{c+cm}{   \PYGZhy{} il terzo argomento   e\PYGZsq{} la lunghezza del passo spaziale;}
+\PYG{c+cm}{   \PYGZhy{} il quarto argomento  e\PYGZsq{} la lunghezza del passo temporale;}
+\PYG{c+cm}{   \PYGZhy{} il quinto argomento  e\PYGZsq{} il valore del punto estremo inferiore della funzione.}
+\PYG{c+cm}{   L\PYGZsq{}uso di last e testa consente di selezionare gli elementi in coda e in testa}
+\PYG{c+cm}{   alla funzione per il calcolo della condizione di bordo. */}
+
+\PYG{n+nf}{bordo1}\PYG{p}{([}\PYG{n+nv}{X}\PYG{p}{|}\PYG{n+nv}{LX}\PYG{p}{],}\PYG{n+nv}{NU}\PYG{p}{,}\PYG{n+nv}{DX}\PYG{p}{,}\PYG{n+nv}{DT}\PYG{p}{,}\PYG{n+nv}{B1}\PYG{p}{)} \PYG{p}{:\PYGZhy{}} \PYG{n+nf}{last}\PYG{p}{(}\PYG{n+nv}{LX}\PYG{p}{,}\PYG{n+nv}{C}\PYG{p}{),}
+                              \PYG{n+nf}{testa}\PYG{p}{(}\PYG{n+nv}{LX}\PYG{p}{,}\PYG{n+nv}{T}\PYG{p}{),}
+                              \PYG{n+nv}{B1} \PYG{o}{is} \PYG{n+nv}{X} \PYG{o}{\PYGZhy{}} \PYG{n+nv}{X}\PYG{o}{*}\PYG{n+nv}{DT}\PYG{o}{/}\PYG{n+nv}{DX} \PYG{o}{*} \PYG{p}{(}\PYG{n+nv}{X} \PYG{o}{\PYGZhy{}} \PYG{n+nv}{C}\PYG{p}{)} \PYG{o}{+} \PYG{n+nv}{NU}\PYG{o}{*}\PYG{n+nv}{DT}\PYG{o}{/}\PYG{n+nv}{DX}\PYG{l+s+sAtom}{\PYGZca{}}\PYG{l+m+mi}{2} \PYG{o}{*} \PYG{p}{(}\PYG{n+nv}{T} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{2}\PYG{o}{*}\PYG{n+nv}{X} \PYG{o}{+} \PYG{n+nv}{C}\PYG{p}{).}
+
+
+\PYG{c+cm}{/* Il predicato bordo2 calcola le condizioni di bordo superiore della funzione:}
+\PYG{c+cm}{   \PYGZhy{} il primo argomento   e\PYGZsq{} la funzione d\PYGZsq{}onda;}
+\PYG{c+cm}{   \PYGZhy{} il secondo argomento e\PYGZsq{} il coefficiente di diffusione;}
+\PYG{c+cm}{   \PYGZhy{} il terzo argomento   e\PYGZsq{} la lunghezza del passo spaziale;}
+\PYG{c+cm}{   \PYGZhy{} il quarto argomento  e\PYGZsq{} la lunghezza del passo temporale;}
+\PYG{c+cm}{   \PYGZhy{} il quinto argomento  e\PYGZsq{} il valore del punto estremo superiore della funzione.}
+\PYG{c+cm}{   L\PYGZsq{}uso di last, testa e penultimo consente di selezionare l\PYGZsq{}ultimo, il primo e}
+\PYG{c+cm}{   il penultimo elemento della funzione per il calcolo della condizione di bordo. */}
+
+\PYG{n+nf}{bordo2}\PYG{p}{(}\PYG{n+nv}{ONDA}\PYG{p}{,}\PYG{n+nv}{NU}\PYG{p}{,}\PYG{n+nv}{DX}\PYG{p}{,}\PYG{n+nv}{DT}\PYG{p}{,}\PYG{n+nv}{B2}\PYG{p}{)} \PYG{p}{:\PYGZhy{}} \PYG{n+nf}{last}\PYG{p}{(}\PYG{n+nv}{ONDA}\PYG{p}{,}\PYG{n+nv}{C}\PYG{p}{),}
+                            \PYG{n+nf}{penultimo}\PYG{p}{(}\PYG{n+nv}{ONDA}\PYG{p}{,}\PYG{n+nv}{P}\PYG{p}{),}
+                            \PYG{n+nf}{testa}\PYG{p}{(}\PYG{n+nv}{ONDA}\PYG{p}{,}\PYG{n+nv}{T}\PYG{p}{),}
+                            \PYG{n+nv}{B2} \PYG{o}{is} \PYG{n+nv}{C} \PYG{o}{\PYGZhy{}} \PYG{n+nv}{C}\PYG{o}{*}\PYG{n+nv}{DT}\PYG{o}{/}\PYG{n+nv}{DX} \PYG{o}{*} \PYG{p}{(}\PYG{n+nv}{C} \PYG{o}{\PYGZhy{}} \PYG{n+nv}{P}\PYG{p}{)} \PYG{o}{+} \PYG{n+nv}{NU}\PYG{o}{*}\PYG{n+nv}{DT}\PYG{o}{/}\PYG{n+nv}{DX}\PYG{l+s+sAtom}{\PYGZca{}}\PYG{l+m+mi}{2} \PYG{o}{*} \PYG{p}{(}\PYG{n+nv}{T} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{2}\PYG{o}{*}\PYG{n+nv}{C} \PYG{o}{+} \PYG{n+nv}{P}\PYG{p}{).}
+
+
+\PYG{c+cm}{/* Il predicato passo\PYGZus{}eulero\PYGZus{}burg effettua il passo di Eulero:}
+\PYG{c+cm}{   \PYGZhy{} il primo argomento   e\PYGZsq{} la funzione d\PYGZsq{}onda;}
+\PYG{c+cm}{   \PYGZhy{} il secondo argomento e\PYGZsq{} l\PYGZsq{}indice dell\PYGZsq{}elemento corrente della lista;}
+\PYG{c+cm}{   \PYGZhy{} il terzo argomento   e\PYGZsq{} il coefficiente di diffusione;}
+\PYG{c+cm}{   \PYGZhy{} il quarto argomento  e\PYGZsq{} la lunghezza del passo spaziale;}
+\PYG{c+cm}{   \PYGZhy{} il quinto argomento  e\PYGZsq{} la lunghezza del passo temporale;}
+\PYG{c+cm}{   \PYGZhy{} il sesto argomento   e\PYGZsq{} il valore risultante del punto applicato il passo di Eulero.}
+\PYG{c+cm}{   L\PYGZsq{}uso del predicato nth consente di accedere agli elementi della lista tramite}
+\PYG{c+cm}{   indice. Gli elementi sono indicizzati da 1 a N. */}
+
+\PYG{n+nf}{passo\PYGZus{}eulero\PYGZus{}burg}\PYG{p}{(}\PYG{n+nv}{ONDA}\PYG{p}{,}\PYG{n+nv}{I0}\PYG{p}{,}\PYG{n+nv}{NU}\PYG{p}{,}\PYG{n+nv}{DX}\PYG{p}{,}\PYG{n+nv}{DT}\PYG{p}{,}\PYG{n+nv}{EU}\PYG{p}{)} \PYG{p}{:\PYGZhy{}} \PYG{n+nv}{I1} \PYG{o}{is} \PYG{n+nv}{I0} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{,}
+                                          \PYG{n+nv}{I2} \PYG{o}{is} \PYG{n+nv}{I1} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{,}
+                                          \PYG{n+nf}{nth}\PYG{p}{(}\PYG{n+nv}{I0}\PYG{p}{,}\PYG{n+nv}{ONDA}\PYG{p}{,}\PYG{n+nv}{E0}\PYG{p}{),}
+                                          \PYG{n+nf}{nth}\PYG{p}{(}\PYG{n+nv}{I1}\PYG{p}{,}\PYG{n+nv}{ONDA}\PYG{p}{,}\PYG{n+nv}{E1}\PYG{p}{),}
+                                          \PYG{n+nf}{nth}\PYG{p}{(}\PYG{n+nv}{I2}\PYG{p}{,}\PYG{n+nv}{ONDA}\PYG{p}{,}\PYG{n+nv}{E2}\PYG{p}{),}
+                                          \PYG{n+nv}{EU} \PYG{o}{is} \PYG{n+nv}{E1} \PYG{o}{\PYGZhy{}} \PYG{n+nv}{E1}\PYG{o}{*}\PYG{n+nv}{DT}\PYG{o}{/}\PYG{n+nv}{DX} \PYG{o}{*} \PYG{p}{(}\PYG{n+nv}{E1} \PYG{o}{\PYGZhy{}} \PYG{n+nv}{E0}\PYG{p}{)} \PYG{o}{+} \PYG{n+nv}{NU}\PYG{o}{*}\PYG{n+nv}{DT}\PYG{o}{/}\PYG{n+nv}{DX}\PYG{l+s+sAtom}{\PYGZca{}}\PYG{l+m+mi}{2} \PYG{o}{*} \PYG{p}{(}\PYG{n+nv}{E2} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{2}\PYG{o}{*}\PYG{n+nv}{E1} \PYG{o}{+} \PYG{n+nv}{E0}\PYG{p}{).}
+
+
+\PYG{c+cm}{/* Il predicato cond\PYGZus{}iniziale\PYGZus{}burg calcola la condizione iniziale (una }
+\PYG{c+cm}{   funzione) per il calcolo numerico dell\PYGZsq{}equazione di Burgers:}
+\PYG{c+cm}{   \PYGZhy{} il primo argomento   e\PYGZsq{} il numero di punti della griglia spaziale;}
+\PYG{c+cm}{   \PYGZhy{} il secondo argomento e\PYGZsq{} l\PYGZsq{}estremo inferiore del dominio spaziale;}
+\PYG{c+cm}{   \PYGZhy{} il terzo argomento   e\PYGZsq{} l\PYGZsq{}estremo superiore del dominio spaziale; }
+\PYG{c+cm}{   \PYGZhy{} il quarto argomento  e\PYGZsq{} la funzione \PYGZdq{}onda a dente di sega\PYGZdq{}. */}
+
+\PYG{n+nf}{cond\PYGZus{}iniziale\PYGZus{}burg}\PYG{p}{(}\PYG{n+nv}{NX}\PYG{p}{,}\PYG{n+nv}{INF}\PYG{p}{,}\PYG{n+nv}{SUP}\PYG{p}{,}\PYG{n+nv}{ONDA}\PYG{p}{)} \PYG{p}{:\PYGZhy{}} \PYG{n+nf}{gen\PYGZus{}punti\PYGZus{}equi}\PYG{p}{(}\PYG{n+nv}{NX}\PYG{p}{,}\PYG{n+nv}{INF}\PYG{p}{,}\PYG{n+nv}{SUP}\PYG{p}{,}\PYG{n+nv}{L}\PYG{p}{),}
+                                       \PYG{n+nf}{onda\PYGZus{}dente\PYGZus{}sega}\PYG{p}{(}\PYG{n+nv}{L}\PYG{p}{,}\PYG{n+nv}{ONDA}\PYG{p}{).}
+
+
+\PYG{c+cm}{/* Il predicato onda\PYGZus{}dente\PYGZus{}sega calcola la funzione d\PYGZsq{}onda a dente di sega \PYGZsq{}u\PYGZsq{}:}
+\PYG{c+cm}{   \PYGZhy{} il primo argomento   e\PYGZsq{} la lista di punti equidistanti del dominio}
+\PYG{c+cm}{     spaziale;}
+\PYG{c+cm}{   \PYGZhy{} il secondo argomento e\PYGZsq{} la funzione d\PYGZsq{}onda calcolata. }
+\PYG{c+cm}{   Per il calcolo dell\PYGZsq{}onda si fa uso dei predicati phi e phi\PYGZus{}primo}
+\PYG{c+cm}{   che sono rispettavamente la funzione e la sua derivata. */}
+
+\PYG{n+nf}{onda\PYGZus{}dente\PYGZus{}sega}\PYG{p}{([],[]).}
+\PYG{n+nf}{onda\PYGZus{}dente\PYGZus{}sega}\PYG{p}{([}\PYG{n+nv}{X}\PYG{p}{|}\PYG{n+nv}{LX}\PYG{p}{],[}\PYG{n+nv}{U}\PYG{p}{|}\PYG{n+nv}{LU}\PYG{p}{])} \PYG{p}{:\PYGZhy{}} \PYG{n+nv}{T0} \PYG{o}{is} \PYG{l+m+mf}{0.0}\PYG{p}{,}
+                                  \PYG{n+nv}{NU} \PYG{o}{is} \PYG{l+m+mf}{0.07}\PYG{p}{,}
+                                  \PYG{n+nf}{phi\PYGZus{}primo}\PYG{p}{(}\PYG{n+nv}{X}\PYG{p}{,}\PYG{n+nv}{T0}\PYG{p}{,}\PYG{n+nv}{NU}\PYG{p}{,}\PYG{n+nv}{F1}\PYG{p}{),}
+                                  \PYG{n+nf}{phi}\PYG{p}{(}\PYG{n+nv}{X}\PYG{p}{,}\PYG{n+nv}{T0}\PYG{p}{,}\PYG{n+nv}{NU}\PYG{p}{,}\PYG{n+nv}{F2}\PYG{p}{),}
+                                  \PYG{n+nv}{U} \PYG{o}{is} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{2}\PYG{o}{*}\PYG{n+nv}{NU}\PYG{l+s+sAtom}{*}\PYG{p}{(}\PYG{n+nv}{F1} \PYG{o}{/} \PYG{n+nv}{F2}\PYG{p}{)}\PYG{o}{+}\PYG{l+m+mi}{4}\PYG{p}{,}
+                                  \PYG{n+nf}{onda\PYGZus{}dente\PYGZus{}sega}\PYG{p}{(}\PYG{n+nv}{LX}\PYG{p}{,}\PYG{n+nv}{LU}\PYG{p}{).}
+
+\PYG{n+nf}{phi\PYGZus{}primo}\PYG{p}{(}\PYG{n+nv}{X}\PYG{p}{,}\PYG{n+nv}{T0}\PYG{p}{,}\PYG{n+nv}{NU}\PYG{p}{,}\PYG{n+nv}{F}\PYG{p}{)} \PYG{p}{:\PYGZhy{}} \PYG{n+nv}{F} \PYG{o}{is} \PYG{l+s+sAtom}{\PYGZhy{}}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{8}\PYG{o}{*}\PYG{n+nv}{T0} \PYG{o}{+} \PYG{l+m+mi}{2}\PYG{o}{*}\PYG{n+nv}{X}\PYG{p}{)}\PYG{o}{*}\PYG{n+nf}{exp}\PYG{p}{(}\PYG{l+s+sAtom}{\PYGZhy{}}\PYG{p}{((}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{4}\PYG{o}{*}\PYG{n+nv}{T0} \PYG{o}{+} \PYG{n+nv}{X}\PYG{p}{)}\PYG{l+s+sAtom}{\PYGZca{}}\PYG{l+m+mi}{2}\PYG{p}{)}\PYG{l+s+sAtom}{/}\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{o}{*}\PYG{n+nv}{NU}\PYG{l+s+sAtom}{*}\PYG{p}{(}\PYG{n+nv}{T0} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{)))}\PYG{l+s+sAtom}{/}\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{o}{*}\PYG{n+nv}{NU}\PYG{l+s+sAtom}{*}\PYG{p}{(}\PYG{n+nv}{T0} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{))} \PYG{o}{\PYGZhy{}} \PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{8}\PYG{o}{*}\PYG{n+nv}{T0} \PYG{o}{+}
+                             \PYG{l+m+mi}{2}\PYG{o}{*}\PYG{n+nv}{X} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{4}\PYG{o}{*}\PYG{l+s+sAtom}{pi}\PYG{p}{)}\PYG{o}{*}\PYG{n+nf}{exp}\PYG{p}{(}\PYG{l+s+sAtom}{\PYGZhy{}}\PYG{p}{((}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{4}\PYG{o}{*}\PYG{n+nv}{T0} \PYG{o}{+} \PYG{n+nv}{X} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{2}\PYG{o}{*}\PYG{l+s+sAtom}{pi}\PYG{p}{)}\PYG{l+s+sAtom}{\PYGZca{}}\PYG{l+m+mi}{2}\PYG{p}{)}\PYG{l+s+sAtom}{/}\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{o}{*}\PYG{n+nv}{NU}\PYG{l+s+sAtom}{*}\PYG{p}{(}\PYG{n+nv}{T0} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{)))}\PYG{l+s+sAtom}{/}\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{o}{*}\PYG{n+nv}{NU}\PYG{l+s+sAtom}{*}\PYG{p}{(}\PYG{n+nv}{T0} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{)).}
+
+\PYG{n+nf}{phi}\PYG{p}{(}\PYG{n+nv}{X}\PYG{p}{,}\PYG{n+nv}{T0}\PYG{p}{,}\PYG{n+nv}{NU}\PYG{p}{,}\PYG{n+nv}{F}\PYG{p}{)} \PYG{p}{:\PYGZhy{}} \PYG{n+nv}{F} \PYG{o}{is} \PYG{n+nf}{exp}\PYG{p}{(}\PYG{l+s+sAtom}{\PYGZhy{}}\PYG{p}{((}\PYG{n+nv}{X}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{4}\PYG{o}{*}\PYG{n+nv}{T0}\PYG{p}{)}\PYG{l+s+sAtom}{\PYGZca{}}\PYG{l+m+mi}{2}\PYG{p}{)}\PYG{l+s+sAtom}{/}\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{o}{*}\PYG{n+nv}{NU}\PYG{l+s+sAtom}{*}\PYG{p}{(}\PYG{n+nv}{T0}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{)))} \PYG{o}{+} \PYG{n+nf}{exp}\PYG{p}{(}\PYG{l+s+sAtom}{\PYGZhy{}}\PYG{p}{((}\PYG{n+nv}{X}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{4}\PYG{o}{*}\PYG{n+nv}{T0}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{2}\PYG{o}{*}\PYG{l+s+sAtom}{pi}\PYG{p}{)}\PYG{l+s+sAtom}{\PYGZca{}}\PYG{l+m+mi}{2}\PYG{p}{)}\PYG{l+s+sAtom}{/}\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{o}{*}\PYG{n+nv}{NU}\PYG{l+s+sAtom}{*}\PYG{p}{(}\PYG{n+nv}{T0}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{))).}
+
+
+\PYG{c+cm}{/* Fine sezione equazione di Burgers */}
+
+
+\PYG{c+cm}{/* Inizio sezione funzioni condivise */}
+
+
+\PYG{c+cm}{/* Il predicato gen\PYGZus{}punti\PYGZus{}equi genera una lista di punti equidistanti tra loro:}
+\PYG{c+cm}{   \PYGZhy{} il primo argomento   e\PYGZsq{} il numero di punti che si vuole generare;}
+\PYG{c+cm}{   \PYGZhy{} il secondo argomento e\PYGZsq{} l\PYGZsq{}estremo inferiore della lista di punti;}
+\PYG{c+cm}{   \PYGZhy{} il terzo argomento   e\PYGZsq{} l\PYGZsq{}estremo superiore della lista di punti;}
+\PYG{c+cm}{   \PYGZhy{} il quarto argomento  e\PYGZsq{} la lista di punti equidistanti. }
+\PYG{c+cm}{   Per il calcolo dei punti si fa uso del predicato calc\PYGZus{}punti. */}
+
+\PYG{n+nf}{gen\PYGZus{}punti\PYGZus{}equi}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{k}{\PYGZus{}}\PYG{p}{,}\PYG{k}{\PYGZus{}}\PYG{p}{,[]).}
+\PYG{n+nf}{gen\PYGZus{}punti\PYGZus{}equi}\PYG{p}{(}\PYG{n+nv}{N}\PYG{p}{,}\PYG{n+nv}{INF}\PYG{p}{,}\PYG{n+nv}{SUP}\PYG{p}{,}\PYG{n+nv}{L}\PYG{p}{)} \PYG{p}{:\PYGZhy{}} \PYG{n+nv}{N} \PYG{o}{\PYGZgt{}} \PYG{l+m+mi}{0}\PYG{p}{,}
+                               \PYG{n+nv}{DST} \PYG{o}{is} \PYG{n+nf}{abs}\PYG{p}{(}\PYG{n+nv}{SUP} \PYG{o}{\PYGZhy{}} \PYG{n+nv}{INF}\PYG{p}{),}
+                               \PYG{n+nv}{N1}  \PYG{o}{is} \PYG{n+nv}{N} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}\PYG{p}{,}
+                               \PYG{p}{((}\PYG{n+nv}{SUP} \PYG{o}{\PYGZgt{}} \PYG{n+nv}{INF}\PYG{p}{,}
+                               \PYG{n+nf}{calc\PYGZus{}punti}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{n+nv}{N1}\PYG{p}{,}\PYG{n+nv}{INF}\PYG{p}{,}\PYG{n+nv}{DST}\PYG{p}{,}\PYG{n+nv}{L}\PYG{p}{));}
+                               \PYG{p}{(}\PYG{n+nf}{calc\PYGZus{}punti}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{n+nv}{N1}\PYG{p}{,}\PYG{n+nv}{SUP}\PYG{p}{,}\PYG{n+nv}{DST}\PYG{p}{,}\PYG{n+nv}{L1}\PYG{p}{),}
+                               \PYG{n+nf}{reverse}\PYG{p}{(}\PYG{n+nv}{L1}\PYG{p}{,}\PYG{n+nv}{L}\PYG{p}{))).}
+
+
+\PYG{n+nf}{calc\PYGZus{}punti}\PYG{p}{(}\PYG{n+nv}{N1}\PYG{p}{,}\PYG{n+nv}{N1}\PYG{p}{,}\PYG{n+nv}{INF}\PYG{p}{,}\PYG{k}{\PYGZus{}}\PYG{p}{,[}\PYG{n+nv}{INF}\PYG{p}{]).}
+\PYG{n+nf}{calc\PYGZus{}punti}\PYG{p}{(}\PYG{n+nv}{I}\PYG{p}{,}\PYG{n+nv}{N1}\PYG{p}{,}\PYG{n+nv}{INF}\PYG{p}{,}\PYG{n+nv}{DST}\PYG{p}{,[}\PYG{n+nv}{INF}\PYG{p}{|}\PYG{n+nv}{L}\PYG{p}{])} \PYG{p}{:\PYGZhy{}} \PYG{n+nv}{I} \PYG{o}{\PYGZlt{}} \PYG{n+nv}{N1}\PYG{p}{,}
+                                    \PYG{n+nv}{I1}   \PYG{o}{is} \PYG{n+nv}{I} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{,}
+                                    \PYG{n+nv}{INF1} \PYG{o}{is} \PYG{n+nv}{INF} \PYG{o}{+} \PYG{p}{(}\PYG{n+nv}{DST}\PYG{o}{/}\PYG{n+nv}{N1}\PYG{p}{),}
+                                    \PYG{n+nf}{calc\PYGZus{}punti}\PYG{p}{(}\PYG{n+nv}{I1}\PYG{p}{,}\PYG{n+nv}{N1}\PYG{p}{,}\PYG{n+nv}{INF1}\PYG{p}{,}\PYG{n+nv}{DST}\PYG{p}{,}\PYG{n+nv}{L}\PYG{p}{).}
+
+\PYG{c+cm}{/* Predicato che inserisce un elemento in testa alla lista. */}
+
+\PYG{n+nf}{inserisci\PYGZus{}elem}\PYG{p}{(}\PYG{n+nv}{X}\PYG{p}{,}\PYG{n+nv}{L}\PYG{p}{,[}\PYG{n+nv}{X}\PYG{p}{|}\PYG{n+nv}{L}\PYG{p}{]).}
+
+
+\PYG{c+cm}{/* Predicato che estrae la lista di elementi successivi al primo. */}
+
+\PYG{n+nf}{estrai\PYGZus{}lista}\PYG{p}{([}\PYG{k}{\PYGZus{}}\PYG{p}{|}\PYG{n+nv}{LX}\PYG{p}{],}\PYG{n+nv}{LX}\PYG{p}{).}
+
+
+\PYG{c+cm}{/* Predicato per estrarre il primo elemento di una lista. */}
+
+\PYG{n+nf}{testa}\PYG{p}{([}\PYG{n+nv}{X}\PYG{p}{|}\PYG{k}{\PYGZus{}}\PYG{p}{],}\PYG{n+nv}{X}\PYG{p}{).}
+
+
+\PYG{c+cm}{/* Predicato che restituisce il penultimo elemento di una lista. */}
+
+\PYG{n+nf}{penultimo}\PYG{p}{(}\PYG{n+nv}{LX}\PYG{p}{,}\PYG{n+nv}{X}\PYG{p}{)} \PYG{p}{:\PYGZhy{}} \PYG{n+nf}{reverse}\PYG{p}{(}\PYG{n+nv}{LX}\PYG{p}{,}\PYG{n+nv}{LXInv}\PYG{p}{),}
+                   \PYG{n+nf}{estrai\PYGZus{}lista}\PYG{p}{(}\PYG{n+nv}{LXInv}\PYG{p}{,}\PYG{n+nv}{Y}\PYG{p}{),}
+                   \PYG{n+nf}{testa}\PYG{p}{(}\PYG{n+nv}{Y}\PYG{p}{,}\PYG{n+nv}{X}\PYG{p}{).}
+
+
+\PYG{c+cm}{/* Predicato per aggiungere un elemento alla fine di una lista. */}
+
+\PYG{n+nf}{accoda\PYGZus{}elem}\PYG{p}{(}\PYG{n+nv}{X}\PYG{p}{,[],[}\PYG{n+nv}{X}\PYG{p}{]).}
+\PYG{n+nf}{accoda\PYGZus{}elem}\PYG{p}{(}\PYG{n+nv}{X}\PYG{p}{,[}\PYG{n+nv}{Y}\PYG{p}{|}\PYG{n+nv}{L}\PYG{p}{],[}\PYG{n+nv}{Y}\PYG{p}{|}\PYG{n+nv}{LX}\PYG{p}{])} \PYG{p}{:\PYGZhy{}} \PYG{n+nf}{accoda\PYGZus{}elem}\PYG{p}{(}\PYG{n+nv}{X}\PYG{p}{,}\PYG{n+nv}{L}\PYG{p}{,}\PYG{n+nv}{LX}\PYG{p}{).}
+
+
+\PYG{c+cm}{/* Fine sezione funzioni condivise */}
+\end{Verbatim}

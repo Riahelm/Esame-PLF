@@ -8,7 +8,7 @@
 \usepackage{graphicx}
 \usepackage[rightcaption]{sidecap}
 \usepackage{caption}
-\usepackage{minted}
+\usepackage[outputdir=../]{minted}
 \usepackage[italian]{babel}
 \usepackage{amssymb} %per \nless 
 \usepackage{amsmath}
@@ -48,17 +48,7 @@
 \include{01_specifica/specifica}   
 \include{02_analisi/analisi} 
 \include{03_progettazione/prog_algoritmo}
-%\include{04_implementazione/impl_algoritmo}
-\section{Implementazione dell'algoritmo}
-
-\subsection{Haskell}
-\underline{File sorgente} %\texttt{simulazioni_numeriche.hs} 
-\input{04_implementazione/simulazioni_numeriche_has}
-\newpage
-\subsection{Prolog}
-\underline{File sorgente} %\texttt{simulazioni_numeriche.pro}
-\input{04_implementazione/simulazioni_numeriche_pro}
-
+\include{04_implementazione/impl_algoritmo}
 \include{05_testing/test}
 
 \end{document}

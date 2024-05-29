@@ -31,17 +31,17 @@ I passi dell'algoritmo per risolvere il problema sono i seguenti:
 \begin{itemize}
 \item Alla condizione iniziale $z_0$ si aggiunge il resto del calcolo per l'integrazione numerica dell'equazione:
 \begin{itemize}
-\item Caso base: se il numero di passi temporali è pari a zero, si effettua un passo di integrazione numerica (vedi metodo di Eulero, in \ref{analisi}, 6).
-\item Caso generale: se il numero di passi temporali è maggiore di zero, si effettua un passo di integrazione numerica e poi, una volta decrementato di uno il numero di passi temporali, si procede ricorsivamente sul numero di passi rimanenti. 
+\item Caso base: se il numero di passi temporali è pari a zero, si effettua un passo di integrazione numerica (vedi metodo di Eulero, in \ref{analisi}, 6) e si restituisce l'altitudine del velivolo $z$.
+\item Caso generale: se il numero di passi temporali è maggiore di zero, si effettua un passo di integrazione numerica, si aggiunge l'altitudine del velivolo $z$ alla funzione di traiettoria e poi, una volta decrementato di uno il numero di passi temporali, si procede ricorsivamente sul numero di passi rimanenti. 
 \end{itemize}
 \end{itemize}
 
 \subsubsection*{4.1 Calcolo del moto fugoide con attrito}
 \begin{itemize}
-\item Alla condizione iniziale $y_0$ si aggiunge il resto del calcolo per l'integrazione numerica dell'equazione:
+\item Alla condizione iniziale $(x_0,y_0)$ si aggiunge il resto del calcolo per l'integrazione numerica dell'equazione:
 \begin{itemize}
-\item Caso base: se il numero di passi temporali è pari a zero, si effettua un passo di integrazione numerica (vedi metodo di Eulero, in \ref{analisi}, 17).
-\item Caso generale: se il numero di passi temporali è maggiore di zero, si effettua un passo di integrazione numerica e poi, una volta decrementato di uno il numero di passi temporali, si procede ricorsivamente sul numero di passi rimanenti. 
+\item Caso base: se il numero di passi temporali è pari a zero, si effettua un passo di integrazione numerica (vedi metodo di Eulero, in \ref{analisi}, 17) e si restituisce la coppia di coordinate spaziali $(x,y)$.
+\item Caso generale: se il numero di passi temporali è maggiore di zero, si effettua un passo di integrazione numerica, si aggiunge la coppia di coordinate spaziali $(x,y)$ alla funzione di traiettoria e poi, una volta decrementato di uno il numero di passi temporali, si procede ricorsivamente sul numero di passi rimanenti. 
 \end{itemize}
 \end{itemize}
 
