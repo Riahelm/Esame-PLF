@@ -314,7 +314,7 @@ calc_convezione(NX,DT,F) :- NX > 1,
      funzione d'onda deve compiere; 
    - il terzo argomento   e' il numero di passi spaziali utilizzati dal
      predicato spazio_conv;
-   - il quarto argomento  e' la costante di velocità dell'onda;     
+   - il quarto argomento  e' la costante di velocita' dell'onda;     
    - il quinto argomento  e' la lunghezza del passo spaziale;
    - il sesto argomento   e' la lunghezza del passo temporale;
    - il settimo argomento e' la funzione d'onda ricalcolata;
@@ -335,7 +335,7 @@ tempo_conv(I,NT,NX1,C,DX,DT,ONDA,F) :- I < NT,
      d'onda ha compiuto;
    - il secondo argomento e' il numero di passi temporali totali che la
      funzione d'onda deve compiere; 
-   - il terzo argomento   e' la costante di velocità dell'onda;      
+   - il terzo argomento   e' la costante di velocita' dell'onda;      
    - il quarto argomento  e' la lunghezza del passo spaziale;
    - il quinto argomento  e' la lunghezza del passo temporale;
    - il sesto argomento   e' la funzione d'onda;
@@ -354,7 +354,7 @@ spazio_conv(I,NX1,C,DX,DT,[E0|LX],[E|T]) :- I < NX1,
 /* Il predicato passo_eulero_conv effettua il passo di Eulero:
    - il primo argomento   e' l'elemento corrente della lista;
    - il secondo argomento e' l'elemento successivo a quello corrente della lista;
-   - il terzo argomento   e' la costante di velocità dell'onda;
+   - il terzo argomento   e' la costante di velocita' dell'onda;
    - il quarto argomento  e' la lunghezza del passo spaziale;
    - il quinto argomento  e' la lunghezza del passo temporale;
    - il sesto argomento   e' il valore risultante del punto applicato il passo di Eulero. */

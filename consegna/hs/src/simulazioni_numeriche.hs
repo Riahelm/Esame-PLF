@@ -348,7 +348,7 @@ calc_convezione nx dt = tempo_conv nt nx c dx dt (cond_iniziale nx onda_quadra i
      funzione d'onda deve compiere; 
    - il secondo argomento e' il numero di passi spaziali utilizzati dal
      predicato spazio_conv;
-   - il terzo argomento   e' la costante di velocità dell'onda;     
+   - il terzo argomento   e' la costante di velocita' dell'onda;     
    - il quarto argomento  e' la lunghezza del passo spaziale;
    - il quinto argomento  e' la lunghezza del passo temporale;
    - il sesto argomento   e' la funzione d'onda ricalcolata. -}
@@ -362,7 +362,7 @@ tempo_conv nt nx c dx dt onda = tempo_conv (nt - 1) nx c dx dt ((head onda) : sp
    funzione rispetto al parametro spaziale dx:
    - il primo argomento   e' il numero di passi temporali che la funzione
      d'onda ha compiuto;
-   - il secondo argomento e' la costante di velocità dell'onda;      
+   - il secondo argomento e' la costante di velocita' dell'onda;      
    - il terzo argomento   e' la lunghezza del passo spaziale;
    - il quarto argomento  e' la lunghezza del passo temporale;
    - il quinto argomento  e' la funzione d'onda. -}
