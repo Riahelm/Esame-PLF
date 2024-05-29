@@ -8,11 +8,13 @@
 \usepackage{graphicx}
 \usepackage[rightcaption]{sidecap}
 \usepackage{caption}
+\usepackage[outputdir=../]{minted}
 \usepackage[italian]{babel}
 \usepackage{amssymb} %per \nless 
 \usepackage{amsmath}
 \usepackage{hyperref}
 \usepackage{url}
+
 
 %  /nless è il simbolo "non minore", (< con la striscia)
 
@@ -47,8 +49,6 @@
 \include{01_specifica/specifica}   
 \include{02_analisi/analisi} 
 \include{03_progettazione/prog_algoritmo}
-%\include{04_implementazione/impl_algoritmo}
-
 \section{Implementazione dell'algoritmo}
 
 \subsection{Haskell}
@@ -60,6 +60,7 @@
 \underline{File sorgente \texttt{simulazioni\_numeriche.pro}}
 \input{04_implementazione/simulazioni_numeriche_pro.tex}
 
+%\include{04_implementazione/impl_algoritmo}
 \include{05_testing/test}
 
 \end{document}
