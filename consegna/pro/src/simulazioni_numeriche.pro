@@ -23,7 +23,7 @@ main :-
         write('--------------------------------------------------------------------'), nl,
 
         acquisisci_dato_dt(DT),                                                        
-        calc_fugoide_semplice(DT, FS),
+        moto_fugoide_semplice(DT, FS),
         write(FS),                                                                     nl,
 
         write('--------------------------------------------------------------------'), nl,
@@ -47,7 +47,7 @@ main :-
         write('--------------------------------------------------------------------'), nl,
 
         acquisisci_dato_dt(DT1),                                                       
-        calc_fugoide_completo(DT1, FC),
+        moto_fugoide_completo(DT1, FC),
         write(FC),                                                                     nl,
 
         write('--------------------------------------------------------------------'), nl,
@@ -72,7 +72,7 @@ main :-
         write('--------------------------------------------------------------------'), nl,
 
         acquisisci_dati_conv(NXC,DT2),                                                 
-        calc_convezione(NXC,DT2,CONV), 
+        moto_convezione(NXC,DT2,CONV), 
         write(CONV),                                                                   nl,
 
         write('--------------------------------------------------------------------'), nl,
@@ -91,7 +91,7 @@ main :-
         write('--------------------------------------------------------------------'), nl,
 
         acquisisci_dato_nxb(NXB),                                                          
-        calc_burgers(NXB,BURG),
+        moto_burgers(NXB,BURG),
         write(BURG).
 
 
@@ -112,7 +112,7 @@ acquisisci_dato_dt(DT) :- write('Digita lunghezza del passo temporale: '),
 
 
 /* Il predicato acquisisci_dati_conv acquisisce due parametri numerici di simulazione 
-   per l'equazione di convezione: il primo, un naturale per il numero di punti della 
+   per il moto di convezione: il primo, un naturale per il numero di punti della 
    funzione d'onda; il secondo un reale positivo per la lunghezza del passo temporale. */
 
 acquisisci_dati_conv(NX,DT) :- write('Digita il numero di punti totali della funzione d\'onda: '),
@@ -132,7 +132,7 @@ acquisisci_dato_nxc(NX,NX,DT) :- NX > 1,
 
 /* Il predicato acquisisci_dato_nxb acquisisce un parametro numerico naturale 
    di simulazione, ovvero il numero totale di punti della funzione
-   d'onda per il calcolo dell'equazione di Burgers. */
+   d'onda per il moto di convezione e di diffusione. (Burgers) */
 
 acquisisci_dato_nxb(NX) :- write('Digita il numero di punti totali della funzione d\'onda: '),
                            read(NXV),
@@ -151,11 +151,11 @@ acquisisci_dato_nxb(NX) :- write('Digita il numero di punti totali della funzion
 /* Inizio sezione fugoide semplice */
 
 
-/* Il predicato calc_fugoide_semplice calcola il moto fugoide privo di attrito di un velivolo generico:
+/* Il predicato moto_fugoide_semplice simula il moto fugoide privo di attrito di un velivolo generico:
    - il primo argomento   e' la lunghezza del passo temporale dt;
    - il secondo argomento e' la funzione di traiettoria risultante. */
 
-calc_fugoide_semplice(DT,[Z0|T]) :-  Z0 is 100.0,                    /* Altitudine iniziale del velivolo.             */
+moto_fugoide_semplice(DT,[Z0|T]) :-  Z0 is 100.0,                    /* Altitudine iniziale del velivolo.             */
                                      B0 is 10.0,                     /* Angolo iniziale del velivolo.                 */
                                      PASSI is (floor(100.0/DT) + 1), /* Numero di punti in cui effettuare il calcolo. */
                                      calc_moto(Z0,B0,DT,PASSI,T).
@@ -208,11 +208,11 @@ derivata_u(Y,V,V,V1) :- CG is 9.81,     /* Costante gravitazionale terrestre. */
 /* Inizio sezione fugoide completo */
 
 
-/* Il predicato calc_fugoide_completo calcola il moto fugoide con attrito di un velivolo generico:
+/* Il predicato moto_fugoide_completo simula il moto fugoide con attrito di un velivolo generico:
    - il primo argomento   e' la lunghezza del passo temporale dt;
    - il secondo argomento e' la funzione di traiettoria risultante. */
 
-  calc_fugoide_completo(DT,[[X0|Y0]|T]) :- V0 is 30.0,                     /* La velocita' iniziale, in questo caso quella di trim. */
+  moto_fugoide_completo(DT,[[X0|Y0]|T]) :- V0 is 30.0,                     /* La velocita' iniziale, in questo caso quella di trim. */
                                            THETA0 is 0.0,                  /* Angolo iniziale del velivolo.                         */
                                            X0 is 0.0,                      /* Spostamento orizzontale iniziale del velivolo.        */
                                            Y0 is 1000.0,                   /* Altitudine iniziale del velivolo.                     */
@@ -282,19 +282,19 @@ derivata_u(V,THETA,V1,THETA1,X1,Y1) :-  CG is 9.81,     /* Costante gravitaziona
 /* Inizio sezione convezione lineare */
 
 
-/* Il predicato calc_convezione calcola l'integrazione numerica dell'equazione di convezione 
-   lineare a una dimensione:
+/* Il predicato moto_convezione simula il moto di convezione lineare unidimensionale
+   della funzione d'onda quadra:
    - il primo argomento   e' il numero di punti totali della funzione d'onda;
    - il secondo argomento e' la lunghezza del passo temporale;
    - il terzo argomento   e' l'integrazione numerica completa dell'equazione lineare 
      unidimensionale di convezione. */
 
-calc_convezione(NX,_,F)  :- (NX == 0;
+moto_convezione(NX,_,F)  :- (NX == 0;
                              NX == 1),
                             INF is 0.0,                  /* Estremo inferiore del dominio spaziale. */
                             SUP is 2.0,                  /* Estremo superiore del dominio spaziale. */
                             cond_iniziale_conv(NX,INF,SUP,F).
-calc_convezione(NX,DT,F) :- NX > 1,
+moto_convezione(NX,DT,F) :- NX > 1,
                             NT  is 25,                   /* Numero complessivo di passi temporali   */
                             NX1 is NX - 1,
                             C   is 1.0,                  /* Velocita' dell'onda.                    */
@@ -393,21 +393,21 @@ onda_quadra([X|L1],[OSI|T]) :- (X < 0.5;
 /* Fine sezione convezione lineare */
 
 
-/* Inizio sezione equazione di Burgers */
+/* Inizio sezione convezione-diffusione (Burgers) */
 
 
-/* Il predicato calc_burgers calcola l'integrazione numerica dell'equazione di Burgers 
-   a una dimensione:
+/* Il predicato moto_burgers simula il moto convettivo-diffusivo unidimensionale
+   della funzione d'onda a dente di sega:
    - il primo argomento   e' il numero di punti totali della funzione d'onda;
    - il secondo argomento e' l'integrazione numerica completa dell'equazione 
-     unidimensionale di Burgers.*/
+     unidimensionale di Burgers. */
 
-calc_burgers(NX,F) :- (NX == 0;
+moto_burgers(NX,F) :- (NX == 0;
                        NX == 1),
                       INF is 0.0,         /* Estremo inferiore del dominio spaziale. */
                       SUP is 2.0 * pi,    /* Estremo superiore del dominio spaziale. */
                       cond_iniziale_burg(NX,INF,SUP,F).
-calc_burgers(NX,F) :- NX1 is NX - 1,
+moto_burgers(NX,F) :- NX1 is NX - 1,
                       T   is 0.6,                  /* Tempo totale di simulazione.                */
                       S   is 0.1,                  /* Costante di Courant-Friendrichs-Lewy (CFL). */
                       NU  is 0.07,                 /* Coefficiente di diffusione.                 */
@@ -542,10 +542,10 @@ phi_primo(X,T0,NU,F) :- F is -(-8*T0 + 2*X)*exp(-((-4*T0 + X)^2)/(4*NU*(T0 + 1))
 phi(X,T0,NU,F) :- F is exp(-((X-4*T0)^2)/(4*NU*(T0+1))) + exp(-((X-4*T0-2*pi)^2)/(4*NU*(T0+1))).
 
 
-/* Fine sezione equazione di Burgers */
+/* Fine sezione convezione-diffusione (Burgers) */
 
 
-/* Inizio sezione funzioni condivise */
+/* Inizio sezione predicati condivisi */
 
 
 /* Il predicato gen_punti_equi genera una lista di punti equidistanti tra loro:
@@ -599,4 +599,4 @@ accoda_elem(X,[],[X]).
 accoda_elem(X,[Y|L],[Y|LX]) :- accoda_elem(X,L,LX).
 
 
-/* Fine sezione funzioni condivise */
+/* Fine sezione predicati condivisi */
