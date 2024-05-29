@@ -22,13 +22,14 @@ Il dato in ingresso per l'integrazione dell'equazione di Burgers (la quale viene
 \subsubsection*{Moto Fugoide Senza Attrito}
 Il dato in uscita dell'integrazione dell'equazione del moto fugoide senza attrito è una sequenza di numeri reali che rappresentano la funzione di traiettoria dell'areomobile.
 \subsubsection*{Moto Fugoide Con Attrito}
-Il dato in uscita dell'integrazione dell'equazione del moto fugoide con attrito è una sequenza di numeri reali che rappresentano la funzione di traiettoria dell'areomobile.
+Il dato in uscita dell'integrazione dell'equazione del moto fugoide con attrito è una sequenza di coppie di numeri reali che rappresentano la funzione di traiettoria dell'areomobile.
 \subsubsection*{Moto di Convezione}
 Il dato in uscita dell'integrazione dell'equazione di convezione lineare a una dimensione è una sequenza di numeri reali che rappresentano i valori finali della funzione d'onda quadra.
 \subsubsection*{Moto di Convezione e Diffusione (Burgers)}
 Il dato in uscita all'integrazione dell'equazione di Burgers a una dimensione è una sequenza di numeri reali che rappresentano i valori finali della la funzione a dente di sega.
 
 \subsection{Relazioni Intercorrenti tra i Dati del Problema}\label{analisi}
+Le simulazioni numeriche di moto fugoide senza attrito, moto fugoide con attrito, moto di convezione di un'onda quadra e moto convettivo-diffusivo di un'onda a dente di sega sono rappresentate mediante la risoluzione di equazioni differenziali. Queste sono di seguito descritte insieme all'unico approccio di calcolo numerico adottato: il metodo di Eulero. 
 
 \subsubsection*{Moto Fugoide Senza Attrito}
 L’equazione per il moto fugoide senza attrito è un’equazione differenziale ordinaria del secondo ordine:
@@ -60,7 +61,7 @@ Un altro modo di considerare un sistema di due equazioni ordinarie del primo ord
 \end{equation}
 
 \noindent
-La soluzione approssimativa al tempo $t_n$ è $u_n$ e la soluzione numerica dell’equazione differenziale consiste nel calcolare una sequenza di soluzioni con la seguente equazione:
+La soluzione approssimata al tempo $t_n$ è $u_n$ e la soluzione numerica dell’equazione differenziale consiste nel calcolare una sequenza di soluzioni con la seguente equazione:
 
 \begin{equation}
 u_{n+1} = u_n + \Delta t \,f(u_n) + O(\Delta t)^2.
@@ -253,7 +254,7 @@ u(x, 0).
 Le condizioni al contorno sono: 
 
 \begin{equation}
-u(0) = u(2\pi).
+u(0,t) = u(2\pi,t).
 \end{equation}
 
 

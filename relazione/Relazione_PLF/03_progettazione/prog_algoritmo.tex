@@ -17,13 +17,13 @@ Per guidare al meglio l'utente durante la fase di acquisizione dei dati, si è s
 I passi dell'algoritmo per risolvere il problema sono i seguenti:
 
 \begin{enumerate}
-\item Acquisire la lunghezza del passo temporale per l'equazione di moto fugoide senza attrito: \textbf{v1.}
+\item Acquisire la lunghezza del passo temporale per la simulazione numerica del moto fugoide senza attrito: \textbf{v1.}
 \item Calcolare e stampare l'integrazione numerica dell'equazione di moto fugoide senza attrito: \textbf{2.1}.
-\item Acquisire la lunghezza del passo temporale per l'equazione di moto fugoide con attrito: \textbf{v1.}
+\item Acquisire la lunghezza del passo temporale per la simulazione numerica del moto fugoide con attrito: \textbf{v1.}
 \item Calcolare e stampare l'integrazione numerica dell'equazione di moto fugoide con attrito: \textbf{4.1}.
-\item Acquisire il numero di punti totali della funzione d'onda per l'equazione di convezione lineare unidimensionale: \textbf{v2.} e \textbf{5.1}.
+\item Acquisire il numero di punti totali della funzione d'onda quadra per la simulazione numerica del moto di convezione lineare unidimensionale: \textbf{v2.} e \textbf{5.1}.
 \item Calcolare e stampare l'integrazione numerica dell'equazione di convezione lineare unidimensionale: \textbf{6.1}.
-\item Acquisire il numero di punti totali della funzione d'onda per l'equazione di Burgers unidimensionale: \textbf{v2.}
+\item Acquisire il numero di punti totali della funzione d'onda a dente di sega per la simulazione numerica del moto convettivo-diffusivo unidimensionale: \textbf{v2.}
 \item Calcolare e stampare l'integrazione numerica dell'equazione di Burgers unidimensionale: \textbf{8.1}.
 \end{enumerate}
 
@@ -99,7 +99,7 @@ I passi dell'algoritmo per risolvere il problema sono i seguenti:
 
 \subsubsection*{a. Generazione di punti equidistanti}
 \begin{itemize}
-\item Se il numero di punti da generare è zero, si restituisce una sequenza di punti è vuota.
+\item Se il numero di punti da generare è zero, si restituisce una sequenza di punti vuota.
 \item Se il numero di punti da generare è maggiore di zero, si calcola la distanza tra l'estremo superiore e quello inferiore del dominio, si decrementa di uno il numero di punti totali e partendo dall'estremo inferiore del dominio:
 \begin{itemize}
 \item Caso base: se si è raggiunto il numero massimo di punti da generare, si aggiunge alla sequenza di punti l'estremo inferiore del dominio.
@@ -109,14 +109,14 @@ I passi dell'algoritmo per risolvere il problema sono i seguenti:
 
 \subsubsection*{v1. Validazione dell'acquisizione della lunghezza del passo temporale}
 \begin{itemize}
-\item Caso base: se il valore del passo temporale è maggiore di zero, allora il dato viene acquisito.
-\item Caso generale: altrimenti si stampa su schermo un messaggio di errore e viene ripetuta l'acquisizione.
+\item Se il valore del passo temporale è maggiore di zero, allora il dato viene acquisito.
+\item Altrimenti si stampa su schermo un messaggio di errore e viene ripetuta l'acquisizione.
 \end{itemize}
 
 \subsubsection*{v2. Validazione dell'acquisizione del numero di punti di una funzione}
 \begin{itemize}
-\item Caso base: se il numero di punti è un intero positivo, il valore viene acquisito.
-\item Caso generale: altrimenti si stampa su schermo un messaggio di errore e viene ripetuta l'acquisizione.
+\item Se il numero di punti è un naturale, il valore viene acquisito.
+\item Altrimenti si stampa su schermo un messaggio di errore e viene ripetuta l'acquisizione.
 \end{itemize}
 
 
