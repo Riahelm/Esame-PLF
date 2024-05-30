@@ -442,7 +442,7 @@ tempo_burg nt nx dx dt onda = tempo_burg (nt - 1) nx dx dt (bordo : spazio_burg 
 
 spazio_burg :: Int -> Double -> Double -> [Double] -> [Double]
 spazio_burg i dx dt lx | i == length lx - 1 = [bordo]
-                       | otherwise          = (passo_eulero) : spazio_burg (i+1) dx dt lx
+                       | otherwise          = passo_eulero : spazio_burg (i+1) dx dt lx
    where
       bordo        = (last lx) - (last lx) * dt/dx * ((last lx) - (last $ init lx)) +
                      nu*dt/dx**2*(head lx - 2*(last lx) + (last $ init lx)) -- Condizione di bordo.
