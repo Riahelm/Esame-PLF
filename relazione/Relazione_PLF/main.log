@@ -1,7 +1,12 @@
+<<<<<<< HEAD
 This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2022.5.20)  30 MAY 2024 02:48
+=======
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.5.29)  30 MAY 2024 03:58
+>>>>>>> cb17896325e5f23bd512af8c7f69b13e1ea87624
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
+<<<<<<< HEAD
 **main.tex
 (./main.tex
 LaTeX2e <2020-02-02> patch level 2
@@ -33,6 +38,36 @@ Package: fontenc 2020/02/11 v2.0o Standard LaTeX package
 )
 (/usr/share/texmf/tex/latex/lm/lmodern.sty
 Package: lmodern 2009/10/30 v1.6 Latin Modern Fonts
+=======
+**c:/Università/ProgettoPLF/relazione/Relazione_PLF/main.tex
+(c:/Università/ProgettoPLF/relazione/Relazione_PLF/main.tex
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-05-08>
+(c:/texlive/2024/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2023/05/17 v1.4n Standard LaTeX document class
+(c:/texlive/2024/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2023/05/17 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count189
+\c@section=\count190
+\c@subsection=\count191
+\c@subsubsection=\count192
+\c@paragraph=\count193
+\c@subparagraph=\count194
+\c@figure=\count195
+\c@table=\count196
+\abovecaptionskip=\skip48
+\belowcaptionskip=\skip49
+\bibindent=\dimen140
+) (c:/texlive/2024/texmf-dist/tex/latex/base/inputenc.sty
+Package: inputenc 2021/02/14 v1.3d Input encoding file
+\inpenc@prehook=\toks17
+\inpenc@posthook=\toks18
+) (c:/texlive/2024/texmf-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
+) (c:/texlive/2024/texmf-dist/tex/latex/lm/lmodern.sty
+Package: lmodern 2015/05/01 v1.6.1 Latin Modern Fonts
+>>>>>>> cb17896325e5f23bd512af8c7f69b13e1ea87624
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
 (Font)                  OT1/cmr/m/n --> OT1/lmr/m/n on input line 22.
 LaTeX Font Info:    Overwriting symbol font `letters' in version `normal'
@@ -617,6 +652,7 @@ File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 (./04_implementazione/simulazioni_numeriche_hs.tex [11
 
 ] [12] [13] [14]
+<<<<<<< HEAD
 Overfull \hbox (28.3125pt too wide) in paragraph at lines 506--506
 []      \T1/lmtt/m/n/7 dx = abs(sup_conv - inf_conv) / (fromIntegral(nx :: Int)
  - 1) -- Distanza tra qualsiasi coppia di punti della griglia adiacenti.[] 
@@ -657,6 +693,40 @@ Overfull \hbox (20.875pt too wide) in paragraph at lines 608--608
 Overfull \hbox (20.875pt too wide) in paragraph at lines 608--608
 []                                         \T1/lmtt/m/n/7 PASSI is (floor(100.0
 /DT) + 1), /* Numero di punti in cui effettuare il calcolo.         */[] 
+=======
+Overfull \hbox (28.3125pt too wide) in paragraph at lines 512--512
+[]      \T1/lmtt/m/n/7 dx = abs(sup_conv - inf_conv) / (fromIntegral(nx :: Int) - 1) -- Distanza tra qualsiasi coppia di punti della griglia adiacenti.[] 
+ []
+
+
+Overfull \hbox (13.4375pt too wide) in paragraph at lines 512--512
+[]      \T1/lmtt/m/n/7 dx       = abs(sup - inf) / (fromIntegral(nx :: Int) - 1) -- Distanza tra qualsiasi coppia di punti della griglia adiacenti.[] 
+ []
+
+[15] [16]) [17] (./04_implementazione/simulazioni_numeriche_pro.tex [18] [19]
+Overfull \hbox (20.875pt too wide) in paragraph at lines 614--614
+[]\T1/lmtt/m/n/7 moto_fugoide_completo(DT,[[X0|Y0]|T]) :- V0 is 30.0,                     /* La velocita' iniziale, in questo caso quella di trim. */[] 
+ []
+
+
+Overfull \hbox (20.875pt too wide) in paragraph at lines 614--614
+[]                                         \T1/lmtt/m/n/7 THETA0 is 0.0,                  /* Angolo iniziale del velivolo.                         */[] 
+ []
+
+
+Overfull \hbox (20.875pt too wide) in paragraph at lines 614--614
+[]                                         \T1/lmtt/m/n/7 X0 is 0.0,                      /* Spostamento orizzontale iniziale del velivolo.        */[] 
+ []
+
+
+Overfull \hbox (20.875pt too wide) in paragraph at lines 614--614
+[]                                         \T1/lmtt/m/n/7 Y0 is 1000.0,                   /* Altitudine iniziale del velivolo.                     */[] 
+ []
+
+
+Overfull \hbox (20.875pt too wide) in paragraph at lines 614--614
+[]                                         \T1/lmtt/m/n/7 PASSI is (floor(100.0/DT) + 1), /* Numero di punti in cui effettuare il calcolo.         */[] 
+>>>>>>> cb17896325e5f23bd512af8c7f69b13e1ea87624
  []
 
 [20] [21] [22] [23] [24]) [25]
@@ -1210,6 +1280,7 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
+<<<<<<< HEAD
  10055 strings out of 481239
  160807 string characters out of 5920377
  453358 words of memory out of 5000000
@@ -1233,6 +1304,17 @@ fb></usr/share/texmf/fonts/type1/public/lm/lmsy5.pfb></usr/share/texmf/fonts/ty
 pe1/public/lm/lmsy7.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt10.pfb></us
 r/share/texmf/fonts/type1/public/lm/lmtt8.pfb>
 Output written on main.pdf (53 pages, 5742195 bytes).
+=======
+ 14106 strings out of 473993
+ 240437 string characters out of 5745069
+ 1983907 words of memory out of 5000000
+ 36198 multiletter control sequences out of 15000+600000
+ 619172 words of font info for 80 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 75i,14n,79p,1109b,620s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmbx10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmcsc10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmex10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi5.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi7.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr5.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr6.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr7.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy5.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy7.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmtt10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmtt8.pfb>
+Output written on main.pdf (53 pages, 5760422 bytes).
+>>>>>>> cb17896325e5f23bd512af8c7f69b13e1ea87624
 PDF statistics:
  596 PDF objects out of 1000 (max. 8388607)
  439 compressed objects within 5 object streams

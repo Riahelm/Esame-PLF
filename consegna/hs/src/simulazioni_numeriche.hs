@@ -12,7 +12,7 @@ import Data.List {- necessario per usare:
 
 {- Costanti globali -}
 
-{- Estremi del dominio spaziale dell'equazione di convezione -}
+{- Estremi del dominio spaziale per il moto di convezione. -}
 inf_conv = 0.0  -- Estremo inferiore del dominio spaziale.
 sup_conv = 2.0  -- Estremo superiore del dominio spaziale.
 
@@ -129,7 +129,7 @@ main = do putStrLn "Progetto della sessione estiva del corso Programmazione Logi
 
 
 {- L'azione input/output acquisisci_dato_dt acquisisce un parametro numerico
-   reale di simulazione, ovvero la lunghezza del passo temporale.-}
+   reale positivo di simulazione, ovvero la lunghezza del passo temporale. -}
 
 acquisisci_dato_dt :: IO String
 acquisisci_dato_dt = do putStr "Digita lunghezza del passo temporale: "
@@ -142,8 +142,8 @@ acquisisci_dato_dt = do putStr "Digita lunghezza del passo temporale: "
 
 
 {- L'azione input/output acqui_dati_e_simul_conv acquisisce due parametri numerici
-   di simulazione per simulare il moto di convezione: il primo, un naturale per il 
-   numero di punti della funzione d'onda; il secondo un reale per la lunghezza
+   di simulazione per il moto di convezione: il primo, un naturale per il numero 
+   di punti della funzione d'onda; il secondo un reale positivo per la lunghezza
    del passo temporale. In seguito all'acquisizione dei parametri calcola l'inte- 
    -grazione numerica dell'equazione di convezione. -}
 
@@ -209,7 +209,7 @@ calc_moto_semplice dA@(dAA,_) dt len | len == 0  = [dBA]
 {- La funzione passo_eulero_semplice applica il metodo di Eulero ad una coppia di numeri.
    La funzione approssima la soluzione al tempo t_(n+1) tramite il valore della funzione 
    al tempo t_n ed un opportuno passo temporale:
-   - il primo argomento   e' una coppia di valori, ovvero la posizione e direzione del 
+   - il primo argomento   e' una coppia di valori, ovvero l'altitudine e la velocita' del 
      velivolo al momento t_n;
    - il secondo argomento e' la lunghezza del passo temporale dt. -}
 
@@ -420,10 +420,10 @@ moto_burgers nx | nx == 0 || nx == 1 = cond_iniziale nx onda_dente_sega inf sup
 
 tempo_burg :: Int -> Int -> Double -> Double -> [Double] -> [Double]
 tempo_burg 0 _ _ _ onda     = onda
-tempo_burg nt nx dx dt onda = tempo_burg (nt - 1) nx dx dt (bordo : spazio_burg 1 dx dt onda)
+tempo_burg nt nx dx dt onda = tempo_burg (nt - 1) nx dx dt (contorno : spazio_burg 1 dx dt onda)
    where
-      bordo = head onda - head onda * dt/dx * (head onda - last onda) +
-              nu*dt/dx**2 * ((head $ tail onda) - 2*(head onda) + last onda) -- Condizione di bordo.
+      contorno = head onda - head onda * dt/dx * (head onda - last onda) +
+                 nu*dt/dx**2 * ((head $ tail onda) - 2*(head onda) + last onda) -- Condizione di contorno.
 
 
 {- La funzione spazio_burg calcola numericamente l'integrazione della
@@ -435,11 +435,11 @@ tempo_burg nt nx dx dt onda = tempo_burg (nt - 1) nx dx dt (bordo : spazio_burg 
    - il quarto argomento  e' la funzione d'onda. -}
 
 spazio_burg :: Int -> Double -> Double -> [Double] -> [Double]
-spazio_burg i dx dt lx | i == length lx - 1 = [bordo]
+spazio_burg i dx dt lx | i == length lx - 1 = [contorno]
                        | otherwise          = passo_eulero : spazio_burg (i+1) dx dt lx
    where
-      bordo        = (last lx) - (last lx) * dt/dx * ((last lx) - (last $ init lx)) +
-                     nu*dt/dx**2*(head lx - 2*(last lx) + (last $ init lx)) -- Condizione di bordo.
+      contorno     = (last lx) - (last lx) * dt/dx * ((last lx) - (last $ init lx)) +
+                     nu*dt/dx**2*(head lx - 2*(last lx) + (last $ init lx)) -- Condizione di contorno.
       passo_eulero = (lx !! i - lx !! i * dt/dx * (lx !! i - lx !! (i-1)) + 
                       nu*dt/dx**2*(lx !! (i+1) - 2*(lx !! i) + lx !! (i-1)))
 
@@ -491,6 +491,12 @@ gen_punti_equi nx inf sup | sup > inf = calc_punti 0 (nx - 1) inf (abs $ sup - i
                           | otherwise = reverse(calc_punti 0 (nx - 1) sup (abs $ sup - inf))
 
 
+{- La funzione calc_punti calcola i punti successivi all'estremo inferiore del 
+   dominio aventi la medesima distanza uno dall'altro:
+   - il primo argomento   e' il numero di punti calcolati;
+   - il secondo argomento e' il numero totale di punti da calcolare;
+   - il terzo argomento   e' l'estremo inferiore della lista di punti;
+   - il quarto argomento  e' la distanza fissa presente tra ogni punto. -}
 
 calc_punti :: Int -> Int -> Double -> Double -> [Double]
 calc_punti i nx inf dst | i == nx   = [inf]
