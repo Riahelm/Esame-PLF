@@ -1,5 +1,5 @@
-\babel@toc {italian}{}\relax 
-\babel@toc {italian}{}\relax 
+\babel@toc {italian}{}
+\babel@toc {italian}{}
 \contentsline {section}{\numberline {1}Specifica del Problema}{2}{section.1}%
 \contentsline {section}{\numberline {2}Analisi del Problema}{3}{section.2}%
 \contentsline {subsection}{\numberline {2.1}Dati di Ingresso del Problema}{3}{subsection.2.1}%
