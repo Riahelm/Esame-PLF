@@ -1,6 +1,7 @@
 
 \scriptsize
 \begin{verbatim}
+   
 {- Programma Haskell per effettuare simulazioni numeriche -}
 
 import Data.List {- necessario per usare: 
@@ -148,7 +149,7 @@ acquisisci_dato_dt = do putStr "Digita lunghezza del passo temporale: "
    di simulazione per simulare il moto di convezione: il primo, un naturale per il 
    numero di punti della funzione d'onda; il secondo un reale per la lunghezza
    del passo temporale. In seguito all'acquisizione dei parametri calcola l'inte- 
-  -grazione numerica dell'equazione di convezione. -}
+   -grazione numerica dell'equazione di convezione. -}
 
 acqui_dati_e_simul_conv :: IO ()
 acqui_dati_e_simul_conv = do putStr "Digita il numero di punti totali della funzione d'onda: "
@@ -166,7 +167,7 @@ acqui_dati_e_simul_conv = do putStr "Digita il numero di punti totali della funz
 
 {- L'azione input/output acquisisci_dato_nxb acquisisce un parametro numerico
    naturale di simulazione, ovvero il numero totale di punti della funzione
-   d'onda per il calcolo dell'equazione di Burgers. -}
+   d'onda per il moto di convezione e di diffusione (Burgers). -}
 
 acquisisci_dato_nxb :: IO String
 acquisisci_dato_nxb = do putStr "Digita il numero di punti totali della funzione d'onda: "

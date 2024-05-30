@@ -1,0 +1,1012 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.5.29)  30 MAY 2024 02:41
+entering extended mode
+ \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**c:/Università/aiuto/relazione/Relazione_PLF/main.tex
+(c:/Università/aiuto/relazione/Relazione_PLF/main.tex
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-05-08>
+(c:/texlive/2024/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2023/05/17 v1.4n Standard LaTeX document class
+(c:/texlive/2024/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2023/05/17 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count189
+\c@section=\count190
+\c@subsection=\count191
+\c@subsubsection=\count192
+\c@paragraph=\count193
+\c@subparagraph=\count194
+\c@figure=\count195
+\c@table=\count196
+\abovecaptionskip=\skip48
+\belowcaptionskip=\skip49
+\bibindent=\dimen140
+) (c:/texlive/2024/texmf-dist/tex/latex/base/inputenc.sty
+Package: inputenc 2021/02/14 v1.3d Input encoding file
+\inpenc@prehook=\toks17
+\inpenc@posthook=\toks18
+) (c:/texlive/2024/texmf-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
+) (c:/texlive/2024/texmf-dist/tex/latex/lm/lmodern.sty
+Package: lmodern 2015/05/01 v1.6.1 Latin Modern Fonts
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmr/m/n --> OT1/lmr/m/n on input line 22.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `normal'
+(Font)                  OML/cmm/m/it --> OML/lmm/m/it on input line 23.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
+(Font)                  OMS/cmsy/m/n --> OMS/lmsy/m/n on input line 24.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
+(Font)                  OMX/cmex/m/n --> OMX/lmex/m/n on input line 25.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 26.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
+(Font)                  OML/cmm/b/it --> OML/lmm/b/it on input line 27.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  OMS/cmsy/b/n --> OMS/lmsy/b/n on input line 28.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  OMX/cmex/m/n --> OMX/lmex/m/n on input line 29.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 31.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
+(Font)                  OT1/cmss/m/n --> OT1/lmss/m/n on input line 32.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/cmr/m/it --> OT1/lmr/m/it on input line 33.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
+(Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 34.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 35.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/cmss/bx/n --> OT1/lmss/bx/n on input line 36.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  OT1/cmr/bx/it --> OT1/lmr/bx/it on input line 37.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 38.
+) (c:/texlive/2024/texmf-dist/tex/latex/geometry/geometry.sty
+Package: geometry 2020/01/02 v5.9 Page Geometry
+ (c:/texlive/2024/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+\KV@toks@=\toks19
+) (c:/texlive/2024/texmf-dist/tex/generic/iftex/ifvtex.sty
+Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
+ (c:/texlive/2024/texmf-dist/tex/generic/iftex/iftex.sty
+Package: iftex 2022/02/03 v1.0f TeX engine tests
+))
+\Gm@cnth=\count197
+\Gm@cntv=\count198
+\c@Gm@tempcnt=\count199
+\Gm@bindingoffset=\dimen141
+\Gm@wd@mp=\dimen142
+\Gm@odd@mp=\dimen143
+\Gm@even@mp=\dimen144
+\Gm@layoutwidth=\dimen145
+\Gm@layoutheight=\dimen146
+\Gm@layouthoffset=\dimen147
+\Gm@layoutvoffset=\dimen148
+\Gm@dimlist=\toks20
+) (c:/texlive/2024/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
+ (c:/texlive/2024/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2022/03/10 v1.4e Standard LaTeX Graphics (DPC,SPQR)
+ (c:/texlive/2024/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2021/08/11 v1.11 sin cos tan (DPC)
+) (c:/texlive/2024/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 107.
+ (c:/texlive/2024/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2024/04/13 v1.2c Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen149
+\Gin@req@width=\dimen150
+) (c:/texlive/2024/texmf-dist/tex/latex/sidecap/sidecap.sty
+Package: sidecap 2023/01/24 v1.7a SideCap Package (RN/HjG)
+ (c:/texlive/2024/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2022/04/13 v1.1d Standard LaTeX ifthen package (DPC)
+)
+\SC@BOXWD=\dimen151
+\SC@CAPWD=\dimen152
+\SC@tempdima=\dimen153
+\SC@tempdimb=\dimen154
+\c@SC@C=\count266
+\SC@BOX=\box51
+) (c:/texlive/2024/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2023/08/05 v3.6o Customizing captions (AR)
+ (c:/texlive/2024/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
+\caption@tempdima=\dimen155
+\captionmargin=\dimen156
+\caption@leftmargin=\dimen157
+\caption@rightmargin=\dimen158
+\caption@width=\dimen159
+\caption@indent=\dimen160
+\caption@parindent=\dimen161
+\caption@hangindent=\dimen162
+Package caption Info: Standard document class detected.
+)
+\c@caption@flags=\count267
+\c@continuedfloat=\count268
+Package caption Info: sidecap package is loaded.
+) (c:/texlive/2024/texmf-dist/tex/generic/babel/babel.sty
+Package: babel 2024/05/18 v24.5 The Babel package
+\babel@savecnt=\count269
+\U@D=\dimen163
+\l@unhyphenated=\language89
+ (c:/texlive/2024/texmf-dist/tex/generic/babel/txtbabel.def)
+\bbl@readstream=\read2
+\bbl@dirlevel=\count270
+ (c:/texlive/2024/texmf-dist/tex/generic/babel-italian/italian.ldf
+Language: italian 2024/01/03 v.1.5.00 Italian support for the babel system
+\it@lettering=\count271
+\it@doublequoteactive=\count272
+\it@ISOcompliance=\count273
+)) (c:/texlive/2024/texmf-dist/tex/generic/babel/locale/it/babel-italian.tex
+Package babel Info: Importing font and identification data for italian
+(babel)             from babel-it.ini. Reported on input line 11.
+) (c:/texlive/2024/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count274
+) (c:/texlive/2024/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+ (c:/texlive/2024/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\@emptytoks=\toks21
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+)) (c:/texlive/2024/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2023/05/13 v2.17o AMS math features
+\@mathmargin=\skip50
+
+For additional information on amsmath, use the `?' option.
+(c:/texlive/2024/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2021/08/26 v2.01 AMS text
+ (c:/texlive/2024/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks22
+\ex@=\dimen164
+)) (c:/texlive/2024/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen165
+) (c:/texlive/2024/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 2022/04/08 v2.04 operator names
+)
+\inf@bad=\count275
+LaTeX Info: Redefining \frac on input line 234.
+\uproot@=\count276
+\leftroot@=\count277
+LaTeX Info: Redefining \overline on input line 399.
+LaTeX Info: Redefining \colon on input line 410.
+\classnum@=\count278
+\DOTSCASE@=\count279
+LaTeX Info: Redefining \ldots on input line 496.
+LaTeX Info: Redefining \dots on input line 499.
+LaTeX Info: Redefining \cdots on input line 620.
+\Mathstrutbox@=\box52
+\strutbox@=\box53
+LaTeX Info: Redefining \big on input line 722.
+LaTeX Info: Redefining \Big on input line 723.
+LaTeX Info: Redefining \bigg on input line 724.
+LaTeX Info: Redefining \Bigg on input line 725.
+\big@size=\dimen166
+LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
+\macc@depth=\count280
+LaTeX Info: Redefining \bmod on input line 905.
+LaTeX Info: Redefining \pmod on input line 910.
+LaTeX Info: Redefining \smash on input line 940.
+LaTeX Info: Redefining \relbar on input line 970.
+LaTeX Info: Redefining \Relbar on input line 971.
+\c@MaxMatrixCols=\count281
+\dotsspace@=\muskip16
+\c@parentequation=\count282
+\dspbrk@lvl=\count283
+\tag@help=\toks23
+\row@=\count284
+\column@=\count285
+\maxfields@=\count286
+\andhelp@=\toks24
+\eqnshift@=\dimen167
+\alignsep@=\dimen168
+\tagshift@=\dimen169
+\tagwidth@=\dimen170
+\totwidth@=\dimen171
+\lineht@=\dimen172
+\@envbody=\toks25
+\multlinegap=\skip51
+\multlinetaggap=\skip52
+\mathdisplay@stack=\toks26
+LaTeX Info: Redefining \[ on input line 2953.
+LaTeX Info: Redefining \] on input line 2954.
+) (c:/texlive/2024/texmf-dist/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2024-05-23 v7.01i Hypertext links for LaTeX
+ (c:/texlive/2024/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty
+Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
+) (c:/texlive/2024/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty
+Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
+) (c:/texlive/2024/texmf-dist/tex/generic/pdfescape/pdfescape.sty
+Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
+ (c:/texlive/2024/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
+Package: ltxcmds 2023-12-04 v1.26 LaTeX kernel commands for general use (HO)
+) (c:/texlive/2024/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO)
+ (c:/texlive/2024/texmf-dist/tex/generic/infwarerr/infwarerr.sty
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+)
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)) (c:/texlive/2024/texmf-dist/tex/latex/hycolor/hycolor.sty
+Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
+) (c:/texlive/2024/texmf-dist/tex/latex/hyperref/nameref.sty
+Package: nameref 2023-11-26 v2.56 Cross-referencing by name of section
+ (c:/texlive/2024/texmf-dist/tex/latex/refcount/refcount.sty
+Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
+) (c:/texlive/2024/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
+Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
+ (c:/texlive/2024/texmf-dist/tex/latex/kvoptions/kvoptions.sty
+Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
+))
+\c@section@level=\count287
+) (c:/texlive/2024/texmf-dist/tex/generic/stringenc/stringenc.sty
+Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO)
+)
+\@linkdim=\dimen173
+\Hy@linkcounter=\count288
+\Hy@pagecounter=\count289
+ (c:/texlive/2024/texmf-dist/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2024-05-23 v7.01i Hyperref: PDFDocEncoding definition (HO)
+Now handling font encoding PD1 ...
+... no UTF-8 mapping file for font encoding PD1
+) (c:/texlive/2024/texmf-dist/tex/generic/intcalc/intcalc.sty
+Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
+)
+\Hy@SavedSpaceFactor=\count290
+ (c:/texlive/2024/texmf-dist/tex/latex/hyperref/puenc.def
+File: puenc.def 2024-05-23 v7.01i Hyperref: PDF Unicode definition (HO)
+Now handling font encoding PU ...
+... no UTF-8 mapping file for font encoding PU
+)
+Package hyperref Info: Hyper figures OFF on input line 4157.
+Package hyperref Info: Link nesting OFF on input line 4162.
+Package hyperref Info: Hyper index ON on input line 4165.
+Package hyperref Info: Plain pages OFF on input line 4172.
+Package hyperref Info: Backreferencing OFF on input line 4177.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4424.
+\c@Hy@tempcnt=\count291
+ (c:/texlive/2024/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip17
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 4763.
+\XeTeXLinkMargin=\dimen174
+ (c:/texlive/2024/texmf-dist/tex/generic/bitset/bitset.sty
+Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
+ (c:/texlive/2024/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
+Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO)
+))
+\Fld@menulength=\count292
+\Field@Width=\dimen175
+\Fld@charsize=\dimen176
+Package hyperref Info: Hyper figures OFF on input line 6042.
+Package hyperref Info: Link nesting OFF on input line 6047.
+Package hyperref Info: Hyper index ON on input line 6050.
+Package hyperref Info: backreferencing OFF on input line 6057.
+Package hyperref Info: Link coloring OFF on input line 6062.
+Package hyperref Info: Link coloring with OCG OFF on input line 6067.
+Package hyperref Info: PDF/A mode OFF on input line 6072.
+ (c:/texlive/2024/texmf-dist/tex/latex/base/atbegshi-ltx.sty
+Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
+package with kernel methods
+)
+\Hy@abspage=\count293
+\c@Item=\count294
+\c@Hfootnote=\count295
+)
+Package hyperref Info: Driver (autodetected): hpdftex.
+ (c:/texlive/2024/texmf-dist/tex/latex/hyperref/hpdftex.def
+File: hpdftex.def 2024-05-23 v7.01i Hyperref driver for pdfTeX
+ (c:/texlive/2024/texmf-dist/tex/latex/base/atveryend-ltx.sty
+Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend package
+with kernel methods
+)
+\Fld@listcount=\count296
+\c@bookmark@seq@number=\count297
+ (c:/texlive/2024/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+Package: rerunfilecheck 2022-07-10 v1.10 Rerun checks for auxiliary files (HO)
+ (c:/texlive/2024/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
+Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
+)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 285.
+)
+\Hy@SectionHShift=\skip53
+)
+LaTeX Font Info:    Trying to load font information for T1+lmr on input line 21.
+ (c:/texlive/2024/texmf-dist/tex/latex/lm/t1lmr.fd
+File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+) (c:/texlive/2024/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count298
+\l__pdf_internal_box=\box54
+) (./main.aux (./01_specifica/specifica.aux) (./02_analisi/analisi.aux) (./03_progettazione/prog_algoritmo.aux) (./05_testing/test.aux))
+\openout1 = `main.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: a4paper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(63.75394pt, 470.0pt, 63.75394pt)
+* v-part:(T,H,B)=(66.01874pt, 680.0pt, 99.0281pt)
+* \paperwidth=597.50787pt
+* \paperheight=845.04684pt
+* \textwidth=470.0pt
+* \textheight=680.0pt
+* \oddsidemargin=-8.51605pt
+* \evensidemargin=-8.51605pt
+* \topmargin=-43.25125pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=10.0pt
+* \footskip=30.0pt
+* \marginparwidth=65.0pt
+* \marginparsep=11.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+(c:/texlive/2024/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count299
+\scratchdimen=\dimen177
+\scratchbox=\box55
+\nofMPsegments=\count300
+\nofMParguments=\count301
+\everyMPshowfont=\toks27
+\MPscratchCnt=\count302
+\MPscratchDim=\dimen178
+\MPnumerator=\count303
+\makeMPintoPDFobject=\count304
+\everyMPtoPDFconversion=\toks28
+) (c:/texlive/2024/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
+ (c:/texlive/2024/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
+)) (c:/texlive/2024/texmf-dist/tex/latex/ragged2e/ragged2e.sty
+Package: ragged2e 2023/06/22 v3.6 ragged2e Package
+\CenteringLeftskip=\skip54
+\RaggedLeftLeftskip=\skip55
+\RaggedRightLeftskip=\skip56
+\CenteringRightskip=\skip57
+\RaggedLeftRightskip=\skip58
+\RaggedRightRightskip=\skip59
+\CenteringParfillskip=\skip60
+\RaggedLeftParfillskip=\skip61
+\RaggedRightParfillskip=\skip62
+\JustifyingParfillskip=\skip63
+\CenteringParindent=\skip64
+\RaggedLeftParindent=\skip65
+\RaggedRightParindent=\skip66
+\JustifyingParindent=\skip67
+)
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: hyperref package is loaded.
+Package caption Info: End \AtBeginDocument code.
+LaTeX Info: Redefining \it@ocap on input line 21.
+LaTeX Info: Redefining \it@ccap on input line 21.
+Package hyperref Info: Link coloring OFF on input line 21.
+ (./main.out) (./main.out)
+\@outlinefile=\write3
+\openout3 = `main.out'.
+
+Package epstopdf Info: Source file: <Resources/logo-uniurb-2016.jpg.eps>
+(epstopdf)                    date: 2024-05-30 02:15:44
+(epstopdf)                    size: 800898 bytes
+(epstopdf)             Output file: <Resources/logo-uniurb-2016.jpg-eps-converted-to.pdf>
+(epstopdf)                    date: 2024-05-30 02:15:44
+(epstopdf)                    size: 628666 bytes
+(epstopdf)             Command: <epstopdf --outfile=Resources/logo-uniurb-2016.jpg-eps-converted-to.pdf Resources/logo-uniurb-2016.jpg.eps>
+(epstopdf)             \includegraphics on input line 29.
+Package epstopdf Info: Output file is already uptodate.
+<Resources/logo-uniurb-2016.jpg-eps-converted-to.pdf, id=60, 557.08125pt x 294.09875pt>
+File: Resources/logo-uniurb-2016.jpg-eps-converted-to.pdf Graphic file (type pdf)
+<use Resources/logo-uniurb-2016.jpg-eps-converted-to.pdf>
+Package pdftex.def Info: Resources/logo-uniurb-2016.jpg-eps-converted-to.pdf  used on input line 29.
+(pdftex.def)             Requested size: 172.46388pt x 91.04872pt.
+
+
+LaTeX Font Warning: Font shape `T1/lmr/bx/sc' undefined
+(Font)              using `T1/lmr/bx/n' instead on input line 34.
+
+[1
+
+{c:/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{c:/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc} <./Resources/logo-uniurb-2016.jpg-eps-converted-to.pdf>] (./main.toc
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 5.
+ (c:/texlive/2024/texmf-dist/tex/latex/lm/ot1lmr.fd
+File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 5.
+ (c:/texlive/2024/texmf-dist/tex/latex/lm/omllmm.fd
+File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 5.
+ (c:/texlive/2024/texmf-dist/tex/latex/lm/omslmsy.fd
+File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 5.
+ (c:/texlive/2024/texmf-dist/tex/latex/lm/omxlmex.fd
+File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 5.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 5.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 5.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 5.
+ (c:/texlive/2024/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 5.
+ (c:/texlive/2024/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+))
+\tf@toc=\write4
+\openout4 = `main.toc'.
+
+
+pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.48 \include{01_specifica/specifica}
+                                      [1]
+\openout2 = `01_specifica/specifica.aux'.
+
+ (./01_specifica/specifica.tex
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <8> on input line 3.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <6> on input line 3.
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 3.
+ (c:/texlive/2024/texmf-dist/tex/latex/lm/t1lmtt.fd
+File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+Underfull \hbox (badness 10000) in paragraph at lines 3--3
+[][][][]$\T1/lmtt/m/n/8 https : / / www . treccani . it / enciclopedia / simulazioni-[]di-[]processi-[]fisici-[]mediante-[]calcolatore _
+ []
+
+) [2
+
+]
+\openout2 = `02_analisi/analisi.aux'.
+
+ (./02_analisi/analisi.tex [3
+
+
+
+]
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 81.
+ (c:/texlive/2024/texmf-dist/tex/latex/lm/ts1lmr.fd
+File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+) [4{c:/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{c:/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{c:/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{c:/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}{c:/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}] [5] [6]) [7]
+\openout2 = `03_progettazione/prog_algoritmo.aux'.
+
+ (./03_progettazione/prog_algoritmo.tex [8
+
+
+
+] [9]) [10] (./04_implementazione/simulazioni_numeriche_hs.tex [11
+
+
+] [12] [13] [14]
+Overfull \hbox (28.3125pt too wide) in paragraph at lines 506--506
+[]      \T1/lmtt/m/n/7 dx = abs(sup_conv - inf_conv) / (fromIntegral(nx :: Int) - 1) -- Distanza tra qualsiasi coppia di punti della griglia adiacenti.[] 
+ []
+
+
+Overfull \hbox (13.4375pt too wide) in paragraph at lines 506--506
+[]      \T1/lmtt/m/n/7 dx       = abs(sup - inf) / (fromIntegral(nx :: Int) - 1) -- Distanza tra qualsiasi coppia di punti della griglia adiacenti.[] 
+ []
+
+[15] [16]) [17] (./04_implementazione/simulazioni_numeriche_pro.tex [18] [19]
+Overfull \hbox (20.875pt too wide) in paragraph at lines 608--608
+[]\T1/lmtt/m/n/7 moto_fugoide_completo(DT,[[X0|Y0]|T]) :- V0 is 30.0,                     /* La velocita' iniziale, in questo caso quella di trim. */[] 
+ []
+
+
+Overfull \hbox (20.875pt too wide) in paragraph at lines 608--608
+[]                                         \T1/lmtt/m/n/7 THETA0 is 0.0,                  /* Angolo iniziale del velivolo.                         */[] 
+ []
+
+
+Overfull \hbox (20.875pt too wide) in paragraph at lines 608--608
+[]                                         \T1/lmtt/m/n/7 X0 is 0.0,                      /* Spostamento orizzontale iniziale del velivolo.        */[] 
+ []
+
+
+Overfull \hbox (20.875pt too wide) in paragraph at lines 608--608
+[]                                         \T1/lmtt/m/n/7 Y0 is 1000.0,                   /* Altitudine iniziale del velivolo.                     */[] 
+ []
+
+
+Overfull \hbox (20.875pt too wide) in paragraph at lines 608--608
+[]                                         \T1/lmtt/m/n/7 PASSI is (floor(100.0/DT) + 1), /* Numero di punti in cui effettuare il calcolo.         */[] 
+ []
+
+[20] [21] [22] [23] [24]) [25]
+\openout2 = `05_testing/test.aux'.
+
+ (./05_testing/test.tex
+<05_testing/image/hs/01_test/01_negativo.png, id=285, 1272.755pt x 581.17125pt>
+File: 05_testing/image/hs/01_test/01_negativo.png Graphic file (type png)
+<use 05_testing/image/hs/01_test/01_negativo.png>
+Package pdftex.def Info: 05_testing/image/hs/01_test/01_negativo.png  used on input line 6.
+(pdftex.def)             Requested size: 469.9992pt x 214.6132pt.
+<05_testing/image/hs/01_test/02_negativo.png, id=286, 1275.76625pt x 550.055pt>
+File: 05_testing/image/hs/01_test/02_negativo.png Graphic file (type png)
+<use 05_testing/image/hs/01_test/02_negativo.png>
+Package pdftex.def Info: 05_testing/image/hs/01_test/02_negativo.png  used on input line 8.
+(pdftex.def)             Requested size: 470.0016pt x 202.64427pt.
+<05_testing/image/hs/01_test/03_negativo.png, id=287, 1275.76625pt x 498.86375pt>
+File: 05_testing/image/hs/01_test/03_negativo.png Graphic file (type png)
+<use 05_testing/image/hs/01_test/03_negativo.png>
+Package pdftex.def Info: 05_testing/image/hs/01_test/03_negativo.png  used on input line 10.
+(pdftex.def)             Requested size: 470.0016pt x 183.78505pt.
+<05_testing/image/hs/01_test/04_negativo.png, id=288, 1276.77pt x 532.99126pt>
+File: 05_testing/image/hs/01_test/04_negativo.png Graphic file (type png)
+<use 05_testing/image/hs/01_test/04_negativo.png>
+Package pdftex.def Info: 05_testing/image/hs/01_test/04_negativo.png  used on input line 12.
+(pdftex.def)             Requested size: 470.00124pt x 196.20334pt.
+ [26
+
+ <./05_testing/image/hs/01_test/01_negativo.png> <./05_testing/image/hs/01_test/02_negativo.png> <./05_testing/image/hs/01_test/03_negativo.png>]
+<05_testing/image/hs/02_test/01_zero.png, id=294, 1273.75874pt x 637.38126pt>
+File: 05_testing/image/hs/02_test/01_zero.png Graphic file (type png)
+<use 05_testing/image/hs/02_test/01_zero.png>
+Package pdftex.def Info: 05_testing/image/hs/02_test/01_zero.png  used on input line 15.
+(pdftex.def)             Requested size: 470.0006pt x 235.18547pt.
+<05_testing/image/hs/02_test/02_zero.png, id=295, 1275.76625pt x 618.31pt>
+File: 05_testing/image/hs/02_test/02_zero.png Graphic file (type png)
+<use 05_testing/image/hs/02_test/02_zero.png>
+Package pdftex.def Info: 05_testing/image/hs/02_test/02_zero.png  used on input line 17.
+(pdftex.def)             Requested size: 470.0016pt x 227.78992pt.
+<05_testing/image/hs/02_test/03_zero.png, id=296, 1269.74374pt x 666.49pt>
+File: 05_testing/image/hs/02_test/03_zero.png Graphic file (type png)
+<use 05_testing/image/hs/02_test/03_zero.png>
+Package pdftex.def Info: 05_testing/image/hs/02_test/03_zero.png  used on input line 19.
+(pdftex.def)             Requested size: 469.99158pt x 246.69913pt.
+ [27 <./05_testing/image/hs/01_test/04_negativo.png>] [28 <./05_testing/image/hs/02_test/01_zero.png> <./05_testing/image/hs/02_test/02_zero.png>]
+<05_testing/image/hs/03_test/01_uno.png, id=306, 1272.755pt x 636.3775pt>
+File: 05_testing/image/hs/03_test/01_uno.png Graphic file (type png)
+<use 05_testing/image/hs/03_test/01_uno.png>
+Package pdftex.def Info: 05_testing/image/hs/03_test/01_uno.png  used on input line 23.
+(pdftex.def)             Requested size: 469.9992pt x 234.9996pt.
+<05_testing/image/hs/03_test/02_uno.png, id=307, 1275.76625pt x 565.11125pt>
+File: 05_testing/image/hs/03_test/02_uno.png Graphic file (type png)
+<use 05_testing/image/hs/03_test/02_uno.png>
+Package pdftex.def Info: 05_testing/image/hs/03_test/02_uno.png  used on input line 25.
+(pdftex.def)             Requested size: 470.0016pt x 208.1911pt.
+<05_testing/image/hs/03_test/03_uno.png, id=308, 1272.755pt x 672.5125pt>
+File: 05_testing/image/hs/03_test/03_uno.png Graphic file (type png)
+<use 05_testing/image/hs/03_test/03_uno.png>
+Package pdftex.def Info: 05_testing/image/hs/03_test/03_uno.png  used on input line 27.
+(pdftex.def)             Requested size: 469.9992pt x 248.34343pt.
+ [29 <./05_testing/image/hs/02_test/03_zero.png>] [30 <./05_testing/image/hs/03_test/01_uno.png> <./05_testing/image/hs/03_test/02_uno.png>]
+<05_testing/image/hs/04_test/01_normale.png, id=319, 1277.77374pt x 379.4175pt>
+File: 05_testing/image/hs/04_test/01_normale.png Graphic file (type png)
+<use 05_testing/image/hs/04_test/01_normale.png>
+Package pdftex.def Info: 05_testing/image/hs/04_test/01_normale.png  used on input line 30.
+(pdftex.def)             Requested size: 470.00027pt x 139.56017pt.
+<05_testing/image/hs/04_test/02_normale.png, id=320, 1274.7625pt x 364.36125pt>
+File: 05_testing/image/hs/04_test/02_normale.png Graphic file (type png)
+<use 05_testing/image/hs/04_test/02_normale.png>
+Package pdftex.def Info: 05_testing/image/hs/04_test/02_normale.png  used on input line 32.
+(pdftex.def)             Requested size: 470.00139pt x 134.33897pt.
+<05_testing/image/hs/04_test/03_normale.png, id=321, 1279.78125pt x 429.605pt>
+File: 05_testing/image/hs/04_test/03_normale.png Graphic file (type png)
+<use 05_testing/image/hs/04_test/03_normale.png>
+Package pdftex.def Info: 05_testing/image/hs/04_test/03_normale.png  used on input line 34.
+(pdftex.def)             Requested size: 469.99664pt x 157.77141pt.
+<05_testing/image/hs/04_test/04_normale.png, id=322, 1276.77pt x 362.35374pt>
+File: 05_testing/image/hs/04_test/04_normale.png Graphic file (type png)
+<use 05_testing/image/hs/04_test/04_normale.png>
+Package pdftex.def Info: 05_testing/image/hs/04_test/04_normale.png  used on input line 36.
+(pdftex.def)             Requested size: 470.00124pt x 133.3887pt.
+ [31 <./05_testing/image/hs/03_test/03_uno.png> <./05_testing/image/hs/04_test/01_normale.png> <./05_testing/image/hs/04_test/02_normale.png>]
+<05_testing/image/hs/05_test/01_misto.png, id=328, 1272.755pt x 384.43625pt>
+File: 05_testing/image/hs/05_test/01_misto.png Graphic file (type png)
+<use 05_testing/image/hs/05_test/01_misto.png>
+Package pdftex.def Info: 05_testing/image/hs/05_test/01_misto.png  used on input line 39.
+(pdftex.def)             Requested size: 469.9992pt x 141.96347pt.
+<05_testing/image/hs/05_test/02_misto.png, id=329, 1277.77374pt x 511.9125pt>
+File: 05_testing/image/hs/05_test/02_misto.png Graphic file (type png)
+<use 05_testing/image/hs/05_test/02_misto.png>
+Package pdftex.def Info: 05_testing/image/hs/05_test/02_misto.png  used on input line 41.
+(pdftex.def)             Requested size: 470.00027pt x 188.29547pt.
+<05_testing/image/hs/05_test/03_misto.png, id=330, 1276.77pt x 585.18625pt>
+File: 05_testing/image/hs/05_test/03_misto.png Graphic file (type png)
+<use 05_testing/image/hs/05_test/03_misto.png>
+Package pdftex.def Info: 05_testing/image/hs/05_test/03_misto.png  used on input line 43.
+(pdftex.def)             Requested size: 470.00124pt x 215.41722pt.
+<05_testing/image/hs/05_test/04_misto.png, id=331, 1272.755pt x 294.09875pt>
+File: 05_testing/image/hs/05_test/04_misto.png Graphic file (type png)
+<use 05_testing/image/hs/05_test/04_misto.png>
+Package pdftex.def Info: 05_testing/image/hs/05_test/04_misto.png  used on input line 45.
+(pdftex.def)             Requested size: 469.9992pt x 108.60391pt.
+ [32 <./05_testing/image/hs/04_test/03_normale.png> <./05_testing/image/hs/04_test/04_normale.png> <./05_testing/image/hs/05_test/01_misto.png> <./05_testing/image/hs/05_test/02_misto.png>]
+<05_testing/image/hs/06_test/01_misto.png, id=337, 1267.73625pt x 364.36125pt>
+File: 05_testing/image/hs/06_test/01_misto.png Graphic file (type png)
+<use 05_testing/image/hs/06_test/01_misto.png>
+Package pdftex.def Info: 05_testing/image/hs/06_test/01_misto.png  used on input line 48.
+(pdftex.def)             Requested size: 470.00293pt x 135.08397pt.
+<05_testing/image/hs/06_test/02_misto.png, id=338, 1276.77pt x 596.2275pt>
+File: 05_testing/image/hs/06_test/02_misto.png Graphic file (type png)
+<use 05_testing/image/hs/06_test/02_misto.png>
+Package pdftex.def Info: 05_testing/image/hs/06_test/02_misto.png  used on input line 50.
+(pdftex.def)             Requested size: 470.00124pt x 219.4817pt.
+<05_testing/image/hs/06_test/03_misto.png, id=339, 1275.76625pt x 447.6725pt>
+File: 05_testing/image/hs/06_test/03_misto.png Graphic file (type png)
+<use 05_testing/image/hs/06_test/03_misto.png>
+Package pdftex.def Info: 05_testing/image/hs/06_test/03_misto.png  used on input line 52.
+(pdftex.def)             Requested size: 470.0016pt x 164.92581pt.
+<05_testing/image/hs/06_test/04_misto.png, id=340, 1273.75874pt x 430.60875pt>
+File: 05_testing/image/hs/06_test/04_misto.png Graphic file (type png)
+<use 05_testing/image/hs/06_test/04_misto.png>
+Package pdftex.def Info: 05_testing/image/hs/06_test/04_misto.png  used on input line 54.
+(pdftex.def)             Requested size: 470.0006pt x 158.88907pt.
+ [33 <./05_testing/image/hs/05_test/03_misto.png> <./05_testing/image/hs/05_test/04_misto.png>] [34 <./05_testing/image/hs/06_test/01_misto.png> <./05_testing/image/hs/06_test/02_misto.png> <./05_testing/image/hs/06_test/03_misto.png>]
+<05_testing/image/hs/07_test/01_misto.png, id=350, 1271.75125pt x 367.3725pt>
+File: 05_testing/image/hs/07_test/01_misto.png Graphic file (type png)
+<use 05_testing/image/hs/07_test/01_misto.png>
+Package pdftex.def Info: 05_testing/image/hs/07_test/01_misto.png  used on input line 57.
+(pdftex.def)             Requested size: 469.99725pt x 135.76872pt.
+<05_testing/image/hs/07_test/02_misto.png, id=351, 1278.7775pt x 498.86375pt>
+File: 05_testing/image/hs/07_test/02_misto.png Graphic file (type png)
+<use 05_testing/image/hs/07_test/02_misto.png>
+Package pdftex.def Info: 05_testing/image/hs/07_test/02_misto.png  used on input line 59.
+(pdftex.def)             Requested size: 469.99875pt x 183.35115pt.
+<05_testing/image/hs/07_test/03_misto.png, id=352, 1283.79625pt x 393.47pt>
+File: 05_testing/image/hs/07_test/03_misto.png Graphic file (type png)
+<use 05_testing/image/hs/07_test/03_misto.png>
+Package pdftex.def Info: 05_testing/image/hs/07_test/03_misto.png  used on input line 61.
+(pdftex.def)             Requested size: 470.00195pt x 144.05063pt.
+<05_testing/image/hs/07_test/04_misto.png, id=353, 1275.76625pt x 584.1825pt>
+File: 05_testing/image/hs/07_test/04_misto.png Graphic file (type png)
+<use 05_testing/image/hs/07_test/04_misto.png>
+Package pdftex.def Info: 05_testing/image/hs/07_test/04_misto.png  used on input line 63.
+(pdftex.def)             Requested size: 470.0016pt x 215.21709pt.
+ [35 <./05_testing/image/hs/06_test/04_misto.png> <./05_testing/image/hs/07_test/01_misto.png> <./05_testing/image/hs/07_test/02_misto.png> <./05_testing/image/hs/07_test/03_misto.png>]
+<05_testing/image/hs/08_test/01_misto.png, id=359, 1276.77pt x 635.37375pt>
+File: 05_testing/image/hs/08_test/01_misto.png Graphic file (type png)
+<use 05_testing/image/hs/08_test/01_misto.png>
+Package pdftex.def Info: 05_testing/image/hs/08_test/01_misto.png  used on input line 66.
+(pdftex.def)             Requested size: 470.00124pt x 233.89212pt.
+<05_testing/image/hs/08_test/02_misto.png, id=360, 1272.755pt x 368.37625pt>
+File: 05_testing/image/hs/08_test/02_misto.png Graphic file (type png)
+<use 05_testing/image/hs/08_test/02_misto.png>
+Package pdftex.def Info: 05_testing/image/hs/08_test/02_misto.png  used on input line 68.
+(pdftex.def)             Requested size: 469.9992pt x 136.03288pt.
+<05_testing/image/hs/08_test/03_misto.png, id=361, 1276.77pt x 516.93124pt>
+File: 05_testing/image/hs/08_test/03_misto.png Graphic file (type png)
+<use 05_testing/image/hs/08_test/03_misto.png>
+Package pdftex.def Info: 05_testing/image/hs/08_test/03_misto.png  used on input line 70.
+(pdftex.def)             Requested size: 470.00124pt x 190.29137pt.
+<05_testing/image/hs/08_test/04_misto.png, id=362, 1272.755pt x 325.215pt>
+File: 05_testing/image/hs/08_test/04_misto.png Graphic file (type png)
+<use 05_testing/image/hs/08_test/04_misto.png>
+Package pdftex.def Info: 05_testing/image/hs/08_test/04_misto.png  used on input line 72.
+(pdftex.def)             Requested size: 469.9992pt x 120.09442pt.
+ [36 <./05_testing/image/hs/07_test/04_misto.png> <./05_testing/image/hs/08_test/01_misto.png> <./05_testing/image/hs/08_test/02_misto.png>]
+<05_testing/image/hs/09_test/01_misto.png, id=369, 1275.76625pt x 401.5pt>
+File: 05_testing/image/hs/09_test/01_misto.png Graphic file (type png)
+<use 05_testing/image/hs/09_test/01_misto.png>
+Package pdftex.def Info: 05_testing/image/hs/09_test/01_misto.png  used on input line 75.
+(pdftex.def)             Requested size: 470.0016pt x 147.91553pt.
+<05_testing/image/hs/09_test/02_misto.png, id=370, 1278.7775pt x 461.725pt>
+File: 05_testing/image/hs/09_test/02_misto.png Graphic file (type png)
+<use 05_testing/image/hs/09_test/02_misto.png>
+Package pdftex.def Info: 05_testing/image/hs/09_test/02_misto.png  used on input line 77.
+(pdftex.def)             Requested size: 469.99875pt x 169.70128pt.
+<05_testing/image/hs/09_test/03_misto.png, id=371, 1278.7775pt x 512.91624pt>
+File: 05_testing/image/hs/09_test/03_misto.png Graphic file (type png)
+<use 05_testing/image/hs/09_test/03_misto.png>
+Package pdftex.def Info: 05_testing/image/hs/09_test/03_misto.png  used on input line 79.
+(pdftex.def)             Requested size: 469.99875pt x 188.51598pt.
+<05_testing/image/hs/09_test/04_misto.png, id=372, 1283.79625pt x 293.095pt>
+File: 05_testing/image/hs/09_test/04_misto.png Graphic file (type png)
+<use 05_testing/image/hs/09_test/04_misto.png>
+Package pdftex.def Info: 05_testing/image/hs/09_test/04_misto.png  used on input line 81.
+(pdftex.def)             Requested size: 470.00195pt x 107.30301pt.
+ [37 <./05_testing/image/hs/08_test/03_misto.png> <./05_testing/image/hs/08_test/04_misto.png> <./05_testing/image/hs/09_test/01_misto.png> <./05_testing/image/hs/09_test/02_misto.png>]
+<05_testing/image/hs/10_test/01_misto.png, id=378, 1272.755pt x 468.75125pt>
+File: 05_testing/image/hs/10_test/01_misto.png Graphic file (type png)
+<use 05_testing/image/hs/10_test/01_misto.png>
+Package pdftex.def Info: 05_testing/image/hs/10_test/01_misto.png  used on input line 84.
+(pdftex.def)             Requested size: 469.9992pt x 173.09906pt.
+<05_testing/image/hs/10_test/02_misto.png, id=379, 1276.77pt x 375.4025pt>
+File: 05_testing/image/hs/10_test/02_misto.png Graphic file (type png)
+<use 05_testing/image/hs/10_test/02_misto.png>
+Package pdftex.def Info: 05_testing/image/hs/10_test/02_misto.png  used on input line 86.
+(pdftex.def)             Requested size: 470.00124pt x 138.19218pt.
+<05_testing/image/hs/10_test/03_misto.png, id=380, 1283.79625pt x 393.47pt>
+File: 05_testing/image/hs/10_test/03_misto.png Graphic file (type png)
+<use 05_testing/image/hs/10_test/03_misto.png>
+Package pdftex.def Info: 05_testing/image/hs/10_test/03_misto.png  used on input line 88.
+(pdftex.def)             Requested size: 470.00195pt x 144.05063pt.
+<05_testing/image/hs/10_test/04_misto.png, id=381, 1274.7625pt x 296.10625pt>
+File: 05_testing/image/hs/10_test/04_misto.png Graphic file (type png)
+<use 05_testing/image/hs/10_test/04_misto.png>
+Package pdftex.def Info: 05_testing/image/hs/10_test/04_misto.png  used on input line 90.
+(pdftex.def)             Requested size: 470.00139pt x 109.17354pt.
+ [38 <./05_testing/image/hs/09_test/03_misto.png> <./05_testing/image/hs/09_test/04_misto.png> <./05_testing/image/hs/10_test/01_misto.png> <./05_testing/image/hs/10_test/02_misto.png>]
+<05_testing/image/pro/01_test/01.png, id=387, 1274.7625pt x 548.0475pt>
+File: 05_testing/image/pro/01_test/01.png Graphic file (type png)
+<use 05_testing/image/pro/01_test/01.png>
+Package pdftex.def Info: 05_testing/image/pro/01_test/01.png  used on input line 96.
+(pdftex.def)             Requested size: 470.00139pt x 202.06358pt.
+<05_testing/image/pro/01_test/02.png, id=388, 1274.7625pt x 553.06625pt>
+File: 05_testing/image/pro/01_test/02.png Graphic file (type png)
+<use 05_testing/image/pro/01_test/02.png>
+Package pdftex.def Info: 05_testing/image/pro/01_test/02.png  used on input line 98.
+(pdftex.def)             Requested size: 470.00139pt x 203.91399pt.
+<05_testing/image/pro/01_test/03.png, id=389, 1273.75874pt x 497.86pt>
+File: 05_testing/image/pro/01_test/03.png Graphic file (type png)
+<use 05_testing/image/pro/01_test/03.png>
+Package pdftex.def Info: 05_testing/image/pro/01_test/03.png  used on input line 100.
+(pdftex.def)             Requested size: 470.0006pt x 183.70393pt.
+<05_testing/image/pro/01_test/04.png, id=390, 1275.76625pt x 599.23875pt>
+File: 05_testing/image/pro/01_test/04.png Graphic file (type png)
+<use 05_testing/image/pro/01_test/04.png>
+Package pdftex.def Info: 05_testing/image/pro/01_test/04.png  used on input line 102.
+(pdftex.def)             Requested size: 470.0016pt x 220.76393pt.
+ [39 <./05_testing/image/hs/10_test/03_misto.png> <./05_testing/image/hs/10_test/04_misto.png>] [40 <./05_testing/image/pro/01_test/01.png> <./05_testing/image/pro/01_test/02.png> <./05_testing/image/pro/01_test/03.png>]
+<05_testing/image/pro/02_test/01.png, id=400, 1276.77pt x 636.3775pt>
+File: 05_testing/image/pro/02_test/01.png Graphic file (type png)
+<use 05_testing/image/pro/02_test/01.png>
+Package pdftex.def Info: 05_testing/image/pro/02_test/01.png  used on input line 105.
+(pdftex.def)             Requested size: 470.00124pt x 234.26161pt.
+<05_testing/image/pro/02_test/02.png, id=401, 1276.77pt x 620.3175pt>
+File: 05_testing/image/pro/02_test/02.png Graphic file (type png)
+<use 05_testing/image/pro/02_test/02.png>
+Package pdftex.def Info: 05_testing/image/pro/02_test/02.png  used on input line 107.
+(pdftex.def)             Requested size: 470.00124pt x 228.34966pt.
+<05_testing/image/pro/02_test/03.png, id=402, 1283.79625pt x 377.41pt>
+File: 05_testing/image/pro/02_test/03.png Graphic file (type png)
+<use 05_testing/image/pro/02_test/03.png>
+Package pdftex.def Info: 05_testing/image/pro/02_test/03.png  used on input line 109.
+(pdftex.def)             Requested size: 470.00195pt x 138.171pt.
+<05_testing/image/pro/02_test/04.png, id=403, 1272.755pt x 362.35374pt>
+File: 05_testing/image/pro/02_test/04.png Graphic file (type png)
+<use 05_testing/image/pro/02_test/04.png>
+Package pdftex.def Info: 05_testing/image/pro/02_test/04.png  used on input line 111.
+(pdftex.def)             Requested size: 469.9992pt x 133.80891pt.
+ [41 <./05_testing/image/pro/01_test/04.png>] [42 <./05_testing/image/pro/02_test/01.png> <./05_testing/image/pro/02_test/02.png> <./05_testing/image/pro/02_test/03.png>]
+<05_testing/image/pro/03_test/01.png, id=414, 1274.7625pt x 570.13pt>
+File: 05_testing/image/pro/03_test/01.png Graphic file (type png)
+<use 05_testing/image/pro/03_test/01.png>
+Package pdftex.def Info: 05_testing/image/pro/03_test/01.png  used on input line 114.
+(pdftex.def)             Requested size: 470.00139pt x 210.20534pt.
+<05_testing/image/pro/03_test/02.png, id=415, 1276.77pt x 562.1pt>
+File: 05_testing/image/pro/03_test/02.png Graphic file (type png)
+<use 05_testing/image/pro/03_test/02.png>
+Package pdftex.def Info: 05_testing/image/pro/03_test/02.png  used on input line 116.
+(pdftex.def)             Requested size: 470.00124pt x 206.91878pt.
+<05_testing/image/pro/03_test/03.png, id=416, 1283.79625pt x 379.4175pt>
+File: 05_testing/image/pro/03_test/03.png Graphic file (type png)
+<use 05_testing/image/pro/03_test/03.png>
+Package pdftex.def Info: 05_testing/image/pro/03_test/03.png  used on input line 118.
+(pdftex.def)             Requested size: 470.00195pt x 138.90596pt.
+<05_testing/image/pro/03_test/04.png, id=417, 1273.75874pt x 361.35pt>
+File: 05_testing/image/pro/03_test/04.png Graphic file (type png)
+<use 05_testing/image/pro/03_test/04.png>
+Package pdftex.def Info: 05_testing/image/pro/03_test/04.png  used on input line 120.
+(pdftex.def)             Requested size: 470.0006pt x 133.3335pt.
+ [43 <./05_testing/image/pro/02_test/04.png> <./05_testing/image/pro/03_test/01.png> <./05_testing/image/pro/03_test/02.png>]
+<05_testing/image/pro/04_test/01.png, id=423, 1276.77pt x 381.425pt>
+File: 05_testing/image/pro/04_test/01.png Graphic file (type png)
+<use 05_testing/image/pro/04_test/01.png>
+Package pdftex.def Info: 05_testing/image/pro/04_test/01.png  used on input line 123.
+(pdftex.def)             Requested size: 470.00124pt x 140.40916pt.
+<05_testing/image/pro/04_test/02.png, id=424, 1281.78876pt x 365.365pt>
+File: 05_testing/image/pro/04_test/02.png Graphic file (type png)
+<use 05_testing/image/pro/04_test/02.png>
+Package pdftex.def Info: 05_testing/image/pro/04_test/02.png  used on input line 125.
+(pdftex.def)             Requested size: 469.99066pt x 133.96758pt.
+<05_testing/image/pro/04_test/03.png, id=425, 1278.7775pt x 427.5975pt>
+File: 05_testing/image/pro/04_test/03.png Graphic file (type png)
+<use 05_testing/image/pro/04_test/03.png>
+Package pdftex.def Info: 05_testing/image/pro/04_test/03.png  used on input line 127.
+(pdftex.def)             Requested size: 469.99875pt x 157.15813pt.
+<05_testing/image/pro/04_test/04.png, id=426, 1276.77pt x 428.60126pt>
+File: 05_testing/image/pro/04_test/04.png Graphic file (type png)
+<use 05_testing/image/pro/04_test/04.png>
+Package pdftex.def Info: 05_testing/image/pro/04_test/04.png  used on input line 129.
+(pdftex.def)             Requested size: 470.00124pt x 157.77556pt.
+ [44 <./05_testing/image/pro/03_test/03.png> <./05_testing/image/pro/03_test/04.png> <./05_testing/image/pro/04_test/01.png> <./05_testing/image/pro/04_test/02.png>]
+<05_testing/image/pro/05_test/01.png, id=432, 1275.76625pt x 380.42125pt>
+File: 05_testing/image/pro/05_test/01.png Graphic file (type png)
+<use 05_testing/image/pro/05_test/01.png>
+Package pdftex.def Info: 05_testing/image/pro/05_test/01.png  used on input line 132.
+(pdftex.def)             Requested size: 470.0016pt x 140.14995pt.
+<05_testing/image/pro/05_test/02.png, id=433, 1282.7925pt x 511.9125pt>
+File: 05_testing/image/pro/05_test/02.png Graphic file (type png)
+<use 05_testing/image/pro/05_test/02.png>
+Package pdftex.def Info: 05_testing/image/pro/05_test/02.png  used on input line 134.
+(pdftex.def)             Requested size: 469.9868pt x 187.55342pt.
+<05_testing/image/pro/05_test/03.png, id=434, 1275.76625pt x 583.17876pt>
+File: 05_testing/image/pro/05_test/03.png Graphic file (type png)
+<use 05_testing/image/pro/05_test/03.png>
+Package pdftex.def Info: 05_testing/image/pro/05_test/03.png  used on input line 136.
+(pdftex.def)             Requested size: 470.0016pt x 214.8473pt.
+<05_testing/image/pro/05_test/04.png, id=435, 1272.755pt x 361.35pt>
+File: 05_testing/image/pro/05_test/04.png Graphic file (type png)
+<use 05_testing/image/pro/05_test/04.png>
+Package pdftex.def Info: 05_testing/image/pro/05_test/04.png  used on input line 138.
+(pdftex.def)             Requested size: 469.9992pt x 133.43826pt.
+ [45 <./05_testing/image/pro/04_test/03.png> <./05_testing/image/pro/04_test/04.png> <./05_testing/image/pro/05_test/01.png> <./05_testing/image/pro/05_test/02.png>]
+<05_testing/image/pro/06_test/01.png, id=441, 1278.7775pt x 365.365pt>
+File: 05_testing/image/pro/06_test/01.png Graphic file (type png)
+<use 05_testing/image/pro/06_test/01.png>
+Package pdftex.def Info: 05_testing/image/pro/06_test/01.png  used on input line 141.
+(pdftex.def)             Requested size: 469.99875pt x 134.28535pt.
+<05_testing/image/pro/06_test/02.png, id=442, 1274.7625pt x 603.25375pt>
+File: 05_testing/image/pro/06_test/02.png Graphic file (type png)
+<use 05_testing/image/pro/06_test/02.png>
+Package pdftex.def Info: 05_testing/image/pro/06_test/02.png  used on input line 143.
+(pdftex.def)             Requested size: 470.00139pt x 222.41797pt.
+<05_testing/image/pro/06_test/03.png, id=443, 1280.785pt x 447.6725pt>
+File: 05_testing/image/pro/06_test/03.png Graphic file (type png)
+<use 05_testing/image/pro/06_test/03.png>
+Package pdftex.def Info: 05_testing/image/pro/06_test/03.png  used on input line 145.
+(pdftex.def)             Requested size: 469.99394pt x 164.27687pt.
+<05_testing/image/pro/06_test/04.png, id=444, 1276.77pt x 496.85625pt>
+File: 05_testing/image/pro/06_test/04.png Graphic file (type png)
+<use 05_testing/image/pro/06_test/04.png>
+Package pdftex.def Info: 05_testing/image/pro/06_test/04.png  used on input line 147.
+(pdftex.def)             Requested size: 470.00124pt x 182.90141pt.
+ [46 <./05_testing/image/pro/05_test/03.png> <./05_testing/image/pro/05_test/04.png>] [47 <./05_testing/image/pro/06_test/01.png> <./05_testing/image/pro/06_test/02.png> <./05_testing/image/pro/06_test/03.png>]
+<05_testing/image/pro/07_test/01.png, id=454, 1277.77374pt x 365.365pt>
+File: 05_testing/image/pro/07_test/01.png Graphic file (type png)
+<use 05_testing/image/pro/07_test/01.png>
+Package pdftex.def Info: 05_testing/image/pro/07_test/01.png  used on input line 150.
+(pdftex.def)             Requested size: 470.00027pt x 134.39128pt.
+<05_testing/image/pro/07_test/02.png, id=455, 1283.79625pt x 500.87125pt>
+File: 05_testing/image/pro/07_test/02.png Graphic file (type png)
+<use 05_testing/image/pro/07_test/02.png>
+Package pdftex.def Info: 05_testing/image/pro/07_test/02.png  used on input line 152.
+(pdftex.def)             Requested size: 470.00195pt x 183.37057pt.
+<05_testing/image/pro/07_test/03.png, id=456, 1279.78125pt x 395.4775pt>
+File: 05_testing/image/pro/07_test/03.png Graphic file (type png)
+<use 05_testing/image/pro/07_test/03.png>
+Package pdftex.def Info: 05_testing/image/pro/07_test/03.png  used on input line 154.
+(pdftex.def)             Requested size: 469.99664pt x 145.23817pt.
+<05_testing/image/pro/07_test/04.png, id=457, 1279.78125pt x 652.4375pt>
+File: 05_testing/image/pro/07_test/04.png Graphic file (type png)
+<use 05_testing/image/pro/07_test/04.png>
+Package pdftex.def Info: 05_testing/image/pro/07_test/04.png  used on input line 156.
+(pdftex.def)             Requested size: 469.99664pt x 239.60612pt.
+ [48 <./05_testing/image/pro/06_test/04.png> <./05_testing/image/pro/07_test/01.png> <./05_testing/image/pro/07_test/02.png> <./05_testing/image/pro/07_test/03.png>]
+<05_testing/image/pro/08_test/01.png, id=464, 1276.77pt x 653.44125pt>
+File: 05_testing/image/pro/08_test/01.png Graphic file (type png)
+<use 05_testing/image/pro/08_test/01.png>
+Package pdftex.def Info: 05_testing/image/pro/08_test/01.png  used on input line 159.
+(pdftex.def)             Requested size: 470.00124pt x 240.54308pt.
+<05_testing/image/pro/08_test/02.png, id=465, 1278.7775pt x 363.3575pt>
+File: 05_testing/image/pro/08_test/02.png Graphic file (type png)
+<use 05_testing/image/pro/08_test/02.png>
+Package pdftex.def Info: 05_testing/image/pro/08_test/02.png  used on input line 161.
+(pdftex.def)             Requested size: 469.99875pt x 133.54752pt.
+<05_testing/image/pro/08_test/03.png, id=466, 1277.77374pt x 516.93124pt>
+File: 05_testing/image/pro/08_test/03.png Graphic file (type png)
+<use 05_testing/image/pro/08_test/03.png>
+Package pdftex.def Info: 05_testing/image/pro/08_test/03.png  used on input line 163.
+(pdftex.def)             Requested size: 470.00027pt x 190.14151pt.
+<05_testing/image/pro/08_test/04.png, id=467, 1275.76625pt x 397.485pt>
+File: 05_testing/image/pro/08_test/04.png Graphic file (type png)
+<use 05_testing/image/pro/08_test/04.png>
+Package pdftex.def Info: 05_testing/image/pro/08_test/04.png  used on input line 165.
+(pdftex.def)             Requested size: 470.0016pt x 146.43637pt.
+ [49 <./05_testing/image/pro/07_test/04.png> <./05_testing/image/pro/08_test/01.png> <./05_testing/image/pro/08_test/02.png>]
+<05_testing/image/pro/09_test/01.png, id=474, 1283.79625pt x 395.4775pt>
+File: 05_testing/image/pro/09_test/01.png Graphic file (type png)
+<use 05_testing/image/pro/09_test/01.png>
+Package pdftex.def Info: 05_testing/image/pro/09_test/01.png  used on input line 168.
+(pdftex.def)             Requested size: 470.00195pt x 144.78558pt.
+<05_testing/image/pro/09_test/02.png, id=475, 1282.7925pt x 464.73625pt>
+File: 05_testing/image/pro/09_test/02.png Graphic file (type png)
+<use 05_testing/image/pro/09_test/02.png>
+Package pdftex.def Info: 05_testing/image/pro/09_test/02.png  used on input line 170.
+(pdftex.def)             Requested size: 469.9868pt x 170.26907pt.
+<05_testing/image/pro/09_test/03.png, id=476, 1280.785pt x 532.99126pt>
+File: 05_testing/image/pro/09_test/03.png Graphic file (type png)
+<use 05_testing/image/pro/09_test/03.png>
+Package pdftex.def Info: 05_testing/image/pro/09_test/03.png  used on input line 172.
+(pdftex.def)             Requested size: 469.99394pt x 195.58525pt.
+<05_testing/image/pro/09_test/04.png, id=477, 1275.76625pt x 357.335pt>
+File: 05_testing/image/pro/09_test/04.png Graphic file (type png)
+<use 05_testing/image/pro/09_test/04.png>
+Package pdftex.def Info: 05_testing/image/pro/09_test/04.png  used on input line 174.
+(pdftex.def)             Requested size: 470.0016pt x 131.64482pt.
+ [50 <./05_testing/image/pro/08_test/03.png> <./05_testing/image/pro/08_test/04.png>]
+<05_testing/image/pro/10_test/01.png, id=482, 1283.79625pt x 464.73625pt>
+File: 05_testing/image/pro/10_test/01.png Graphic file (type png)
+<use 05_testing/image/pro/10_test/01.png>
+Package pdftex.def Info: 05_testing/image/pro/10_test/01.png  used on input line 177.
+(pdftex.def)             Requested size: 470.00195pt x 170.14143pt.
+<05_testing/image/pro/10_test/02.png, id=483, 1283.79625pt x 378.41376pt>
+File: 05_testing/image/pro/10_test/02.png Graphic file (type png)
+<use 05_testing/image/pro/10_test/02.png>
+Package pdftex.def Info: 05_testing/image/pro/10_test/02.png  used on input line 179.
+(pdftex.def)             Requested size: 470.00195pt x 138.53848pt.
+<05_testing/image/pro/10_test/03.png, id=484, 1281.78876pt x 394.47375pt>
+File: 05_testing/image/pro/10_test/03.png Graphic file (type png)
+<use 05_testing/image/pro/10_test/03.png>
+Package pdftex.def Info: 05_testing/image/pro/10_test/03.png  used on input line 181.
+(pdftex.def)             Requested size: 469.99066pt x 144.64081pt.
+<05_testing/image/pro/10_test/04.png, id=485, 1275.76625pt x 361.35pt>
+File: 05_testing/image/pro/10_test/04.png Graphic file (type png)
+<use 05_testing/image/pro/10_test/04.png>
+Package pdftex.def Info: 05_testing/image/pro/10_test/04.png  used on input line 183.
+(pdftex.def)             Requested size: 470.0016pt x 133.12398pt.
+ [51 <./05_testing/image/pro/09_test/01.png> <./05_testing/image/pro/09_test/02.png> <./05_testing/image/pro/09_test/03.png> <./05_testing/image/pro/09_test/04.png>]) [52 <./05_testing/image/pro/10_test/01.png> <./05_testing/image/pro/10_test/02.png> <./05_testing/image/pro/10_test/03.png> <./05_testing/image/pro/10_test/04.png>] (./main.aux (./01_specifica/specifica.aux) (./02_analisi/analisi.aux) (./03_progettazione/prog_algoritmo.aux) (./05_testing/test.aux))
+ ***********
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-05-08>
+ ***********
+
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
+Package rerunfilecheck Info: File `main.out' has not changed.
+(rerunfilecheck)             Checksum: 707A5AA301A9302A16FDA740D3C0C36E;2172.
+ ) 
+Here is how much of TeX's memory you used:
+ 14106 strings out of 473993
+ 240419 string characters out of 5745069
+ 1982907 words of memory out of 5000000
+ 36198 multiletter control sequences out of 15000+600000
+ 619172 words of font info for 80 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 75i,14n,79p,1103b,620s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmbx10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmcsc10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmex10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi5.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmmi7.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr5.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr6.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr7.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy5.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy7.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmtt10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmtt8.pfb>
+Output written on main.pdf (53 pages, 5760022 bytes).
+PDF statistics:
+ 616 PDF objects out of 1000 (max. 8388607)
+ 439 compressed objects within 5 object streams
+ 151 named destinations out of 1000 (max. 500000)
+ 508 words of extra memory for PDF output out of 10000 (max. 10000000)
+
