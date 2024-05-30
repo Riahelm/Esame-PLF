@@ -1,98 +1,100 @@
+
 \scriptsize
 \begin{verbatim}
-   
 /* Programma Prolog per effettuare simulazioni numeriche */
 
-main :-
-    write('Progetto della sessione estiva del corso Programmazione Logica e Funzionale'), nl,
-    write('Anno 2023/2024'), nl,
-    write('Corso tenuto dal prof. Marco Bernardo'), nl,
-    write('Progetto realizzato da: Barzotti Nicolas e Ramagnano Gabriele'), nl,
+main :- 
+        write('Progetto della sessione estiva del corso Programmazione Logica e Funzionale'), nl,
+        write('Anno 2023/2024'), nl,
+        write('Corso tenuto dal prof. Marco Bernardo'), nl,
+        write('Progetto realizzato da: Barzotti Nicolas e Ramagnano Gabriele'), nl, 
 
-    write('--------------------------------------------------------------------'), nl,
-    write('| Calcolo del moto fugoide senza attrito                           |'), nl,
-    write('| Parametri iniziali:                                              |'), nl,
-    write('| altitudine iniziale        = 100m,                               |'), nl,
-    write('| velocita\' iniziale         = 10m/s.                              |'), nl,
-    write('| Parametri di simulazione:                                        |'), nl,
-    write('| secondi di simulazione     = 100s,                               |'), nl,
-    write('| costante gravitazionale    = 9.81m/(s^2).                        |'), nl,
-    write('| Parametro richiesto:                                             |'), nl,
-    write('| passo temporale, determina la distanza temporale                 |'), nl,
-    write('| tra due punti di simulazione, un valore basso                    |'), nl,
-    write('| permette una simulazione piu\' accurata.                          |'), nl,
-    write('| Il valore del passo temporale deve essere maggiore di zero.      |'), nl,
-    write('--------------------------------------------------------------------'), nl,
+        write('--------------------------------------------------------------------'), nl,
+        write('| Calcolo del moto fugoide senza attrito                           |'), nl,
+        write('| Parametri iniziali:                                              |'), nl,
+        write('| altitudine iniziale        = 100m,                               |'), nl,
+        write('| velocita\' iniziale         = 10m/s.                              |'), nl,
+        write('| Parametri di simulazione:                                        |'), nl,
+        write('| secondi di simulazione     = 100s,                               |'), nl,
+        write('| costante gravitazionale    = 9.81m/(s^2).                        |'), nl,
+        write('| Parametro richiesto:                                             |'), nl,
+        write('| passo temporale, determina la distanza temporale                 |'), nl,
+        write('| tra due punti di simulazione, un valore basso                    |'), nl,
+        write('| permette una simulazione piu\' accurata.                          |'), nl,
+        write('| Il valore del passo temporale deve essere maggiore di zero.      |'), nl,
+        write('--------------------------------------------------------------------'), nl,
 
-    acquisisci_dato_dt(DT),                                                        
-    calc_fugoide_semplice(DT, FS),
-    write(FS),                                                                     nl,
+        acquisisci_dato_dt(DT),                                                        
+        moto_fugoide_semplice(DT, FS),
+        write(FS),                                                                     nl,
 
-    write('--------------------------------------------------------------------'), nl,
-    write('| Calcolo del moto fugoide con attrito                             |'), nl,
-    write('| Parametri iniziali:                                              |'), nl,
-    write('| velocita\' iniziale                    = velocita\' di trim,       |'), nl,
-    write('| angolo iniziale                       = 0rad,                    |'), nl,
-    write('| spostamento laterale iniziale         = 0m,                      |'), nl,
-    write('| spostamento verticale iniziale        = 1000m.                   |'), nl,
-    write('| Parametri di simulazione:                                        |'), nl,
-    write('| secondi di simulazione                = 100s,                    |'), nl,
-    write('| velocita\' di trim                     = 30m/s,                   |'), nl,
-    write('| costante gravitazionale               = 9.81m/(s^2),             |'), nl,
-    write('| coefficiente di resistenza dell\'aria  = 0.025,                   |'), nl,
-    write('| coefficiente di portanza              = 1N.                      |'), nl,
-    write('| Parametro richiesto:                                             |'), nl,
-    write('| passo temporale, determina la distanza temporale                 |'), nl,
-    write('| tra due punti di simulazione, un valore basso                    |'), nl,
-    write('| permette una simulazione piu\' accurata.                          |'), nl,
-    write('| Il valore del passo temporale deve essere maggiore di zero.      |'), nl,
-    write('--------------------------------------------------------------------'), nl,
+        write('--------------------------------------------------------------------'), nl,
+        write('| Calcolo del moto fugoide con attrito                             |'), nl,
+        write('| Parametri iniziali:                                              |'), nl,
+        write('| velocita\' iniziale                    = velocita\' di trim,       |'), nl,
+        write('| angolo iniziale                       = 0rad,                    |'), nl,
+        write('| spostamento laterale iniziale         = 0m,                      |'), nl,
+        write('| spostamento verticale iniziale        = 1000m.                   |'), nl,
+        write('| Parametri di simulazione:                                        |'), nl,
+        write('| secondi di simulazione                = 100s,                    |'), nl,
+        write('| velocita\' di trim                     = 30m/s,                   |'), nl,
+        write('| costante gravitazionale               = 9.81m/(s^2),             |'), nl,
+        write('| coefficiente di resistenza dell\'aria  = 0.025,                   |'), nl,
+        write('| coefficiente di portanza              = 1N.                      |'), nl,
+        write('| Parametro richiesto:                                             |'), nl,
+        write('| passo temporale, determina la distanza temporale                 |'), nl,
+        write('| tra due punti di simulazione, un valore basso                    |'), nl,
+        write('| permette una simulazione piu\' accurata.                          |'), nl,
+        write('| Il valore del passo temporale deve essere maggiore di zero.      |'), nl,
+        write('--------------------------------------------------------------------'), nl,
 
-    acquisisci_dato_dt(DT1),                                                       
-    calc_fugoide_completo(DT1, FC),
-    write(FC),                                                                     nl,
+        acquisisci_dato_dt(DT1),                                                       
+        moto_fugoide_completo(DT1, FC),
+        write(FC),                                                                     nl,
 
-    write('--------------------------------------------------------------------'), nl,
-    write('| Calcolo dell\' equazione di convezione lineare a una dimensione   |'), nl,
-    write('| Parametri iniziali:                                              |'), nl,
-    write('| estremo superiore del dominio spaziale   = 2.0,                  |'), nl,
-    write('| estremo inferiore del dominio spaziale   = 0.0,                  |'), nl, 
-    write('| valore della parte alta della funzione   = 2.0,                  |'), nl, 
-    write('| valore della parte bassa della funzione  = 1.0.                  |'), nl,
-    write('| Parametri di simulazione:                                        |'), nl,
-    write('| numero di passi temporali da effettuare  = 25,                   |'), nl, 
-    write('| velocita\' dell\'onda                      = 1.0.                  |'), nl, 
-    write('| Parametri richiesti all\'utente:                                  |'), nl, 
-    write('| numero di punti che compongono la funzione d\'onda,               |'), nl,
-    write('| un valore alto permette una simulazione piu\' accurata.           |'), nl,
-    write('| Il valore del numero di punti dell\'onda deve essere un naturale. |'), nl,
-    write('| Passo temporale, determina la distanza temporale                 |'), nl,
-    write('| tra due punti di simulazione, un valore basso                    |'), nl,
-    write('| permette una simulazione piu\' accurata.                          |'), nl,
-    write('| Il valore del passo temporale deve essere maggiore di zero.      |'), nl,
-    write('--------------------------------------------------------------------'), nl,
+        write('--------------------------------------------------------------------'), nl,
+        write('| Calcolo del moto di convezione lineare unidimensionale di        |'), nl,
+        write('| un\'onda quadra                                                   |'), nl,
+        write('| Parametri iniziali:                                              |'), nl,
+        write('| estremo superiore del dominio spaziale          = 2.0,           |'), nl,
+        write('| estremo inferiore del dominio spaziale          = 0.0,           |'), nl, 
+        write('| valore della parte alta della funzione d\'onda   = 2.0,           |'), nl, 
+        write('| valore della parte bassa della funzione d\'onda  = 1.0.           |'), nl,
+        write('| Parametri di simulazione:                                        |'), nl,
+        write('| numero di passi temporali da effettuare         = 25,            |'), nl, 
+        write('| velocita\' dell\'onda                             = 1.0.           |'), nl, 
+        write('| Parametri richiesti all\'utente:                                  |'), nl, 
+        write('| numero di punti che compongono la funzione d\'onda,               |'), nl,
+        write('| un valore alto permette una simulazione piu\' accurata.           |'), nl,
+        write('| Il valore del numero di punti dell\'onda deve essere un naturale. |'), nl,
+        write('| Passo temporale, determina la distanza temporale                 |'), nl,
+        write('| tra due punti di simulazione, un valore basso                    |'), nl,
+        write('| permette una simulazione piu\' accurata.                          |'), nl,
+        write('| Il valore del passo temporale deve essere maggiore di zero.      |'), nl,
+        write('--------------------------------------------------------------------'), nl,
 
-    acquisisci_dati_conv(NXC,DT2),                                                 
-    calc_convezione(NXC,DT2,CONV), 
-    write(CONV),                                                                   nl,
+        acquisisci_dati_conv(NXC,DT2),                                                 
+        moto_convezione(NXC,DT2,CONV), 
+        write(CONV),                                                                   nl,
 
-    write('--------------------------------------------------------------------'), nl,
-    write('| Calcolo dell\'equazione di Burgers a una dimensione               |'), nl,
-    write('| Parametri iniziali:                                              |'), nl,
-    write('| estremo superiore del dominio spaziale   = 2.0 * pi,             |'), nl,
-    write('| estremo inferiore del dominio spaziale   = 0.0.                  |'), nl, 
-    write('| Parametri di simulazione:                                        |'), nl,
-    write('| tempo finale di simulazione              = 0.6s,                 |'), nl, 
-    write('| coefficiente di diffusione               = 1.0m^2/s,             |'), nl, 
-    write('| costante di Courant-Friedrichs-Lewy      = 0.1.                  |'), nl, 
-    write('| Parametri richiesti all\'utente:                                  |'), nl, 
-    write('| numero di punti che compongono la funzione d\'onda.               |'), nl,
-    write('| Il valore del numero di punti dell\'onda deve essere un naturale. |'), nl,
-    write('--------------------------------------------------------------------'), nl,
+        write('--------------------------------------------------------------------'), nl,
+        write('| Calcolo del moto convettivo e diffusivo unidimensionale di       |'), nl,
+        write('| un\'onda a dente di sega                                          |'), nl,
+        write('| Parametri iniziali:                                              |'), nl,
+        write('| estremo superiore del dominio spaziale  = 2.0 * pi,              |'), nl,
+        write('| estremo inferiore del dominio spaziale  = 0.0.                   |'), nl, 
+        write('| Parametri di simulazione:                                        |'), nl,
+        write('| tempo finale di simulazione             = 0.6s,                  |'), nl, 
+        write('| coefficiente di diffusione              = 1.0m^2/s,              |'), nl, 
+        write('| costante di Courant-Friedrichs-Lewy     = 0.1.                   |'), nl, 
+        write('| Parametri richiesti all\'utente:                                  |'), nl, 
+        write('| numero di punti che compongono la funzione d\'onda.               |'), nl,
+        write('| Il valore del numero di punti dell\'onda deve essere un naturale. |'), nl,
+        write('--------------------------------------------------------------------'), nl,
 
-    acquisisci_dato_nxb(NXB),                                                          
-    calc_burgers(NXB,BURG),
-    write(BURG).
+        acquisisci_dato_nxb(NXB),                                                          
+        moto_burgers(NXB,BURG),
+        write(BURG).
 
 
 /* Inizio sezione input/output */
@@ -111,10 +113,9 @@ acquisisci_dato_dt(DT) :- write('Digita lunghezza del passo temporale: '),
                           acquisisci_dato_dt(DT).
 
 
-/* Il predicato acquisisci_dati_conv acquisisce due parametri numerici
-   di simulazione per l'equazione di convezione: il primo, un naturale per il 
-   numero di punti della funzione d'onda; il secondo un reale positivo 
-   per la lunghezza del passo temporale. */
+/* Il predicato acquisisci_dati_conv acquisisce due parametri numerici di simulazione 
+   per il moto di convezione: il primo, un naturale per il numero di punti della 
+   funzione d'onda; il secondo un reale positivo per la lunghezza del passo temporale. */
 
 acquisisci_dati_conv(NX,DT) :- write('Digita il numero di punti totali della funzione d\'onda: '),
                                read(NXV),
@@ -131,9 +132,9 @@ acquisisci_dato_nxc(NX,NX,DT) :- NX > 1,
                                  acquisisci_dato_dt(DT).
 
 
-/* Il predicato acquisisci_dato_nxb acquisisce un parametro numerico
-   naturale di simulazione, ovvero il numero totale di punti della funzione
-   d'onda per il calcolo dell'equazione di Burgers. */
+/* Il predicato acquisisci_dato_nxb acquisisce un parametro numerico naturale 
+   di simulazione, ovvero il numero totale di punti della funzione
+   d'onda per il moto di convezione e di diffusione. (Burgers) */
 
 acquisisci_dato_nxb(NX) :- write('Digita il numero di punti totali della funzione d\'onda: '),
                            read(NXV),
@@ -152,12 +153,11 @@ acquisisci_dato_nxb(NX) :- write('Digita il numero di punti totali della funzion
 /* Inizio sezione fugoide semplice */
 
 
-/* Il predicato calc_fugoide_semplice calcola il moto fugoide con attrito di 
-   un velivolo generico:
+/* Il predicato moto_fugoide_semplice simula il moto fugoide privo di attrito di un velivolo generico:
    - il primo argomento   e' la lunghezza del passo temporale dt;
    - il secondo argomento e' la funzione di traiettoria risultante. */
 
-calc_fugoide_semplice(DT,[Z0|T]) :-  Z0 is 100.0,                    /* Altitudine iniziale del velivolo.             */
+moto_fugoide_semplice(DT,[Z0|T]) :-  Z0 is 100.0,                    /* Altitudine iniziale del velivolo.             */
                                      B0 is 10.0,                     /* Angolo iniziale del velivolo.                 */
                                      PASSI is (floor(100.0/DT) + 1), /* Numero di punti in cui effettuare il calcolo. */
                                      calc_moto(Z0,B0,DT,PASSI,T).
@@ -210,17 +210,16 @@ derivata_u(Y,V,V,V1) :- CG is 9.81,     /* Costante gravitazionale terrestre. */
 /* Inizio sezione fugoide completo */
 
 
-/* Il predicato calc_fugoide_completo calcola il moto fugoide con attrito di 
-   un velivolo generico:
+/* Il predicato moto_fugoide_completo simula il moto fugoide con attrito di un velivolo generico:
    - il primo argomento   e' la lunghezza del passo temporale dt;
    - il secondo argomento e' la funzione di traiettoria risultante. */
 
-  calc_fugoide_completo(DT,[[X0|Y0]|T]) :-  V0 is 30.0,                     /* La velocita' iniziale, in questo caso quella di trim.  */
-                                            THETA0 is 0.0,                  /* Angolo iniziale del velivolo.                          */
-                                            X0 is 0.0,                      /* Spostamento orizzontale iniziale del velivolo.         */
-                                            Y0 is 1000.0,                   /* Altitudine iniziale del velivolo.                      */
-                                            PASSI is (floor(100.0/DT) + 1), /* Numero di punti in cui effettuare il calcolo.          */
-                                            calc_moto(V0,THETA0,X0,Y0,DT,PASSI,T).
+  moto_fugoide_completo(DT,[[X0|Y0]|T]) :- V0 is 30.0,                     /* La velocita' iniziale, in questo caso quella di trim. */
+                                           THETA0 is 0.0,                  /* Angolo iniziale del velivolo.                         */
+                                           X0 is 0.0,                      /* Spostamento orizzontale iniziale del velivolo.        */
+                                           Y0 is 1000.0,                   /* Altitudine iniziale del velivolo.                     */
+                                           PASSI is (floor(100.0/DT) + 1), /* Numero di punti in cui effettuare il calcolo.         */
+                                           calc_moto(V0,THETA0,X0,Y0,DT,PASSI,T).
 
 
 /* Il predicato calc_moto calcola numericamente l'integrazione del moto fugoide:
@@ -285,28 +284,26 @@ derivata_u(V,THETA,V1,THETA1,X1,Y1) :-  CG is 9.81,     /* Costante gravitaziona
 /* Inizio sezione convezione lineare */
 
 
-/* Il predicato calc_convezione calcola l'integrazione numerica
-   dell'equazione di convezione lineare a una dimensione:
-   - il primo argomento   e' il numero di punti totali della 
-     funzione d'onda;
+/* Il predicato moto_convezione simula il moto di convezione lineare unidimensionale
+   della funzione d'onda quadra:
+   - il primo argomento   e' il numero di punti totali della funzione d'onda;
    - il secondo argomento e' la lunghezza del passo temporale;
-   - il terzo argomento   e' l'integrazione numerica completa dell'equa-
-     -zione lineare unidimensionale di convezione. */
+   - il terzo argomento   e' l'integrazione numerica completa dell'equazione lineare 
+     unidimensionale di convezione. */
 
-calc_convezione(NX,_,F)  :- (NX == 0;
+moto_convezione(NX,_,F)  :- (NX == 0;
                              NX == 1),
-                            INF is 0.0,                  /* Limite inferiore del dominio spaziale. */
-                            SUP is 2.0,                  /* Limite superiore del dominio spaziale. */
+                            INF is 0.0,                  /* Estremo inferiore del dominio spaziale. */
+                            SUP is 2.0,                  /* Estremo superiore del dominio spaziale. */
                             cond_iniziale_conv(NX,INF,SUP,F).
-calc_convezione(NX,DT,F) :- NX > 1,
-                            NT  is 25,                   /* Numero complessivo di passi temporali
-                                                            che deve effettuare l'algoritmo.       */
+moto_convezione(NX,DT,F) :- NX > 1,
+                            NT  is 25,                   /* Numero complessivo di passi temporali   */
                             NX1 is NX - 1,
-                            C   is 1.0,                  /* Velocita' dell'onda.                   */
-                            INF is 0.0,                  /* Limite inferiore del dominio spaziale. */
-                            SUP is 2.0,                  /* Limite superiore del dominio spaziale. */
+                            C   is 1.0,                  /* Velocita' dell'onda.                    */
+                            INF is 0.0,                  /* Estremo inferiore del dominio spaziale. */
+                            SUP is 2.0,                  /* Estremo superiore del dominio spaziale. */
                             DX  is abs(SUP - INF) / NX1, /* Distanza tra qualsiasi coppia di
-                                                            punti della griglia adiacenti.         */
+                                                            punti della griglia adiacenti.          */
                             cond_iniziale_conv(NX,INF,SUP,ONDA),
                             tempo_conv(0,NT,NX1,C,DX,DT,ONDA,F).
 
@@ -319,7 +316,7 @@ calc_convezione(NX,DT,F) :- NX > 1,
      funzione d'onda deve compiere; 
    - il terzo argomento   e' il numero di passi spaziali utilizzati dal
      predicato spazio_conv;
-   - il quarto argomento  e' la costante di velocità dell'onda;     
+   - il quarto argomento  e' la costante di velocita' dell'onda;     
    - il quinto argomento  e' la lunghezza del passo spaziale;
    - il sesto argomento   e' la lunghezza del passo temporale;
    - il settimo argomento e' la funzione d'onda ricalcolata;
@@ -334,13 +331,13 @@ tempo_conv(I,NT,NX1,C,DX,DT,ONDA,F) :- I < NT,
                                        tempo_conv(I1,NT,NX1,C,DX,DT,R,F). 
 
 
-/* Il predicato spazio_conv calcola numericamente l'integrazionee della
+/* Il predicato spazio_conv calcola numericamente l'integrazione della
    funzione rispetto al parametro spaziale DX:
    - il primo argomento   e' il numero di passi temporali che la funzione
      d'onda ha compiuto;
    - il secondo argomento e' il numero di passi temporali totali che la
      funzione d'onda deve compiere; 
-   - il terzo argomento   e' la costante di velocità dell'onda;      
+   - il terzo argomento   e' la costante di velocita' dell'onda;      
    - il quarto argomento  e' la lunghezza del passo spaziale;
    - il quinto argomento  e' la lunghezza del passo temporale;
    - il sesto argomento   e' la funzione d'onda;
@@ -359,7 +356,7 @@ spazio_conv(I,NX1,C,DX,DT,[E0|LX],[E|T]) :- I < NX1,
 /* Il predicato passo_eulero_conv effettua il passo di Eulero:
    - il primo argomento   e' l'elemento corrente della lista;
    - il secondo argomento e' l'elemento successivo a quello corrente della lista;
-   - il terzo argomento   e' la costante di velocità dell'onda;
+   - il terzo argomento   e' la costante di velocita' dell'onda;
    - il quarto argomento  e' la lunghezza del passo spaziale;
    - il quinto argomento  e' la lunghezza del passo temporale;
    - il sesto argomento   e' il valore risultante del punto applicato il passo di Eulero. */
@@ -379,76 +376,73 @@ cond_iniziale_conv(NX,INF,SUP,ONDA) :- gen_punti_equi(NX,INF,SUP,L),
 
 
 /* Il predicato onda_quadra calcola la funzione d'onda quadra:
-   - il primo argomento   e' la lista di punti equidistanti del dominio
-     spaziale;
+   - il primo argomento   e' la lista di punti equidistanti del dominio spaziale;
    - il secondo argomento e' la funzione d'onda calcolata. */
 
 onda_quadra([],[]).
 onda_quadra([X|L1],[OSI|T]) :- X >= 0.5,
                                X =< 1.0,
-                               OSI is 2.0,   /* Valori assunti dalla parte alta della
-                                                funzione d'onda quadra. */
+                               OSI is 2.0,   /* Valori assunti dalla parte alta (superiore) 
+                                                della funzione d'onda quadra. */
                                onda_quadra(L1,T).
 onda_quadra([X|L1],[OSI|T]) :- (X < 0.5; 
                                 X > 1.0),
-                               OSI is 1.0,   /* Valori assunti dalla parte bassa della
-                                                funzione d'onda quadra. */
+                               OSI is 1.0,   /* Valori assunti dalla parte bassa (inferiore) 
+                                                della funzione d'onda quadra. */
                                onda_quadra(L1,T).
 
 
 /* Fine sezione convezione lineare */
 
 
-/* Inizio sezione equazione di Burgers */
+/* Inizio sezione convezione-diffusione (Burgers) */
 
 
-/* Il predicato calc_burgers calcola l'integrazione numerica
-   dell'equazione di Burgers a una dimensione:
-   - il primo argomento e' il numero di punti totali della funzione
-     d'onda;
-   - il secondo argomento e' l'integrazione numerica completa dell'equa-
-     -zione lineare unidimensionale di Burgers.*/
+/* Il predicato moto_burgers simula il moto convettivo-diffusivo unidimensionale
+   della funzione d'onda a dente di sega:
+   - il primo argomento   e' il numero di punti totali della funzione d'onda;
+   - il secondo argomento e' l'integrazione numerica completa dell'equazione 
+     unidimensionale di Burgers. */
 
-calc_burgers(NX,F) :- (NX == 0;
+moto_burgers(NX,F) :- (NX == 0;
                        NX == 1),
-                      INF is 0.0,         /* Limite inferiore del dominio spaziale. */
-                      SUP is 2.0 * pi,    /* Limite superiore del dominio spaziale. */
+                      INF is 0.0,         /* Estremo inferiore del dominio spaziale. */
+                      SUP is 2.0 * pi,    /* Estremo superiore del dominio spaziale. */
                       cond_iniziale_burg(NX,INF,SUP,F).
-calc_burgers(NX,F) :- NX1 is NX - 1,
+moto_burgers(NX,F) :- NX1 is NX - 1,
                       T   is 0.6,                  /* Tempo totale di simulazione.                */
                       S   is 0.1,                  /* Costante di Courant-Friendrichs-Lewy (CFL). */
                       NU  is 0.07,                 /* Coefficiente di diffusione.                 */
-                      INF is 0.0,                  /* Limite inferiore del dominio spaziale.      */
-                      SUP is 2.0 * pi,             /* Limite superiore del dominio spaziale.      */
+                      INF is 0.0,                  /* Estremo inferiore del dominio spaziale.     */
+                      SUP is 2.0 * pi,             /* Estremo superiore del dominio spaziale.     */
                       DX  is abs(SUP - INF) / NX1, /* Distanza tra qualsiasi coppia di punti
                                                       della griglia adiacenti.                    */
                       DT  is S * DX^2 / NU,        /* Lunghezza del passo temporale.              */
-                      NT  is floor(T/DT),          /* Numero complessivo di passi temporali
-                                                      che deve effettuare l'algoritmo.            */
+                      NT  is floor(T/DT),          /* Numero complessivo di passi temporali       */
                       cond_iniziale_burg(NX,INF,SUP,ONDA),
                       tempo_burg(0,NT,NX1,NU,DX,DT,ONDA,F).
 
 
-/* Il predicato tempo_burg calcola numericamente l'integrazione della
-   funzione rispetto al parametro temporale DT:
-   - il primo argomento e' il numero di passi temporali che la funzione
+/* Il predicato tempo_burg calcola numericamente l'integrazione della funzione 
+   rispetto al parametro temporale DT:
+   - il primo argomento   e' il numero di passi temporali che la funzione
      d'onda ha compiuto;
    - il secondo argomento e' il numero di passi temporali totali che la
      funzione d'onda deve compiere; 
-   - il terzo argomento e' il numero di passi spaziali utilizzati dal
+   - il terzo argomento   e' il numero di passi spaziali utilizzati dal
      predicato spazio_burg;
-   - il quarto argomento e' il coefficiente di diffusione;         
-   - il quinto argomento e' la lunghezza del passo spaziale;
-   - il sesto argomento e' la lunghezza del passo temporale;
+   - il quarto argomento  e' il coefficiente di diffusione;         
+   - il quinto argomento  e' la lunghezza del passo spaziale;
+   - il sesto argomento   e' la lunghezza del passo temporale;
    - il settimo argomento e' la funzione d'onda ricalcolata;
-   - l' ottavo argomento e' la funzione d'onda risultante. */
+   - l' ottavo argomento  e' la funzione d'onda risultante. */
 
 tempo_burg(NT,NT,_,_,_,_,F,F).
 tempo_burg(I,NT,NX1,NU,DX,DT,ONDA,F) :- I < NT,
                                         I1  is I + 1,
-                                        bordo_inf(ONDA,NU,DX,DT,BI),
+                                        bordo1(ONDA,NU,DX,DT,B1),
                                         spazio_burg(1,NX1,NU,DX,DT,ONDA,Z),
-                                        inserisci_elem(BI,Z,R),
+                                        inserisci_elem(B1,Z,R),
                                         tempo_burg(I1,NT,NX1,NU,DX,DT,R,F).
 
 
@@ -462,42 +456,42 @@ tempo_burg(I,NT,NX1,NU,DX,DT,ONDA,F) :- I < NT,
    - il quinto argomento  e' la lunghezza del passo temporale;
    - il sesto argomento   e' la funzione d'onda;
    - il settimo argomento e' la funzione d'onda ricalcolata con 
-     il passo_eulero_burg e bordo_sup. */
+     il passo_eulero_burg e bordo2. */
 
-spazio_burg(NX1,NX1,NU,DX,DT,ONDA,[F]) :- bordo_sup(ONDA,NU,DX,DT,F).
+spazio_burg(NX1,NX1,NU,DX,DT,ONDA,[F]) :- bordo2(ONDA,NU,DX,DT,F).
 spazio_burg(I,NX1,NU,DX,DT,ONDA,[E|F]) :- I < NX1,
                                           I1 is I + 1,
                                           passo_eulero_burg(ONDA,I,NU,DX,DT,E),
                                           spazio_burg(I1,NX1,NU,DX,DT,ONDA,F).
 
 
-/* Il predicato bordo_inf calcola le condizioni di bordo inferiore della funzione:
+/* Il predicato bordo1 calcola le condizioni di bordo inferiore della funzione:
    - il primo argomento   e' la funzione d'onda;
    - il secondo argomento e' il coefficiente di diffusione;
    - il terzo argomento   e' la lunghezza del passo spaziale;
    - il quarto argomento  e' la lunghezza del passo temporale;
    - il quinto argomento  e' il valore del punto estremo inferiore della funzione.
    L'uso di last e testa consente di selezionare gli elementi in coda e in testa
-   alla funzione per il calcolo della condizione. */
+   alla funzione per il calcolo della condizione di bordo. */
 
-bordo_inf([X|LX],NU,DX,DT,BI) :- last(LX,C),
-                                 testa(LX,T),
-                                 BI is X - X*DT/DX * (X - C) + NU*DT/DX^2 * (T - 2*X + C).
+bordo1([X|LX],NU,DX,DT,B1) :- last(LX,C),
+                              testa(LX,T),
+                              B1 is X - X*DT/DX * (X - C) + NU*DT/DX^2 * (T - 2*X + C).
 
 
-/* Il predicato bordo_sup calcola le condizioni di bordo superiore della funzione:
+/* Il predicato bordo2 calcola le condizioni di bordo superiore della funzione:
    - il primo argomento   e' la funzione d'onda;
    - il secondo argomento e' il coefficiente di diffusione;
    - il terzo argomento   e' la lunghezza del passo spaziale;
    - il quarto argomento  e' la lunghezza del passo temporale;
    - il quinto argomento  e' il valore del punto estremo superiore della funzione.
    L'uso di last, testa e penultimo consente di selezionare l'ultimo, il primo e
-   il penultimo elemento della funzione per il calcolo della condizione. */
+   il penultimo elemento della funzione per il calcolo della condizione di bordo. */
 
-bordo_sup(ONDA,NU,DX,DT,BS) :- last(ONDA,C),
-                               penultimo(ONDA,P),
-                               testa(ONDA,T),
-                               BS is C - C*DT/DX * (C - P) + NU*DT/DX^2 * (T - 2*C + P).
+bordo2(ONDA,NU,DX,DT,B2) :- last(ONDA,C),
+                            penultimo(ONDA,P),
+                            testa(ONDA,T),
+                            B2 is C - C*DT/DX * (C - P) + NU*DT/DX^2 * (T - 2*C + P).
 
 
 /* Il predicato passo_eulero_burg effettua il passo di Eulero:
@@ -529,8 +523,7 @@ cond_iniziale_burg(NX,INF,SUP,ONDA) :- gen_punti_equi(NX,INF,SUP,L),
                                        onda_dente_sega(L,ONDA).
 
 
-/* Il predicato onda_dente_sega calcola la funzione d'onda a dente di 
-   sega 'u':
+/* Il predicato onda_dente_sega calcola la funzione d'onda a dente di sega 'u':
    - il primo argomento   e' la lista di punti equidistanti del dominio
      spaziale;
    - il secondo argomento e' la funzione d'onda calcolata. 
@@ -551,10 +544,10 @@ phi_primo(X,T0,NU,F) :- F is -(-8*T0 + 2*X)*exp(-((-4*T0 + X)^2)/(4*NU*(T0 + 1))
 phi(X,T0,NU,F) :- F is exp(-((X-4*T0)^2)/(4*NU*(T0+1))) + exp(-((X-4*T0-2*pi)^2)/(4*NU*(T0+1))).
 
 
-/* Fine sezione equazione di Burgers */
+/* Fine sezione convezione-diffusione (Burgers) */
 
 
-/* Inizio sezione funzioni condivise */
+/* Inizio sezione predicati condivisi */
 
 
 /* Il predicato gen_punti_equi genera una lista di punti equidistanti tra loro:
@@ -567,11 +560,11 @@ phi(X,T0,NU,F) :- F is exp(-((X-4*T0)^2)/(4*NU*(T0+1))) + exp(-((X-4*T0-2*pi)^2)
 gen_punti_equi(0,_,_,[]).
 gen_punti_equi(N,INF,SUP,L) :- N > 0,
                                DST is abs(SUP - INF),
-                               N1  is N - 1, 
-			                      ((SUP > INF,
-                                calc_punti(0,N1,INF,DST,L));
-                                (calc_punti(0,N1,SUP,DST,L1),
-                                reverse(L1,L))).
+                               N1  is N - 1,
+                               ((SUP > INF,
+                               calc_punti(0,N1,INF,DST,L));
+                               (calc_punti(0,N1,SUP,DST,L1),
+                               reverse(L1,L))).
 
 
 calc_punti(N1,N1,INF,_,[INF]).
@@ -608,6 +601,6 @@ accoda_elem(X,[],[X]).
 accoda_elem(X,[Y|L],[Y|LX]) :- accoda_elem(X,L,LX).
 
 
-/* Fine sezione funzioni condivise */
+/* Fine sezione predicati condivisi */
 
 \end{verbatim}

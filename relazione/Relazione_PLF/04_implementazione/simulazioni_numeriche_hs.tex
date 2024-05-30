@@ -1,21 +1,21 @@
+
 \scriptsize
 \begin{verbatim}
-   
-
 {- Programma Haskell per effettuare simulazioni numeriche -}
+
 import Data.List {- necessario per usare: 
                     - !!,      che estrae l'n-esimo elemento di una lista;
                     - head,    che estrae il primo elemento di una lista;
                     - last,    che estrae l'ultimo elemento di una lista; 
                     - tail,    che estrae gli elementi di una lista successivi al primo;
                     - init,    che estrae gli elementi di una lista precedenti all'ultimo;
-                    - abs,     che ritorno il valore assoluto di un numero;
+                    - abs,     che ritorna il valore assoluto di un numero;
                     - reverse, che ritorna una lista di elementi in ordine inverso;
                     - length,  che ritorna la lunghezza della lista. -}
 
 {- Costanti globali -}
 
-{- Limiti del dominio spaziale dell'equazione di convezione -}
+{- Estremi del dominio spaziale dell'equazione di convezione -}
 inf_conv = 0.0  -- Estremo inferiore del dominio spaziale.
 sup_conv = 2.0  -- Estremo superiore del dominio spaziale.
 
@@ -23,11 +23,11 @@ sup_conv = 2.0  -- Estremo superiore del dominio spaziale.
 c_grv :: Double
 c_grv = 9.81 
 
-{- Coefficiente di diffusione -}
+{- Coefficiente di diffusione. -}
 nu :: Double
 nu = 0.07  
 
-{- Velocita' di trim del velivolo, misurato in m/s -}
+{- Velocita' di trim del velivolo, misurato in m/s. -}
 v_trim :: Double
 v_trim = 30.0     
 
@@ -61,7 +61,7 @@ main = do putStrLn "Progetto della sessione estiva del corso Programmazione Logi
           putStrLn "--------------------------------------------------------------------"
 
           dt <- acquisisci_dato_dt
-          putStrLn $ show (calc_fugoide_semplice (read dt :: Double))
+          putStrLn $ show (moto_fugoide_semplice (read dt :: Double))
 
           putStrLn "--------------------------------------------------------------------"
           putStrLn "| Calcolo del moto fugoide con attrito                             |"
@@ -84,18 +84,19 @@ main = do putStrLn "Progetto della sessione estiva del corso Programmazione Logi
           putStrLn "--------------------------------------------------------------------"
 
           dt <- acquisisci_dato_dt
-          putStrLn $ show (calc_fugoide_completo (read dt :: Double))
+          putStrLn $ show (moto_fugoide_completo (read dt :: Double))
 
           putStrLn "--------------------------------------------------------------------"
-          putStrLn "| Calcolo dell'equazione di convezione lineare a una dimensione    |"
+          putStrLn "| Calcolo del moto di convezione lineare unidimensionale di        |"
+          putStrLn "| un'onda quadra                                                   |"
           putStrLn "| Parametri iniziali:                                              |"
-          putStrLn "| estremo superiore del dominio spaziale   = 2.0,                  |"
-          putStrLn "| estremo inferiore del dominio spaziale   = 0.0,                  |" 
-          putStrLn "| valore della parte alta della funzione   = 2.0,                  |" 
-          putStrLn "| valore della parte bassa della funzione  = 1.0.                  |"
+          putStrLn "| estremo superiore del dominio spaziale          = 2.0,           |"
+          putStrLn "| estremo inferiore del dominio spaziale          = 0.0,           |" 
+          putStrLn "| valore della parte alta della funzione d'onda   = 2.0,           |" 
+          putStrLn "| valore della parte bassa della funzione d'onda  = 1.0.           |"
           putStrLn "| Parametri di simulazione:                                        |"
-          putStrLn "| numero di passi temporali da effettuare  = 25,                   |" 
-          putStrLn "| velocita' dell'onda                      = 1.0.                  |" 
+          putStrLn "| numero di passi temporali da effettuare         = 25,            |" 
+          putStrLn "| velocita' dell'onda                             = 1.0.           |" 
           putStrLn "| Parametri richiesti all'utente:                                  |" 
           putStrLn "| numero di punti che compongono la funzione d'onda,               |"
           putStrLn "| un valore alto permette una simulazione piu' accurata.           |"
@@ -106,24 +107,25 @@ main = do putStrLn "Progetto della sessione estiva del corso Programmazione Logi
           putStrLn "| Il valore del passo temporale deve essere maggiore di zero.      |"
           putStrLn "--------------------------------------------------------------------"
 
-          acqui_dati_e_calc_conv
+          acqui_dati_e_simul_conv
 
           putStrLn "--------------------------------------------------------------------"
-          putStrLn "| Calcolo dell'equazione di Burgers a una dimensione               |"
+          putStrLn "| Calcolo del moto convettivo e diffusivo unidimensionale di       |"
+          putStrLn "| un'onda a dente di sega                                          |"
           putStrLn "| Parametri iniziali:                                              |"
-          putStrLn "| estremo superiore del dominio spaziale   = 2.0 * pi,             |"
-          putStrLn "| estremo inferiore del dominio spaziale   = 0.0.                  |" 
+          putStrLn "| estremo superiore del dominio spaziale  = 2.0 * pi,              |"
+          putStrLn "| estremo inferiore del dominio spaziale  = 0.0.                   |" 
           putStrLn "| Parametri di simulazione:                                        |"
-          putStrLn "| tempo finale di simulazione              = 0.6s,                 |" 
-          putStrLn "| coefficiente di diffusione               = 1.0m^2/s,             |" 
-          putStrLn "| costante di Courant-Friedrichs-Lewy      = 0.1.                  |" 
+          putStrLn "| tempo finale di simulazione             = 0.6s,                  |" 
+          putStrLn "| coefficiente di diffusione              = 1.0m^2/s,              |" 
+          putStrLn "| costante di Courant-Friedrichs-Lewy     = 0.1.                   |" 
           putStrLn "| Parametri richiesti all'utente:                                  |" 
           putStrLn "| numero di punti che compongono la funzione d'onda.               |"
           putStrLn "| Il valore del numero di punti dell'onda deve essere un naturale. |"
           putStrLn "--------------------------------------------------------------------"
 
           nx <- acquisisci_dato_nxb 
-          putStrLn $ show (calc_burgers (read nx :: Int))
+          putStrLn $ show (moto_burgers (read nx :: Int))
 
 
 {- Inizio sezione input/output -}
@@ -142,24 +144,24 @@ acquisisci_dato_dt = do putStr "Digita lunghezza del passo temporale: "
                                 acquisisci_dato_dt 
 
 
-{- L'azione input/output acqui_dati_e_calc_conv acquisisce due parametri numerici
-   di simulazione per l'equazione di convezione: il primo, un naturale per il 
+{- L'azione input/output acqui_dati_e_simul_conv acquisisce due parametri numerici
+   di simulazione per simulare il moto di convezione: il primo, un naturale per il 
    numero di punti della funzione d'onda; il secondo un reale per la lunghezza
    del passo temporale. In seguito all'acquisizione dei parametri calcola l'inte- 
   -grazione numerica dell'equazione di convezione. -}
 
-acqui_dati_e_calc_conv :: IO ()
-acqui_dati_e_calc_conv = do putStr "Digita il numero di punti totali della funzione d'onda: "
-                            nx <- getLine
-                            if (((read nx  :: Integer) == 0) ||
-                                ((read nx  :: Integer) == 1)) 
-                              then putStrLn $ show (cond_iniziale (read nx :: Int) onda_quadra inf_conv sup_conv)
-                            else if ((read nx :: Integer) > 1)
-                              then do dt <- acquisisci_dato_dt
-                                      putStrLn $ show (calc_convezione (read nx :: Int) (read dt :: Double))
-                            else  do putStrLn "Acquisizione errata!"
-                                     putStrLn "Il valore deve essere un numero naturale."
-                                     acqui_dati_e_calc_conv
+acqui_dati_e_simul_conv :: IO ()
+acqui_dati_e_simul_conv = do putStr "Digita il numero di punti totali della funzione d'onda: "
+                             nx <- getLine
+                             if (((read nx  :: Integer) == 0) ||
+                                 ((read nx  :: Integer) == 1)) 
+                               then putStrLn $ show (cond_iniziale (read nx :: Int) onda_quadra inf_conv sup_conv)
+                             else if ((read nx :: Integer) > 1)
+                               then do dt <- acquisisci_dato_dt
+                                       putStrLn $ show (moto_convezione (read nx :: Int) (read dt :: Double))
+                             else  do putStrLn "Acquisizione errata!"
+                                      putStrLn "Il valore deve essere un numero naturale."
+                                      acqui_dati_e_simul_conv
 
 
 {- L'azione input/output acquisisci_dato_nxb acquisisce un parametro numerico
@@ -182,12 +184,11 @@ acquisisci_dato_nxb = do putStr "Digita il numero di punti totali della funzione
 {- Inizio sezione fugoide semplice -}
 
 
-{- La funzione calc_fugoide_semplice calcola il moto fugoide privo di attrito di 
-   un velivolo generico:
+{- La funzione moto_fugoide_semplice simula il moto fugoide privo di attrito di un velivolo generico:
    - il suo unico argomento e' la lunghezza del passo temporale dt. -}
 
-calc_fugoide_semplice :: Double -> [Double]
-calc_fugoide_semplice dt = z0 : calc_moto_semplice (z0, b0) dt passi_temporali
+moto_fugoide_semplice :: Double -> [Double]
+moto_fugoide_semplice dt = z0 : calc_moto_semplice (z0, b0) dt passi_temporali
    where
       z0              = 100.0               -- Altitudine iniziale del velivolo.
       b0              = 10.0                -- Velocita' iniziale del velivolo.
@@ -208,8 +209,8 @@ calc_moto_semplice dA@(dAA,_) dt len | len == 0  = [dBA]
       dB@(dBA,_) = passo_eulero_semplice dA dt
 
 
-{- La funzione passo_eulero_semplice applica il metodo di Eulero ad una coppia di numeri. La
-   funzione approssima la soluzione al tempo t_(n+1) tramite il valore della funzione 
+{- La funzione passo_eulero_semplice applica il metodo di Eulero ad una coppia di numeri.
+   La funzione approssima la soluzione al tempo t_(n+1) tramite il valore della funzione 
    al tempo t_n ed un opportuno passo temporale:
    - il primo argomento   e' una coppia di valori, ovvero la posizione e direzione del 
      velivolo al momento t_n;
@@ -220,8 +221,7 @@ passo_eulero_semplice dA@(y@alt, v@vel) dt = somma_coppia dA (molt_coppia_scalar
 
 
 {- La funzione derivata_u_semplice viene utilizzata per l'applicazione dell'equazione del moto fugoide:
-   - il suo unico argomento e' una coppia di valori, ovvero altitudine e velocita' 
-     del velivolo. -}
+   - il suo unico argomento e' una coppia di valori, ovvero altitudine e velocita' del velivolo. -}
 
 derivata_u_semplice :: Coppia Double -> Coppia Double
 derivata_u_semplice dA@(y@alt, v@vel) = (v, c_grv * (1-y/zt))
@@ -235,12 +235,11 @@ derivata_u_semplice dA@(y@alt, v@vel) = (v, c_grv * (1-y/zt))
 {- Inizio sezione fugoide completo -}
 
 
-{- La funzione calc_fugoide_completo calcola il moto fugoide con attrito di 
-   un velivolo generico:
+{- La funzione moto_fugoide_completo simula il moto fugoide con attrito di un velivolo generico:
    - il suo unico argomento e' la lunghezza del passo temporale dt. -}
 
-calc_fugoide_completo :: Double -> [[Double]]
-calc_fugoide_completo dt = [x0, y0] : calc_moto_completo (v0, theta0, x0, y0) dt passi_temporali
+moto_fugoide_completo :: Double -> [[Double]]
+moto_fugoide_completo dt = [x0, y0] : calc_moto_completo (v0, theta0, x0, y0) dt passi_temporali
    where
       v0              = v_trim                -- La velocita' iniziale, in questo caso quella di trim.
       theta0          = 0.0                   -- Angolo iniziale del velivolo.
@@ -263,8 +262,8 @@ calc_moto_completo dA dt len | len == 0   = [[dBC, dBD]]
       dB@(_,_,dBC,dBD) = passo_eulero_completo dA dt
 
 
-{- La funzione passo_eulero_completo applica il metodo di Eulero ad una quadrupla di numeri. La
-   funzione approssima la soluzione al tempo t_(n+1) tramite il valore della funzione 
+{- La funzione passo_eulero_completo applica il metodo di Eulero ad una quadrupla di numeri. 
+   La funzione approssima la soluzione al tempo t_(n+1) tramite il valore della funzione 
    al tempo t_n ed un opportuno passo temporale:
    - il primo argomento   e' una quadrupla di valori, ovvero la velocita', angolo, spostamento 
      laterale e verticale del velivolo al momento t_n;
@@ -333,16 +332,15 @@ molt_quadrupla_scalare (a1,b1,c1,d1) b = (a1*b, b1*b, c1*b, d1*b)
 {- Inizio sezione convezione lineare -}
 
 
-{- La funzione calc_convezione calcola l'integrazione numerica
-   dell'equazione di convezione lineare a una dimensione:
-   - il primo argomento   e' il numero di punti totali della funzione
-     d'onda;
+{- La funzione moto_convezione simula il moto di convezione lineare unidimensionale
+   della funzione d'onda quadra:
+   - il primo argomento   e' il numero di punti totali della funzione d'onda;
    - il secondo argomento e' la lunghezza del passo temporale. -}
 
-calc_convezione :: Int -> Double -> [Double]
-calc_convezione nx dt = tempo_conv nt nx c dx dt (cond_iniziale nx onda_quadra inf_conv sup_conv)
+moto_convezione :: Int -> Double -> [Double]
+moto_convezione nx dt = tempo_conv nt nx c dx dt (cond_iniziale nx onda_quadra inf_conv sup_conv)
    where
-      nt = 25                                                       -- Numero complessivo di passi temporali che deve effettuare l'algoritmo.
+      nt = 25                                                       -- Numero complessivo di passi temporali.
       dx = abs(sup_conv - inf_conv) / (fromIntegral(nx :: Int) - 1) -- Distanza tra qualsiasi coppia di punti della griglia adiacenti.
       c  = 1.0                                                      -- Velocita' dell'onda.
 
@@ -353,7 +351,7 @@ calc_convezione nx dt = tempo_conv nt nx c dx dt (cond_iniziale nx onda_quadra i
      funzione d'onda deve compiere; 
    - il secondo argomento e' il numero di passi spaziali utilizzati dal
      predicato spazio_conv;
-   - il terzo argomento   e' la costante di velocità dell'onda;     
+   - il terzo argomento   e' la costante di velocita' dell'onda;     
    - il quarto argomento  e' la lunghezza del passo spaziale;
    - il quinto argomento  e' la lunghezza del passo temporale;
    - il sesto argomento   e' la funzione d'onda ricalcolata. -}
@@ -367,7 +365,7 @@ tempo_conv nt nx c dx dt onda = tempo_conv (nt - 1) nx c dx dt ((head onda) : sp
    funzione rispetto al parametro spaziale dx:
    - il primo argomento   e' il numero di passi temporali che la funzione
      d'onda ha compiuto;
-   - il secondo argomento e' la costante di velocità dell'onda;      
+   - il secondo argomento e' la costante di velocita' dell'onda;      
    - il terzo argomento   e' la lunghezza del passo spaziale;
    - il quarto argomento  e' la lunghezza del passo temporale;
    - il quinto argomento  e' la funzione d'onda. -}
@@ -380,8 +378,7 @@ spazio_conv i c dx dt lx  | i == length lx - 1 = [passo_eulero]
 
 
 {- La funzione onda_quadra calcola la funzione d'onda quadra:
-   - il suo unico argomento e' la lista di punti equidistanti del dominio
-     spaziale. -}
+   - il suo unico argomento e' la lista di punti equidistanti del dominio spaziale. -}
 
 onda_quadra :: Double -> Double
 onda_quadra x | x >= 0.5 && x <= 1.0 = onda_sup
@@ -394,16 +391,15 @@ onda_quadra x | x >= 0.5 && x <= 1.0 = onda_sup
 {- Fine sezione convezione lineare -}
 
 
-{- Inizio sezione equazione di Burgers -}
+{- Inizio sezione convezione-diffusione (Burgers) -}
 
 
-{- La funzione calc_burgers calcola l'integrazione numerica
-   dell'equazione di Burgers a una dimensione:
-   - il suo unico argomento e' il numero di punti totali della funzione
-     d'onda. -}
+{- La funzione moto_burgers simula il moto convettivo-diffusivo unidimensionale
+   della funzione d'onda a dente di sega:
+   - il suo unico argomento e' il numero di punti totali della funzione d'onda. -}
 
-calc_burgers :: Int -> [Double]
-calc_burgers nx | nx == 0 || nx == 1 = cond_iniziale nx onda_dente_sega inf sup                       
+moto_burgers :: Int -> [Double]
+moto_burgers nx | nx == 0 || nx == 1 = cond_iniziale nx onda_dente_sega inf sup                       
                 | otherwise          = tempo_burg nt nx dx dt (cond_iniziale nx onda_dente_sega inf sup)
    where
       inf      = 0.0                                            -- Estremo inferiore del dominio spaziale. 
@@ -412,11 +408,11 @@ calc_burgers nx | nx == 0 || nx == 1 = cond_iniziale nx onda_dente_sega inf sup
       sigma    = 0.1                                            -- Costante di Courant-Friedrichs-Lewy (CFL).
       dt       = sigma * dx**2 / nu                             -- Lunghezza del passo temporale.
       t_fine   = 0.6                                            -- Tempo totale di simulazione.
-      nt       = floor(t_fine / dt)                             -- Numero complessivo di passi temporali che deve effettuare l'algoritmo.
+      nt       = floor(t_fine / dt)                             -- Numero complessivo di passi temporali.
 
 
-{- La funzione tempo_burg calcola numericamente l'integrazione della
-   funzione rispetto al parametro temporale dt:
+{- La funzione tempo_burg calcola numericamente l'integrazione della funzione rispetto al 
+   parametro temporale dt:
    - il primo argomento   e' il numero di passi temporali totali che la
      funzione d'onda deve compiere; 
    - il secondo argomento e' il numero di passi spaziali utilizzati dalla
@@ -443,20 +439,18 @@ tempo_burg nt nx dx dt onda = tempo_burg (nt - 1) nx dx dt (bordo : spazio_burg 
 
 spazio_burg :: Int -> Double -> Double -> [Double] -> [Double]
 spazio_burg i dx dt lx | i == length lx - 1 = [bordo]
-                       | otherwise          = (passo_eulero) : spazio_burg (i+1) dx dt lx
+                       | otherwise          = passo_eulero : spazio_burg (i+1) dx dt lx
    where
       bordo        = (last lx) - (last lx) * dt/dx * ((last lx) - (last $ init lx)) +
-                     nu*dt/dx**2*(head lx - 2*(last lx) + (last $ init lx))
+                     nu*dt/dx**2*(head lx - 2*(last lx) + (last $ init lx)) -- Condizione di bordo.
       passo_eulero = (lx !! i - lx !! i * dt/dx * (lx !! i - lx !! (i-1)) + 
                       nu*dt/dx**2*(lx !! (i+1) - 2*(lx !! i) + lx !! (i-1)))
 
 
-{- La funzione onda_dente_sega calcola la funzione d'onda a dente di 
-   sega 'u':
-   - il suo unico argomento e' la lista di punti equidistanti del 
-     dominio spaziale. 
-   Per il calcolo dell'onda si fa uso dei predicati phi e phi_primo
-   che sono rispettivamente la funzione e la sua derivata.  -}
+{- La funzione onda_dente_sega calcola la funzione d'onda a dente di sega 'u':
+   - il suo unico argomento e' la lista di punti equidistanti del dominio spaziale. 
+   Per il calcolo dell'onda si fa uso dei predicati phi e phi_primo che sono 
+   rispettivamente la funzione e la sua derivata.  -}
 
 onda_dente_sega :: Double -> Double
 onda_dente_sega x = u t0 x nu
@@ -468,7 +462,7 @@ onda_dente_sega x = u t0 x nu
       u t0 x nu         = -2*nu*((phi_primo t0 x nu) / (phi t0 x nu))+4
 
 
-{- Fine sezione equazione di Burgers -}
+{- Fine sezione convezione-diffusione (Burgers) -}
 
 
 {- Inizio sezione funzioni condivise -}
