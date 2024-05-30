@@ -2,7 +2,6 @@
 \scriptsize
 \begin{verbatim}
    
-
 /* Programma Prolog per effettuare simulazioni numeriche */
 
 main :- 
@@ -160,7 +159,7 @@ acquisisci_dato_nxb(NX) :- write('Digita il numero di punti totali della funzion
    - il secondo argomento e' la funzione di traiettoria risultante. */
 
 moto_fugoide_semplice(DT,[Z0|T]) :-  Z0 is 100.0,                    /* Altitudine iniziale del velivolo.             */
-                                     B0 is 10.0,                     /* Angolo iniziale del velivolo.                 */
+                                     B0 is 10.0,                     /* Velocita' iniziale del velivolo.              */
                                      PASSI is (floor(100.0/DT) + 1), /* Numero di punti in cui effettuare il calcolo. */
                                      calc_moto(Z0,B0,DT,PASSI,T).
 
@@ -197,9 +196,9 @@ passo_eulero(Y,V,DT,Y1,V1) :- derivata_u(Y,V,YT,VT),
 /* Il predicato derivata_u viene utilizzato per l'applicazione dell'equazione del 
    moto fugoide:
    - il primo argomento   e' l'altitudine del velivolo;
-   - il secondo argomento e' l'angolazione del velivolo;
+   - il secondo argomento e' la velocita' del velivolo;
    - il terzo argomento   e' l'altitudine del velivolo ricalcolata;
-   - il quarto argomento  e' l'angolazione del velivolo ricalcolata. */
+   - il quarto argomento  e' la velocita' del velivolo ricalcolata. */
 
 derivata_u(Y,V,V,V1) :- CG is 9.81,     /* Costante gravitazionale terrestre. */
                         ZT is 100.0,    /* Altitudine centrale all'oscillazione. */
@@ -368,7 +367,7 @@ passo_eulero_conv(E0,E1,C,DX,DT,EU) :- EU is E1 - C * (DT/DX) * (E1 - E0).
 
 /* Il predicato cond_iniziale_conv calcola la condizione iniziale (una funzione)
    per l'integrazione numerica dell'equazione di convezione:
-   - il primo argomento   e' il numero di punti della griglia spaziale;
+   - il primo argomento   e' il numero di punti della funzione d'onda;
    - il secondo argomento e' l'estremo inferiore del dominio spaziale;
    - il terzo argomento   e' l'estremo superiore del dominio spaziale; 
    - il quarto argomento  e' la funzione d'onda quadra. */
@@ -385,12 +384,12 @@ onda_quadra([],[]).
 onda_quadra([X|L1],[OSI|T]) :- X >= 0.5,
                                X =< 1.0,
                                OSI is 2.0,   /* Valori assunti dalla parte alta (superiore) 
-                                                della funzione d'onda quadra. */
+                                                della funzione d'onda quadra (OndaSup_). */
                                onda_quadra(L1,T).
 onda_quadra([X|L1],[OSI|T]) :- (X < 0.5; 
                                 X > 1.0),
                                OSI is 1.0,   /* Valori assunti dalla parte bassa (inferiore) 
-                                                della funzione d'onda quadra. */
+                                                della funzione d'onda quadra (Onda_Inf). */
                                onda_quadra(L1,T).
 
 
@@ -442,7 +441,7 @@ moto_burgers(NX,F) :- NX1 is NX - 1,
 tempo_burg(NT,NT,_,_,_,_,F,F).
 tempo_burg(I,NT,NX1,NU,DX,DT,ONDA,F) :- I < NT,
                                         I1  is I + 1,
-                                        bordo1(ONDA,NU,DX,DT,B1),
+                                        contorno1(ONDA,NU,DX,DT,B1),
                                         spazio_burg(1,NX1,NU,DX,DT,ONDA,Z),
                                         inserisci_elem(B1,Z,R),
                                         tempo_burg(I1,NT,NX1,NU,DX,DT,R,F).
@@ -458,42 +457,42 @@ tempo_burg(I,NT,NX1,NU,DX,DT,ONDA,F) :- I < NT,
    - il quinto argomento  e' la lunghezza del passo temporale;
    - il sesto argomento   e' la funzione d'onda;
    - il settimo argomento e' la funzione d'onda ricalcolata con 
-     il passo_eulero_burg e bordo2. */
+     il passo_eulero_burg e contorno2. */
 
-spazio_burg(NX1,NX1,NU,DX,DT,ONDA,[F]) :- bordo2(ONDA,NU,DX,DT,F).
+spazio_burg(NX1,NX1,NU,DX,DT,ONDA,[F]) :- contorno2(ONDA,NU,DX,DT,F).
 spazio_burg(I,NX1,NU,DX,DT,ONDA,[E|F]) :- I < NX1,
                                           I1 is I + 1,
                                           passo_eulero_burg(ONDA,I,NU,DX,DT,E),
                                           spazio_burg(I1,NX1,NU,DX,DT,ONDA,F).
 
 
-/* Il predicato bordo1 calcola le condizioni di bordo inferiore della funzione:
+/* Il predicato contorno1 calcola le condizioni di contorno della funzione:
    - il primo argomento   e' la funzione d'onda;
    - il secondo argomento e' il coefficiente di diffusione;
    - il terzo argomento   e' la lunghezza del passo spaziale;
    - il quarto argomento  e' la lunghezza del passo temporale;
-   - il quinto argomento  e' il valore del punto estremo inferiore della funzione.
+   - il quinto argomento  e' il valore del primo punto della funzione.
    L'uso di last e testa consente di selezionare gli elementi in coda e in testa
-   alla funzione per il calcolo della condizione di bordo. */
+   alla funzione per il calcolo della condizione di contorno. */
 
-bordo1([X|LX],NU,DX,DT,B1) :- last(LX,C),
-                              testa(LX,T),
-                              B1 is X - X*DT/DX * (X - C) + NU*DT/DX^2 * (T - 2*X + C).
+contorno1([X|LX],NU,DX,DT,B1) :- last(LX,C),
+                                 testa(LX,T),
+                                 B1 is X - X*DT/DX * (X - C) + NU*DT/DX^2 * (T - 2*X + C).
 
 
-/* Il predicato bordo2 calcola le condizioni di bordo superiore della funzione:
+/* Il predicato contorno2 calcola le condizioni di contorno della funzione:
    - il primo argomento   e' la funzione d'onda;
    - il secondo argomento e' il coefficiente di diffusione;
    - il terzo argomento   e' la lunghezza del passo spaziale;
    - il quarto argomento  e' la lunghezza del passo temporale;
-   - il quinto argomento  e' il valore del punto estremo superiore della funzione.
+   - il quinto argomento  e' il valore dell'ultimo punto della funzione.
    L'uso di last, testa e penultimo consente di selezionare l'ultimo, il primo e
-   il penultimo elemento della funzione per il calcolo della condizione di bordo. */
+   il penultimo elemento della funzione per il calcolo della condizione di contorno. */
 
-bordo2(ONDA,NU,DX,DT,B2) :- last(ONDA,C),
-                            penultimo(ONDA,P),
-                            testa(ONDA,T),
-                            B2 is C - C*DT/DX * (C - P) + NU*DT/DX^2 * (T - 2*C + P).
+contorno2(ONDA,NU,DX,DT,B2) :- last(ONDA,C),
+                               penultimo(ONDA,P),
+                               testa(ONDA,T),
+                               B2 is C - C*DT/DX * (C - P) + NU*DT/DX^2 * (T - 2*C + P).
 
 
 /* Il predicato passo_eulero_burg effettua il passo di Eulero:
@@ -516,7 +515,7 @@ passo_eulero_burg(ONDA,I0,NU,DX,DT,EU) :- I1 is I0 + 1,
 
 /* Il predicato cond_iniziale_burg calcola la condizione iniziale (una 
    funzione) per il calcolo numerico dell'equazione di Burgers:
-   - il primo argomento   e' il numero di punti della griglia spaziale;
+   - il primo argomento   e' il numero di punti della funzione d'onda;
    - il secondo argomento e' l'estremo inferiore del dominio spaziale;
    - il terzo argomento   e' l'estremo superiore del dominio spaziale; 
    - il quarto argomento  e' la funzione "onda a dente di sega". */
@@ -568,7 +567,14 @@ gen_punti_equi(N,INF,SUP,L) :- N > 0,
                                (calc_punti(0,N1,SUP,DST,L1),
                                reverse(L1,L))).
 
-
+/* Il predicato calc_punti calcola i punti successivi all'estremo inferiore del 
+   dominio aventi la medesima distanza uno dall'altro:
+   - il primo argomento   e' il numero di punti calcolati;
+   - il secondo argomento e' il numero totale di punti da calcolare;
+   - il terzo argomento   e' l'estremo inferiore della lista di punti;
+   - il quarto argomento  e' la distanza fissa presente tra ogni punto;
+   - il quinto argomento  e' la lista di punti equidistanti risultante. */
+   
 calc_punti(N1,N1,INF,_,[INF]).
 calc_punti(I,N1,INF,DST,[INF|L]) :- I < N1,
                                     I1   is I + 1,
